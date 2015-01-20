@@ -1,0 +1,12 @@
+Dear Students,
+
+You will find attached to this email Task 1, which focuses on the source code management (SCM) tools employed to share your projects with other members of the class.  You will also use Git to submit your work and during peer grading activities.  Remember to always fetch/pull just before you try to push.
+
+As part of Task 1, you will need to create an account on GitHub and subsequently send us your GitHubID. Then, you will have to wait until we grant you write access before you can complete this exercise. Equivalently, you can send a pull request. We will go over basic concepts and possible issues during our first meeting.
+
+Best regards,
+Jean-Francois Chamberland and Gregory Huff
+
+Due Date: Jan 21 (at the end of class).
+GitHub: https://github.com/CourseReps/ECEN489-Spring2015
+
