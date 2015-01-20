@@ -1,0 +1,117 @@
+\documentclass[letterpaper,11pt]{article}
+
+%%  Dimensions and URL
+\usepackage[margin=1in]{geometry}
+\usepackage{url}
+
+%%  Definitions
+\renewcommand{\baselinestretch}{1.1}
+\pagestyle{plain}
+
+
+\begin{document}
+
+\begin{center}
+{\bfseries \LARGE Task 1 -- Code Management System\\[8mm]}
+\end{center}
+
+
+\section{Git -- Source Code Management}
+
+Git is a popular source code management system.
+Every Git working directory is a full-fledged repository, with complete history and full version tracking capabilities, not dependent on network access or a central server.
+In this sense, it trades off space for speed.
+Git is primarily developed on Linux, although it also supports most major operating systems including BSD, OS~X, and Microsoft Windows.
+Pertinent information about Git can be found on the project website.
+\begin{itemize}
+\item \url{http://git-scm.com/}
+\end{itemize}
+
+
+\subsection*{Action Items}
+
+\begin{itemize}
+\item \textbf{Read:} Git documentation. \\
+\url{http://git-scm.com/doc/}
+\item \textbf{Complete:} Try git tutorial. \\
+\url{https://try.github.io/levels/1/challenges/1}
+\item \textbf{Download and Install:} Git (if needed). \\
+\url{http://git-scm.com/downloads}
+\end{itemize}
+
+
+\section{GitHub}
+
+GitHub is a web-based hosting service for source code management (SCM).
+It is built on the Git revision control system and offers free accounts for open source projects.
+According to the terms of service, if bandwidth usage of an account significantly exceeds the average of other GitHub customers, the associated file hosting service may be immediately disabled.
+
+To facilitate integration of our projects, we will employ a Git archive.
+Our master Git repository is hosted on GitHub.
+\begin{center}
+\url{https://github.com/CourseReps/ECEN489-Spring2015.git}
+\end{center}
+Active participants in this course will be given access to our master repository.
+You will find below a short list of frequently used commands.
+
+
+\subsection*{Common Actions}
+
+\begin{itemize}
+\item \textbf{Init:}
+The \texttt{init} command creates a new local repository.
+\item \textbf{Clone:}
+Use \texttt{clone} to instantiate a working copy from a master repository.
+This is usually the first command employed to establish a local working hierarchy under this paradigm.
+Within Eclipse, you may use the Git Repository Exploring perspective to clone a master repository.
+\item \textbf{Add:}
+The \texttt{add} command is used to add one or more files to staging.
+Only add pertinent files to the repository.
+\item \textbf{Commit:}
+The \texttt{commit} command incorporates changes to your working copy of the repository.
+\item \textbf{Push:}
+The \texttt{push} command sends changes to the master branch, typically a remote repository.
+\item \textbf{Pull:}
+The \texttt{pull} command fetches and merges changes on the remote server to the local working directory.
+\item \textbf{Mergetool:}
+Sometimes, there may be a discrepancy between the latest version of a file and its working copy on a given host.
+In such cases, the developer may need to take action to resolve these issues.
+This can be achieve through normal editing, followed by the Git \texttt{add} command.
+Alternatively, one can use the  \texttt{mergetool} command, which initiates a visual tool.
+\item \textbf{Status:}
+The \texttt{status} command lists the status of working files and directories.
+\end{itemize}
+
+
+\subsection*{Action Items}
+
+\begin{itemize}
+\item \textbf{Account:} Go to \url{https://github.com} and create a developer account (if needed).
+Email your GitHubID to your instructor via your TAMU account.
+You will need write permission before you can proceed.
+\item \textbf{Web:} Locate the \texttt{README.md} under \texttt{Students}.
+Add your GitHubID next to you name.
+\begin{center}
+\begin{tabular}{l}
+\texttt{* <Full Name>, [GitHubID](https://github.com/GitHubID)}
+\end{tabular}
+\end{center}
+\item \textbf{Clone:} Once you have been added to the list of collaborators, use \texttt{git} to clone the master repository.
+\item \textbf{Directory:} Under \texttt{Students} (in the master branch), make a directory named \texttt{<GitHubID>}.
+This location is where you will commit all your individual work.
+Within this directory, create a file labeled \texttt{README.md} that contains the following information.
+\begin{center}
+\begin{tabular}{l}
+\texttt{\# Identity} \\
+\\
+\texttt{* Name:} \texttt{<Full Name>} \\
+\texttt{* GitHubID:} \texttt{<GitHub ID>} \\
+\texttt{* NetID:} \texttt{<TAMU NetID>} \\
+\texttt{* Preferred email:} \texttt{username@domain} \\
+\end{tabular}
+\end{center}
+Finally, \texttt{add} and \texttt{commit} your modifications to your local repository, then \texttt{pull} the latest revisions and \texttt{push} this information on the master repository.
+\end{itemize}
+
+\end{document}
+
