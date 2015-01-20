@@ -19,7 +19,7 @@ Undergraduate Students
 Graduate Students
 -----------------
 
-* Jeffrey Scott Jensen
-* Hong Pan
+* Jeffrey Scott Jensen, [happycamper](https://github.com/happycamper)
+* Hong Pan, [hongpan0507](https://github.com/hongpan0507)
 * Jingqing Wang
 
