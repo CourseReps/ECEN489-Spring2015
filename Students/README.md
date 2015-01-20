@@ -1,4 +1,5 @@
-# Enrolled Students
+Enrolled Students and Faculty Members
+=====================================
 
 
 Undergraduate Students
@@ -22,4 +23,11 @@ Graduate Students
 * Jeffrey Scott Jensen, [happycamper](https://github.com/happycamper)
 * Hong Pan, [hongpan0507](https://github.com/hongpan0507)
 * Jingqing Wang
+
+
+Faculty Members
+---------------
+
+* Jean-Francois Chamberland, [chmbrlnd](https://github.com/chmbrlnd)
+* Gregory H. Huff, [ghuff](https://github.com/ghuff)
 
