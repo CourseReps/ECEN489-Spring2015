@@ -5,4 +5,6 @@ Tutorials
 * [GitHub](https://github.com/CourseReps/ECEN489-Spring2015/wiki/github)
 * [Java](https://github.com/CourseReps/ECEN489-Spring2015/wiki/java)
 * [IntelliJ IDEA](https://github.com/CourseReps/ECEN489-Spring2015/wiki/intellij)
+* [Android Architecture](https://github.com/CourseReps/ECEN489-Spring2015/wiki/android)
+* [Android Studio](https://github.com/CourseReps/ECEN489-Spring2015/wiki/androidstudio)
 
