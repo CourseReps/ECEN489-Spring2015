@@ -1,0 +1,10 @@
+Dear Students,
+
+You will find attached to this email Task 2, which focuses on transforming your laptop into a world class programming environment with Java and IntelliJ IDEA. Some of you may have the required software already installed.  In such cases, you may only need to bring it up to date.  Programming exercises will eventually be submitted as IntelliJ IDEA projects.  This is instrumental in facilitating peer grading and collaborative initiatives. Task 2 is the starting point of this journey and, as such, it should be completed promptly. The software packages are free, yet they can be quite large. The EIC offers very fast wireless access to download the necessary packages, so you may want to perform this task during the next class period.
+
+Best regards,
+Jean-Francois Chamberland and Gregory Huff
+
+Due Date: Jan 23.
+GitHub: https://github.com/CourseReps/ECEN489-Spring2015
+
