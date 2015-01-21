@@ -5,11 +5,11 @@ Enrolled Students and Faculty Members
 Undergraduate Students
 ----------------------
 
-* Evelyn Susanah Cifuentes
+* Evelyn Susanah Cifuentes, [cifuentesevelyn](https://github.com/cifuentesevelyn)
 * Ian Paul DeGroot
 * Trevor Glen Dennis
 * Rong Liu
-* Randy Allen Neal
+* Randy Allen Neal, [gmnealusn](https://github.com/gmnealusn)
 * Benito Ramirez
 * Blade Octaviano Roybal
 * George Francis Sullivan
