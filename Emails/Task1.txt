@@ -1,5 +1,7 @@
 Dear Students,
 
+Early in the semester, you will be given a series of tasks.  These tasks are aimed at making sure that your programming platform features the necessary software for our work.  Tasks are an integral part of the progression of the course, and they are the easiest points to collect.  In the process, we will leverage these straightforward exercises to get familiar with peer grading.
+
 You will find attached to this email Task 1, which focuses on the source code management (SCM) tools employed to share your projects with other members of the class.  You will also use Git to submit your work and during peer grading activities.  Remember to always fetch/pull just before you try to push.
 
 As part of Task 1, you will need to create an account on GitHub and subsequently send us your GitHubID. Then, you will have to wait until we grant you write access before you can complete this exercise. Equivalently, you can send a pull request. We will go over basic concepts and possible issues during our first meeting.
