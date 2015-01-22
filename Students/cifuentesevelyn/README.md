@@ -1,6 +1,6 @@
 # Identity
 
 * Name: Evelyn Cifuentes
-* Github: cifuentesevelyn
+* GithubID: cifuentesevelyn
 * NetID: 221004235
 * Preferred email: cifuentesevelyn@tamu.edu
