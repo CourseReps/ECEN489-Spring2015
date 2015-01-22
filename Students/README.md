@@ -11,7 +11,7 @@ Undergraduate Students
 * Rong Liu
 * Randy Allen Neal, [gmnealusn](https://github.com/gmnealusn)
 * Benito Ramirez, [BenitoRamirezJr](https://github.com/BenitoRamirezJr)
-* Blade Octaviano Roybal
+* Blade Octaviano Roybal, [Bladeroybal] (https://github.com/Bladeroybal)
 * George Francis Sullivan, [I-Love-Github](https://github.com/I-Love-Github)
 * Kevin Christopher Wilkens
 * Yajie Zeng
