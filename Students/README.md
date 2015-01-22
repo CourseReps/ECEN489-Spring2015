@@ -8,7 +8,7 @@ Undergraduate Students
 * Evelyn Susanah Cifuentes, [cifuentesevelyn](https://github.com/cifuentesevelyn)
 * Ian Paul DeGroot, [iandegroot](https://github.com/iandegroot)
 * Trevor Glen Dennis, [td08] (https://github.com/td08)
-* Rong Liu
+* Rong Liu, [liur180855](https://github.com/liur180855)
 * Randy Allen Neal, [gmnealusn](https://github.com/gmnealusn)
 * Benito Ramirez, [BenitoRamirezJr](https://github.com/BenitoRamirezJr)
 * Blade Octaviano Roybal, [Bladeroybal] (https://github.com/Bladeroybal)
