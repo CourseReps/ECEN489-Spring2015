@@ -4,7 +4,7 @@ Enrolled Students and Faculty Members
 
 Undergraduate Students
 ----------------------
-
+* Joshua Anthony Cano, [jacano23](https://github.com/jacano23)
 * Evelyn Susanah Cifuentes, [cifuentesevelyn](https://github.com/cifuentesevelyn)
 * Ian Paul DeGroot, [iandegroot](https://github.com/iandegroot)
 * Trevor Glen Dennis, [td08] (https://github.com/td08)
