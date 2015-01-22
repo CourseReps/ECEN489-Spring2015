@@ -6,15 +6,15 @@ Undergraduate Students
 ----------------------
 
 * Evelyn Susanah Cifuentes, [cifuentesevelyn](https://github.com/cifuentesevelyn)
-* Ian Paul DeGroot
-* Trevor Glen Dennis
-* Rong Liu
+* Ian Paul DeGroot, [iandegroot](https://github.com/iandegroot)
+* Trevor Glen Dennis, [td08] (https://github.com/td08)
+* Rong Liu, [liur180855](https://github.com/liur180855)
 * Randy Allen Neal, [gmnealusn](https://github.com/gmnealusn)
 * Benito Ramirez, [BenitoRamirezJr](https://github.com/BenitoRamirezJr)
-* Blade Octaviano Roybal
+* Blade Octaviano Roybal, [Bladeroybal] (https://github.com/Bladeroybal)
 * George Francis Sullivan, [I-Love-Github](https://github.com/I-Love-Github)
 * Kevin Christopher Wilkens
-* Yajie Zeng
+* Yajie Zeng, [yjzeng8833](https://github.com/yjzeng8833)
 
 
 Graduate Students
