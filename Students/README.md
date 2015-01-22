@@ -14,7 +14,7 @@ Undergraduate Students
 * Blade Octaviano Roybal, [Bladeroybal] (https://github.com/Bladeroybal)
 * George Francis Sullivan, [I-Love-Github](https://github.com/I-Love-Github)
 * Kevin Christopher Wilkens
-* Yajie Zeng
+* Yajie Zeng, [yjzeng8833](https://github.com/yjzeng8833)
 
 
 Graduate Students
