@@ -4,7 +4,7 @@ Enrolled Students and Faculty Members
 
 Undergraduate Students
 ----------------------
-
+* Joshua Anthony Cano, [jacano23](https://github.com/jacano23)
 * Evelyn Susanah Cifuentes, [cifuentesevelyn](https://github.com/cifuentesevelyn)
 * Ian Paul DeGroot, [iandegroot](https://github.com/iandegroot)
 * Trevor Glen Dennis, [td08] (https://github.com/td08)
@@ -13,8 +13,9 @@ Undergraduate Students
 * Benito Ramirez, [BenitoRamirezJr](https://github.com/BenitoRamirezJr)
 * Blade Octaviano Roybal, [Bladeroybal] (https://github.com/Bladeroybal)
 * George Francis Sullivan, [I-Love-Github](https://github.com/I-Love-Github)
-* Kevin Christopher Wilkens
+* Kevin Christopher Wilkens [kevinwilkens22](https://github.com/kevinwilkens22)
 * Yajie Zeng, [yjzeng8833](https://github.com/yjzeng8833)
+* Mandel Oats, [mandeloats](https://github.com/mandeloats)
 
 
 Graduate Students
