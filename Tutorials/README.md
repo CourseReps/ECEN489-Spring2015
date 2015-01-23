@@ -11,7 +11,7 @@ As part of every tutorial, the presenter must create a [wiki](https://github.com
 * [Java Database Connectivity (JDBC)](https://github.com/CourseReps/ECEN489-Spring2015/wiki/jdbc)
 * [JSON and GSON](https://github.com/CourseReps/ECEN489-Spring2015/wiki/json)
 * [Java Threads](https://github.com/CourseReps/ECEN489-Spring2015/wiki/threads)
-* [Android Architecture](https://github.com/CourseReps/ECEN489-Spring2015/wiki/android)
+* [Android Architecture](https://github.com/CourseReps/ECEN489-Spring2015/wiki/android) by Kevin Wilkens on TBD
 * [Android Studio](https://github.com/CourseReps/ECEN489-Spring2015/wiki/androidstudio) by Joshua Anthony Cano on TBD
 * [SQLite](https://github.com/CourseReps/ECEN489-Spring2015/wiki/sqlite)
 * [Google Fusion Tables](https://github.com/CourseReps/ECEN489-Spring2015/wiki/fusiontables)
