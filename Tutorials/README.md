@@ -4,7 +4,7 @@ Tutorials
 Throughout the semester, students will be giving tutorials on material relevant to cloud-enabled mobile sensing.
 As part of every tutorial, the presenter must create a [wiki](https://github.com/CourseReps/ECEN489-Spring2015/wiki) page with suitable information, pertinent links, and references.
 
-* [Git](https://github.com/CourseReps/ECEN489-Spring2015/wiki/git)  by Randy Allen Neal on Jan 26, 2015
+* [Git](https://github.com/CourseReps/ECEN489-Spring2015/wiki/git)  
 * [GitHub](https://github.com/CourseReps/ECEN489-Spring2015/wiki/github)
 * [Java](https://github.com/CourseReps/ECEN489-Spring2015/wiki/java)
 * [IntelliJ IDEA](https://github.com/CourseReps/ECEN489-Spring2015/wiki/intellij)
@@ -15,4 +15,4 @@ As part of every tutorial, the presenter must create a [wiki](https://github.com
 * [Android Studio](https://github.com/CourseReps/ECEN489-Spring2015/wiki/androidstudio) by Joshua Anthony Cano on TBD
 * [SQLite](https://github.com/CourseReps/ECEN489-Spring2015/wiki/sqlite)
 * [Google Fusion Tables](https://github.com/CourseReps/ECEN489-Spring2015/wiki/fusiontables)
-* [Bluetooth](https://github.com/CourseReps/ECEN489-Spring2015/wiki/bluetooth)
+* [Bluetooth](https://github.com/CourseReps/ECEN489-Spring2015/wiki/bluetooth) by Randy Allen Neal on 
