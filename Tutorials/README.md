@@ -6,7 +6,7 @@ As part of every tutorial, the presenter must create a [wiki](https://github.com
 
 * [Git](https://github.com/CourseReps/ECEN489-Spring2015/wiki/git)  
 * [GitHub](https://github.com/CourseReps/ECEN489-Spring2015/wiki/github)
-* [Java](https://github.com/CourseReps/ECEN489-Spring2015/wiki/java)
+* [Java](https://github.com/CourseReps/ECEN489-Spring2015/wiki/java) by Rong Liu on TBD
 * [IntelliJ IDEA](https://github.com/CourseReps/ECEN489-Spring2015/wiki/intellij)
 * [Java Database Connectivity (JDBC)](https://github.com/CourseReps/ECEN489-Spring2015/wiki/jdbc)
 * [JSON and GSON](https://github.com/CourseReps/ECEN489-Spring2015/wiki/json)
