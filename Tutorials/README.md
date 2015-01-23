@@ -14,5 +14,5 @@ As part of every tutorial, the presenter must create a [wiki](https://github.com
 * [Android Architecture](https://github.com/CourseReps/ECEN489-Spring2015/wiki/android) by Kevin Wilkens on TBD
 * [Android Studio](https://github.com/CourseReps/ECEN489-Spring2015/wiki/androidstudio) by Joshua Anthony Cano on TBD
 * [SQLite](https://github.com/CourseReps/ECEN489-Spring2015/wiki/sqlite)
-* [Google Fusion Tables](https://github.com/CourseReps/ECEN489-Spring2015/wiki/fusiontables)
+* [Google Fusion Tables] by Trevor Dennis on TBD(https://github.com/CourseReps/ECEN489-Spring2015/wiki/fusiontables)
 * [Bluetooth](https://github.com/CourseReps/ECEN489-Spring2015/wiki/bluetooth) by Randy Allen Neal on 
