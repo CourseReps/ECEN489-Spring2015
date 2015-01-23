@@ -15,6 +15,7 @@ Undergraduate Students
 * George Francis Sullivan, [I-Love-Github](https://github.com/I-Love-Github)
 * Kevin Christopher Wilkens [kevinwilkens22](https://github.com/kevinwilkens22)
 * Yajie Zeng, [yjzeng8833](https://github.com/yjzeng8833)
+* Mandel Oats, [mandeloats](https://github.com/mandeloats)
 
 
 Graduate Students
