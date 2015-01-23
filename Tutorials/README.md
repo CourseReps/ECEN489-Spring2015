@@ -8,7 +8,7 @@ As part of every tutorial, the presenter must create a [wiki](https://github.com
 * [GitHub](https://github.com/CourseReps/ECEN489-Spring2015/wiki/github)
 * [Java](https://github.com/CourseReps/ECEN489-Spring2015/wiki/java) by Rong Liu on TBD
 * [IntelliJ IDEA](https://github.com/CourseReps/ECEN489-Spring2015/wiki/intellij) by Ian DeGroot on TBD
-* [Java Database Connectivity (JDBC)](https://github.com/CourseReps/ECEN489-Spring2015/wiki/jdbc)
+* [Java Database Connectivity (JDBC)](https://github.com/CourseReps/ECEN489-Spring2015/wiki/jdbc) by Benito Ramirez
 * [Java Threads](https://github.com/CourseReps/ECEN489-Spring2015/wiki/threads) by George Sullivan on TBD
 * [JSON and GSON](https://github.com/CourseReps/ECEN489-Spring2015/wiki/json) by Evelyn Cifuentes on TBD
 * [Android Architecture](https://github.com/CourseReps/ECEN489-Spring2015/wiki/android) by Kevin Wilkens on TBD
