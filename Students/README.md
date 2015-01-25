@@ -25,7 +25,7 @@ Graduate Students
 * Hong Pan, [hongpan0507](https://github.com/hongpan0507)
 * Jingqing Wang
 * Emil Thomas, [emilthomas] (https://github.com/emilthomas)
-
+* Pranay Kumar Eedara, [epranaykumar] (https://github.com/epranaykumar)
 
 Faculty Members
 ---------------
