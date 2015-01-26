@@ -1,0 +1,9 @@
+Dear Students,
+
+You will find attached to this email Assignment 1 and Opt-Out Challenge 1.  The first assignment should be rather straightforward.  It is acceptable to write your answers directly on the question sheet.  You must submit a printed version of the question sheet, as it will be used to grade your solution. In addition, you will need to submit your Java code through GitHub.
+
+Cheers,
+Jean-Francois Chamberland, Gregory Huff
+
+Due Date: Jan 26.
+https://github.com/CourseReps/ECEN489-Spring2015/tree/master/Assignments
