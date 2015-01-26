@@ -1,0 +1,9 @@
+Dear Students,
+
+You will find below Assignment 2 and Opt-Out Challenge 2.  As usual, you must commit your Java code on GitHub as IntelliJ IDEA projects.
+
+Best regards,
+Jean-Francois Chamberland, Gregory Huff
+
+Due Date: Jan 30, 2015
+https://github.com/CourseReps/ECEN489-Spring2015/tree/master/Assignments
