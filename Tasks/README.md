@@ -13,12 +13,17 @@ Task 2: Java and IntelliJ IDEA
 * [Java](https://www.java.com/)
 * [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 
-Task 3:
--------
+Task 3: Data Management
+-----------------------
+* [SQLite](http://www.sqlite.org)
 
-Task 4:
--------
+Task 4: Android Development and Studio
+--------------------------------------
+* [Android Development](https://developer.android.com/)
+* [Android Studio](https://developer.android.com/sdk/)
 
-Task 5:
--------
-
+Task 5: Google Fusion Tables
+----------------------------
+* [Fusion Table API](https://developers.google.com/fusiontables/)
+* Getting Started
+* Using the API

@@ -1,0 +1,57 @@
+\documentclass[11pt]{article}
+
+%%  Dimensions and URL
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+
+%%  Definitions
+\renewcommand{\baselinestretch}{1.1}
+\pagestyle{plain}
+
+
+\begin{document}
+
+\begin{center}
+{\bfseries \LARGE Task 3 -- Data Management\\[8mm]}
+\end{center}
+
+
+\section{SQLite}
+
+SQLite is a software library that implements a self-contained, serverless, SQL database engine.
+It is used extensively, and it ships with the Android operating system.
+Furthermore, the source code for SQLite is in the public domain.
+\begin{center}
+\url{http://www.sqlite.org}
+\end{center}
+Unlike most SQL databases, SQLite does not require a separate server process; it reads and writes directly to disk files.
+There is a \texttt{C/C++} interface to SQLite, namely \texttt{sqlite3}.
+
+
+\subsection*{Action Items}
+
+\begin{itemize}
+\item \textbf{Download and Install:} SQLite. \\
+\url{http://www.sqlite.org/download.html}
+\item \textbf{Read:} The SQLite Quick Start Guide.\\
+\url{http://www.sqlite.org/quickstart.html}\\
+\url{http://www.sqlite.org/sqlite.html}
+\end{itemize}
+
+
+\subsection*{Proficient Test}
+
+\begin{enumerate}
+\item Using command-line tools, create a new database.
+Add and edit entries.
+Search and display the content of your database.
+\item Employ a GUI to display the content of the database.\\
+\url{https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/}
+\item (Optional) Repeat Step~1 on an Android phone using \texttt{SQLiteOpenHelper} and \texttt{SQLiteDatabase}.\\
+\texttt{import android.database.sqlite.SQLiteDatabase;}\\
+\texttt{import android.database.sqlite.SQLiteOpenHelper;}
+\end{enumerate}
+
+
+\end{document}
+
