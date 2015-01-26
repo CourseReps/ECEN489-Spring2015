@@ -20,8 +20,10 @@ Task 3: Data Management
 Task 4: Android Development and Studio
 --------------------------------------
 * [Android Development](https://developer.android.com/)
-* [Android Studio](http://developer.android.com/sdk/)
+* [Android Studio](https://developer.android.com/sdk/)
 
-Task 5:
--------
-
+Task 5: Google Fusion Tables
+----------------------------
+* [Fusion Table API](https://developers.google.com/fusiontables/)
+* Getting Started
+* Using the API
