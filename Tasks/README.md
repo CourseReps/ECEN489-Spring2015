@@ -17,8 +17,10 @@ Task 3: Data Management
 -----------------------
 * [SQLite](http://www.sqlite.org)
 
-Task 4:
--------
+Task 4: Android Development and Studio
+--------------------------------------
+* [Android Development](https://developer.android.com/)
+* [Android Studio](http://developer.android.com/sdk/)
 
 Task 5:
 -------
