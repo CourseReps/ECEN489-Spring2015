@@ -13,8 +13,9 @@ Task 2: Java and IntelliJ IDEA
 * [Java](https://www.java.com/)
 * [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 
-Task 3:
--------
+Task 3: Data Management
+-----------------------
+* [SQLite](http://www.sqlite.org)
 
 Task 4:
 -------
