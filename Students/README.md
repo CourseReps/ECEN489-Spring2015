@@ -26,6 +26,7 @@ Graduate Students
 * Jingqing Wang
 * Emil Thomas, [emilthomas] (https://github.com/emilthomas)
 * Pranay Kumar Eedara, [epranaykumar] (https://github.com/epranaykumar)
+* Nagaraj Thenkarai Janakiraman, [tjnagaraj](https://github.com/tjnagaraj)
 
 Faculty Members
 ---------------
