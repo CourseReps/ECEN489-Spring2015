@@ -1,0 +1,9 @@
+Dear Students,
+
+You will find attached to this email Task 3, which centers around data management and SQLite. This task will help you get familiar with data management and storing on mobile devices. As usual, the software packages are free.
+
+Best regards,
+Jean-Francois Chamberland and Gregory Huff
+
+Due Date: Jan 30.
+GitHub: https://github.com/CourseReps/ECEN489-Spring2015

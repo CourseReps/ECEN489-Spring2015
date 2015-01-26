@@ -1,0 +1,91 @@
+\documentclass[11pt]{article}
+
+%%  Dimensions and URL
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+
+%%  Definitions
+\renewcommand{\baselinestretch}{1.1}
+\pagestyle{plain}
+
+
+\begin{document}
+
+\begin{center}
+{\bfseries \LARGE Opt-Out Assignment 2}
+\end{center}
+
+\paragraph{Reading Assignment:}
+How to Program Java, 10th edition
+\begin{itemize}
+\item Chapter~4 -- Control Statements: Part~1
+\item Chapter~5 -- Control Statements: Part~2
+\item Chapter~6 -- Methods: A Deeper Look
+\item Chapter~27 -- Networking (Sections 27.4, 27.5, 27.6)
+\end{itemize}
+
+
+\section*{Programming Challenges}
+
+Create a two-way chat service composed of a server and a client.
+This should be implemented using stream sockets.
+The client should be able to access the server over the Internet.
+
+
+\subsection*{Simple Server Using Stream Sockets}
+
+Establishing a simple server in Java requires five steps.
+
+\begin{enumerate}
+\item Create a \texttt{ServerSocket} object:
+\begin{verbatim}
+  ServerSocket server = new ServerSocket(portNumber, queueLength);
+\end{verbatim}
+The variable \texttt{portNumber} is an admissible TCP port number and \texttt{queueLength} is the maximum number of clients that can wait to connect to the server.
+\item Wait for a connection:
+\begin{verbatim}
+  Socket connection = server.accept();
+\end{verbatim}
+In this step, the server listen indefinitely for an attempt by a client to connect.
+The method returns a \texttt{Socket} when a connection with a client is established.
+\item Manage the I/O streams associated with the socket:
+\begin{verbatim}
+  connection.getOutputStream();
+  connection.getInputStream();
+\end{verbatim}
+These objects can subsequently be employed to send or receive bytes with the \texttt{OutputStream} method \texttt{write} and the \texttt{InputStream} method \texttt{read}, respectively.
+One can also use classes such \texttt{ObjectInputStream} and \texttt{ObjectOutputStream} to enable entire objects to be read from or written to a stream, a technique called wrapping.
+\item Support the live interaction:
+In the processing phase, the server and the client communicate via the \texttt{OutputStream} and \texttt{InputStream} objects.
+\item Closing the connection:
+The server closes the connection by invoking the \texttt{close} method on the streams and on the \texttt{Socket}.
+\end{enumerate}
+
+
+\subsection*{Simple Client Using Stream Sockets}
+
+Establishing a simple client in Java necessitates four steps.
+
+\begin{enumerate}
+\item Create a \texttt{Socket} to connect to the server:
+\begin{verbatim}
+  Socket connection = new Socket( serverAddress, port);
+\end{verbatim}
+When the connection attempt is successful, this returns a \texttt{Socket}.
+\item Manage the I/O streams.
+\item Support the live interaction.
+\item Close the connection:
+The client closes the connection by invoking the \texttt{close} method on the streams and on the \texttt{Socket}.
+\end{enumerate}
+
+
+\subsection*{Code}
+
+\begin{enumerate}
+\item Implement this task in Java.
+\item Using IntelliJ IDEA, Git, and GitHub, commit your code for the server as a project labeled \texttt{Challenge2server} under \texttt{Students/<GitHubID>/}, where \texttt{<GitHubID>} should be replaced by your username on \href{https://GitHub.com}{GitHub}.
+\item In a similar fashion, commit your code for the client as a project labeled \texttt{Challenge2client} under \texttt{Students/<GitHubID>/}.
+\end{enumerate}
+
+
+\end{document}
