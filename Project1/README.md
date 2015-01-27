@@ -11,9 +11,12 @@ More specifically, the antenna radiation patterns associated with the acquisitio
 By tuning the illuminated areas, it is possible to match the gathered data to the inference tasked at hand.
 
 
-
 Monitoring Hardware
 -------------------
+
+The selection for physical components for the monitoring nodes is guided by usability and ease of implementation.
+This project utilizes the [Debian](https://www.debian.org/) [GNU](https://www.gnu.org/)/Linux operating system to power the sensing devices.
+This choice is motivated by its [free](http://www.fsf.org/) distribution, its programmability, and the availability of drivers.
 
 ### Intel Next Unit of Computing
 
@@ -27,4 +30,8 @@ Indeed, monitor mode permits several types of traffic analyses, including illegi
 For this reason, many manufacturers do not support monitor mode with their adapters.
 Fortunately, [Atheros](http://www.qca.qualcomm.com/) allows some of its NIC chipsets to operate in monitor mode.
 This project employs the [TP-LINK](http://www.tp-link.us/) TL-WN722N Wireless N150 High Gain USB Adapter, as it features one such Atheros chipset.
+
+
+Project Architecture
+--------------------
 
