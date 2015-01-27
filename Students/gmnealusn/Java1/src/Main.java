@@ -9,25 +9,34 @@ public class Main {
         // Using a Scanner to get name from user
         Scanner input =  new Scanner (System.in);
         String Name;
-        int Num1; // First number
-        int Num2; // Second number
-        int Num3; // Third number
-        int Avg; // Third number
+        int data; // The number of items
+        int size = 0; // Size of array
+        double sum = 0; // Sum of the array elements
+        double average; // Average of all the array elements
+        double[] dataArray; // All items of the avarage will be stored in the array.
+
         System.out.print("Please type your name. "); // Greeting and name prompt
         Name = input.nextLine(); // Read name from user
-        System.out.printf("Hello, %s, please enter a number. ", Name); // First number prompt
+        System.out.printf("Hello, %s, please enter the number of items you would like to average out. ", Name); // Request the number of items
+        data = input.nextInt(); // Read number of items
+        dataArray = new double[data];
 
-        Num1 = input.nextInt(); // Read first number
-        System.out.printf("Your first number is, %d, please enter another number. ", Num1); // Second number prompt
+        while (data > size) // This while loop will take the numbers entered by the user and place them into the array.
+        {
+            double number; // Temporary variable for the items in the array.
+            System.out.printf("Please enter a number you would like to average. "); // Number prompt
+            number = input.nextInt(); // Read number of items
+            dataArray[size] = number; // set the element of the array to equal the number
+            size++;
+        }
 
-        Num2 = input.nextInt(); // Read second number
-        System.out.printf("Your second number is, %d, please enter another number. ", Num2); // Display second number
+        for (double i : dataArray) // This loop calculates the sum of the array elements
+            sum += i;
 
-        Num3 = input.nextInt(); // Read third number
-        System.out.printf("Your third number is: %d", Num3); // Display third number
+        average = sum / data; // This is the average calculation
 
-        Avg = (Num1+Num2+Num3)/3; // Compute average of the numbers
-        System.out.printf("\nThe average of your numbers is: %d", Avg); // Display average
+        System.out.printf("The average of your numbers is: %f", average); // Display average
+
     }
 
 }
