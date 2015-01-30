@@ -26,7 +26,7 @@ Graduate Students
 * Emil Thomas, [emilthomas](https://github.com/emilthomas)
 * Pranay Kumar Eedara, [epranaykumar](https://github.com/epranaykumar)
 * Nagaraj Thenkarai Janakiraman, [tjnagaraj](https://github.com/tjnagaraj)
-* Naga Raghavendra Anudeep, [nranudeep1990](https://github.com/nranudeep1990)
+* Naga Raghavendra Anudeep Tungala, [nranudeep1990](https://github.com/nranudeep1990)
 
 Faculty Members
 ---------------
