@@ -31,6 +31,9 @@ For this reason, many manufacturers do not support monitor mode with their adapt
 Fortunately, [Atheros](http://www.qca.qualcomm.com/) allows some of its NIC chipsets to operate in monitor mode.
 This project employs the [TP-LINK](http://www.tp-link.us/) TL-WN722N Wireless N150 High Gain USB Adapter, as it features one such Atheros chipset.
 
+Here is a list of three potential cards I googled online -- George
+https://www.raymond.cc/blog/best-compatible-usb-wireless-adapter-for-backtrack-5-and-aircrack-ng/
+
 
 Project Architecture
 --------------------
