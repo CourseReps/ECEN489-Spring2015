@@ -33,7 +33,9 @@ This project employs the [TP-LINK](http://www.tp-link.us/) TL-WN722N Wireless N1
 
 Two possible models of wireless dongle:
 [TP-LINK TL-WN722N](http://www.amazon.com/TP-LINK-TL-WN722N-Wireless-Adapter-External/dp/B002SZEOLG/ref=sr_1_1?ie=UTF8&qid=1422659883&sr=8-1&keywords=TP-Link%27s+TL-WN722N&pebp=1422659900492&peasin=B002SZEOLG)
+
 [Alfa AWUS036NH] (http://www.amazon.com/Alfa-AWUS036NH-802-11g-Wireless-Long-Range/dp/B003YIFHJY/ref=sr_1_fkmr0_2?s=electronics&ie=UTF8&qid=1422660889&sr=1-2-fkmr0&keywords=atheros+9280)
+
 
 Linux distro we will use: [Debian] (https://www.debian.org/distrib/)
 
