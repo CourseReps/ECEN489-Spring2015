@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        int a;
-        int b;
+        double a;
+        double b;
         double intAve;
 
         Scanner userInput = new Scanner(System.in);
