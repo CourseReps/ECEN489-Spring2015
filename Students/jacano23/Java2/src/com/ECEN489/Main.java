@@ -15,7 +15,7 @@ public class Main {
         Date date = new Date();
         System.out.println("Date and Time: " + date.toString());
 
-	    System.out.println("Java Class Path: " + System.getProperty("java.class.path"));
+	System.out.println("Java Class Path: " + System.getProperty("java.class.path"));
         System.out.println("JRE Vendor Name: " + System.getProperty("java.vendor"));
         System.out.println("JRE Version Number: "+ System.getProperty("java.version"));
         System.out.println("Operating System Architecture: " + System.getProperty("os.arch"));
