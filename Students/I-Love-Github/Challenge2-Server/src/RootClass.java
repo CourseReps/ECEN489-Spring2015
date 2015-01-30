@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 // ROOT CLASS
 // This class contains the object where the java program begins
@@ -11,12 +13,19 @@ public class RootClass {
     //              times and a button that performs the required average speed calculation
     public static void main(String[] args) {
         // Create MAP PANEL frame
-        JFrame f = new JFrame("Server");
+        final JFrame f = new JFrame("Server");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ServerPanel mapPanel = new ServerPanel();
-        f.setContentPane(mapPanel);
+        final ServerPanel serverPanel = new ServerPanel();
+        f.setContentPane(serverPanel);
         f.setSize(500, 460);
         f.setLocation(200, 200);
         f.setVisible(true);
+
+        f.addWindowListener(new WindowAdapter() {
+            public void WindowClosing(WindowEvent e) {
+                serverPanel.emergencyShutdown();
+                f.dispose();
+            }
+        });
    }
 }

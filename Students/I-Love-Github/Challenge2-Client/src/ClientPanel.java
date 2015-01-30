@@ -197,21 +197,25 @@ class ClientPanel extends JPanel {
 
             } else if (connectButton.getText().equals("Disconnect")) {
 
-                connectButtonManip("Disconnecting", false);
-
-                if (clientThread == null) {
-                    clientRunnable = new ClientRunnable(
-                            panel, localIPField.getText(), Integer.valueOf(portField.getText()), nameField.getText()
-                    );
-                    clientThread = new Thread(clientRunnable);
-                }
-
-                if (clientRunnable.isRunning) {
-                    clientRunnable.disconnect();
-                    clientThread.interrupt();
-
-                }
+                disconnectClient();
             }
+        }
+    }
+
+    public void disconnectClient() {
+        connectButtonManip("Disconnecting", false);
+
+        if (clientThread == null) {
+            clientRunnable = new ClientRunnable(
+                    panel, localIPField.getText(), Integer.valueOf(portField.getText()), nameField.getText()
+            );
+            clientThread = new Thread(clientRunnable);
+        }
+
+        if (clientRunnable.isRunning) {
+            clientRunnable.disconnect();
+            clientThread.interrupt();
+
         }
     }
 

@@ -165,17 +165,21 @@ class ServerPanel extends JPanel {
     {
         public void actionPerformed(ActionEvent ae)
         {
-            stopButton.setEnabled(false);
+            emergencyShutdown();
+        }
+    }
 
-            if (serverThread == null) {
-                serverRunnable = new ServerRunnable(panel, Integer.valueOf(portField.getText()));
-                serverThread = new Thread(serverRunnable);
-            }
+    public void emergencyShutdown() {
+        stopButton.setEnabled(false);
 
-            if (serverRunnable.isRunning) {
-                serverRunnable.notifyStopPressed();
-                serverThread.interrupt();
-            }
+        if (serverThread == null) {
+            serverRunnable = new ServerRunnable(panel, Integer.valueOf(portField.getText()));
+            serverThread = new Thread(serverRunnable);
+        }
+
+        if (serverRunnable.isRunning) {
+            serverRunnable.notifyStopPressed();
+            serverThread.interrupt();
         }
     }
 
