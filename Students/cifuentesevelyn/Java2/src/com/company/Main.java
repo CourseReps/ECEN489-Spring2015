@@ -1,9 +1,8 @@
 package com.company;
 /* Program that displays information about the computer
-it is executed on.
- */
+it is executed on. */
+
 import java.util.Calendar;
-//import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
