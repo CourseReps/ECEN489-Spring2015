@@ -15,8 +15,8 @@ As part of every tutorial, the presenter must create a [wiki](https://github.com
 * [JSON and GSON](https://github.com/CourseReps/ECEN489-Spring2015/wiki/json) by Evelyn Cifuentes on 2/4/2015
 * [SQLite](https://github.com/CourseReps/ECEN489-Spring2015/wiki/sqlite) by Yajie Zeng on 2/6/2015
 * [Java Database Connectivity (JDBC)](https://github.com/CourseReps/ECEN489-Spring2015/wiki/jdbc) by Benito Ramirez on 2/6/2015
-* [Android Architecture](https://github.com/CourseReps/ECEN489-Spring2015/wiki/android) by Kevin Wilkens on 2/9/2015
 * [Android Studio](https://github.com/CourseReps/ECEN489-Spring2015/wiki/androidstudio) by Joshua Anthony Cano on 2/9/2015
+* [Android Architecture](https://github.com/CourseReps/ECEN489-Spring2015/wiki/android) by Kevin Wilkens on 2/9/2015
 * [LocationManager](https://github.com/CourseReps/ECEN489-Spring2015/wiki/location)
 * [SensorManager](https://github.com/CourseReps/ECEN489-Spring2015/wiki/sensor) by Pranay Kumar 
 * [WifiManager](https://github.com/CourseReps/ECEN489-Spring2015/wiki/wifi)
