@@ -7,7 +7,7 @@ As part of every tutorial, the presenter must create or enhance a [wiki](https:/
 * [Git](https://github.com/CourseReps/ECEN489-Spring2015/wiki/git) by Mandel Oats ~~on Monday 1/26/2015~~
 * [GitHub](https://github.com/CourseReps/ECEN489-Spring2015/wiki/github) by Blade  Roybal ~~on Monday 1/26/2015~~
 * [Java](https://github.com/CourseReps/ECEN489-Spring2015/wiki/java) by Rong Liu ~~on Wednesday 1/28/2015~~
-* [IntelliJ IDEA](https://github.com/CourseReps/ECEN489-Spring2015/wiki/intellij) by Ian DeGroot ~~on 1/28/~~
+* [IntelliJ IDEA](https://github.com/CourseReps/ECEN489-Spring2015/wiki/intellij) by Ian DeGroot ~~on Wednesday 1/28/2015~~
 * [Networking](https://github.com/CourseReps/ECEN489-Spring2015/wiki/javanet) by Anudeep on 2/2/2015
 * [Java Threads](https://github.com/CourseReps/ECEN489-Spring2015/wiki/threads) by George Sullivan on 2/2/2015
 * [Git/GitHub with IntelliJ IDEA](https://github.com/CourseReps/ECEN489-Spring2015/wiki/gitidea) by Mandel Oats on 2/2/2015
