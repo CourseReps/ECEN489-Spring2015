@@ -1,0 +1,10 @@
+Hello,
+
+You will find below Assignment 4 and Opt-Out Challenge 4.  As usual, you must commit your Java/Android code on GitHub as IntelliJ IDEA or Android Studio projects.
+
+Best regards,
+Jean-Francois Chamberland, Gregory Huff
+
+Due Date: Feb 11, 2015
+https://github.com/CourseReps/ECEN489-Spring2015/tree/master/Assignments
+

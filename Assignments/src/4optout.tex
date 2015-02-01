@@ -39,6 +39,10 @@ This can be achieved by jointly specifying an interface between the clients and 
 Options for the mode of interaction between the agents include \href{http://www.json.org/}{JSON} objects, \texttt{serializable} objects, repeated queries from the server, etc.
 This will be discussed in class to formalize and define the common interface.
 
+Before the app attempts to connect to the network, it may be advisable to check whether a network connection is available, perhaps using \texttt{getActiveNetworkInfo()} and \texttt{isConnected()}.
+Note that, in some recent versions of Android, applications must perform network operations on separate threads.
+This is to prevent undue delays from causing a poor user experience.
+
 
 \subsection*{Code}
 
