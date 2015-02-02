@@ -65,7 +65,10 @@ Can be purchased from Amazon.com for $14.99 or Newegg.com for $17.99 and other r
 
 
 #2
-Specification:
+TP-Link:
+Model Brand:					Alfa
+Model:							AWUS036NH
+Specs:
 Wireless: 						IEEE 802.11b/g/n
 Interface:						USB 2.0 standard to USB 2.0 mini USB
 Data Rate:					802.11b: UP to 11Mbps
