@@ -2,7 +2,7 @@ package com.company;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -18,15 +18,16 @@ public class Server {
 
     public void runServer() throws IOException, ClassNotFoundException {
         ServerSocket serverSocket = new ServerSocket(PORT);
-        System.out.println("Server is up! Waiting for incoming connections...");
+        System.out.println("Server is up! \nServer IP address:" + InetAddress.getLocalHost().getHostAddress()+"\nServer PORT number:" + PORT );
+        System.out.println(" Waiting for incoming connections...");
         Socket socket = serverSocket.accept();
-        System.out.println("Client connected!");
+        System.out.println("\nClient connected!\n");
         ObjectInputStream objectInputStream =new ObjectInputStream(socket.getInputStream());
+        System.out.println("Data received from client: ");
         Cars car= (Cars) objectInputStream.readObject();
         car.printMake();
         car.printModel();
         car.printYear();
         socket.close();
     }
-
 }
