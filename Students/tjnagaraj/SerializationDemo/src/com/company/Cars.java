@@ -3,7 +3,7 @@ package com.company;
 import java.io.Serializable;
 
 /**
- * Created by NAGARAJ on 2/3/2015.
+ * Created by Nagaraj on 2/3/2015.
  * For Serialization concepts demo
  */
 public class Cars implements Serializable{
