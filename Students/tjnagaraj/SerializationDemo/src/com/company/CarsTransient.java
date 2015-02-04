@@ -1,5 +1,4 @@
 package com.company;
-
 import java.io.Serializable;
 
 /**
@@ -10,6 +9,7 @@ public class CarsTransient implements Serializable{
         private String make;
         private int year;
         transient private String model;
+
 
         public void setModel(String model) {
             this.model = model;
@@ -34,7 +34,7 @@ public class CarsTransient implements Serializable{
         }
 
         public void printModel(){
-            System.out.println("Name: "+model);
+            System.out.println("Model: "+model);
         }
         public void printYear(){
             System.out.println("Year: "+year);
@@ -42,5 +42,4 @@ public class CarsTransient implements Serializable{
         public  void printMake(){
             System.out.println("Make: "+make);
         }
-
 }
