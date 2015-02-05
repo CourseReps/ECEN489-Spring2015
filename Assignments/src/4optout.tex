@@ -1,0 +1,56 @@
+\documentclass[11pt]{article}
+
+%%  Dimensions and URL
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+
+%%  Definitions
+\renewcommand{\baselinestretch}{1.1}
+\pagestyle{plain}
+
+
+\begin{document}
+
+\begin{center}
+{\bfseries \LARGE Opt-Out Challenge 4}
+\end{center}
+
+\paragraph{Reading Assignment:}
+How to Program Java, 10th edition
+\begin{itemize}
+\item Chapter~10 -- Object-Oriented Programming: Polymorphism
+\item Chapter~11 -- Exception Handling: A Deeper Look
+\item Chapter~16 -- Strings, Characters and Regular Expressions
+\end{itemize}
+
+
+\section*{Programming Challenges}
+
+Using Android Studio, build an application that connects to a server and periodically reports the status of phone parameters such as
+\href{http://developer.android.com/reference/android/location/LocationManager.html}{location},
+\href{http://developer.android.com/reference/android/hardware/SensorManager.html}{orientation},
+and \href{http://developer.android.com/reference/android/net/wifi/WifiManager.html}{Wi-Fi} attributes.
+Program a Java server that can support this type of connection and displays the latest message it has received.
+
+\paragraph{Coordination:}
+At this point, several members have been successful at building server-client infrastructures.
+This time, students who attempt this exercise must coordinate with one another to make sure that all the phone clients can connect with servers.
+This can be achieved by jointly specifying an interface between the clients and servers.
+Options for the mode of interaction between the agents include \href{http://www.json.org/}{JSON} objects, \texttt{serializable} objects, repeated queries from the server, etc.
+This will be discussed in class to formalize and define the common interface.
+
+Before the app attempts to connect to the network, it may be advisable to check whether a network connection is available, perhaps using \texttt{getActiveNetworkInfo()} and \texttt{isConnected()}.
+Note that, in some recent versions of Android, applications must perform network operations on separate threads.
+This is to prevent undue delays from causing a poor user experience.
+
+
+\subsection*{Code}
+
+\begin{enumerate}
+\item Implement the server in Java and the client as an Android application.
+\item Using \href{https://www.jetbrains.com/idea/}{IntelliJ IDEA}, \href{http://git-scm.com/}{Git}, and \href{https://GitHub.com}{GitHub}, commit your code for the server as a project labeled \texttt{Challenge4server} under \texttt{Students/<GitHubID>/}.
+\item Using \href{http://developer.android.com/sdk/index.html}{Android Studio}, \href{http://git-scm.com/}{Git}, and \href{https://GitHub.com}{GitHub}, commit your application for the client as a project labeled \texttt{Challenge4android} under \texttt{Students/<GitHubID>/}.
+\end{enumerate}
+
+
+\end{document}
