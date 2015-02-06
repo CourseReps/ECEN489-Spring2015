@@ -8,12 +8,15 @@ class ChatServer
 {
     static Vector ClientSockets;
     static Vector LoginNames;
+    public static int numYes = 0;
+    public static int numNo = 0;
+    public final int numVoters = 3;
 
     ChatServer() throws Exception
     {
-        ServerSocket soc=new ServerSocket(5217);
-        ClientSockets=new Vector();
-        LoginNames=new Vector();
+        ServerSocket soc = new ServerSocket(9000);
+        ClientSockets = new Vector();
+        LoginNames = new Vector();
 
         while(true)
         {
@@ -23,8 +26,16 @@ class ChatServer
     }
     public static void main(String args[]) throws Exception
     {
-
         ChatServer ob = new ChatServer();
+    }
+
+    public boolean checkNumVotes()
+    {
+        int sum = numYes + numNo;
+        if (sum == numVoters)
+            return true;
+        else
+            return false;
     }
 
     class AcceptClient extends Thread
@@ -56,12 +67,13 @@ class ChatServer
                 {
                     String msgFromClient = new String();
                     msgFromClient=din.readUTF();
+                    System.out.println(msgFromClient);
                     StringTokenizer st=new StringTokenizer(msgFromClient);
                     String Sendto=st.nextToken();
-                    String MsgType=st.nextToken();
+                    //String MsgType=st.nextToken();
                     int iCount=0;
 
-                    if(MsgType.equals("LOGOUT"))
+                    if(msgFromClient.equals("LOGOUT"))
                     {
                         for(iCount=0;iCount<LoginNames.size();iCount++)
                         {
@@ -75,8 +87,42 @@ class ChatServer
                         }
 
                     }
+                    else if(msgFromClient.equals("YES"))
+                    {
+                        numYes++;
+                        boolean doneVoting = checkNumVotes();
+                        System.out.println(numYes);
+                        System.out.println(doneVoting);
+                        if(doneVoting)
+                        {
+                            for(iCount=0;iCount<LoginNames.size();iCount++)
+                            {
+                                System.out.println("Login names");
+                                System.out.println("Send votes");
+                                Socket tSoc=(Socket)ClientSockets.elementAt(iCount);
+                                DataOutputStream tdout=new DataOutputStream(tSoc.getOutputStream());
+                                tdout.writeUTF("Number of Yes votes: " + numYes + "Number of No votes: " + numNo);
+                            }
+                        }
+                    }
+                    else if(msgFromClient.equals("NO"))
+                    {
+                        numNo++;
+                        boolean doneVoting = checkNumVotes();
+
+                        if(doneVoting)
+                        {
+                            for(iCount=0;iCount<LoginNames.size();iCount++)
+                            {
+                                Socket tSoc=(Socket)ClientSockets.elementAt(iCount);
+                                DataOutputStream tdout=new DataOutputStream(tSoc.getOutputStream());
+                                tdout.writeUTF("Number of Yes votes: " + numYes + "Number of No votes: " + numNo);
+                            }
+                        }
+                    }
                     else
                     {
+                        /*
                         String msg="";
                         while(st.hasMoreTokens())
                         {
@@ -100,8 +146,9 @@ class ChatServer
                         {
 
                         }
+                        */
                     }
-                    if(MsgType.equals("LOGOUT"))
+                    if(msgFromClient.equals("LOGOUT"))
                     {
                         break;
                     }

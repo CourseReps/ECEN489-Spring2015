@@ -25,7 +25,7 @@ class ChatClient extends Frame implements Runnable
         ta=new TextArea(50,50);
         btnSend=new Button("Send");
         btnClose=new Button("Close");
-        soc=new Socket("127.0.0.1",5217);
+        soc=new Socket("127.0.0.1", 9000);
 
         din=new DataInputStream(soc.getInputStream());
         dout=new DataOutputStream(soc.getOutputStream());
@@ -55,7 +55,7 @@ class ChatClient extends Frame implements Runnable
         {
             try
             {
-                dout.writeUTF(sendTo + " "  + "DATA" + " " + tf.getText().toString());
+                dout.writeUTF(tf.getText().toString());
                 ta.append("\n" + LoginName + " Says:" + tf.getText().toString());
                 tf.setText("");
             }
@@ -89,7 +89,7 @@ class ChatClient extends Frame implements Runnable
         {
             try
             {
-                ta.append( "\n" + sendTo + " Says :" + din.readUTF());
+                ta.append(din.readUTF());
 
             }
             catch(Exception ex)
