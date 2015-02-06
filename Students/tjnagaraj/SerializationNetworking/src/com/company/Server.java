@@ -10,7 +10,7 @@ import java.net.Socket;
  * Created by Nagaraj on 2/4/2015.
  */
 public class Server {
-    public static final int PORT = 8000;
+    public static final int PORT = 9000;
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         new Server().runServer();
