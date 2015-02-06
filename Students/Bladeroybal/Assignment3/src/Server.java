@@ -12,17 +12,20 @@ public class Server {
 
         int portNumber = Integer.parseInt(args[0]);
         ServerSocket Server = new ServerSocket(portNumber);
+
+        System.out.println("Server Running. Waiting for Client to Connect");
+        
         Socket clientSocket = Server.accept();
         ObjectOutputStream out =
                 new ObjectOutputStream(clientSocket.getOutputStream());
+        //PrintWriter out2 = new PrintWriter(clientSocket.getOutputStream(), true); //If I wanted to send string by string
+
 
         try
-
-         //       BufferedReader in = new BufferedReader(
-         //               new InputStreamReader(clientSocket.getInputStream()));
         {
             Properties p = new Properties(System.getProperties());
             out.writeObject(p);
+         //   out2.println(System.getProperty("java.class.path")); //Pushing out string by string
         }
         finally {
             Server.close();

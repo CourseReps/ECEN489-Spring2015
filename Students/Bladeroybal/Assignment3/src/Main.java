@@ -27,7 +27,7 @@ public class Main {
             p.list(System.out);
             //p.list(read.readLine());
             //System.out.println(serverOutput);
-
+            //serverOutput = read.readLine(); how to read string in from server
         }
         catch (Exception e) {
             System.err.println("Don't know about host " + hostName);
