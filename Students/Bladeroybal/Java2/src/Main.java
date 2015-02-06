@@ -1,6 +1,5 @@
 import java.lang.System.*; //Import all of Java System Language
 import java.util.Date; //Importing to create Date & Time
-
 public class Main {
 
     public static void main(String[] args) {
