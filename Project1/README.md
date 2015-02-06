@@ -105,7 +105,9 @@ Can be purchased from Amazon.com for $39.99 or Newegg.com for $33.99 and other r
 
 
 
-Linux distro we will use: [Debian] (https://www.debian.org/distrib/)
+Linux distro we will use: Debian
+
+[Link to the latest stable Debian install DVD (USB bootable)] (http://cdimage.debian.org/debian-cd/7.8.0/amd64/iso-dvd/debian-7.8.0-amd64-DVD-1.iso)
 
 
 Project Architecture
