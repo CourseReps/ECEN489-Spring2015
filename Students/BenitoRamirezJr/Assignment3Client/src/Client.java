@@ -1,33 +1,29 @@
-/**
- * Created by Benito on 2/4/2015.
- */
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
-
+import java.util.Date;
 import javax.swing.JOptionPane;
 
-/**
- * Trivial client for the date server.
- */
-public class Client {
+public class Client{
 
-    /**
-     * Runs the client as an application.  First it displays a dialog
-     * box asking for the IP address or hostname of a host running
-     * the date server, then connects to it and displays the date that
-     * it serves.
-     */
     public static void main(String[] args) throws IOException {
         String serverAddress = JOptionPane.showInputDialog(
                 "Enter IP Address of a machine that is\n" +
-                        "running the date service on port 9090:");
-        Socket s = new Socket(serverAddress, 9090);
-        BufferedReader input =
-                new BufferedReader(new InputStreamReader(s.getInputStream()));
-        String answer = input.readLine();
-        JOptionPane.showMessageDialog(null, answer);
+                        "running the date service on port 60025:");
+        Socket socket = new Socket(serverAddress, 60025);
+
+        PrintWriter out =
+                new PrintWriter(socket.getOutputStream(), true);
+        out.println(new Date().toString());
+        out.println("JRE Vendor Name = " + System.getProperty("java.vendor"));
+        out.println("JRE Version Number = " + System.getProperty("java.version"));
+        out.println("Operating System Architecture = " + System.getProperty("os.arch"));
+        out.println("Operating System Name = " + System.getProperty("os.name"));
+        out.println("Operating System version = " + System.getProperty("os.version"));
+        out.println("User Home Directory = " + System.getProperty("user.dir"));
+        out.println("User Account Name = " + System.getProperty("user.name"));
+
+
         System.exit(0);
     }
 }
