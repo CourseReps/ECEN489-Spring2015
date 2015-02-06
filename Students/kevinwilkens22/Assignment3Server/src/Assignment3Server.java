@@ -16,7 +16,7 @@ public class Assignment3Server {
 
 
     public static void main(String[] args) throws IOException {
-        ServerSocket server = new ServerSocket(60025, 1);
+        ServerSocket server = new ServerSocket(60025);
         int stop = 0;
         try {
             while (stop == 0) {
