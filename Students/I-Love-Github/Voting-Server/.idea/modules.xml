@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Challenge2-Server.iml" filepath="$PROJECT_DIR$/Challenge2-Server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Voting-Server.iml" filepath="$PROJECT_DIR$/Voting-Server.iml" />
     </modules>
   </component>
 </project>

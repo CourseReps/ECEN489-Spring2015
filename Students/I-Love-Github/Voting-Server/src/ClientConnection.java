@@ -4,37 +4,41 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+// This class manages a connection to a client and its associated input stream
 public class ClientConnection implements Runnable {
 
+    // This list of message types is incomplete -- more can be found down in processMessage(String message)
     final static public String QUIT = "/quit";
     final static public String JOIN_SERVER = "/join";
 
+    // This is used by the parent class to keep track of the connected clients
     final public int id;
 
-    private String userName;
+    // Fields inherited from the parent
     private ServerRunnable parent;
-
     private Socket clientSocket;
     private PrintWriter toClient;
 
+    // CONSTRUCTOR
+    // Populates inherited fields
     ClientConnection(ServerRunnable parent, Socket clientSocket, int id) {
         this.clientSocket = clientSocket;
         this.parent = parent;
         this.id = id;
     }
 
+    // RUN FUNCTION
     public void run() {
-
-        boolean handshake = true;
 
         BufferedReader toServer = null;
 
         try {
+            // Create the I/O streams
             toClient = new PrintWriter(clientSocket.getOutputStream(), true);
             toServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
+            // Connection loop -- read in client messages and process them
             String stringIn;
-
             while (clientSocket.isConnected()) {
                 stringIn = toServer.readLine();
 
@@ -42,12 +46,15 @@ public class ClientConnection implements Runnable {
                     processString(stringIn);
                 }
             }
+
+            // If the loop is broken, the server lets us know about it
             parent.parent.updateStatusBox("Stopping client from ClientConnection");
 
         } catch(IOException e) {
             parent.parent.updateStatusBox(id + " " + e.getMessage());
 
             //TODO: IO Exceptions should be handled
+        // Close all client connections in the finally block -- just in case they weren't taken care of elsewhere
         } finally {
             try {
                 toServer.close();
@@ -63,13 +70,13 @@ public class ClientConnection implements Runnable {
             }
         }
 
+        // Let ServerRunnable that this thread is ending so it can do housekeeping
         parent.clientThreadEnding(this);
     }
 
+    // Checks to see if this client is still connected -- and if it is, tell it to go away
     public void closeSocket() {
-
         try {
-
             if (clientSocket != null && clientSocket.isConnected()) {
                 toClient.write('q');
                 toClient.flush();
@@ -82,7 +89,7 @@ public class ClientConnection implements Runnable {
         }
     }
 
-    // PROCESS_STRING IS WHERE ALL OF THE MAGIC HAPPENS
+    // For reference, the complete list of message types (client AND server side) is presented below
     //
     // TABLE OF MESSAGE TYPES (server AND client)
     //
@@ -118,17 +125,14 @@ public class ClientConnection implements Runnable {
         }
     }
 
-
+    // If a connection to this client exists, send a message
     public void xmitMessage(String string) {
-        if ((userName != null || toClient != null) && !clientSocket.isClosed()) {
+        if (toClient != null && !clientSocket.isClosed()) {
             toClient.println(string);
         }
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
+    // Check to see if this client is still connected (used during the cleanup portion of ServerRunnable)
     public boolean isConnected() {
         if (clientSocket != null) {
             return clientSocket.isConnected();

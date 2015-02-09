@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-// CLIENTPANEL Class
+// CLIENT PANEL Class
 // This class only builds and provides interactivity with the user interface
 // Any functions that do not talk to or come from the UI are handled in other classes
 class ClientPanel extends JPanel {
@@ -20,6 +20,8 @@ class ClientPanel extends JPanel {
     private final JSeparator horizontalBar2;
     private final JLabel portLabel;
     private final JLabel localIPLabel;
+
+    // Voting buttons
     private final JButton[] vote = new JButton[4];
 
     // ClientRunnable and its thread

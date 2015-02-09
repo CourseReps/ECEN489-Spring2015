@@ -1,11 +1,8 @@
-import javax.swing.*;
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.StringTokenizer;
 
 // This class handles all client-server interactions on the client side
 class ClientRunnable implements Runnable {
