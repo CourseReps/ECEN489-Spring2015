@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
 public class RootClass {
 
     // MAIN FUNCTION
+    // Create and build the main program window
     public static void main(String[] args) {
         final JFrame f = new JFrame("Client");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

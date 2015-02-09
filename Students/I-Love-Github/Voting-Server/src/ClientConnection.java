@@ -82,22 +82,42 @@ public class ClientConnection implements Runnable {
         }
     }
 
+    // PROCESS_STRING IS WHERE ALL OF THE MAGIC HAPPENS
+    //
+    // TABLE OF MESSAGE TYPES (server AND client)
+    //
+    //      STRING TYPE         FORMAT          OPERATION
+    //  --------------------    ------------    ---------------------------------------------------------------------------------------
+    //      Join Server         /join           Part of the handshake -- tells the server that the client is ready for initial commands
+    //  Number of Questions     /numq#          Tells us how many questions there are
+    //       Question           /ques#<str>     Gives us the string <str> of question number #
+    //      Start Vote          /stvt           Standalone command: tells the client to enable voting options
+    //    Selected Option       /sel#           Tells the server that this client has chosen option #
+    //       Remaining          /rem#           After every received vote, the server will tell all clients how many votes remain
+    //    Number of Votes       /ansr#$         Before ending the vote, the server reports that $ votes were cast for option #
+    //       End Vote           /novo           Standalone command: tells the client to disable voting and generate results
+    //      Leave Server        /quit           From client: requests a disconnect || From server: forces client to disconnect
+
+    // For easy reference, the following if-else if statements follow the same order as the above table
     private void processString(String string) {
 
         parent.parent.updateStatusBox(string);
 
-        if (string.startsWith("/sel")) {
+        // On the server side, the server performs some housekeeping when a client joins and constructs an appropriate response
+        if (string.startsWith(JOIN_SERVER)) {
+            parent.clientJoined(this);
+
+        // If a client selects an option, handle it in the ServerRunnable
+        } else if (string.startsWith("/sel")) {
             parent.setVote(Integer.valueOf(string.substring(4)));
             parent.parent.updateStatusBox("Client " + this.id + " chose option " + Integer.valueOf(string.substring(4)));
 
+        // If a client requests disconnection, kill the socket
         } else if (string.startsWith(QUIT)) {
             closeSocket();
-
-        } else if (string.startsWith(JOIN_SERVER)) {
-            parent.clientJoined(this);
-
         }
     }
+
 
     public void xmitMessage(String string) {
         if ((userName != null || toClient != null) && !clientSocket.isClosed()) {

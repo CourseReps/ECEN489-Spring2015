@@ -7,6 +7,8 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
+// This class was gratuitously stolen from the internet.  It was not well commented.
+// Because it extends application, it will also crash if called more than once.  ClientPanel is written to handle this.
 public class BarChrt extends Application {
 
     final static String Option1 = "Option 1";
@@ -19,12 +21,13 @@ public class BarChrt extends Application {
     private static double op3value;
     private static double op4value;
 
-
+    // Required for JavaFX initialization
     @Override public void init() throws Exception{
         super.init();
         Application.Parameters parameters = getParameters();
     }
 
+    // Builds the bar graph window
     @Override public void start(final Stage stage) {
         stage.setTitle("Vote Result");
         final CategoryAxis xAxis = new CategoryAxis();
@@ -55,6 +58,7 @@ public class BarChrt extends Application {
         });
     }
 
+    // Enter values and display the graph
     public void draw(double x,double y,double z,double k) {
         this.op1value = x;
         this.op2value = y;

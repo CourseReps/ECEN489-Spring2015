@@ -7,12 +7,8 @@ import java.awt.event.WindowEvent;
 public class RootClass {
 
     // MAIN FUNCTION
-    // This function creates two swing frame objects...
-    // MAP PANEL: This object creates a JFrame containing a custom panel that displays the map (MapPanel class)
-    // CALC PANE: This object creates another JFrame that contains text fields that allow the user to enter travel
-    //              times and a button that performs the required average speed calculation
+    // Create and build the main program window
     public static void main(String[] args) {
-        // Create MAP PANEL frame
         final JFrame f = new JFrame("Server");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         final ServerPanel serverPanel = new ServerPanel();
