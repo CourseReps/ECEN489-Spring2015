@@ -58,11 +58,11 @@ class ServerRunnable implements Runnable {
 
         // Create new lists for the clients and threads
         if (clientSocketList == null || !clientSocketList.isEmpty()) {
-            clientThreadList = new Vector<Thread>();
+            clientSocketList = new Vector<ClientConnection>();
         }
 
         if (clientThreadList == null || !clientThreadList.isEmpty()) {
-            clientSocketList = new Vector<ClientConnection>();
+            clientThreadList = new Vector<Thread>();
         }
 
         // Now we're ready to go
@@ -173,6 +173,10 @@ class ServerRunnable implements Runnable {
             }
 
             clientConnection.xmitMessage("/stvt");
+        } else {
+            // As a part of the handshake, the client is expecting some form of reply.  This is placeholder for
+            //      something actually useful
+            clientConnection.xmitMessage("You're connected!");
         }
     }
 
@@ -289,6 +293,8 @@ class ServerRunnable implements Runnable {
         }
         broadcastMsg("/novo");                          // Tells all users that voting has ended
 
+        parent.updateStatusBox("Voting has ended!  Voting Results: \n1: " + votes[0] + " \n2: " + votes[1] + " \n3: " + votes[2] + " \n4: " + votes[3] );
+
 
         // Perform some simple math to calculate the vote winner, then let the server know which option won
         int largest = 0;
@@ -299,7 +305,7 @@ class ServerRunnable implements Runnable {
                 winner = (x + 1);
             }
         }
-        parent.updateStatusBox("Voting ended!  Option " + winner + " has won.");
+        parent.updateStatusBox("Option " + winner + " was reported as the winner.");
 
         for (int x = 0; x <= 3; x++) {
             this.votes[x] = 0;
