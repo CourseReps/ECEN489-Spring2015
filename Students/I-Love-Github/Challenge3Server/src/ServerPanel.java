@@ -1,15 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
 
-class ClientPanel extends JPanel {
+class ServerPanel extends JPanel {
 
     private final JTextArea statusBox;
-    private final ClientPanel panel;
-    private ClientRunnable clientRunnable;
+    private final ServerPanel panel;
+    private ServerRunnable serverRunnable;
     private Thread clientThread = null;
 
     // CONSTRUCTOR
-    public ClientPanel() {
+    public ServerPanel() {
 
         panel = this;
 
@@ -28,12 +28,12 @@ class ClientPanel extends JPanel {
         this.setLayout(new BorderLayout());
         this.add(statusBoxScroller, BorderLayout.CENTER);
 
-        clientRunnable = new ClientRunnable(this);
-        clientThread = new Thread(clientRunnable);
+        serverRunnable = new ServerRunnable(this);
+        clientThread = new Thread(serverRunnable);
         clientThread.start();
     }
 
-    public void updateUI(String message) {
+    public void newMessage(String message) {
 
         final String text = message;
 

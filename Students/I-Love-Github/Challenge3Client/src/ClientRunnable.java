@@ -5,6 +5,9 @@ class ClientRunnable implements Runnable {
     private ICHandler icHandler;
     private CommHandler commHandler;
 
+    private long serverTS;
+    private long clientTS;
+
 
     ClientRunnable(ClientPanel parent) {
         this.parent = parent;
@@ -27,11 +30,31 @@ class ClientRunnable implements Runnable {
     }
 
     public void updateUI(String message) {
-        parent.updateUI(message);
+        parent.newMessage(message);
     }
 
     public DBHandler getDB() {
         return dbHandler;
 
+    }
+
+    public void newMessage(String message) {
+        parent.newMessage(message);
+    }
+
+    public void setServerTS(long ts) {
+        this.serverTS = ts;
+    }
+
+    public long getServerTS() {
+        return serverTS;
+    }
+
+    public void setmyTS(long ts) {
+        this.clientTS = ts;
+    }
+
+    public long getMyTS() {
+        return clientTS;
     }
 }

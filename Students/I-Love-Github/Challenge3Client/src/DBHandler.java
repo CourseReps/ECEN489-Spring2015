@@ -58,7 +58,6 @@ public class DBHandler implements Runnable {
             }
         } catch (Exception e) {
             parent.updateUI(e.getClass().getName() + ": " + e.getMessage());
-//            System.exit(0);
         }
         parent.updateUI("Opened database successfully");
     }
@@ -76,7 +75,7 @@ public class DBHandler implements Runnable {
             return false;
 
         } finally {
-            parent.updateUI("Write to DB successful");
+//            parent.updateUI("Write to DB successful");
             return true;
         }
     }
@@ -99,6 +98,46 @@ public class DBHandler implements Runnable {
         } finally {
             parent.updateUI("This client ID is: " + String.valueOf(returnValue));
             return returnValue;
+        }
+    }
+
+    public long getLatestTime() {
+        ResultSet rs = null;
+        long returnValue = 0;
+
+        try {
+
+            stmt = c.createStatement();
+            sqlCommand = "SELECT * FROM SINGLE ORDER BY ID DESC LIMIT 1";
+            rs = stmt.executeQuery(sqlCommand);
+            returnValue = Long.valueOf(rs.getLong("TIME"));
+
+        } catch (Exception e) {
+            parent.updateUI(e.getClass().getName() + ": " + e.getMessage());
+            return 0;
+
+        } finally {
+            parent.updateUI("Latest entry timestamp: " + String.valueOf(returnValue));
+            return returnValue;
+        }
+    }
+
+    public ResultSet gatherDataForServer() {
+        ResultSet rs = null;
+
+        try {
+
+            stmt = c.createStatement();
+            sqlCommand = "SELECT * FROM SINGLE WHERE TIME > " + String.valueOf(parent.getServerTS());
+            rs = stmt.executeQuery(sqlCommand);
+
+        } catch (Exception e) {
+            parent.updateUI(e.getClass().getName() + ": " + e.getMessage());
+            return null;
+
+        } finally {
+            parent.updateUI("Sending entries to server...");
+            return rs;
         }
     }
 }

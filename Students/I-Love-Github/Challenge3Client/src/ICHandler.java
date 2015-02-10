@@ -33,7 +33,8 @@ public class ICHandler implements Runnable {
             parent.getDB().commitData(currentTime, "Mouse X", String.valueOf(point.getX()));
             parent.getDB().commitData(currentTime, "Mouse Y", String.valueOf(point.getY()));
 
-            parent.getDB().getID();
+//            parent.getDB().getID();
+            parent.setmyTS(currentTime);
         }
     }
 }

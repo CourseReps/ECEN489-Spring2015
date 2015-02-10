@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 // ROOT CLASS
 // This class contains the object where the java program begins
