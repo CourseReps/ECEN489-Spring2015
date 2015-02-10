@@ -107,8 +107,38 @@ Can be purchased from Amazon.com for $39.99 or Newegg.com for $33.99 and other r
 
 Linux distro we will use: Debian
 
-[Link to the latest stable Debian install DVD (USB bootable)] (http://cdimage.debian.org/debian-cd/7.8.0/amd64/iso-dvd/debian-7.8.0-amd64-DVD-1.iso)
+[Link to the latest stable Debian install DVD (USB bootable -- you only need the first DVD)] (http://cdimage.debian.org/debian-cd/7.8.0/amd64/iso-dvd/debian-7.8.0-amd64-DVD-1.iso)
 
+
+Debian Install Instructions
+--------------------
+There is a problem with the NUC firmware where it fails to recognize a boot device after Linux is installed.  Here is the workaround:
+
+.1. Install debian
+
+.2. At the INSTALL COMPLETE screen, select GO BACK instead of continue
+
+.3. Press **ctrl-alt-F2** to move to a second console.  Press enter to activate the console
+
+.4. Enter the following five commands:
+
+
+`mount /dev/sda1 /mnt`
+
+`mkdir /mnt/EFI/BOOT`
+
+`cp /mnt/EFI/ubuntu/* /mnt/EFI/BOOT`
+
+`mv /mnt/EFI/BOOT/grubx64.efi /mnt/EFI/BOOT/bootx64.efi`
+
+`exit`
+
+
+.5. Press **ctrl-alt-F1** to move back to the install screen
+
+.6. Select FINISH INSTALL, remove the USB drive and restart
+
+.7. Enjoy Debian!
 
 Project Architecture
 --------------------
