@@ -22,3 +22,4 @@ As part of every tutorial, the presenter must create or enhance a [wiki](https:/
 * [WifiManager](https://github.com/CourseReps/ECEN489-Spring2015/wiki/wifi)
 * [Bluetooth](https://github.com/CourseReps/ECEN489-Spring2015/wiki/bluetooth) by Randy Allen Neal 2/16/2015 
 * [Google Fusion Tables](https://github.com/CourseReps/ECEN489-Spring2015/wiki/fusiontables) by Trevor Dennis on 2/16/2015
+* [Android Fragments](https://github.com/CourseReps/ECEN489-Spring2015/wiki/fragments) by George Sullivan on **not Wednesday**
