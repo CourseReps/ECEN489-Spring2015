@@ -3,8 +3,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+
 
 /**
  * A server program which accepts requests from clients to
@@ -33,6 +35,7 @@ public class Server {
      */
     public static void main(String[] args) throws Exception {
         System.out.println("The capitalization server is running.");
+        System.out.println(InetAddress.getLocalHost().getHostAddress());
         int clientNumber = 0;
         voteQuestion = "Do you prefer ubuntu over debian?";
         numVoters = Integer.parseInt(JOptionPane.showInputDialog("Enter number of voters..."));
@@ -91,10 +94,13 @@ public class Server {
                         break;
                 }
 
-                if (result > (numVoters/2)) {
+                double half = ((double) numVoters)/2;
+                double fResult = (double) result;
+
+                if ( fResult > half ) {
                     out.println("Final result: No");
                 }
-                else if (result < (numVoters/2)) {
+                else if ( fResult < half ) {
                     out.println("Final result: Yes");
                 }
                 else {
