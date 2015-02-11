@@ -1,6 +1,7 @@
 package com.nagaraj.assignment4android;
 
-import android.content.Intent;
+import android.app.Activity;
+import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -9,21 +10,34 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.provider.Settings;
-import android.support.v7.app.ActionBarActivity;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.support.v4.net.ConnectivityManagerCompat;
+import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
 
-public class SystemProperties extends ActionBarActivity implements SensorEventListener,LocationListener {
+public class SystemProperties extends Activity implements SensorEventListener{
 
     SensorManager sensorManager;
     Sensor sensor;
-    LocationManager locationManager;
-    String provider;
+    //protected  LocationManager locationManager;
+    //protected LocationListener locationListener;
+  // protected  Context context;
+   //String provider;
+   //Double latitude,longitude;
+   // protected boolean gps_enabled,network_enabled;
     TextView displayDate;
     TextView displayOrientation;
     TextView displayLocation;
@@ -34,86 +48,57 @@ public class SystemProperties extends ActionBarActivity implements SensorEventLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_properties);
 
-        LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-        boolean enabled = service
-                .isProviderEnabled(LocationManager.GPS_PROVIDER);
+     //locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+     //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,this);
 
-// check if enabled and if not send user to the GSP settings
-// Better solution would be to display a dialog and suggesting to
-// go to the settings
-        if (!enabled) {
-            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(intent);
-        }
-        Criteria criteria = new Criteria();
-        provider = locationManager.getBestProvider(criteria, false);
-        Location location = locationManager.getLastKnownLocation(provider);
 
-        if (location != null) {
-            onLocationChanged(location);
-        } else {
-            displayLocation.setText("Location not available");
-        }
+
+        displayOrientation = (TextView) findViewById(R.id.display_orientation);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        displayOrientation = (TextView) findViewById(R.id.display_orientation);
         displayDate = (TextView) findViewById(R.id.display_date);
         displayLocation = (TextView) findViewById(R.id.display_location);
         displayWifi = (TextView) findViewById(R.id.display_wifi);
-        if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION) != null) {
 
-            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
         } else {
-            //No ACCELEROMETER found.
+            //No Sensor found.
 
-            displayOrientation.setText("No ACCELEROMETER found!");
+            displayOrientation.setText("No ORIENTATION SENSOR found!");
         }
-
-
+        Calendar c=Calendar.getInstance();
+        SimpleDateFormat df =new SimpleDateFormat("MM-dd-yyyy");
+        String formattedDate =df.format(c.getTime());
+        Toast.makeText(this,formattedDate,Toast.LENGTH_SHORT).show();
+        displayDate.setText("Current date: "+formattedDate);
+        getWifiProperties(getApplicationContext());
     }
 
+    public void getWifiProperties(Context context){
+        ConnectivityManager connectivityManager= (ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if(networkInfo.isConnected()){
+            final WifiManager wifiManager =(WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            wifiManager.getConnectionInfo().getBSSID();
 
+                displayWifi.setText("Wifi Deatails\n  SSID: "+wifiManager.getConnectionInfo().getSSID()+"\n Network Id: " +wifiManager.getConnectionInfo().getNetworkId()+ "\n  IP Address: "+wifiManager.getConnectionInfo().getIpAddress());
+
+        }
+    }
     @Override
     protected void onResume() {
         super.onResume();
         sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
-        locationManager.requestLocationUpdates(provider, 400, 1, this);
+       // locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         sensorManager.unregisterListener(this);
-        locationManager.removeUpdates(this);
-
-
+        //locationManager.removeUpdates(this);
     }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        int lat = (int) (location.getAltitude());
-        int lng = (int) (location.getLongitude());
-        displayLocation.setText("Latitude: " + lat + "   Longitude: " + lng);
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-        Toast.makeText(this, "Enabled new provider " + provider, Toast.LENGTH_SHORT).show();
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-        Toast.makeText(this, "Disabled provider " + provider,Toast.LENGTH_SHORT).show();
-
-    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -136,6 +121,10 @@ public class SystemProperties extends ActionBarActivity implements SensorEventLi
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        if(event.sensor.getType()==Sensor.TYPE_ORIENTATION){
+            displayOrientation.setText("Orientation:\n  X: "+event.values[0]+"\n  Y: " +event.values[1]+"\n  Z: "+ event.values[2]);
+        }
+
 
     }
 
@@ -143,4 +132,29 @@ public class SystemProperties extends ActionBarActivity implements SensorEventLi
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
+/*
+    @Override
+    public void onLocationChanged(Location location) {
+       latitude=location.getLatitude();
+       longitude=location.getLongitude();
+       displayLocation.setText("Location:\n  Latitude:"+latitude+"  Longitude"+longitude);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        Log.d("Location", "status");
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+        Log.d("Location", "enable");
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        Log.d("Location","disable");
+    }
+*/
 }
+
