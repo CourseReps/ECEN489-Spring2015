@@ -6,13 +6,13 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        if (args.length != 2){
-            System.err.println("Usage: Java Client <host name> <port number>");
-            System.exit(1);
-        }
+//        if (args.length != 2){
+//            System.err.println("Usage: Java Client <host name> <port number>");
+//            System.exit(1);
+//        }
 
-        String hostName = args[0];
-        int portNumber = Integer.parseInt(args[1]);
+        String hostName = "10.202.99.68";
+        int portNumber = Integer.parseInt("5555");
 
         Socket socket = new Socket(hostName, portNumber);
         BufferedReader read = new BufferedReader(new InputStreamReader(socket.getInputStream()));
