@@ -24,7 +24,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         //Date and Time on Device
-        Date datetime=new Date();
+        Date datetime = new Date();
         String time = "It is currently  " + datetime;
 
         //OS Information of Device
@@ -45,10 +45,9 @@ public class MainActivity extends ActionBarActivity {
         WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = manager.getConnectionInfo();
         String wirelessInfo = "WIFI Information: \n";
-        if (info.getRssi()<-150){
+        if (!manager.isWifiEnabled()) {
             wirelessInfo += "Your device is not connected to WIFI";
-        }
-        else {
+        } else {
             wirelessInfo += "Device Mac Address: " + info.getMacAddress() + "\n";
             wirelessInfo += "Connected To: " + info.getSSID() + "\n";
             wirelessInfo += "Signal Strength (in dBm): " + info.getRssi() + "\n";
@@ -57,11 +56,16 @@ public class MainActivity extends ActionBarActivity {
 
         //Location Information
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
-        String coordinates = "Your last known coordinates are \n";
-        coordinates += "Latitude: " + location.getLatitude() + "\n";
-        coordinates += "Longitude " + location.getLongitude() + "\n";
-
+        String coordinates = "Location Information: \n";
+        if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+            Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
+            coordinates += "Your last known coordinates are \n";
+            coordinates += "Latitude: " + location.getLatitude() + "\n";
+            coordinates += "Longitude " + location.getLongitude() + "\n";
+        }
+        else {
+            coordinates += "Your GPS is not enabled.";
+        }
         //Text on Android Screen
         TextView dateTextView = (TextView)findViewById(R.id.dateTextView);
         dateTextView.setText(time);
