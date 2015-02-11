@@ -11,10 +11,9 @@ import java.util.Scanner;
 public class Client {
 
     public static void main(String[] args) throws IOException {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter IP Address of server:");
+
         //console used to enter server IP address
-        String serverAddress = scan.nextLine();
+        String serverAddress = JOptionPane.showInputDialog("Enter IP Address of server");
 
         try {
             //create new socket object using server IP address and port

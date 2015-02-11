@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".SystemProperties"
+    android:id="@+id/my_phone_properties">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/location_string"
+        android:id="@+id/display_location"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/display_date"
+        android:layout_alignStart="@+id/display_date" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/date_string"
+        android:id="@+id/display_date"
+        android:layout_marginTop="36dp"
+        android:layout_below="@+id/analogClock"
+        android:layout_alignLeft="@+id/analogClock"
+        android:layout_alignStart="@+id/analogClock" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/wifi_string"
+        android:id="@+id/display_wifi"
+        android:layout_marginTop="54dp"
+        android:layout_below="@+id/display_orientation"
+        android:layout_alignLeft="@+id/display_orientation"
+        android:layout_alignStart="@+id/display_orientation" />
+
+    <AnalogClock
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/analogClock"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/orientation_string"
+        android:id="@+id/display_orientation"
+        android:layout_marginTop="54dp"
+        android:layout_below="@+id/display_location"
+        android:layout_alignLeft="@+id/display_location"
+        android:layout_alignStart="@+id/display_location" />
+
+</RelativeLayout>

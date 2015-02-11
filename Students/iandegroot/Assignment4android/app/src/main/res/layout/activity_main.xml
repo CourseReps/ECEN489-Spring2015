@@ -1,0 +1,56 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/dateTextView"
+            android:text="@string/hello_world"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/osInfoTextView"
+            android:text="@string/os_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dateTextView" />
+
+        <TextView
+            android:id="@+id/wifiInfoTextView"
+            android:text="@string/wifi_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/osInfoTextView" />
+
+        <TextView
+            android:id="@+id/sensorInfoTextView"
+            android:text="@string/sensor_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/wifiInfoTextView" />
+
+        <TextView
+            android:id="@+id/accelInfoTextView"
+            android:text="@string/accel_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sensorInfoTextView" />
+
+        <TextView
+            android:id="@+id/lightInfoTextView"
+            android:text="@string/light_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/accelInfoTextView" />
+
+    </RelativeLayout>
+
+</ScrollView>
