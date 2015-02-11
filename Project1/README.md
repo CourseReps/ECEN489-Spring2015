@@ -31,6 +31,114 @@ For this reason, many manufacturers do not support monitor mode with their adapt
 Fortunately, [Atheros](http://www.qca.qualcomm.com/) allows some of its NIC chipsets to operate in monitor mode.
 This project employs the [TP-LINK](http://www.tp-link.us/) TL-WN722N Wireless N150 High Gain USB Adapter, as it features one such Atheros chipset.
 
+Two possible models of wireless dongle:
+
+[TP-LINK TL-WN722N](http://www.amazon.com/TP-LINK-TL-WN722N-Wireless-Adapter-External/dp/B002SZEOLG/ref=sr_1_1?ie=UTF8&qid=1422659883&sr=8-1&keywords=TP-Link%27s+TL-WN722N&pebp=1422659900492&peasin=B002SZEOLG)
+
+[Alfa AWUS036NH] (http://www.amazon.com/Alfa-AWUS036NH-802-11g-Wireless-Long-Range/dp/B003YIFHJY/ref=sr_1_fkmr0_2?s=electronics&ie=UTF8&qid=1422660889&sr=1-2-fkmr0&keywords=atheros+9280)
+
+
+Network Card Update
+#1
+TP-Link:
+Model Brand:					TP-LINK
+Model:							TL-WN722N
+Specs
+Standards:					IEEE 802.11b/g/n
+Wireless Data Rates:		Up to 150Mbps
+Security:						64/128 bit WEP, WPA-PSK/WPA2-PSK
+Interface:						USB 2.0
+Frequency Band:			2.4GHz - 2.4835GHz
+Modulation:					DBPSK, DQPSK, CCK, OFDM, 16-QAM, 64-QAM
+Antenna:						4dBi Detachable Omni-directional Antenna (RP-SMA)
+System Requirements:	OS: Windows 7(32/64bits), Windows Vista(32/64bits), Windows XP(32/64bits), Windows 2000
+Dimensions:					3.7" x 1.0" x 0.4"
+Weight:							0.35
+Temperature:					0°C - 40°C (32°F - 104°F)
+Humidity:						10% - 90% (Non-Condensing)
+Features:						Wireless Modes: Ad-Hoc / Infrastructure mode
+									Advanced Functions: WMM, PSP X-LINK(For Windows XP), Roaming
+									Wireless N speed up to 150Mbps makes it ideal for video streaming, online gaming and VoIP
+									High gain external antenna brings better performance than conventional internal antenna
+									Easy wireless security encryption at a push of the QSS button
+Can be purchased from Amazon.com for $14.99 or Newegg.com for $17.99 and other retailers
+
+
+#2
+TP-Link:
+Model Brand:					Alfa
+Model:							AWUS036NH
+Specs:
+Wireless: 						IEEE 802.11b/g/n
+Interface:						USB 2.0 standard to USB 2.0 mini USB
+Data Rate:					802.11b: UP to 11Mbps
+									802.11g: UP to54Mbps
+									802.11n: UP to 150Mbps
+OS support: 					Windows 2000, XP, Vista, Windows 7, Linux 2.6, Mac 10.4, 10.5, 10.6
+Antenna type: 				1 x 2.4Ghz RP-SMA connector
+Antenna: 						5dBi 2.4GHz Antenna
+Frequency Range: 		2.412~2.483 GHz
+Chipset: 						RT3070
+One LED: 						Power/Status, Wireless Active
+Channel:						1~11 channels ( North America)
+Output power:				802.11b : 33dBm±1
+									802.11g : 32dBm±1
+									802.11n (HT20) : 32dBm±1
+									802.11n (HT40) : 33dBm±1
+Sensitivity:					11b: -92dBm
+									11g: -76dBm
+									11n: -73dBm@HT20
+									-70dBm@HT40
+Data Modulation Type:	BPSK,QPSK, CCK and OFDM
+Power: 							Voltage: 5V+5%
+Security:						WEP 64/128 802.1X support
+									Wi-Fi Protected Access (WPA)
+									WPA-PSK
+									WPA II
+									Cisco CCX support
+									WAPI-PSK
+									WAPI-CERT Environment
+Operating Temp:			0°C ~ +50°C
+Storage: 						-10°C ~ +65°C
+Humidity: 						5%~98% non-condensing
+Can be purchased from Amazon.com for $39.99 or Newegg.com for $33.99 and other retailers
+
+
+
+Linux distro we will use: Debian
+
+[Link to the latest stable Debian install DVD (USB bootable -- you only need the first DVD)] (http://cdimage.debian.org/debian-cd/7.8.0/amd64/iso-dvd/debian-7.8.0-amd64-DVD-1.iso)
+
+
+Debian Install Instructions
+--------------------
+There is a problem with the NUC firmware where it fails to recognize a boot device after Linux is installed.  Here is the workaround:
+
+.1. Install debian
+
+.2. At the INSTALL COMPLETE screen, select GO BACK instead of continue
+
+.3. Press **ctrl-alt-F2** to move to a second console.  Press enter to activate the console
+
+.4. Enter the following five commands:
+
+
+`mount /dev/sda1 /mnt`
+
+`mkdir /mnt/EFI/BOOT`
+
+`cp /mnt/EFI/ubuntu/* /mnt/EFI/BOOT`
+
+`mv /mnt/EFI/BOOT/grubx64.efi /mnt/EFI/BOOT/bootx64.efi`
+
+`exit`
+
+
+.5. Press **ctrl-alt-F1** to move back to the install screen
+
+.6. Select FINISH INSTALL, remove the USB drive and restart
+
+.7. Enjoy Debian!
 
 Project Architecture
 --------------------
