@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+
+    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView" />
+
+    <View android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:id="@+id/horizontalRule1"
+        android:layout_below="@+id/textView"
+        android:background="#50505050" />
+
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Date and Time"
+    android:id="@+id/dateTextView"
+    android:layout_below="@+id/textView"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true" />
+
+    <View android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="#50505050"
+        android:layout_below="@+id/wifiTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OS Info"
+        android:id="@+id/osTextView"
+        android:layout_below="@+id/dateTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <View android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="#50505050"
+        android:layout_below="@+id/deviceTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Device Info"
+        android:id="@+id/deviceTextView"
+        android:layout_below="@+id/osTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <View android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="#50505050"
+        android:layout_below="@+id/osTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wifi Info"
+        android:id="@+id/wifiTextView"
+        android:layout_below="@+id/deviceTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <View android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="#50505050"
+        android:layout_below="@+id/dateTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location Info"
+        android:id="@+id/locationTextView"
+        android:layout_below="@+id/wifiTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

@@ -1,0 +1,1 @@
+The Challenge 4 Android client talks to the Challenge 3 server.  Please refer to that project.
