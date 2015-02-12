@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 class ServerPanel extends JPanel {
 

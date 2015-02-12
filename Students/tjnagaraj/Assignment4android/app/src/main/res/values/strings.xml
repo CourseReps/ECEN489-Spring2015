@@ -4,5 +4,9 @@
     <string name="app_name">Assignment4android</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="date_string">Date:</string>
+    <string name="wifi_string">WiFi</string>
+    <string name="location_string">Location:</string>
+    <string name="orientation_string">Orientation:</string>
 
 </resources>

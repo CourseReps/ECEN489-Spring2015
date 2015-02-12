@@ -1,6 +1,8 @@
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.*;
 
 // This class handles all client socket threads and handles the creation of new sockets
@@ -62,6 +64,14 @@ class CommHandler implements Runnable {
         if (clientThreadList == null || !clientThreadList.isEmpty()) {
             clientThreadList = new Vector<Thread>();
         }
+
+        String s = "Not Detected";
+        try {
+            s = InetAddress.getLocalHost().getHostAddress();
+        } catch(UnknownHostException e) {
+            // nothing here
+        }
+        parent.newMessage("My IP address is: " + s);
 
         // Now we're ready to go
         isRunning = true;
