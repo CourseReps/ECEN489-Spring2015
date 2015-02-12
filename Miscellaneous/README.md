@@ -2,7 +2,7 @@
 
 ## Peer Evaluation
 
-As part of every project, students are required to complete a Peer Evaluation Form to assess the individual contributions of other team members.
+As part of every project, students are required to complete a Peer Evaluation Form to assess the individual contributions of their team members.
 A rubric that explains the four evaluation criteria appears below.
 
 * __Effort & Quality:__
