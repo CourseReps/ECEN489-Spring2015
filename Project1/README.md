@@ -148,6 +148,8 @@ Project Architecture
 
 ### Cloud Server
 
+The Cloud 
+
 ### Android DataMule
 
 The data mule is an Android app that can connects to the Sensor Box and acquired the gathered observations.
