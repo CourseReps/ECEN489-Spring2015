@@ -1,0 +1,20 @@
+07/05/2014
+Haiping: Created a schema
+All: Working on the statistics
+
+07/04/2014
+Jorge: Created a scoreboard
+Haiping and Jorge: Implemented the Game mechanics and AI
+Joshua: Learning how to customize UI for a better appeal.
+
+07/03/2014
+Joshua: Input different pictures for the game board and custom buttons.
+Tim: Working on animation for a button flip and screen transitions. 
+Haiping: Created the black and white pieces and made an array that will store 64 buttons onto a game board.
+
+07/02/2014
+All: Learn XML and get familiar with the Android Studio IDE 
+Joshua: Created different Activities and XML layouts for the Main Menu, Statistics, Game Board and Difficulties Screens
+
+07/01/2014
+All: Learn XML and get familiar with the Android Studio IDE 

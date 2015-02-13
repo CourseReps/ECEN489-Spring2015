@@ -1,0 +1,45 @@
+Development Log
+
+07/07/2014  
+Tim: Finally got Android Studio to install and operate correctly. See post production notes for solution. Met with team. Helped with debugging and finishing up last few bits of code. Recreated background image for the game board. Created and edited post production notes and development log.
+
+All: Make sure all bugs are taken care of and just some re-alignment of some button placements and size of the game board pieces.
+
+07/06/2014    
+Josh: Created a loading Screen that has the title of the app and a progress circle for aesthetic appeal. Changed the background picture for each activity, used calligraphy font for the button images.
+
+07/05/2014   
+Tim: Researched animations for android for flipping tiles. Since Android Studio still not working for me unable to test implementation.
+
+Jorge and Haiping: Finished the Statistics Page
+
+Haiping: Created a schema.xml
+
+Josh: Continued to work on the layout/UI
+
+07/04/2014   
+Jorge: Created a scoreboard
+
+Haiping and Jorge: Implemented the Game mechanics and AI
+
+Josh: Learning how to customize UI for a better appeal.
+
+07/03/2014   
+Tim: Met with team. Helped brainstorm overall design of code and some of the implementation. Created initial background image.
+
+Haiping: Created the black and white pieces and made an array that will store 64 buttons onto a game board.
+
+Josh: Input different pictures for the game board and custom buttons.
+
+07/02/2014   
+Tim: Met with team. Edited and finished the design document.
+
+Jorge and Haiping: Continued to learn XML and Android Studio.
+
+Josh: Created different Activities and XML layouts for the Main Menu, Statistics, Game Board and Difficulties Screens.
+
+07/01/2014    
+All: Learn XML and get familiar with the Android Studio IDE.
+
+Tim: Created and edited the design document.
+
