@@ -144,15 +144,15 @@ Project Architecture
 --------------------
 
 
-Fusing Table
-============
+### Fusing Table
 
-Cloud Server
-============
+### Cloud Server
 
-Android DataMule
-================
+### Android DataMule
 
-Sensor Box (GNU/Linux Debian)
-=============================
+The data mule is an Android app that can connects to the Sensor Box and acquired the gathered observations.
+
+
+
+### Sensor Box (GNU/Linux Debian)
 
