@@ -34,9 +34,9 @@ private void gpsAlert(){
     AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(context);
     alertDialogBuilder.setTitle("GPS Alert!");
     alertDialogBuilder
-            .setMessage("GPS disabled! Press OK to enable.")
+            .setMessage("GPS disabled! Press 'Go to Settings' to enable.")
             .setCancelable(true)
-            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            .setPositiveButton("Go to Settings", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     // if this button is clicked, Redirect to GPS Settings
                     startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0);
@@ -79,8 +79,6 @@ private void gpsAlert(){
     @Override
     public void onProviderDisabled(String provider) {
        gpsAlert();
-       // startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0);
-
     }
 }
 
