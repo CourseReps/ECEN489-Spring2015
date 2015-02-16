@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/grey_back"
+    >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "The rules of Reversi:
+        Reversi is a two player strategy game involving game tiles differentiated by color. The game starts off with 4 of these tiles situated in the middle of the board with white in the upper-left and lower right center and black in the lower-left and upper-right center.
+
+        The first move is always made by the player playing as black and once played white can then play.\n
+       The moves a user can make are as follows:
+       1. Any tile can be placed adjacent (but not necessarily diagonal) to an enemy tile
+       2. If one or more enemy tiles are diagonal to at least one of your tiles already and there is a freespace on the opposite end of the diagonal then your tile can be played there.
+       3. It is possible for you or the enemy to play in such a way that the other may not be able to play that turn. \n
+
+Some helpful hints:Some helpful hints:
+    &#8226; Near the beginning to middle of the game try to get corner spaces (without sacrificing good board position)- Near the beginning to middle of the game try to get corner spaces (without sacrificing good board position)
+    &#8226;  Edge spaces are also good except for the spaces surrounding corners- Edge spaces are also good except for the spaces surrounding corners
+    &#8226;  Just because you have most of the board in the beginning and middle of the game does not mean you are poised to win.- Just because you have most of the board in the beginning and middle of the game does not mean you are poised to win.
+    &#8226; Most importantly, have fun. It's a strategy game but once understood the game can be quite fun.- Most importantly, have fun. It's a strategy game but once understood the game can be quite fun."
+      android:textColor = "#000000"
+           android:id="@+id/textView"
+         android:textSize = "20sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        />
+</RelativeLayout>

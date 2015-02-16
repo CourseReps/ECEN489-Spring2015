@@ -28,16 +28,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-public class SystemProperties extends Activity implements SensorEventListener{
+public class SystemProperties extends Activity implements SensorEventListener,LocationListener{
 
     SensorManager sensorManager;
     Sensor sensor;
-    //protected  LocationManager locationManager;
-    //protected LocationListener locationListener;
-  // protected  Context context;
-   //String provider;
-   //Double latitude,longitude;
-   // protected boolean gps_enabled,network_enabled;
+    protected  LocationManager locationManager;
+    protected LocationListener locationListener;
+    protected  Context context;
+    String provider;
+    Double latitude,longitude;
+    protected boolean gps_enabled,network_enabled;
     TextView displayDate;
     TextView displayOrientation;
     TextView displayLocation;
@@ -48,8 +48,8 @@ public class SystemProperties extends Activity implements SensorEventListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_properties);
 
-     //locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-     //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,this);
+     locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,this);
 
 
 
@@ -82,7 +82,7 @@ public class SystemProperties extends Activity implements SensorEventListener{
             final WifiManager wifiManager =(WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             wifiManager.getConnectionInfo().getBSSID();
 
-                displayWifi.setText("Wifi Deatails\n  SSID: "+wifiManager.getConnectionInfo().getSSID()+"\n Network Id: " +wifiManager.getConnectionInfo().getNetworkId()+ "\n  IP Address: "+wifiManager.getConnectionInfo().getIpAddress());
+                displayWifi.setText("Wifi Details\n  SSID: "+wifiManager.getConnectionInfo().getSSID()+"\n  Network Id: " +wifiManager.getConnectionInfo().getNetworkId()+ "\n  MAC Address: "+wifiManager.getConnectionInfo().getMacAddress());
 
         }
     }
@@ -90,7 +90,7 @@ public class SystemProperties extends Activity implements SensorEventListener{
     protected void onResume() {
         super.onResume();
         sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
-       // locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
     }
 
     @Override
@@ -132,12 +132,12 @@ public class SystemProperties extends Activity implements SensorEventListener{
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
-/*
+
     @Override
     public void onLocationChanged(Location location) {
        latitude=location.getLatitude();
        longitude=location.getLongitude();
-       displayLocation.setText("Location:\n  Latitude:"+latitude+"  Longitude"+longitude);
+       displayLocation.setText("Location:\n  Latitude: "+latitude+"\n  Longitude: "+longitude);
     }
 
     @Override
@@ -155,6 +155,6 @@ public class SystemProperties extends Activity implements SensorEventListener{
     public void onProviderDisabled(String provider) {
         Log.d("Location","disable");
     }
-*/
+
 }
 

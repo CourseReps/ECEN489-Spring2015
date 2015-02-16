@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<data>
+	<level difficulty = "easy">
+			<First>xxxx</First>
+			<Second>xxxx</Second>
+			<Third>xxxx</Third>
+			<Fourth>xxxx</Fourth>
+			<Fifth>xxxx</Fifth>
+	</level>
+	
+	<level difficulty = "medium">
+			<First>xxxx</First>
+			<Second>xxxx</Second>
+			<Third>xxxx</Third>
+			<Fourth>xxxx</Fourth>
+			<Fifth>xxxx</Fifth>
+	</level>
+	
+	<level difficulty = "hard">
+			<First>xxxx</First>
+			<Second>xxxx</Second>
+			<Third>xxxx</Third>
+			<Fourth>xxxx</Fourth>
+			<Fifth>xxxx</Fifth>
+	</level>
+
+</data>

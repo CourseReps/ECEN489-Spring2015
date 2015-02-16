@@ -1,0 +1,15 @@
+import java.util.ArrayList;
+import java.util.Collection;
+
+public abstract interface Main {
+    public Collection Data = new ArrayList();
+    public abstract void addElement();
+    public abstract void removeElement();
+    public abstract void obtainElement();
+    public abstract void listAllElement();
+}
+
+I implemented my design this way so that under different sensing scenarios, 
+user can implement their respective way of modifying the Data because of it is abstract.
+This interface gives the user a generic usage of a collection. All collections need to have 
+the same basic operations.
