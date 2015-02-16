@@ -21,7 +21,7 @@ public class DBHandler {
 //    private String sqlCommand;
 
     private ArrayList<DataPoint> dataList;
-    private int dataPointID;
+    private long dataPointID;
     private long clientID;
 
     public DBHandler(ClientRunnable parent) {
@@ -38,7 +38,7 @@ public class DBHandler {
 
         SharedPreferences sp = parent.getActivity().getPreferences(Context.MODE_PRIVATE);
         clientID = sp.getLong("MyID", -1);
-        dataPointID = sp.getInt("dataID", -1);
+        dataPointID = sp.getLong("dataID", -1);
 
         if (clientID == -1) {
             clientID = Math.abs(new HighQualityRandom().nextLong());
@@ -103,7 +103,7 @@ public class DBHandler {
 
     public boolean commitData(long time, String name, String data) {
 
-        DataPoint newPoint = new DataPoint(dataPointID, time, name, data);
+        DataPoint newPoint = new DataPoint((int) dataPointID, time, name, data);
         dataList.add(newPoint);
         dataPointID++;
         return true;

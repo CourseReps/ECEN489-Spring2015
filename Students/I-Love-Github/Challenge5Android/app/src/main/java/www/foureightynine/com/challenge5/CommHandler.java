@@ -1,15 +1,10 @@
-package www.foureightynine.com.challenge4;
-
-import android.database.Cursor;
+package www.foureightynine.com.challenge5;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.sql.ResultSet;
-import java.sql.SQLClientInfoException;
-import java.sql.SQLException;
 import java.util.Iterator;
 
 // This class handles all client-server interactions on the client side
@@ -20,7 +15,7 @@ class CommHandler implements Runnable {
     final static public String JOIN_SERVER = "/join";
 
     // Default server port
-    public final static String DEFAULT_IP = "10.202.104.72";
+    public final static String DEFAULT_IP = "10.202.105.39";
     public final static int DEFAULT_PORT = 5555;
 
     // Connection status booleans
@@ -171,6 +166,12 @@ class CommHandler implements Runnable {
 
                 collectAndSendData();
             }
+
+        } else if (string.startsWith("/ack")) {
+
+            int ackedID = Integer.valueOf(string.substring(4));
+            parent.getDB().markSent(ackedID);
+
         } else if (string.startsWith(QUIT)) {
             parent.newMessage("Server closed connection!");
             disconnect();

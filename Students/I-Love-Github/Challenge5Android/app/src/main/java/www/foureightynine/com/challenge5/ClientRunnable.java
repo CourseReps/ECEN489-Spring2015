@@ -1,4 +1,4 @@
-package www.foureightynine.com.challenge4;
+package www.foureightynine.com.challenge5;
 
 import android.app.Activity;
 
@@ -19,7 +19,7 @@ class ClientRunnable implements Runnable {
     @Override
     public void run() {
 
-        dbHandler = new DBHandler(this);
+        dbHandler = new DBHandler(getActivity(), this);
 //        dbHandler = new DBHandler(parent.getApplicationContext(), this);
         icHandler = new ICHandler(this);
         commHandler = new CommHandler(this);

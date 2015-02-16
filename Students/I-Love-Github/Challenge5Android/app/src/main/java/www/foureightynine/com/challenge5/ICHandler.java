@@ -1,9 +1,6 @@
-package www.foureightynine.com.challenge4;
+package www.foureightynine.com.challenge5;
 import android.content.Context;
 import android.net.wifi.WifiManager;
-import android.telephony.CellInfoLte;
-import android.telephony.CellSignalStrengthLte;
-import android.telephony.TelephonyManager;
 
 public class ICHandler implements Runnable {
 
@@ -44,6 +41,7 @@ public class ICHandler implements Runnable {
 //            parent.getDB().commitData(currentTime, "Mobile Signal", String.valueOf(cellStrength));
 
             parent.setmyTS(currentTime);
+
         }
     }
 }
