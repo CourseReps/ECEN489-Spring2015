@@ -14,13 +14,13 @@ As part of every tutorial, the presenter must create or enhance a [wiki](https:/
 * [Serialization](https://github.com/CourseReps/ECEN489-Spring2015/wiki/serialization) by Nagaraj on Wednesday 2/4/2015
 * [JSON and GSON](https://github.com/CourseReps/ECEN489-Spring2015/wiki/json) by Evelyn Cifuentes ~~on 2/4/2015~~
 * [SQLite](https://github.com/CourseReps/ECEN489-Spring2015/wiki/sqlite) by Yajie Zeng ~~on 2/6/2015~~
-* [Android Studio](https://github.com/CourseReps/ECEN489-Spring2015/wiki/androidstudio) by Joshua Cano on on Friday 2/13/2015
 * [Java Database Connectivity (JDBC)](https://github.com/CourseReps/ECEN489-Spring2015/wiki/jdbc) by Benito Ramirez ~~on 2/9/2015~~
 * [Android Architecture](https://github.com/CourseReps/ECEN489-Spring2015/wiki/android) by Kevin Wilkens ~~on 2/9/2015~~
 * [SensorManager](https://github.com/CourseReps/ECEN489-Spring2015/wiki/sensor) by Pranay Kumar ~~on 2/9/2015~~
 * Coporate Software by Jeffrey Jensen ~~on 2/11/2015~~
-* [LocationManager](https://github.com/CourseReps/ECEN489-Spring2015/wiki/location) by Nagaraj Thenkarai Janakiraman on Friday 2/13/2015
-* [WifiManager](https://github.com/CourseReps/ECEN489-Spring2015/wiki/wifi) by Anudeep Tungala on Friday 2/13/2015
+* [LocationManager](https://github.com/CourseReps/ECEN489-Spring2015/wiki/location) by Nagaraj Thenkarai Janakiraman ~~on 2/13/2015~~
+* [WifiManager](https://github.com/CourseReps/ECEN489-Spring2015/wiki/wifi) by Anudeep Tungala ~~on 2/13/2015~~
+* [Android Studio](https://github.com/CourseReps/ECEN489-Spring2015/wiki/androidstudio) by Joshua Cano on ~~on 2/13/2015~~
 * [Bluetooth](https://github.com/CourseReps/ECEN489-Spring2015/wiki/bluetooth) by Randy Allen Neal on Monday 2/16/2015 
 * [Google Fusion Tables](https://github.com/CourseReps/ECEN489-Spring2015/wiki/fusiontables) by Trevor Dennis on Monday 2/16/2015
 * [Android UI Fragments](https://github.com/CourseReps/ECEN489-Spring2015/wiki/fragments) by George Sullivan on Wednesday 2/18/2015
