@@ -11,5 +11,5 @@ public class ClientOutMessage implements Serializable {
     public Double X;
     public Double Y;
     public Double Z;
-    String  date;
+    public String date;
 }
