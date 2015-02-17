@@ -1,4 +1,4 @@
-package com.company;
+package com.nagaraj.challenge5android;
 
 import java.io.Serializable;
 
