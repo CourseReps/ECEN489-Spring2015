@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Challenge5android</string>
+    <string name="action_settings">Settings</string>
+    <string name="LoadResults">Start</string>
+    <string name="stopLoad">Stop</string>
+    <string name="clearLoad">DBClear</string>
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="insertedRecords">Inserted Records</string>
+    <string name="transferredRecords">Transferred Records</string>
+
+</resources>
