@@ -19,7 +19,9 @@ public class CollectData implements Runnable {
     private MainActivity parent;
     private DatabaseManager db;
     private final int collectTime = 1000; //used to set collection rate
-    int count = 1; //initialize data point counter index 1
+
+    //static class variables
+    static int count = 0; //initialize data point counter
 
     //class constructor
     CollectData (MainActivity parent, DatabaseManager h) {
@@ -28,9 +30,6 @@ public class CollectData implements Runnable {
     }
 
     public void run() {
-        //sets transmit button enable false which disables transmit button during data collection
-        parent.transmitEnable(false);
-
         //get location service
         LocationManager locationManager = (LocationManager) parent.getSystemService(Context.LOCATION_SERVICE);
 
@@ -53,6 +52,7 @@ public class CollectData implements Runnable {
 
                 //writes both coordinates to database
                 db.addPoint(lat, longitude);
+                count++; //increment count
 
                 //update status box and log
                 parent.setStatusText("Now collecting data..." + "\nStored data point " + count);
@@ -65,14 +65,14 @@ public class CollectData implements Runnable {
             catch (SQLiteException e) {
                 e.printStackTrace();
                 Log.d("CollectData", "Error writing to database!");
-                //parent.setStatusText("Error writing to database!");
-            }
-            finally {
-                count++;
+                parent.setStatusText("Error writing data point " + count + " to database!");
             }
         }
         //update status box
         parent.setStatusText("Finished collecting data!" + "\nEnter server IP address and press Transmit to send new data.");
+
+        //enable transmit and clear buttons when new data has been recorded in the database
         parent.transmitEnable(true);
+        parent.clearEnable(true);
     }
 }

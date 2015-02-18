@@ -20,10 +20,11 @@ public class MainActivity extends Activity {
     private String serverIp;
     private Button senseButton;
     private Button transmitButton;
+    private Button clearButton;
 
 
     //static class variables
-    static int LASTID = 0;  //static variable used to keep track of last transmitted database entry
+    //static int LASTID = 0;  //static variable used to keep track of last transmitted database entry
     static boolean senseShowsStop = false;  //static variable used start and stop data collection
 
     @Override
@@ -41,18 +42,26 @@ public class MainActivity extends Activity {
         status = (TextView) findViewById(R.id.viewText);
         status.setText("Press Sense to begin collecting data...");
 
-        //identify sense and transmit buttons
+        //identify sense, transmit, and clear buttons
         senseButton =  (Button)findViewById(R.id.Sense);
         transmitButton = (Button)findViewById(R.id.Transmit);
+        clearButton = (Button) findViewById(R.id.Clear);
 
+        //disable clear and transmit on launch
+        clearButton.setEnabled(false);
+        transmitEnable(false);
+
+        //set listener action for sense button
         senseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //if statement checks if data collection is in progress; if not, start the collection
                 if (!senseShowsStop) {
-                    setSenseText("Stop");
-                    senseShowsStop = true;
+                    setSenseText("Stop");   //change sense button text
+                    senseShowsStop = true;  //sets boolean for loop condition during data collection
+                    transmitEnable(false);  //disable transmit mode while sensing
+                    clearEnable(false);     //disable clear button
                     Thread collectThread = new Thread(collector);
                     collectThread.start();
                 }
@@ -65,6 +74,7 @@ public class MainActivity extends Activity {
             }
         });
 
+        //set listener action for transmit button
         transmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,15 +84,28 @@ public class MainActivity extends Activity {
                     setStatusText("Enter valid IP address!");
                 //only starts server connection if database has recorded new entries
                 else if (!(db.entries == 0)) {
+                    senseEnable(false);
+                    clearEnable(false);
                     Thread clientThread = new Thread(connection);
                     clientThread.start();
                 }
                 //otherwise reports to user no new data
                 else if (db.entries == 0)
                     setStatusText("No new data to transmit!\nPress sense to collect new data!");
+
             }
         });
 
+        //set listener action for clear button
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.clearTable();    //clears table
+                clearEnable(false);     //disables clear button since database contains no data
+                transmitEnable(false);  //disables transmit button as well
+                setStatusText("Cleared database!\nPress sense to collect new data");
+            }
+        });
 
     }
 
@@ -93,6 +116,15 @@ public class MainActivity extends Activity {
         return true;
     }
 
+    //method used to enable clear button
+    public void clearEnable (final boolean b) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                clearButton.setEnabled(b);
+            }
+        });
+    }
 
     //method used to enable sense button
     public void senseEnable (final boolean b) {

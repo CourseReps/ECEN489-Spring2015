@@ -25,6 +25,9 @@ public class ConnectToServer implements Runnable {
     private BufferedReader reader;
     private final int port = 9090;
 
+    //static class variables
+    static int LastID = 0;  //static variable used to keep track of last transmitted database entry
+
     ConnectToServer (MainActivity parent, DatabaseManager h) {
         this.parent = parent;
         this.db = h;
@@ -32,9 +35,6 @@ public class ConnectToServer implements Runnable {
 
     public void run() {
         try {
-            //disable sense button while transmitting
-            parent.senseEnable(false);
-
             //status box message
             parent.setStatusText("Attempting to connect to server..." + "\n@" + serverIp + ":" + port);
 
@@ -50,7 +50,7 @@ public class ConnectToServer implements Runnable {
             Thread.sleep(1000); //sleep so user can see server status
 
             //gets last transmitted row ID to server as well as local entries recorded since last connection
-            int lastId = MainActivity.LASTID == 0 ? 1 : MainActivity.LASTID;
+            int lastId = LastID == 0 ? 1 : LastID;  //local lastId variable used during transmission
             int entries = lastId + db.entries;
 
             //initialize sqlCommand string to be sent to server
@@ -67,8 +67,8 @@ public class ConnectToServer implements Runnable {
                 lastId++;   //increment lastId for next entry to be sent
             }
 
-            //update global LASTID to most recent entry ID in table
-            MainActivity.LASTID = lastId;
+            //update static LastID to most recent entry ID in table
+            LastID = lastId;
             DatabaseManager.entries = 0;
 
             printWriter.write("Done");  //tells the server data transmission is complete
@@ -93,6 +93,7 @@ public class ConnectToServer implements Runnable {
         }
         finally {
             parent.senseEnable(true);
+            parent.clearEnable(true);
             try {
                 printWriter.flush();
                 printWriter.close();
