@@ -15,6 +15,7 @@ public class DBManager implements Runnable {
             connection = DriverManager.getConnection("jdbc:sqlite:C:\\SQLite\\" + DB_NAME);
             statement = connection.createStatement();
             System.out.println("Connected to Database!");
+            clearTable(statement);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -64,10 +65,22 @@ public class DBManager implements Runnable {
             System.out.println("Successfully wrote entry: " + data + " to " + TABLE_NAME);
         }
         catch (SQLException s) {
-            s.printStackTrace();
+            //s.printStackTrace();
+            System.out.println("Unable to write data! Exception thrown: " + s.getMessage());
         }
         catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void clearTable (Statement statement) {
+        try {
+            String sql = "Delete FROM " + TABLE_NAME;
+            statement.executeUpdate(sql);
+            System.out.println("Cleared previous data!");
+        }
+        catch (SQLException e) {
+            System.out.println("Error deleting rows!");
         }
     }
 }

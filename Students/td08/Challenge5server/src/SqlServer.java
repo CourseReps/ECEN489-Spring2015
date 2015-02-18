@@ -6,17 +6,6 @@ import java.sql.Statement;
 
 public class SqlServer
 {
-
-    public static void flushTable (Statement statement) {
-        try {
-            String sql = "Delete FROM DATA";
-            statement.executeUpdate(sql);
-        }
-        catch (SQLException e) {
-            System.out.println("Error deleting rows!");
-        }
-    }
-
     public static void main(String[] args) throws IOException
     {
         int keepOpen = 0;

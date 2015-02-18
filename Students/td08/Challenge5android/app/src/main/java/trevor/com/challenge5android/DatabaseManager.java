@@ -20,7 +20,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Value";
     private static final String LOCAL_TABLE_NAME = "DATA";
     private static final String SERVER_TABLE_NAME = "DATA";
-    public static int entries;  //static int used to track number of entries made to table during sense
+    static int entries;  //static int used to track number of entries made to table during sense
 
     //instance variables
     private SQLiteDatabase db;
@@ -71,9 +71,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
     }
 
     //method to read specific row from table
-    public String readRow (String table, int id) {
+    public String readRow (int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(table, new String[] {"ID", "LAT", "LONG"}, "ID = ?", new String[] {String.valueOf(id)}, null, null, null);
+        Cursor cursor = db.query(LOCAL_TABLE_NAME, new String[] {"ID", "LAT", "LONG"}, "ID = ?", new String[] {String.valueOf(id)}, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
         String row = "Row entry: ID = " + cursor.getInt(0) + ", LAT = " + cursor.getDouble(1) + ", LONG = " + cursor.getDouble(2);
@@ -92,6 +92,15 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
         else sql = null;
         return sql;
+    }
+
+    //method used to clear table entries
+    public void clearTable () {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(LOCAL_TABLE_NAME, null, null);
+        db.close();
+        CollectData.count = 0; //reset data point counter
+        ConnectToServer.LastID = 0; //reset LastID
     }
 
     //method that checks existence of table and returns boolean. Will also create table if necessary
