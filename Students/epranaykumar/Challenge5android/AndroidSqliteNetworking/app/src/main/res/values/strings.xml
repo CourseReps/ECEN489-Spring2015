@@ -6,5 +6,8 @@
     <string name="action_settings">Settings</string>
     <string name="enter_ip">Enter IP Address here</string>
     <string name="enter_port">Enter Port here</string>
+    <string name="send">SEND</string>
+    <string name="stop">STOP</string>
+    <string name="server_info">Server Info</string>
 
 </resources>

@@ -12,6 +12,8 @@ public class ClientManager implements Runnable
     private PrintWriter toClient;
     private DBManager db;
 
+    static int itemsReceived;
+
     //Constructor when client connects
     ClientManager (Socket socket, DBManager db)
     {
@@ -43,16 +45,24 @@ public class ClientManager implements Runnable
             System.out.println("Ready to receive from client...");
             toClient.println(send);
             String received = null;
+            itemsReceived = 0;
 
             //begin receiving data
             while (socket.isConnected())
             {
                 received = fromClient.readLine();
                 //once statement received from client, send to database
-                if (received.equals("Done")) {
-                    System.out.println("Finished receiving data!");
+                if (received.equals("Done") && itemsReceived == 0) {
+                    System.out.println("No new data recorded!");
                     break;
                 }
+
+                if (received.equals("Done")) {
+                    System.out.println("Finished receiving data! Recorded " + itemsReceived + " new entries.");
+                    itemsReceived = 0;
+                    break;
+                }
+
                 else if (received != null)
                     System.out.println(received);
                     try {

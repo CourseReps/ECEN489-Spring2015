@@ -12,7 +12,6 @@ class ClientRunnable implements Runnable {
     private long serverTS;
     private long clientTS;
 
-
     ClientRunnable(RootActivity parent) {
         this.parent = parent;
     }

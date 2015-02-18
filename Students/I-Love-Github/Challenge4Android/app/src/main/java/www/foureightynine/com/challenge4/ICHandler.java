@@ -40,6 +40,7 @@ public class ICHandler implements Runnable {
 
             currentTime = System.currentTimeMillis();
             parent.getDB().commitData(currentTime, "Wifi Speed", String.valueOf(linkSpeed));
+            parent.newMessage("Wifi data point collected: " + String.valueOf(linkSpeed));
 //            parent.getDB().commitData(currentTime, "Mobile Signal", String.valueOf(cellStrength));
 
             parent.setmyTS(currentTime);

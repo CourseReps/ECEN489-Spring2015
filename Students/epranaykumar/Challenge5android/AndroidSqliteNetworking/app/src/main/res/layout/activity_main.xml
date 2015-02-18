@@ -10,14 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <LinearLayout
-        android:id="@+id/buttonBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
 
-    </LinearLayout>
 
 
 
@@ -35,7 +28,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/btnAdd">
+        android:layout_below="@+id/btnClear">
     </EditText>
 
     <EditText
@@ -45,7 +38,7 @@
         android:ems="10"
         android:id="@+id/editText"
         android:hint="@string/enter_ip"
-        android:layout_below="@+id/buttonBar"
+
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -65,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onClick_SendSensorData"
-        android:text="SEND"
+        android:text="@string/send"
         android:layout_below="@+id/editText2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -74,11 +67,24 @@
     android:id="@+id/btnClear"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:onClick="onClick_DisplaySensorReading"
-    android:text="Display"
-        android:layout_below="@+id/editText2"
-        android:layout_toRightOf="@+id/btnAdd"
-        android:layout_toEndOf="@+id/btnAdd" />
+    android:onClick="onClick_StopSending"
+    android:text="@string/stop"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="@string/server_info"
+        android:id="@+id/display_server"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/editText"
+        android:layout_alignEnd="@+id/editText"
+        android:layout_below="@+id/btnAdd"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/btnClear" />
+
 
 
 </RelativeLayout>

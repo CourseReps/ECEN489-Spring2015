@@ -5,5 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="edit_message">Enter server IP address</string>
+    <string name="sense_text">Sense</string>
+    <string name="transmit_text">Transmit</string>
 
 </resources>

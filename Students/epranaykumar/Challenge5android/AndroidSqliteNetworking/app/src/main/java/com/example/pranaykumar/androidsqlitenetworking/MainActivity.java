@@ -47,15 +47,18 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
     TextView displayReading;
     String message;
 
+    String message2;
     DBAdapter myDb;
 
     Socket client;
     BufferedReader in;
     //PrintWriter out;
-    ObjectOutputStream objectOut;
-    ObjectInputStream objectInput;
+    //ObjectOutputStream objectOut;
+    PrintWriter objectOut;
+   // ObjectInputStream objectInput;
     String ip;
     String port;
+    boolean STOP;
 
 
     @Override
@@ -102,13 +105,12 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
     }
 
 
-    public void onClick_DisplaySensorReading(View v) {
 
-    }
 
     private void displayText(String message) {
         displayReading.setText(message);
     }
+
 
 
     @Override
@@ -193,6 +195,15 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
     }
 
 
+    public void onClick_StopSending(View v) {
+
+        STOP = true;
+
+    }
+
+    //private void serverInfo(String message2) {
+    //    displayServer.setText(message2);
+    //}
     public void onClick_SendSensorData(View v) {
 
         EditText editText = (EditText) findViewById(R.id.editText);
@@ -216,63 +227,77 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
     }
 
 
-    /*
-    <TextView
-    android:text="@string/hello_world"
-            android:id="@+id/display_reading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </RelativeLayout>
-    */
     class chatClientConnect extends AsyncTask<Void, Void, Void> {
 
-        //String respmsg = " ";
-        //String ip = " ";
+
         Integer Port = 0;
         @Override
         protected Void doInBackground(Void... args) {
             try {
-               // message = "sending recent data";
-              //  displayText(message);
-                client = new Socket(ip, Port);
+               // TextView displayServer = (TextView) findViewById(R.id.display_server);
+               // message2 = "sending recent data";
+               // displayServer.setText(message2);
+                if(sent_id==1) {
+                    client = new Socket(ip, Port);
+                    in = new BufferedReader(
+                            new InputStreamReader(client.getInputStream()));
+
+                    //objectOut = new ObjectOutputStream(client.getOutputStream());
+                    objectOut = new PrintWriter(client.getOutputStream(), true);
+                }
                // message = "sending recent data";
                // displayText(message);
-                in = new BufferedReader(
-                        new InputStreamReader(client.getInputStream()));
 
-                objectOut = new ObjectOutputStream(client.getOutputStream());
 
                 Cursor cursor = myDb.getRowafter((long) sent_id);
 
                 do {
                     // Process the data:
 
-                    int id = cursor.getInt(DBAdapter.COL_ROWID);
+                     int id = cursor.getInt(DBAdapter.COL_ROWID);
                     float x = cursor.getFloat(DBAdapter.COL_NAME);
                     float y = cursor.getFloat(DBAdapter.COL_STUDENTNUM);
                     float z = cursor.getFloat(DBAdapter.COL_FAVCOLOUR);
-                   // objectOut.writeObject(Integer.toString(sent_id));
-                    objectOut.writeObject(Integer.toString(id));
-                    objectOut.writeObject(Float.toString(x));
-                    objectOut.writeObject(Float.toString(y));
-                    objectOut.writeObject(Float.toString(z));
-                    if (cursor.moveToNext()) {
-                        objectOut.writeObject("RUN");
+                       // objectOut.writeObject(Integer.toString(sent_id));
+                    /*objectOut.writeObject(Integer.toString(id)+"\n");
+                    objectOut.writeObject(Float.toString(x)+"\n");
+                    objectOut.writeObject(Float.toString(y)+"\n");
+                    objectOut.writeObject(Float.toString(z)+"\n");*/
+                    if (STOP) {
+                        objectOut.println("STOP");
+                        break;
                     }
+                    else  {
+                        objectOut.println("RUN");
+                    }
+                    objectOut.println(Integer.toString(id));
+                    objectOut.println(Float.toString(x));
+                    objectOut.println(Float.toString(y));
+                    objectOut.println(Float.toString(z));
+                    // if (cursor.moveToNext()) {
+                    //     objectOut.println("RUN");
+                    // }
+
 
                     sent_id = sent_id + 1;
+                    cursor.moveToNext();
                 } while (sent_id <= total_rows);//while (cursor.moveToNext());
-                objectOut.writeObject("stop");
+
+                objectOut.println("PAUSE");
 
                 objectOut.flush();
 
                // message = "sent recent data";
                // displayText(message);
 
-                objectOut.close();
-                in.close();
-                client.close();
+
+
+                if (STOP) {
+                    objectOut.close();
+                    in.close();
+                    client.close();
+                }
+
 
             } catch (Exception e) {
                 //handle exception
@@ -280,6 +305,7 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
             }
             return null;
         }
+
 
 
         @Override
