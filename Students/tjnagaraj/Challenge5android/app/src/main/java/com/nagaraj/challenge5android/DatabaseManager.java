@@ -41,9 +41,9 @@ public class DatabaseManager {
     private static final String DATABASE_CREATE_SQL =
             "create table " + DATABASE_TABLE
                     + " (" + KEY_ROWID + " integer primary key autoincrement, "
-                    + KEY_X + " float, "
-                    + KEY_Y + " float, "
-                    + KEY_Z + " float, "
+                    + KEY_X + " double, "
+                    + KEY_Y + " double, "
+                    + KEY_Z + " double, "
                     + KEY_DATE_TIME + " string not null,"
                     + KEY_FLAG + " String not null"
                     + ");";
@@ -68,7 +68,7 @@ public class DatabaseManager {
         myDBHelper.close();
     }
 
-    public long insertRow(float x, float y, float z, String date_time, String flag) {
+    public long insertRow(double x, double y, double z, String date_time, String flag) {
 
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_X, x);
@@ -127,7 +127,7 @@ public class DatabaseManager {
     }
 
 
-    public boolean updateRow(long rowId, float x, float y, float z, String date_time, String flag) {
+    public boolean updateRow(long rowId, double x, double y, double z, String date_time, String flag) {
         String where = KEY_ROWID + "=" + rowId;
         ContentValues newValues = new ContentValues();
         newValues.put(KEY_X, x);
