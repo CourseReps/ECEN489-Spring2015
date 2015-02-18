@@ -89,7 +89,8 @@ public class SystemProperties extends Activity implements SensorEventListener,Lo
     @Override
     protected void onResume() {
         super.onResume();
-        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_STATUS_ACCURACY_LOW );
+       // System.out.println("Sensor delay: "+SensorManager.SENSOR_DELAY_NORMAL);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
     }
 

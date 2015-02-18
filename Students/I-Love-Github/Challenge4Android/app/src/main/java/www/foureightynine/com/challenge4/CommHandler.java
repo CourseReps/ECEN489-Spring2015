@@ -20,7 +20,7 @@ class CommHandler implements Runnable {
     final static public String JOIN_SERVER = "/join";
 
     // Default server port
-    public final static String DEFAULT_IP = "10.201.137.117";
+    public final static String DEFAULT_IP = "10.202.104.72";
     public final static int DEFAULT_PORT = 5555;
 
     // Connection status booleans
@@ -208,6 +208,7 @@ class CommHandler implements Runnable {
                 sendString("/data" + key + ", " + time + ", '" + name + "', '" + data + "'");
             }
 
+            parent.newMessage("Flushing data to server.");
             parent.setServerTS(parent.getMyTS());
 
         } catch (Exception e) {

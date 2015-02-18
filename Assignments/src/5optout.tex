@@ -1,0 +1,57 @@
+\documentclass[11pt]{article}
+
+%%  Dimensions and URL
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+
+%%  Definitions
+\renewcommand{\baselinestretch}{1.1}
+\pagestyle{plain}
+
+
+\begin{document}
+
+\begin{center}
+{\bfseries \LARGE Opt-Out Challenge 5}
+\end{center}
+
+\paragraph{Reading Assignment:}
+How to Program Java
+\begin{itemize}
+\item Chapter~17 -- Files, Streams and Object Serialization
+\item Chapter~18 -- Recursion
+\item Chapter~19 -- Searching, Sorting and Big O
+\item Chapter~20 -- Generic Collections
+\item Chapter~21 -- Generic Data Structures
+\item Chapter~22 -- Custom Generic Data Structures
+\end{itemize}
+
+
+\section*{Programming Challenge}
+
+This programming challenge contains two components.
+First, you must create a Java server that can receive information from clients.
+Second, you must program an Android application that records local observations and sends them to the server when connected to a Wi-Fi network.
+
+As in previous challenges, upon accepting a connection, the server should create a table for the remote client using \href{http://www.sqlite.org/}{SQLite}.
+The server should subsequently enter every entry reported by the Android device into the database.
+Again, you may want to leverage the Java Database Connectivity (JDBC) API in your implementation.
+
+The Android app should have two modes of operation.
+A sense mode where the device periodically records measurements into a local SQLite database.
+And, a transfer mode that takes every new entry present in the local database and transfers it to the server.
+Be sure to include a flag with every observation sequence to indicate whether this data was previously transferred to the remote database. 
+If you need to borrow an Android device, we may be able to accommodate the first few requests.
+
+\subsection*{Code}
+
+\begin{enumerate}
+\item Implement the server in Java.
+\item Using IntelliJ IDEA, Git, and GitHub, commit your code for the server as a project labeled \texttt{Challenge5server} under \texttt{Students/<GitHubID>/}.
+\item Using \href{http://developer.android.com/sdk/index.html}{Android Studio}, \href{http://git-scm.com/}{Git}, and \href{https://GitHub.com}{GitHub}, commit your application for the client as a project labeled \texttt{Challenge5android} under \texttt{Students/<GitHubID>/}.
+\item As part of your demonstration, you will have to use an \href{http://www.sqlite.org/}{SQLite} visualizer to showcase the content of the table before and after the connection.
+\end{enumerate}
+
+
+
+\end{document}

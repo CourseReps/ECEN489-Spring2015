@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.haiping.myapplication" >
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        <activity
+            android:name=".LoadingScreen"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="Main Menu"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+
+            <intent-filter>
+                <action android:name="com.example.haiping.myapplication.MAINMENU"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <activity android:name=".DifficultyScreen"
+            android:noHistory = "true"
+            android:label="Get Difficulty"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+
+        <intent-filter>
+            <action android:name="com.example.haiping.myapplication.DIFFICULTY"/>
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>
+
+        <activity android:name=".StatisticsScreen"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="High Scores"
+            android:theme="@style/AppTheme" >
+            <intent-filter>
+                <action android:name="com.example.haiping.myapplication.STATISTICS"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            </activity>
+        <activity android:name = ".AboutScreen"
+            android:screenOrientation = "portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label = "About Page"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            >
+            <intent-filter>
+                <action android:name="com.example.haiping.myapplication.ABOUT"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Reversi"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="GameBoard"
+            android:theme="@style/AppTheme" >
+        <intent-filter>
+            <action android:name="com.example.haiping.myapplication.REVERSI"/>
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

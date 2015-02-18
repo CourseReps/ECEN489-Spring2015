@@ -143,3 +143,19 @@ There is a problem with the NUC firmware where it fails to recognize a boot devi
 Project Architecture
 --------------------
 
+
+### Fusing Table
+
+### Cloud Server
+
+The Cloud 
+
+### Android DataMule
+
+The data mule is an Android app that can connects to the Sensor Box and acquired the gathered observations.
+This data set should be stored locally in an SQLite database.
+Once this information is stored on the device, the data mule must seek an Internet Wi-Fi connection and transfer the data to the Cloud server.
+
+
+### Sensor Box (GNU/Linux Debian)
+
