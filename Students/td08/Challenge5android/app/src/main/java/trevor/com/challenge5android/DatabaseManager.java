@@ -8,66 +8,83 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+/*
+Class used to interface with local SQL database. Contains methods to insert, read, and retrieve entries
+in a SQL formatted command syntax
+*/
+
 public class DatabaseManager extends SQLiteOpenHelper {
 
+    //static class variables
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "Value";
-
-    // table name
-    private static final String TABLE_NAME = "DATA";
+    private static final String LOCAL_TABLE_NAME = "DATA";
     private static final String SERVER_TABLE_NAME = "DATA";
+    public static int entries;  //static int used to track number of entries made to table during sense
 
-    static int entries;
+    //instance variables
     private SQLiteDatabase db;
+    private MainActivity parent;
 
-    public DatabaseManager(Context context) {
+    //constructor to create sql database
+    public DatabaseManager(Context context, MainActivity parent) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-
+        this.parent = parent;
         // TODO Auto-generated constructor stub
     }
 
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-
         this.db = db;
-        String createTable;
-        createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY, LAT DOUBLE, LONG DOUBLE)";
+        String createTable = "CREATE TABLE " + LOCAL_TABLE_NAME + " (ID INTEGER PRIMARY KEY, LAT DOUBLE, LONG DOUBLE)";
         db.execSQL(createTable);
-        entries = 0;
-        Log.d("Database", "created table from onCreate");
+        entries = 0; //initialize entries counter to zero
+        Log.d("DatabaseManager", "created table during onCreate");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + LOCAL_TABLE_NAME);
         onCreate(db);
     }
 
-    public void add(double lat, double ltude) {
+    //method to create table using name passed to method
+    public void createTable (SQLiteDatabase db, String table) {
+        this.db = db;
+        String createTable = "CREATE TABLE " + table + " (ID INTEGER PRIMARY KEY, LAT DOUBLE, LONG DOUBLE)";
+        db.execSQL(createTable);
+        Log.d("DatabaseManager", "created table: " + table + " from createTable");
+    }
+
+    //enter gps coordinates into table
+    public void addPoint(double lat, double ltude) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("LAT", lat);
         values.put("LONG", ltude);
-        db.insert(TABLE_NAME, null, values);
+        db.insert(LOCAL_TABLE_NAME, null, values);
         db.close(); // Closing database connection
-        entries++;
+        entries++;  //increment entries counter after an entry is written to table
     }
 
-    public String readDB (){
+    //method to read specific row from table
+    public String readRow (String table, int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query("DATA", new String[] {"DATE"}, null, null, null, null, null);
+        Cursor cursor = db.query(table, new String[] {"ID", "LAT", "LONG"}, "ID = ?", new String[] {String.valueOf(id)}, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
-        String date = cursor.getString(0);
-        return date;
+        String row = "Row entry: ID = " + cursor.getInt(0) + ", LAT = " + cursor.getDouble(1) + ", LONG = " + cursor.getDouble(2);
+        return row;
     }
 
-    public String getData (int id) {
+    //method that returns a row in SQL command format to be entered into server database table
+    public String getData (int idNum) {
+        int id = idNum == 0 ? 1 : idNum;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME, new String[] {"ID", "LAT", "LONG"}, "ID = ?", new String[] {String.valueOf(id)}, null, null, null, null);
+        Cursor cursor = db.query(LOCAL_TABLE_NAME, new String[] {"ID", "LAT", "LONG"}, "ID = ?", new String[] {String.valueOf(id)}, null, null, null, null);
         String sql = null;
         if (cursor != null) {
             cursor.moveToFirst();
@@ -77,10 +94,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return sql;
     }
 
+    //method that checks existence of table and returns boolean. Will also create table if necessary
     public boolean tableExists() {
         boolean tableExists = false;
         try {
-            String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY, LAT DOUBLE, LONG DOUBLE)";
+            String createTable = "CREATE TABLE " + LOCAL_TABLE_NAME + " (ID INTEGER PRIMARY KEY, LAT DOUBLE, LONG DOUBLE)";
             db.execSQL(createTable);
             Log.d("Database", "Created table from tableExists method");
             entries = 0;

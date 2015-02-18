@@ -60,6 +60,7 @@ public class DBManager implements Runnable {
     public void insertData (String data) {
         try {
             statement.executeUpdate(data);
+            ClientManager.itemsReceived++;
             System.out.println("Successfully wrote entry: " + data + " to " + TABLE_NAME);
         }
         catch (SQLException s) {
