@@ -1,8 +1,5 @@
-package com.thaDagobahSystem;
+package com.thaDagobahSystem.DroidDB;
 
-/**
- * Created by kwilk_000 on 2/15/2015.
- */
 
 import java.io.File;
 import java.sql.DatabaseMetaData;
@@ -36,9 +33,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
     public DataBaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+         }
 
-        // TODO Auto-generated constructor stub
-    }
 
     // Creating Tables
     @Override
@@ -130,5 +126,16 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     }
 
 
-
+    // Updating single record
+//    public int update(Values value) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//
+//        ContentValues values = new ContentValues();
+//        //values.put(KEY_NAME, value.getValue());
+//
+//        // updating row
+//        //return db.update(TABLE_NAME, values, KEY_ID + " = ?",
+//                //new String[] { String.valueOf(value.getId()) });
+//
+//    }
 }

@@ -1,16 +1,20 @@
-package com.thaDagobahSystem;
+package com.thaDagobahSystem.DroidDB;
 
 import android.content.Context;
+import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteException;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.util.Log;
 
-/**
- * Created by kwilk_000 on 2/15/2015.
- */
-public class CollectData implements Runnable {
 
+import com.thaDagobahSystem.DroidDB.MainActivity;
+
+import java.util.Date;
+
+public class CollectData implements Runnable {
     private MainActivity parent;
     private DataBaseHandler db;
     private int i = 0;
@@ -21,6 +25,7 @@ public class CollectData implements Runnable {
     }
 
     public void run() {
+
         LocationManager locationManager = (LocationManager) parent.getSystemService(Context.LOCATION_SERVICE);
         // Location latlong = new Location(locationManager.NETWORK_PROVIDER);
         // Use Network location data:
@@ -29,7 +34,8 @@ public class CollectData implements Runnable {
         if (exists)
             Log.d("Database", "Table already exists from onCreate method");
         i = 0;
-        while (i < 10) {
+        int j = 0;
+        while (j < 10) {
             try {
                 //long date = new Date().getTime();
                 Location loc1 = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
@@ -47,10 +53,14 @@ public class CollectData implements Runnable {
                 e.printStackTrace();
             }
             finally {
-                i++;
+              i++;
+              j = MainActivity.stopSense;
             }
         }
 
+        //        ConnectToServer connect = new ConnectToServer("10.202.106.237", db);
+//        Thread clientThread = new Thread(connect);
+//        clientThread.start();
     }
 
 

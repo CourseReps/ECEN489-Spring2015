@@ -17,7 +17,7 @@ public class ServerSetup implements Runnable {
 
     public void run() {
         System.out.println("Setting up server...");
-        DBManager db = new DBManager();
+        DBModule db = new DBModule();
         Thread dbThread = new Thread(db);
         dbThread.start();
         System.out.println("Waiting for client connection...");
@@ -31,7 +31,7 @@ public class ServerSetup implements Runnable {
 
                 //once client connects, create new ClientManger object and create new thread
                 System.out.println("Client Connected!");
-                ClientManager manager = new ClientManager(clientSocket, db);
+                ClientConnect manager = new ClientConnect(clientSocket, db);
                 Thread clientThread = new Thread(manager);
                 clientThread.start();
                 db.createTable();

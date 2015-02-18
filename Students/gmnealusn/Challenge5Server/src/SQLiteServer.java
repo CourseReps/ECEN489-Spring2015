@@ -4,7 +4,7 @@ import java.net.InetAddress;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class SqlServer
+public class SQLiteServer
 {
 
     public static void flushTable (Statement statement) {

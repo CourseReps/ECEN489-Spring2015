@@ -1,4 +1,4 @@
-package com.thaDagobahSystem;
+package com.thaDagobahSystem.DroidDB;
 
 import android.util.Log;
 
@@ -9,9 +9,6 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-/**
- * Created by kwilk_000 on 2/15/2015.
- */
 public class ConnectToServer implements Runnable {
 
     private String serverIp;
@@ -32,7 +29,7 @@ public class ConnectToServer implements Runnable {
 
     public void run() {
         try {
-            client = new Socket(serverIp, 9090);  //connect to server
+            client = new Socket(serverIp, port);  //connect to server
             printwriter = new PrintWriter(client.getOutputStream(),true);
             reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
@@ -40,11 +37,11 @@ public class ConnectToServer implements Runnable {
             String received = null;
             received = reader.readLine();
 
+
             String sqlData = null;
             lastId = MainActivity.LASTID;
 
-            sqlData = db.getData(lastId);
-            printwriter.println(sqlData);
+
             //Log.d("ToServer", "Sent ID: " + lastId);
             entries = lastId + db.entries;
             //while (!(sqlData = db.getData(lastId)).equals(null)) {

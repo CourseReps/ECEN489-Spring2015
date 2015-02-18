@@ -1,18 +1,18 @@
 import java.sql.*;
 
-public class DBManager implements Runnable {
+public class DBModule implements Runnable {
     //initialize connection and statement variables
     Connection connection = null;
     Statement statement = null;
     PreparedStatement pState = null;
-    final String DB_NAME = "testdb.db";
+    final String DB_NAME = "AndroidSensorInfo.db";
     final String TABLE_NAME = "DATA";
 
     public void run() {
         try {
             //import class and connect to existing database/create database
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\RhoadsWylde\\Desktop\\Master Clone\\ECEN489-Spring2015\\Students\\gmnealusn\\Challenge5android" + DB_NAME);
+            connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\RhoadsWylde\\Desktop\\Master Clone\\sqlite" + DB_NAME);
             statement = connection.createStatement();
             System.out.println("Connected to Database!");
         }

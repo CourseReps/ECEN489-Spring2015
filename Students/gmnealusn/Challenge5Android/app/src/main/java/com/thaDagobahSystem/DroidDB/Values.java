@@ -1,8 +1,4 @@
-package com.thaDagobahSystem;
-
-/**
- * Created by kwilk_000 on 2/15/2015.
- */
+package com.thaDagobahSystem.DroidDB;
 
 public class Values {
 

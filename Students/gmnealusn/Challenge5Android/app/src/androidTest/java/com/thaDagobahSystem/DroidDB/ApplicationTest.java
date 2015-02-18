@@ -1,4 +1,4 @@
-package com.thaDagobahSystem;
+package com.pokemonmasterkc.sqlitemon;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

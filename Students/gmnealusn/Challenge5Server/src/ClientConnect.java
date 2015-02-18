@@ -5,15 +5,15 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 //Class that manages a client when connected to the server. Socket gets passed from ServerSetup to ClientManager constructor
-public class ClientManager implements Runnable
+public class ClientConnect implements Runnable
 {
     private Socket socket;
     private BufferedReader fromClient;
     private PrintWriter toClient;
-    private DBManager db;
+    private DBModule db;
 
     //Constructor when client connects
-    ClientManager (Socket socket, DBManager db)
+    ClientConnect (Socket socket, DBModule db)
     {
         this.socket = socket;
         this.db = db;
