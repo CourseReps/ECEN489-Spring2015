@@ -1,6 +1,7 @@
 package com.nagaraj.challenge5android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -39,17 +40,23 @@ public class ClientActivity extends ActionBarActivity implements SensorEventList
     long lastTransferredRowId;
     long lastId =0;
     String ipAddress="192.168.0.34";
-    String portNumber="9000";
+    int portNumber;
     Socket client;
     ObjectOutputStream objectOut;
-    ClientInfoPacket clientInfoPacket;
     String lastTransferredTime=null;
-
+    ClientInfoPacket clientInfoPacket;
+    String clientName;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getIntent();
+
+        ipAddress = intent.getStringExtra("ipAddress");
+        portNumber = intent.getIntExtra("portNumber",8000);
+        clientName=intent.getStringExtra("clientName");
         setContentView(R.layout.activity_client);
         lastTransferredRowId=0;
         displayNumberOfNewRecords= (TextView) findViewById(R.id.newRecords_text);
@@ -182,7 +189,7 @@ public class ClientActivity extends ActionBarActivity implements SensorEventList
         protected Void doInBackground(Void... args) {
             try {
 
-                client = new Socket(ipAddress, Integer.parseInt(portNumber));
+                client = new Socket(ipAddress, portNumber);
 
                 objectOut = new ObjectOutputStream(client.getOutputStream());
 
@@ -192,7 +199,7 @@ public class ClientActivity extends ActionBarActivity implements SensorEventList
 
                     if(count==1) {
                         clientInfoPacket = new ClientInfoPacket();
-                        clientInfoPacket.setClientName("Nagaraj_test2");
+                        clientInfoPacket.setClientName(clientName);
                         clientInfoPacket.setMode(true);
                         objectOut.writeObject(clientInfoPacket);
                         objectOut.flush();

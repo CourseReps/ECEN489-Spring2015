@@ -59,7 +59,7 @@ class ServerThread extends Thread {
                 Object object = objectInputStream.readObject();
                 if ( object instanceof ClientInfoPacket) {
                     clientName= ((ClientInfoPacket)object).getClientName();
-                    System.out.println("Client-" + clientName + "is connected.");
+                    System.out.println("\"" + clientName + "\" is connected.");
                     clientInfoPacket = (ClientInfoPacket) object;
                     myDb = new SQLiteJDBC(clientName);
                 }
@@ -103,7 +103,7 @@ class SQLiteJDBC
                     "Z REAL,"+
                     "DATE_TIME STRING NOT NULL)";
             statement.executeUpdate(sql);
-            System.out.println("New table created in the name of"+tableName);
+            System.out.println("New table created in the name of "+tableName);
         } catch (Exception e) {
             //System.err.println( e.getClass().getName() + ": " + e.getMessage());
             System.out.println("\nWelcome back "+tableName+"! Your new records will be added to the existing table\n \nReceiving data..." );
