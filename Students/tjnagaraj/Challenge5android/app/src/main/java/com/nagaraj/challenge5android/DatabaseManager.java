@@ -116,8 +116,9 @@ public class DatabaseManager {
         return c;
     }
 
-    public Cursor getRowsGreaterThan(long rowId) {
-        String where = KEY_ROWID + ">=" + rowId;
+
+    public Cursor getFlagNo() {
+        String where = KEY_FLAG + "= \"No\"";
         Cursor c = db.query(true, DATABASE_TABLE, ALL_KEYS,
                 where, null, null, null, null, null);
         if (c != null) {
@@ -125,6 +126,7 @@ public class DatabaseManager {
         }
         return c;
     }
+
 
 
     public boolean updateRow(long rowId, double x, double y, double z, String date_time, String flag) {

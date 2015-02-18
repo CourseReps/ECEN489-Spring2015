@@ -103,6 +103,7 @@ class SQLiteJDBC
                     "Z REAL,"+
                     "DATE_TIME STRING NOT NULL)";
             statement.executeUpdate(sql);
+            System.out.println("New table created in the name of"+tableName);
         } catch (Exception e) {
             //System.err.println( e.getClass().getName() + ": " + e.getMessage());
             System.out.println("\nWelcome back "+tableName+"! Your new records will be added to the existing table\n \nReceiving data..." );

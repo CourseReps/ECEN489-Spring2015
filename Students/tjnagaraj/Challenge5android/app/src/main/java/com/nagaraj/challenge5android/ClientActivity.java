@@ -186,7 +186,7 @@ public class ClientActivity extends ActionBarActivity implements SensorEventList
 
                 objectOut = new ObjectOutputStream(client.getOutputStream());
 
-                Cursor cursor = myLocalDB.getRowsGreaterThan((long)lastTransferredRowId );
+                Cursor cursor = myLocalDB.getFlagNo();
                 int count=1;
                 do {
 
@@ -211,10 +211,8 @@ public class ClientActivity extends ActionBarActivity implements SensorEventList
                     objectOut.writeObject(clientOutMessage);
                     myLocalDB.updateRow(clientOutMessageTemp.id,clientOutMessageTemp.X,clientOutMessageTemp.Y,clientOutMessageTemp.Z,clientOutMessageTemp.date,"YES");
 
-                    lastTransferredRowId++;
-                   if(lastTransferredRowId<=this.lastId)
-                    cursor.moveToNext();
-                } while (lastTransferredRowId <= this.lastId );
+                    lastTransferredRowId=clientOutMessageTemp.id;
+                } while (cursor.moveToNext());
                 lastTransferredTime=clientOutMessage.date;
 
                 objectOut.flush();
@@ -238,7 +236,6 @@ public class ClientActivity extends ActionBarActivity implements SensorEventList
 
         @Override
         protected void onPreExecute() {
-            //ip = intent.getStringExtra(MainActivity.IP_NUMBER);
         }
 
     }
