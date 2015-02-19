@@ -34,7 +34,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public void initialize() {
 
         SharedPreferences sp = parent.getActivity().getPreferences(Context.MODE_PRIVATE);
-        clientID = sp.getLong("MyID", -1);
+//        clientID = sp.getLong("MyID", -1);
         dataPointID = sp.getLong("dataID", -1);
 
 //        if (clientID == -1) {

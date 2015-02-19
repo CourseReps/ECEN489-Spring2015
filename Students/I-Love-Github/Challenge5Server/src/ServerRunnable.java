@@ -30,4 +30,6 @@ class ServerRunnable implements Runnable {
     public void newMessage(String message) {
         parent.newMessage(message);
     }
+
+    public ServerPanel getUI() { return parent; }
 }

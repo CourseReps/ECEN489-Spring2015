@@ -15,7 +15,7 @@ class CommHandler implements Runnable {
     final static public String JOIN_SERVER = "/join";
 
     // Default server port
-    public final static String DEFAULT_IP = "10.202.105.39";
+    public final static String DEFAULT_IP = "10.202.104.195";
     public final static int DEFAULT_PORT = 5555;
 
     // Connection status booleans

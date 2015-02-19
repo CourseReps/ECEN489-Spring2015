@@ -133,6 +133,9 @@ public class ClientConnection implements Runnable {
             String ackID = token.nextToken();
             xmitMessage("/ack" + ackID);
 
+            String timeStamp = token.nextToken();
+            parent.getUI().setClientTime(id, timeStamp);
+
             // If a client requests disconnection, kill the socket
         } else if (string.startsWith(QUIT)) {
             closeSocket();

@@ -3,6 +3,8 @@ package www.foureightynine.com.challenge5;
 import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 
@@ -31,6 +33,7 @@ public class RootActivity extends Activity {
             @Override
             public void run() {
                 ((TextView) findViewById(R.id.first)).append(message + "\n");
+                ((ScrollView) findViewById(R.id.scrollView)).fullScroll(View.FOCUS_DOWN);
             }
         });
     }

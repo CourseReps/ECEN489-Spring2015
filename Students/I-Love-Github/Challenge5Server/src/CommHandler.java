@@ -27,6 +27,8 @@ class CommHandler implements Runnable {
     // ClientConnection housekeeping vectors -- keeps track of all objects/threads created by ServerRunnable
     private Vector<Thread> clientThreadList;
     private Vector<ClientConnection> clientSocketList;
+    private DiscoveryBroadcast broadcast;
+    private Thread discoveryThread;
 
 
     // CONSTRUCTOR
@@ -72,6 +74,9 @@ class CommHandler implements Runnable {
             // nothing here
         }
         parent.newMessage("My IP address is: " + s);
+//        broadcast = new DiscoveryBroadcast(this, s);
+//        discoveryThread = new Thread(broadcast);
+//        discoveryThread.start();
 
         // Now we're ready to go
         isRunning = true;
@@ -143,6 +148,10 @@ class CommHandler implements Runnable {
     // Once a client is connected to the server, their connection object is handed off to this method for handling
     synchronized public void clientConnected(Socket socket) {
 
+        if (idCounter <= 4) {
+            parent.getUI().setClientStatus(idCounter, true);
+        }
+
         // Create a ClientConnection to contain this new client, pass off the socket, and start the new thread
         ClientConnection clientConnection = new ClientConnection(this, socket, idCounter);
         Thread clientSocketThread = new Thread(clientConnection);
@@ -187,6 +196,10 @@ class CommHandler implements Runnable {
     // It just presents a status message and removes the given client and thread from our lists
     synchronized public void clientThreadEnding(ClientConnection clientConnection) {
 
+        if (clientConnection.id <= 4) {
+            parent.getUI().setClientStatus(clientConnection.id, false);
+        }
+
         parent.newMessage(clientSocketList.indexOf(clientConnection) + " " + "Client " + clientConnection.id +
                 " disconnected, removing from connection pool");
 
@@ -204,4 +217,6 @@ class CommHandler implements Runnable {
     public DBHandler getDB() {
         return parent.getDB();
     }
+
+    public ServerPanel getUI() { return parent.getUI(); }
 }
