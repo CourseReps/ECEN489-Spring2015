@@ -22,7 +22,7 @@ public class ServerPushService extends IntentService {
     }
     DBHelper mydb;
     int SERVERPORT = 2222;
-    String SERVER_IP = "192.168.2.115";
+    String SERVER_IP = "10.202.104.195";
     Socket socket;
     @Override
     protected void onHandleIntent(Intent workIntent) {
