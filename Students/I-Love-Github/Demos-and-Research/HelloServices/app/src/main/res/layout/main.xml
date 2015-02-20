@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+    <RelativeLayout android:id="@+id/RelativeLayout01" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <Button android:id="@+id/btnStart" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Start Service"></Button>
+        <Button android:id="@+id/btnStop" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Stop Service" android:layout_alignParentRight="true"></Button>
+    </RelativeLayout>
+
+    <RelativeLayout android:id="@+id/RelativeLayout02" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <Button android:id="@+id/btnBind" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Bind to Service"></Button>
+        <Button android:id="@+id/btnUnbind" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Unbind from Service" android:layout_alignParentRight="true"></Button>
+    </RelativeLayout>
+
+    <TextView android:id="@+id/textStatus" android:textSize="24sp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Status Goes Here" />
+    <TextView android:id="@+id/textIntValue" android:textSize="24sp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Integer Value Goes Here" />
+    <TextView android:id="@+id/textStrValue" android:textSize="24sp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="String Value Goes Here" />
+
+    <RelativeLayout android:id="@+id/RelativeLayout03" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <Button android:id="@+id/btnUpby1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Increment by 1"></Button>
+        <Button android:id="@+id/btnUpby10" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Increment by 10" android:layout_alignParentRight="true"></Button>
+    </RelativeLayout>
+
+</LinearLayout>
