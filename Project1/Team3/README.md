@@ -13,7 +13,7 @@
 **Module Lead: Hong**
 ###Essentials:  
 
-**PRIORITY.  Need to get promiscuous mode working and reading mac addresses of nearby devices.**
+**PRIORITY.  Need to get promiscuous mode working and reading mac addresses of all nearby devices.**
 
 Next, we need to solve problems with connecting devices and sharing content via bluetooth, and in the meantime explore options with wifi connection and data transfer to the mule.
 
