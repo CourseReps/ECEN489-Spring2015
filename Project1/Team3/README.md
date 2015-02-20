@@ -13,8 +13,9 @@
 **Module Lead: Hong**
 ###Essentials:  
 
--Need to get promiscuous mode working and reading mac addresses of nearby devices.
--Next, we need to solve problems with connecting devices and sharing content via bluetooth, and in the meantime explore options with wifi connection and data transfer to the mule.
+**PRIORITY.  Need to get promiscuous mode working and reading mac addresses of nearby devices.**
+
+Next, we need to solve problems with connecting devices and sharing content via bluetooth, and in the meantime explore options with wifi connection and data transfer to the mule.
 
 ## Android Mule (R2Data)
 
