@@ -22,7 +22,7 @@ Next, we need to solve problems with connecting devices and sharing content via 
 **Module Lead: Yajie**
 ###Essentials:  
 
-Collaborate with PB team expert to find a suitable interface for collecting data from the PB.  
+Collaborate with PB team lead to find a suitable interface for collecting data from the PB.  
 
 ## Server (The Notorious S.V.R.)
 
