@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SQLiteServer.iml" filepath="$PROJECT_DIR$/SQLiteServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Challenge5server.iml" filepath="$PROJECT_DIR$/Challenge5server.iml" />
     </modules>
   </component>
 </project>
+
