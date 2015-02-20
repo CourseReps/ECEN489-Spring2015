@@ -1,6 +1,6 @@
 Project 1: Team 1
 =================
-Project1Team1 (https://github.com/CourseReps/ECEN489-Spring2015/wiki/Project-1-Team-1)
+[Project1Team1](https://github.com/CourseReps/ECEN489-Spring2015/wiki/Project-1-Team-1)
 
 * Mandel Oats, [mandeloats](https://github.com/mandeloats), Promiscuous Box
 * Benito Ramirez, [BenitoRamirezJr](https://github.com/BenitoRamirezJr), R2Data
