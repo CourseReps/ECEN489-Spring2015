@@ -129,11 +129,11 @@ How to Use WireShark and Enable Monitor Mode
 --------------------
 
 1. Install wireshark (sudo apt-get install wireshark)
-2. Turn off your wireless dongle, put it in montior mode, then turn it back on:
+2. Turn off your wireless dongle, put it in montior mode, then turn it back on:  
     sudo ifconfig <INTERFACE> down  
     sudo iwconfig <INTERFACE> mode monitor  
     sudo ifconfig <INTERFACE> up  
-3. Start wireshark in root mode (ignore the warnings)
+3. Start wireshark in root mode (ignore the warnings)  
     sudo wireshark  
 4. Start monitoring on the desired interface (it should be WLAN1)
 5. Profit!
