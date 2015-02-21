@@ -13,6 +13,7 @@ The program in this directory uses the PCAP library to access the wireless card 
 
 5: Use the -h or --help flags if you want to customize the program's behavior
 
-6: Check out the created CSV files.  Format: timestamp in S, timestamp in uS, source MAC, destination MAC
+6: Check out the created CSV files.  Format:  
+`timestamp in S,    timestamp in uS,    source MAC,    destination MAC`
 
 7: Profit!
