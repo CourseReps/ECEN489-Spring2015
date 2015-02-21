@@ -19,7 +19,7 @@ The program in this directory uses the PCAP library to access the wireless card 
 7: Profit!
 
 Some things to keep in mind...
-* This program was written on top of an old packet counter I wrote many moons ago, so the code flow may be a little off
+* This program was written on top of an old packet counter I wrote many moons ago, there may be bugs hiding somewhere
 * This program returns MAC addresses and timestamps ONLY  
 * Viewing IP traffic and sniffing data would require us to be attached to a network  
 * If you are attached to a network and do NOT choose monitor mode, it will show IP traffic (but won't log it to a file)  
