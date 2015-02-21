@@ -3,7 +3,7 @@ The program in this directory uses the PCAP library to access the wireless card 
 1: Install the pcap library  
 `sudo apt-get install libpcap-dev`  
 
-2: Download the pcap-based program found [in this directory](https://github.com/CourseReps/ECEN489-Spring2015/blob/master/Project1/Team2/PromiscuousBox/8.wireless_mac_sniffing.c)  
+2: Download the pcap-based program found [right here](https://github.com/CourseReps/ECEN489-Spring2015/blob/master/Project1/Team2/PromiscuousBox/8.wireless_mac_sniffing.c)  
 
 3: Build using the pcap library  
 `gcc SRC.c -o EXE -lpcap`  
