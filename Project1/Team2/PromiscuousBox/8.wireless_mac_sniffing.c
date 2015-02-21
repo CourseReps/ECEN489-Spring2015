@@ -17,10 +17,9 @@
 FILE * create_new_file();
 void help(char *filename);
 void handle_radiotap_frame(u_char *args, const struct pcap_pkthdr* pkthdr, const u_char* packet);
+void handle_ethernet_frame(u_char *args, const struct pcap_pkthdr* pkthdr, const u_char* packet)
 
-void handle_ethernet_frame(u_char *args, const struct pcap_pkthdr* pkthdr, const u_char* packet);
-
-
+// GLOBALS
 FILE *thisFile;
 int fileIncrement = 0;
 int maxRecsPerFile = 10000;
