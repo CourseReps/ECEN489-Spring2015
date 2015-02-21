@@ -1,4 +1,4 @@
-The program in this directory uses the LIBPCAP library to access the wireless card directly and pull MAC data from ethernet frames flying through the air.  It outputs the information we should need in CSV format, and creates a new file every so many entries (default: 10000 frames).  The intention is that a second Java program will come in behind it every so often and parse the files/populate an SQL database.
+The program in this directory uses the LIBPCAP library to access the wireless card directly and pull MAC data from ethernet frames flying through the air.  It outputs the information we should need in CSV format and creates a new file every so many entries (default: every 10000 frames).  The intention is that a second Java program will come in behind it every so often and parse the files/populate an SQL database.
 
 1: Install lpcap libraries  
 `sudo apt-get install libpcap-dev`  
