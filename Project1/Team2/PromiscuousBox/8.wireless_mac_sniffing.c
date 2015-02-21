@@ -16,11 +16,9 @@
 // FUNCTION PROTOTYPES
 FILE * create_new_file();
 void help(char *filename);
-void handle_radiotap_frame(u_char *args, const struct pcap_pkthdr* pkthdr,
-														const u_char* packet);
+void handle_radiotap_frame(u_char *args, const struct pcap_pkthdr* pkthdr, const u_char* packet);
 
-void handle_ethernet_frame(u_char *args, const struct pcap_pkthdr* pkthdr,
-														const u_char* packet);
+void handle_ethernet_frame(u_char *args, const struct pcap_pkthdr* pkthdr, const u_char* packet);
 
 
 FILE *thisFile;
@@ -94,8 +92,7 @@ void my_callback (u_char *args, const struct pcap_pkthdr* pkthdr,
 
 
 // Breaks down radiotap frames into something we can use
-void handle_radiotap_frame (u_char *args, const struct pcap_pkthdr* pkthdr,
-														const u_char* packet)
+void handle_radiotap_frame (u_char *args, const struct pcap_pkthdr* pkthdr, const u_char* packet)
 {
     struct sniffed_frame *eptr;
 	eptr = (struct sniffed_frame *) packet;
@@ -133,8 +130,7 @@ void handle_radiotap_frame (u_char *args, const struct pcap_pkthdr* pkthdr,
 }
 
 // Breaks down ehternet frames into something we can use
-void handle_ethernet_frame (u_char *args, const struct pcap_pkthdr* pkthdr,
-														const u_char* packet)
+void handle_ethernet_frame (u_char *args, const struct pcap_pkthdr* pkthdr, const u_char* packet)
 {
     struct ether_header *eptr;  /* net/ethernet.h */
 	u_short ether_type;
