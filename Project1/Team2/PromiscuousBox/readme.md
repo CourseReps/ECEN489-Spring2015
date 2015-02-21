@@ -28,4 +28,4 @@ The program in this directory uses the PCAP library to access the wireless card 
 * Timestamps are in seconds + microseconds, returned from the wireless device through PCAP  
 * Because speed is key, this program ONLY logs and does not perform any other operations
 * The program creates multiple log files so a second program can come in and do the heavy lifting with minimal delay
-* This program was written on top of an old packet counter I wrote many moons ago
+* It was written on top of an old packet counter I wrote many moons ago, so pardon any spaghetti you find
