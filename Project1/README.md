@@ -137,3 +137,4 @@ How to Use WireShark and Enable Monitor Mode
     sudo wireshark  
 4. Start monitoring on the desired interface (it should be WLAN1)
 5. Profit!
+6. To return the card to normal operation, perform step 2 again, but use the command MODE MANAGED instead of monitor
