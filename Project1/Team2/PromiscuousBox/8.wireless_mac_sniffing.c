@@ -17,7 +17,7 @@
 FILE * create_new_file();
 void help(char *filename);
 void handle_radiotap_frame(u_char *args, const struct pcap_pkthdr* pkthdr, const u_char* packet);
-void handle_ethernet_frame(u_char *args, const struct pcap_pkthdr* pkthdr, const u_char* packet)
+void handle_ethernet_frame(u_char *args, const struct pcap_pkthdr* pkthdr, const u_char* packet);
 
 // GLOBALS
 FILE *thisFile;
@@ -91,7 +91,8 @@ void my_callback (u_char *args, const struct pcap_pkthdr* pkthdr,
 
 
 // Breaks down radiotap frames into something we can use
-void handle_radiotap_frame (u_char *args, const struct pcap_pkthdr* pkthdr, const u_char* packet)
+void handle_radiotap_frame (u_char *args, const struct pcap_pkthdr* pkthdr,
+														const u_char* packet)
 {
     struct sniffed_frame *eptr;
 	eptr = (struct sniffed_frame *) packet;
@@ -99,12 +100,7 @@ void handle_radiotap_frame (u_char *args, const struct pcap_pkthdr* pkthdr, cons
     struct timeval *timeStamp;
 	timeStamp = (struct timeval *) &pkthdr->ts;
 
-    char* source = ether_ntoa((const struct ether_addr *)&eptr->mac_src);
-    char* dest = ether_ntoa((const struct ether_addr *)&eptr->mac_dest);
-
 	if (silenceOutput == 0) {
-	    // long int secs = (long int) timeStamp->tv_sec;
-	    // long int usecs = (long int) timeStamp->tv_usec;
 
 		printf ("TS: %li.%li | "
 	            , (long int) timeStamp->tv_sec, (long int) timeStamp->tv_usec);
@@ -120,16 +116,13 @@ void handle_radiotap_frame (u_char *args, const struct pcap_pkthdr* pkthdr, cons
 	fprintf(thisFile, "%li,", timeStamp->tv_usec);
 	fprintf(thisFile, "%s,", ether_ntoa((const struct ether_addr *)&eptr->mac_src));
 	fprintf(thisFile, "%s\n", ether_ntoa((const struct ether_addr *)&eptr->mac_dest));
-
-	// ,%li,%s,%s\n", timeStamp->tv_sec, timeStamp->tv_usec,
-	// 	source, dest);
-	// // fprintf(thisFile, "%li,%li,%s,%s\n", secs, usecs, source, dest);
 	fflush(thisFile);
     return;
 }
 
 // Breaks down ehternet frames into something we can use
-void handle_ethernet_frame (u_char *args, const struct pcap_pkthdr* pkthdr, const u_char* packet)
+void handle_ethernet_frame (u_char *args, const struct pcap_pkthdr* pkthdr,
+														const u_char* packet)
 {
     struct ether_header *eptr;  /* net/ethernet.h */
 	u_short ether_type;
