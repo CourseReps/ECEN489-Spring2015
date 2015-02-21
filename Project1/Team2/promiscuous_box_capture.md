@@ -1,4 +1,4 @@
-1: Install lpcap libraries  
+1: Install pcap library  
 `sudo apt-get install libpcap-dev`  
 
 2: Download the pcap-based program found [here](https://github.com/CourseReps/ECEN489-Spring2015/blob/master/Project1/Team2/PromiscuousBox/8.wireless_mac_sniffing.c)  
