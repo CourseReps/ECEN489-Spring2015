@@ -19,10 +19,10 @@ The program in this directory uses the PCAP library to access the wireless card 
 7: Profit!
 
 Some things to keep in mind...
-* This program was written on top of an old packet counter I wrote many moons ago -- there may be legacy code or bugs hiding somewhere  
+* This program was written on top of an old packet counter I wrote many moons ago, so the code flow may be a little off
 * This program returns MAC addresses and timestamps ONLY  
 * Viewing IP traffic and sniffing data would require us to be attached to a network  
 * If you are attached to a network and do NOT choose monitor mode, it will show IP traffic (but won't log it to a file)  
 * Timestamps are in seconds + microseconds, returned from the wireless device through PCAP  
 * Because speed is key, this program ONLY logs and does not perform any other operations
-* The program is designed to create multiple CSV files, so a second program can come in behind it and do the heavy lifting with minimal delay
+* The program creates multiple log files so a second program can come in and do the heavy lifting with minimal delay
