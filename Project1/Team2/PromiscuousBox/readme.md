@@ -1,3 +1,5 @@
+### Wireless MAC Sniffing
+
 The program in this directory uses the PCAP library to access the wireless card directly and pull MAC data from ethernet frames flying through the air.  It outputs the information we should need in CSV format and creates a new file every so many entries (default: every 10000 frames).  The intention is that a second Java program will come in behind it every so often and parse the files/populate an SQL database.
 
 1: Install the pcap library  
@@ -18,7 +20,8 @@ The program in this directory uses the PCAP library to access the wireless card 
 
 7: Profit!
 
-Some things to keep in mind...
+
+### Some things to keep in mind...
 * This program returns MAC addresses and timestamps ONLY  
 * Viewing IP traffic and sniffing data would require us to be attached to a network  
 * If you are attached to a network and do NOT choose monitor mode, it will show IP traffic (but won't log it to a file)  
