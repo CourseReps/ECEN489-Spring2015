@@ -20,6 +20,7 @@ public class FileParser implements Runnable {
     @Override
     public void run() {
 
+        // Give the database a few seconds to get started before we begin parsing files
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
