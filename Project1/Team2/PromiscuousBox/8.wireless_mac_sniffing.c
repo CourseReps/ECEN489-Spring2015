@@ -9,6 +9,7 @@
 #include <net/ethernet.h>
 #include <netinet/ether.h>
 
+#include <time.h>	// For time elapsed
 #include <signal.h> // for kernel CTRL-C capture
 #include <string.h> // for memet
 #include <unistd.h> // for checking if a file exists
@@ -21,14 +22,15 @@ void handle_ethernet_frame(u_char *args, const struct pcap_pkthdr* pkthdr, const
 
 // GLOBALS
 FILE *thisFile;
-int fileIncrement = 0;
-int maxRecsPerFile = 10000;
+unsigned long int fileIncrement = 0;
+int maxRecsPerFile = 1000000;
 int recsThisFile = 0;
 
-int totalCount = 0;
+unsigned long int totalCount = 0;
 int dataLinkType = 0;
 
 int silenceOutput = 0;
+unsigned long int startTime = 0;
 
 // STRUCTS
 
@@ -61,7 +63,14 @@ void signal_handler(int sig)
 	{
 		fclose(thisFile);
 		printf("\n\nMonitoring complete.\n");
-		printf("%d packets captured\n\n", totalCount);
+		printf("%lu packets captured\n\n", totalCount);
+
+		// Get the end time of the test
+		struct timespec newTime;
+		clock_gettime(CLOCK_MONOTONIC, &newTime);
+		unsigned long endTime = newTime.tv_sec;
+		printf("%lu seconds elapsed\n\n", (endTime - startTime));
+		
 		exit (1);
 	}
 }
@@ -303,12 +312,18 @@ int main (int argc, char **argv)
 	// Create our logfile
 	thisFile = create_new_file();
 
+	// Set the start time of the test
+	struct timespec newTime;
+	clock_gettime(CLOCK_MONOTONIC, &newTime);
+	startTime = newTime.tv_sec;
+
+
 	// Begin capture
 	pcap_loop (descr, maxPackets, my_callback, args);
 	
 	// Once the capture cycle is broken, display the following messages
 	printf("\n\nMonitoring complete.\n");
-	printf("%d packets captured\n\n", totalCount);
+	printf("%lu packets captured\n\n", totalCount);
 	return 1;
 }
 
@@ -321,7 +336,7 @@ void help(char *filename)
 	printf ("-p              Enable promiscuous mode (default: OFF)\n");
 	printf ("-m              Enable monitor mode (default: OFF)\n");	
 	printf ("-s              Silence screen output (less overhead busy networks)\n");	
-	printf ("-f [#]          Number of frames recorded per file (default: 10000)\n");
+	printf ("-f [#]          Number of frames recorded per file (default: 1000000)\n");
 	printf ("-q [#]          Stop after # total frames (default: -1\n");
 	printf ("-i [interface]: Force network interface selection\n");
 	printf ("-h, --help:   this help menu\n");
@@ -338,7 +353,7 @@ FILE * create_new_file() {
 
 	do {
 		
-		sprintf(fname, "snifflog_%d.csv", fileIncrement);
+		sprintf(fname, "snifflog_%lu.csv", fileIncrement);
 		fileIncrement++;
 	} while (access( fname, F_OK ) != -1);
 
