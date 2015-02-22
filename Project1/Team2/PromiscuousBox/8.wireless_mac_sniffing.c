@@ -17,8 +17,8 @@
 // FUNCTION PROTOTYPES
 FILE * create_new_file();
 void help(char *filename);
-void handle_radiotap_frame(u_char *args, const struct pcap_pkthdr* pkthdr, const u_char* packet);
-void handle_ethernet_frame(u_char *args, const struct pcap_pkthdr* pkthdr, const u_char* packet);
+void handle_radiotap_frame(u_char *args, const struct pcap_pkthdr* frmhdr, const u_char* frame);
+void handle_ethernet_frame(u_char *args, const struct pcap_pkthdr* frmhdr, const u_char* frame);
 
 // GLOBALS
 FILE *thisFile;
@@ -35,24 +35,24 @@ unsigned long int startTime = 0;
 // STRUCTS
 
 // Frames captured in monitor mode
-struct sniffed_frame {
-    u_int8_t    radiotap_header[40];
-    u_int8_t    mac_dest[6];
-    u_int8_t    mac_src[6];
+struct radiotap_header {
+    u_int8_t    revisionNo;
+    u_int8_t    revisionPadding;
+    u_int8_t   header_length;
 } __attribute__ ((__packed__));
 
-// PCAP "packet header" -- part of library, shown here for reference only
+// PCAP "frame header" -- part of library, shown here for reference only
 // struct pcap_pkthdr {
 //         struct timeval ts;   time stamp 
 //         bpf_u_int32 caplen;  length of portion present 
-//         bpf_u_int32;         lebgth this packet (off wire) 
+//         bpf_u_int32;         lebgth this frame (off wire) 
 // }
 
 // Raw ethernet header -- taken from ethernet.h, shown here for reference only
 // struct ether_header {
 //   u_int8_t  ether_dhost[ETH_ALEN];	/* mac_dest eth addr	*/
 //   u_int8_t  ether_shost[ETH_ALEN];	/* mac_src ether addr	*/
-//   u_int16_t ether_type;		        /* packet type ID field	*/
+//   u_int16_t ether_type;		        /* frame type ID field	*/
 // } __attribute__ ((__packed__));
 
 
@@ -63,7 +63,7 @@ void signal_handler(int sig)
 	{
 		fclose(thisFile);
 		printf("\n\nMonitoring complete.\n");
-		printf("%lu packets captured\n\n", totalCount);
+		printf("%lu frames captured\n\n", totalCount);
 
 		// Get the end time of the test
 		struct timespec newTime;
@@ -76,15 +76,15 @@ void signal_handler(int sig)
 }
 
 // PCAP Callback function
-void my_callback (u_char *args, const struct pcap_pkthdr* pkthdr,
-					const u_char* packet)
+void my_callback (u_char *args, const struct pcap_pkthdr* frmhdr,
+					const u_char* frame)
 {
 	if (dataLinkType == 127) {
-		handle_radiotap_frame(args, pkthdr, packet);
+		handle_radiotap_frame(args, frmhdr, frame);
 	
 	} else {
 
-		handle_ethernet_frame(args, pkthdr, packet);
+		handle_ethernet_frame(args, frmhdr, frame);
 	}
 
 	recsThisFile++;
@@ -100,20 +100,39 @@ void my_callback (u_char *args, const struct pcap_pkthdr* pkthdr,
 
 
 // Breaks down radiotap frames into something we can use
-void handle_radiotap_frame (u_char *args, const struct pcap_pkthdr* pkthdr,
-														const u_char* packet)
+void handle_radiotap_frame (u_char *args, const struct pcap_pkthdr* frmhdr,
+														const u_char* frame)
 {
-    struct sniffed_frame *eptr;
-	eptr = (struct sniffed_frame *) packet;
+	struct radiotap_header *hdr;
+	hdr = (struct radiotap_header *) frame;
+	u_int16_t header_length = hdr->header_length;
+
+	// Rarely, we'll sniff a packet with an erroneous radiotap header length
+	// We'll throw these packets out
+	if (hdr->header_length == 255) {
+		return;
+	}
+
+	// printf ("Header length: %i\n ", hdr->header_length);
+
+	// Add 4 bytes to the header length to account for the revision and padding words (2B each)
+	struct radiotap_frame {
+	    u_int8_t    radiotap_header[hdr->header_length + 4];
+	    u_int8_t    mac_dest[6];
+	    u_int8_t    mac_src[6];
+	} __attribute__ ((__packed__));
+
+    struct radiotap_frame *eptr;
+	eptr = (struct radiotap_frame *) frame;
 
     struct timeval *timeStamp;
-	timeStamp = (struct timeval *) &pkthdr->ts;
+	timeStamp = (struct timeval *) &frmhdr->ts;
 
 	if (silenceOutput == 0) {
 
-		printf ("TS: %li.%li | "
+		printf ("TS: %li.%li\t|  "
 	            , (long int) timeStamp->tv_sec, (long int) timeStamp->tv_usec);
-		printf ("SRC: %s \t | "
+		printf ("SRC: %s  \t| "
 	            , ether_ntoa((const struct ether_addr *)&eptr->mac_src));
 		printf ("DST: %s "
 	            , ether_ntoa((const struct ether_addr *)&eptr->mac_dest));
@@ -130,13 +149,13 @@ void handle_radiotap_frame (u_char *args, const struct pcap_pkthdr* pkthdr,
 }
 
 // Breaks down ehternet frames into something we can use
-void handle_ethernet_frame (u_char *args, const struct pcap_pkthdr* pkthdr,
-														const u_char* packet)
+void handle_ethernet_frame (u_char *args, const struct pcap_pkthdr* frmhdr,
+														const u_char* frame)
 {
     struct ether_header *eptr;  /* net/ethernet.h */
 	u_short ether_type;
 	
-	eptr = (struct ether_header *) packet;
+	eptr = (struct ether_header *) frame;
     ether_type = ntohs(eptr->ether_type);
 
 	printf ("Source: %s   \t"
@@ -144,7 +163,7 @@ void handle_ethernet_frame (u_char *args, const struct pcap_pkthdr* pkthdr,
     printf (" || Dest: %s   \t"
             , ether_ntoa((const struct ether_addr *)&eptr->ether_dhost));
 	
-	/* check to see if we have an ip packet */
+	/* check to see if we have an ip frame */
     if (ether_type == ETHERTYPE_IP)
     {
         printf ("(IP)");
@@ -171,12 +190,12 @@ int main (int argc, char **argv)
 	int filterLoc = 0;
 	int devAssigned = 0;
 	int promiscuous = 0;
-	int maxPackets = -1;
+	int maxFrames = -1;
 	int monitorMode = 0;
 	char *dev;
 	char errbuf[PCAP_ERRBUF_SIZE];
 	pcap_t* descr;
-	const u_char *packet;
+	const u_char *frame;
 	struct pcap_pkthdr hdr;
 	struct ether_header *eptr;
 	struct bpf_program fp;
@@ -191,10 +210,10 @@ int main (int argc, char **argv)
     for (i = 1; i < argc; i++)  /* Skip argv[0] (program name). */
     {
 
-		// Packet limit		
+		// Frame limit		
         if (strcmp(argv[i], "-q") == 0)
         {
-            maxPackets = atoi(argv[i+1]);
+            maxFrames = atoi(argv[i+1]);
 			argCount = argCount + 2;
 		}
 
@@ -303,7 +322,7 @@ int main (int argc, char **argv)
 	}
 
 	// We tell the user what's happening
-	printf ("\nCapturing packets on interface: %s\n", dev);
+	printf ("\nCapturing frames on interface: %s\n", dev);
 
 	// Check the datalink type so we can break down our captured framed properly
 	dataLinkType = pcap_datalink(descr);
@@ -317,13 +336,32 @@ int main (int argc, char **argv)
 	clock_gettime(CLOCK_MONOTONIC, &newTime);
 	startTime = newTime.tv_sec;
 
-
 	// Begin capture
-	pcap_loop (descr, maxPackets, my_callback, args);
+	int loopCode = pcap_loop (descr, maxFrames, my_callback, args);
+
+	while (totalCount < maxFrames || maxFrames == -1) {
+
+		printf("\n\nPCAP_Loop ended prematurely with completion code %d.", loopCode);
+		printf("Only %li out of %d frames captured.  Restarting...\n", totalCount, maxFrames);
+
+		if (maxFrames != -1) {
+			maxFrames = totalCount - maxFrames;
+		}
+
+		// Begin capture
+		loopCode = pcap_loop (descr, maxFrames, my_callback, args);
+	}
 	
 	// Once the capture cycle is broken, display the following messages
 	printf("\n\nMonitoring complete.\n");
-	printf("%lu packets captured\n\n", totalCount);
+	printf("\nPCAP loop ended with completion code: %d.\n", loopCode);
+	printf("%lu frames captured\n\n", totalCount);
+
+	// Get the end time of the test
+	clock_gettime(CLOCK_MONOTONIC, &newTime);
+	unsigned long endTime = newTime.tv_sec;
+	printf("%lu seconds elapsed\n\n", (endTime - startTime));
+
 	return 1;
 }
 
