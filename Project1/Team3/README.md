@@ -28,7 +28,7 @@ Next, we need to solve problems with connecting devices and sharing content via 
 
 Collaborate with PB team lead to find a suitable interface for collecting data from the PB.  Have an Android app that is able to receive data from the PB and store it into a local SQLite database.
 
-**Monday 2/23/2014 Deliverables: **Get interface between PB and R2Data. 
+*Monday 2/23/2014 Deliverables: * Get interface between PB and R2Data. 
 
 ## Server (The Notorious S.V.R.)
 
@@ -37,11 +37,11 @@ Collaborate with PB team lead to find a suitable interface for collecting data f
 
 We currently have programs that read data from an Android device and can store said data into a SQLite database.  Current goal is to solve issues regarding writing data to Fusion Tables. 
 
-**Monday 2/23/2014 Deliverables: **Present a server that will read a SQLite database file from an Android device into a SQLite database into the Linux Server using Ubuntu.  
+*Monday 2/23/2014 Deliverables:* Present a server program that will read a SQLite database file from an Android device into a SQLite database into the Linux Server using Ubuntu.  This program will read the SQLite database, write pull data from the read database and write it into a database local to the server computer, and will run a check to ensure that no duplicate data is written into the server database file.
 
 ## Fusion Tables (El Cloudo)
 
 **Module Lead: Evelyn**
 ###Essentials:
 Solve issues with writing data to Fusion tables.
-**Monday 2/23/2014 Deliverables: **Oauth (work on this as a group.)
+*Monday 2/23/2014 Deliverables: * Oauth (work on this as a group.)
