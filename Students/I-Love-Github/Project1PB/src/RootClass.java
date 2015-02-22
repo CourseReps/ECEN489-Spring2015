@@ -11,7 +11,7 @@ public class RootClass {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         final ServerPanel serverPanel = new ServerPanel();
         f.setContentPane(serverPanel);
-        f.setSize(500, 460);
+        f.setSize(540, 700);
         f.setLocation(200, 200);
         f.setVisible(true);
 

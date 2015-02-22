@@ -27,7 +27,6 @@ class CommHandler implements Runnable {
     // ClientConnection housekeeping vectors -- keeps track of all objects/threads created by ServerRunnable
     private Vector<Thread> clientThreadList;
     private Vector<ClientConnection> clientSocketList;
-    private DiscoveryBroadcast broadcast;
     private Thread discoveryThread;
 
 

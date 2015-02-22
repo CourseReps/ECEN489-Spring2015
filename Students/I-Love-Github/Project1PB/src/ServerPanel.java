@@ -63,7 +63,7 @@ class ServerPanel extends JPanel {
         statusBoxScroller = new JScrollPane(statusBox);
         statusBoxScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         statusBoxScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        statusBoxScroller.setPreferredSize(new Dimension(450, 80));
+        statusBoxScroller.setPreferredSize(new Dimension(450, 400));
         statusBoxScroller.setAutoscrolls(true);
 
 

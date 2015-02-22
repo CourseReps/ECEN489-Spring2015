@@ -1,11 +1,9 @@
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.StringTokenizer;
 
 public class FileParser implements Runnable {
@@ -22,7 +20,7 @@ public class FileParser implements Runnable {
 
         // Give the database a few seconds to get started before we begin parsing files
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             parent.newMessage("FileParser: " + e.getMessage());
         }
@@ -39,11 +37,17 @@ public class FileParser implements Runnable {
         boolean firstTime = true;
         String thisMac;
         ArrayList<String> macAddresses = new ArrayList<String>();
+        ArrayList<String> macToDBList = new ArrayList<String>();
+        long sortCounter;
+        String sortMac;
         Iterator<String> iterator;
+        Iterator<String> sortIterator;
         File[] files;
+        File filePath;
 
         while (isRunning) {
 
+            checkCounter = 0;
             files = new File(".").listFiles();
             for (File file : files) {
                 if (file.isFile() && file.getName().contains("snifflog_") && file.getName().endsWith(".csv")) {
@@ -60,37 +64,67 @@ public class FileParser implements Runnable {
                     }
                 }
 
+                parent.newMessage("Working with file: " + f.getName());
+
                 try {
 
-//                        f = new File(path.toURI());
                     reader = new BufferedReader(new FileReader(f));
-
                     line = reader.readLine();
 
                     while (line != null) {
                         tokenizer = new StringTokenizer(line, ",");
-
                         thisTime = tokenizer.nextToken();
+
+                        // Handle the array list and stick them in the DB when one second of records has been parsed
                         if (!lastTime.equals(thisTime) && !firstTime) {
+
+                            // Sift garbage data -- throw out any MAC we don't see more than once
                             iterator = macAddresses.iterator();
+                            macToDBList = new ArrayList<String>();
+                            while (iterator.hasNext()) {
+                                sortCounter = 0;
+                                thisMac = iterator.next();
+
+                                // Count the number of occurences of thisMac in the macAddresses ArrayList
+                                // If there is more than one occurence, we stick it into the to-write ArrayList
+                                if (!macToDBList.contains(thisMac)) {
+                                    sortIterator = macAddresses.iterator();
+                                    while (sortIterator.hasNext()) {
+                                        sortMac = sortIterator.next();
+                                        if (sortMac.contains(thisMac)) {
+                                            sortCounter++;
+                                        }
+                                    }
+
+                                    if (sortCounter > 1) {
+                                        macToDBList.add(thisMac);
+                                    }
+                                }
+                            }
+
+                            // Write cleaned list of MAC addresses to the database
+                            iterator = macToDBList.iterator();
                             while (iterator.hasNext()) {
                                 thisMac = iterator.next();
-                                parent.getDB().dataEntry(thisTime, thisMac);
+                                parent.getDB().dataEntry(lastTime, thisMac);
                             }
+                            parent.newMessage("Wrote to database " + macToDBList.size()
+                                    + " MACS for timestamp: " + lastTime);
 
                             macAddresses = new ArrayList<String>();
                         }
 
                         tokenizer.nextToken(); // Dispose of microsecond timestamp
+
                         thisMac = tokenizer.nextToken();
-                        if (!macAddresses.contains(thisMac)) {
+                        if (!thisMac.toLowerCase().contains("ff:ff:ff:ff:ff")) {
                             macAddresses.add(thisMac);
                         }
-                        tokenizer.nextToken(); // Destination MAC also doesn't give us any useful information
-//                        thisMac = tokenizer.nextToken();
-//                        if (!macAddresses.contains(thisMac)) {
-//                            macAddresses.add(thisMac);
-//                        }
+
+                        thisMac = tokenizer.nextToken();
+                        if (!thisMac.toLowerCase().contains("ff:ff:ff:ff:ff")) {
+                            macAddresses.add(thisMac);
+                        }
 
                         if (firstTime) {
                             firstTime = false;
@@ -100,6 +134,7 @@ public class FileParser implements Runnable {
                         line = reader.readLine();
                     }
 
+                    reader.close();
                     f.delete();
 
                 } catch (Exception e) {
@@ -109,6 +144,7 @@ public class FileParser implements Runnable {
 
             } else {
                 try {
+                    parent.newMessage("Not enough files -- pausing for 30 seconds");
                     Thread.sleep(30000);
                 } catch (InterruptedException e) {
                     parent.newMessage("FileParser: " + e.getMessage());
