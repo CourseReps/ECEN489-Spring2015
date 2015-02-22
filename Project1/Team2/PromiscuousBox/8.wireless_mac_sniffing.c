@@ -23,7 +23,7 @@ void handle_ethernet_frame(u_char *args, const struct pcap_pkthdr* frmhdr, const
 // GLOBALS
 FILE *thisFile;
 unsigned long int fileIncrement = 0;
-int maxRecsPerFile = 1000000;
+int maxRecsPerFile = 100000;
 int recsThisFile = 0;
 
 unsigned long int totalCount = 0;
@@ -341,11 +341,13 @@ int main (int argc, char **argv)
 
 	while (totalCount < maxFrames || maxFrames == -1) {
 
-		printf("\n\nPCAP_Loop ended prematurely with completion code %d.", loopCode);
-		printf("Only %li out of %d frames captured.  Restarting...\n", totalCount, maxFrames);
+		printf("\n\nPCAP_Loop ended prematurely with completion code %d.\n", loopCode);
 
 		if (maxFrames != -1) {
+			printf("Only %li frames captured.  Restarting...\n", totalCount);
 			maxFrames = totalCount - maxFrames;
+		} else {
+			printf("Only %li out of %d frames captured.  Restarting...\n", totalCount, maxFrames);
 		}
 
 		// Begin capture
@@ -374,7 +376,7 @@ void help(char *filename)
 	printf ("-p              Enable promiscuous mode (default: OFF)\n");
 	printf ("-m              Enable monitor mode (default: OFF)\n");	
 	printf ("-s              Silence screen output (less overhead busy networks)\n");	
-	printf ("-f [#]          Number of frames recorded per file (default: 1000000)\n");
+	printf ("-f [#]          Number of frames recorded per file (default: 100000)\n");
 	printf ("-q [#]          Stop after # total frames (default: -1\n");
 	printf ("-i [interface]: Force network interface selection\n");
 	printf ("-h, --help:   this help menu\n");
