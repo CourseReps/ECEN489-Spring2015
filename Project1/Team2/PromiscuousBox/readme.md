@@ -22,9 +22,9 @@ The program in this directory uses the PCAP library to access the wireless card 
 
 
 ### Some things to keep in mind...
-* Because speed is key, this program ONLY logs MAC addresses and timestamps -- it does not perform any other operations
+* Speed is key: this program ONLY logs MAC addresses and timestamps -- it does not perform any other operations
 * If there is a lot of traffic, use the **-s** flag to suppress writing to the screen (reduces overhead a by LOT)
 * If you are attached to a network and do NOT choose monitor mode, it will show IP traffic (but won't log it to a file)  
 * Timestamps are in seconds + microseconds, returned from the wireless device through PCAP  
-* The program creates multiple files so another program can come in and do the heavy lifting without interrupting the sniffer
+* Multiple files are created so another program can come in and do the heavy lifting without interrupting the sniffer
 * It was written on top of an old packet counter I wrote many moons ago, so pardon any spaghetti
