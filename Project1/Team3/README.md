@@ -17,7 +17,7 @@
 
 Next, we need to solve problems with connecting devices and sharing content via bluetooth, and in the meantime explore options with wifi connection and data transfer to the mule.
 
-**Monday 2/23/2014 Deliverables: **Present MAC address data read by the network card in monitor mode.  Also filter some MAC addresses.
+*Monday 2/23/2014 Deliverables:* Present MAC address data read by the network card in monitor mode.  Also filter some MAC addresses.
 
 ## Android Mule (R2Data)
 
@@ -28,7 +28,7 @@ Next, we need to solve problems with connecting devices and sharing content via 
 
 Collaborate with PB team lead to find a suitable interface for collecting data from the PB.  Have an Android app that is able to receive data from the PB and store it into a local SQLite database.
 
-*Monday 2/23/2014 Deliverables: * Get interface between PB and R2Data. 
+*Monday 2/23/2014 Deliverables:* Get interface between PB and R2Data. 
 
 ## Server (The Notorious S.V.R.)
 
@@ -44,4 +44,4 @@ We currently have programs that read data from an Android device and can store s
 **Module Lead: Evelyn**
 ###Essentials:
 Solve issues with writing data to Fusion tables.
-*Monday 2/23/2014 Deliverables: * Oauth (work on this as a group.)
+*Monday 2/23/2014 Deliverables:* Oauth (work on this as a group.)
