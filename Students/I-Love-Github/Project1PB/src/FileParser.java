@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.StringTokenizer;
@@ -117,12 +116,12 @@ public class FileParser implements Runnable {
                         tokenizer.nextToken(); // Dispose of microsecond timestamp
 
                         thisMac = tokenizer.nextToken();
-                        if (!thisMac.toLowerCase().contains("ff:ff:ff:ff:ff") || !thisMac.contains("null")) {
+                        if (!thisMac.toLowerCase().contains("ff:ff:ff:ff:ff") && !thisMac.contains("null")) {
                             macAddresses.add(thisMac);
                         }
 
                         thisMac = tokenizer.nextToken();
-                        if (!thisMac.toLowerCase().contains("ff:ff:ff:ff:ff") || !thisMac.contains("null")) {
+                        if (!thisMac.toLowerCase().contains("ff:ff:ff:ff:ff") && !thisMac.contains("null")) {
                             macAddresses.add(thisMac);
                         }
 
