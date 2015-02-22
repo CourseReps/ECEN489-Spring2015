@@ -117,12 +117,12 @@ public class FileParser implements Runnable {
                         tokenizer.nextToken(); // Dispose of microsecond timestamp
 
                         thisMac = tokenizer.nextToken();
-                        if (!thisMac.toLowerCase().contains("ff:ff:ff:ff:ff")) {
+                        if (!thisMac.toLowerCase().contains("ff:ff:ff:ff:ff") || !thisMac.contains("null")) {
                             macAddresses.add(thisMac);
                         }
 
                         thisMac = tokenizer.nextToken();
-                        if (!thisMac.toLowerCase().contains("ff:ff:ff:ff:ff")) {
+                        if (!thisMac.toLowerCase().contains("ff:ff:ff:ff:ff") || !thisMac.contains("null")) {
                             macAddresses.add(thisMac);
                         }
 
