@@ -74,8 +74,6 @@ public class SampleSPPClient implements DiscoveryListener {
         System.out.println("\nSearching for service...");
         agent.searchServices(null,uuidSet,remoteDevice,client);
 
-        System.out.println("\nDone...");
-
         try {
             synchronized(lock){
                 lock.wait();
@@ -90,19 +88,19 @@ public class SampleSPPClient implements DiscoveryListener {
             System.exit(0);
         }
 
+
+        System.out.println("Connecting to client...");
         //connect to the server and send a line of text
-        System.out.println("\nCreating connection...");
         StreamConnection streamConnection=(StreamConnection) Connector.open(connectionURL);
 
+        System.out.println("Sending string...");
         //send string
-        System.out.println("\nSending test string...");
         OutputStream outStream=streamConnection.openOutputStream();
         PrintWriter pWriter=new PrintWriter(new OutputStreamWriter(outStream));
         pWriter.write("Test String from SPP Client\r\n");
         pWriter.flush();
 
-
-        System.out.println("\nWaiting for response...");
+        System.out.println("Waiting for response...");
         //read response
         InputStream inStream=streamConnection.openInputStream();
         BufferedReader bReader2=new BufferedReader(new InputStreamReader(inStream));
