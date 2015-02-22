@@ -113,11 +113,10 @@ void handle_radiotap_frame (u_char *args, const struct pcap_pkthdr* frmhdr,
 		return;
 	}
 
-	// printf ("Header length: %i\n ", hdr->header_length);
-
-	// Add 4 bytes to the header length to account for the revision and padding words (2B each)
 	struct radiotap_frame {
-	    u_int8_t    radiotap_header[hdr->header_length + 4];
+	    u_int8_t    radiotap_header[hdr->header_length];
+	    u_int8_t	ether_type;
+	    u_int8_t	not_important[3];
 	    u_int8_t    mac_dest[6];
 	    u_int8_t    mac_src[6];
 	} __attribute__ ((__packed__));
@@ -130,10 +129,17 @@ void handle_radiotap_frame (u_char *args, const struct pcap_pkthdr* frmhdr,
 
 	if (silenceOutput == 0) {
 
+		printf ("Header length: %i\t Ethertype: %i\n ", hdr->header_length, eptr->ether_type);
+
 		printf ("TS: %li.%li\t|  "
 	            , (long int) timeStamp->tv_sec, (long int) timeStamp->tv_usec);
-		printf ("SRC: %s  \t| "
-	            , ether_ntoa((const struct ether_addr *)&eptr->mac_src));
+
+		if (eptr->ether_type == 196 || eptr->ether_type == 212) {
+			printf ("SRC: CTS/ACK (no SRC)  \t| ");
+		} else {
+			printf ("SRC: %s  \t| "
+	        	    , ether_ntoa((const struct ether_addr *)&eptr->mac_src));
+		}
 		printf ("DST: %s "
 	            , ether_ntoa((const struct ether_addr *)&eptr->mac_dest));
 	    printf("\n");
@@ -142,7 +148,11 @@ void handle_radiotap_frame (u_char *args, const struct pcap_pkthdr* frmhdr,
 
 	fprintf(thisFile, "%li,", timeStamp->tv_sec);
 	fprintf(thisFile, "%li,", timeStamp->tv_usec);
-	fprintf(thisFile, "%s,", ether_ntoa((const struct ether_addr *)&eptr->mac_src));
+	if (eptr->ether_type == 196 || eptr->ether_type == 212) {
+		fprintf(thisFile, "null,");
+	} else {
+		fprintf(thisFile, "%s,", ether_ntoa((const struct ether_addr *)&eptr->mac_src));
+	}
 	fprintf(thisFile, "%s\n", ether_ntoa((const struct ether_addr *)&eptr->mac_dest));
 	fflush(thisFile);
     return;
@@ -291,6 +301,7 @@ int main (int argc, char **argv)
 		if (monitor != 1)
 		{
 			printf("pcap_can_set_rfmon(): %d\n", monitor);
+			printf("Error: can't set interface \"%s\" to monitor mode\n", dev);
 			exit(1);
 		}
 
