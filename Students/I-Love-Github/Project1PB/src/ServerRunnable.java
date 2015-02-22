@@ -3,7 +3,7 @@ class ServerRunnable implements Runnable {
     private ServerPanel parent;
     private DBHandler dbHandler;
     private FileParser fileParser;
-    private CommHandler commHandler;
+//    private CommHandler commHandler;
     public boolean isRunning;
 
     // This class just acts as a central place to start and manage the different threads that run as a part of this

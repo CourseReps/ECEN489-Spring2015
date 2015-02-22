@@ -26,7 +26,7 @@ public class FileParser implements Runnable {
 
         isRunning = true;
         long fileCounter = 0;
-        long checkCounter = 0;
+        long checkCounter;
         File f = null;
         BufferedReader reader;
         String line;
@@ -36,13 +36,12 @@ public class FileParser implements Runnable {
         boolean firstTime = true;
         String thisMac;
         ArrayList<String> macAddresses = new ArrayList<String>();
-        ArrayList<String> macToDBList = new ArrayList<String>();
+        ArrayList<String> macToDBList;
         long sortCounter;
         String sortMac;
         Iterator<String> iterator;
         Iterator<String> sortIterator;
         File[] files;
-        File filePath;
 
         while (isRunning) {
 
