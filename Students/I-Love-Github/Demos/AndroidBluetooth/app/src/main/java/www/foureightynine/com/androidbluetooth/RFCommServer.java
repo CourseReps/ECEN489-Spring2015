@@ -10,11 +10,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.UUID;
 
 public class RFCommServer extends Thread {
@@ -77,12 +79,11 @@ public class RFCommServer extends Thread {
 
 
                 BufferedReader readInStream = new BufferedReader(new InputStreamReader(tmpIn));
-//                DataInputStream mmInStream = new DataInputStream(tmpIn);
-                DataOutputStream mmOutStream = new DataOutputStream(tmpOut);
+                BufferedWriter writeOutStream = new BufferedWriter(new OutputStreamWriter(tmpOut));
 
                 final String newText = readInStream.readLine();
-                // here you can use the Input Stream to take the string from the client whoever is connecting
-                //similarly use the output stream to send the data to the client
+                writeOutStream.write("This is a test string from the android device\n");
+                writeOutStream.flush();
 
                 activity.runOnUiThread(new Runnable() {
                     @Override
@@ -93,6 +94,12 @@ public class RFCommServer extends Thread {
                         text.setText(newText);
                     }
                 });
+
+                writeOutStream.close();
+                readInStream.close();
+                tmpIn.close();
+                tmpOut.close();
+                socket.close();
 
             } catch (Exception e) {
 

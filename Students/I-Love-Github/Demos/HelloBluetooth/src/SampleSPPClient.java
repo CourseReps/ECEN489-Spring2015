@@ -107,7 +107,13 @@ public class SampleSPPClient implements DiscoveryListener {
         String lineRead=bReader2.readLine();
         System.out.println(lineRead);
 
-
+        System.out.println("Closing all connections and ending program...");
+        bReader2.close();
+        pWriter.close();
+        bReader.close();
+        inStream.close();
+        outStream.close();
+        streamConnection.close();
     }//main
 
     //methods of DiscoveryListener
