@@ -35,9 +35,9 @@ Collaborate with PB team lead to find a suitable interface for collecting data f
 **Module Lead: Kevin**
 ###Essentials:  
 
-We currently have programs that read data from an Android device and can store said data into a SQLite database.  Current goal is to solve issues regarding writing data to Fusion Tables. 
+We currently have programs that read data from an Android device and can store said data into a SQLite database.  Current goal is to solve issues regarding writing data to Fusion Tables. This program will read the SQLite database, pull data from the read database and write it into a database local to the server computer, and will run a check to ensure that no duplicate data is written into the server database file.
 
-*Monday 2/23/2014 Deliverables:* Present a server program that will read a SQLite database file from an Android device into a SQLite database into the Linux Server using Ubuntu.  This program will read the SQLite database, write pull data from the read database and write it into a database local to the server computer, and will run a check to ensure that no duplicate data is written into the server database file.
+*Monday 2/23/2014 Deliverables:* Present a server program that will read a SQLite database file from an Android device into a SQLite database into the Linux Server.  
 
 ## Fusion Tables (El Cloudo)
 
