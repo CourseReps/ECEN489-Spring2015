@@ -20,7 +20,7 @@ public class DBHandler implements Runnable {
         try {
 
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:server.db");
+            c = DriverManager.getConnection("jdbc:sqlite:prombox.db");
 
             DatabaseMetaData dbm = c.getMetaData();
             ResultSet tables = dbm.getTables(null, null, "ROOT", null);

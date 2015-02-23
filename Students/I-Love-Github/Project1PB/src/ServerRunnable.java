@@ -4,6 +4,7 @@ class ServerRunnable implements Runnable {
     private DBHandler dbHandler;
     private FileParser fileParser;
 //    private CommHandler commHandler;
+    private BluetoothClient bluetoothClient;
     public boolean isRunning;
 
     // This class just acts as a central place to start and manage the different threads that run as a part of this
@@ -19,14 +20,17 @@ class ServerRunnable implements Runnable {
         fileParser = new FileParser(this);
         dbHandler = new DBHandler(this);
 //        commHandler = new CommHandler(this);
+        bluetoothClient = new BluetoothClient(this);
 
         Thread fileThread = new Thread(fileParser);
         Thread dbThread = new Thread(dbHandler);
 //        Thread commThread = new Thread(commHandler);
+        Thread btThread = new Thread(bluetoothClient);
 
         fileThread.start();
         dbThread.start();
 //        commThread.start();
+        btThread.start();
 
         isRunning = true;
 
