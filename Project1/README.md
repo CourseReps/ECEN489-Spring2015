@@ -115,11 +115,14 @@ Project Architecture
 
 The Cloud 
 
-### Android DataMule
+### Android DataMule aka (R2Data)
 
-The data mule is an Android app that can connects to the Sensor Box and acquired the gathered observations.
+The data mule is an Android app that can connects to the Sensor Box and acquires the gathered observations.
 This data set should be stored locally in an SQLite database.
 Once this information is stored on the device, the data mule must seek an Internet Wi-Fi connection and transfer the data to the Cloud server.
+PB-R2Data Interface Update
+-The interface from the PB to the R2Data will be implemented using Bluetooth communications. A Java server program will be written to take apart the local SQL database file and send the components over as a serilizable object to the Android app. The Android app will take the entries and compose a new local database on the R2Data. The format of the database is currently TBD.~gmnealusn
+
 
 
 ### [Sensor Box (GNU/Linux Debian)](https://github.com/CourseReps/ECEN489-Spring2015/tree/master/Project1/Team2/PromiscuousBox)
