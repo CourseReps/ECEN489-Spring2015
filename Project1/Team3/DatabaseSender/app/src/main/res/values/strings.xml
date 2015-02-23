@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DatabaseSender</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="edit_message">Enter IP Address</string>
+    <string name="begin_sensing">Press [Begin Sensing] to begin collecting data.</string>
+    <string name="sensing">Inserting sensor data into database...</string>
+    <string name="sensing_complete">Data collection completed!</string>
+    <string name="server_connection">Successfully connected to server!</string>
+    <string name="data_transfer">Data transfer complete!</string>
+
+</resources>
