@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
+import android.os.Environment;
 import android.util.Log;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -84,26 +85,31 @@ public class RFCommServer extends Thread {
 
                 BufferedReader readInStream = new BufferedReader(new InputStreamReader(tmpIn));
                 BufferedWriter writeOutStream = new BufferedWriter(new OutputStreamWriter(tmpOut));
+                Log.d(this.getName(), "Socket connection successful");
+
+//                Thread.sleep(500);
 
                 // Send the server my ID
                 long clientID = Math.abs(new HighQualityRandom().nextLong());
-                writeOutStream.write(String.valueOf(clientID));
+                writeOutStream.write(String.valueOf(clientID) + "\n");
                 writeOutStream.flush();
+                Log.d(this.getName(), "Wrote clientID to PC");
 
                 String recv = readInStream.readLine();
                 // CHECK client ID and see what the latest DB line we have
                 activity.updateText("Promiscuous Box ID is " + recv);
 
                 long latestLine = 0;
-                writeOutStream.write(String.valueOf(latestLine));
+                writeOutStream.write(String.valueOf(latestLine) + "\n");
                 writeOutStream.flush();
+                Log.d(this.getName(), "Wrote latestline to PC");
 
                 recv = readInStream.readLine();
-                long fileLength = Long.getLong(recv);
+                long fileLength = Long.parseLong(recv);
                 activity.updateText("File length I will receive is " + recv);
 
-                readInStream.close();
-                writeOutStream.close();
+//                readInStream.close();
+//                writeOutStream.close();
 
                 /////////////////////////////////////////////////////////////////////////////////
                 // BEGIN DOWNLOAD CODE //////////////////////////////////////////////////////////
@@ -120,8 +126,12 @@ public class RFCommServer extends Thread {
 
 
                 try {
-
-                    saveFile = new File(activity.getExternalFilesDir("data"), filename);
+//                    File path = Environment.getExternalStoragePublicDirectory(
+//                            Environment.DIRECTORY_PICTURES);
+//                    saveFile = new File(activity.getExternalFilesDir("data"), filename);
+                    File savePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+                    saveFile = new File(savePath, "prombox.db");
+                            //new File(activity.getExternalFilesDir("data"), filename);
 
                     is = tmpIn;
                     os = new FileOutputStream(saveFile); // OS to write to file

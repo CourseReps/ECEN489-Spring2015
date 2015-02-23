@@ -18,17 +18,17 @@ class ServerRunnable implements Runnable {
     public void run() {
 
         fileParser = new FileParser(this);
-        dbHandler = new DBHandler(this);
+//        dbHandler = new DBHandler(this);
 //        commHandler = new CommHandler(this);
         bluetoothClient = new BluetoothClient(this);
 
         Thread fileThread = new Thread(fileParser);
-        Thread dbThread = new Thread(dbHandler);
+//        Thread dbThread = new Thread(dbHandler);
 //        Thread commThread = new Thread(commHandler);
         Thread btThread = new Thread(bluetoothClient);
 
         fileThread.start();
-        dbThread.start();
+//        dbThread.start();
 //        commThread.start();
         btThread.start();
 

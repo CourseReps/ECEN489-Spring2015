@@ -28,13 +28,13 @@ public class BluetoothClient implements DiscoveryListener, Runnable {
         try {
             //display local device address and name
             LocalDevice localDevice = LocalDevice.getLocalDevice();
-            System.out.println("Address: " + localDevice.getBluetoothAddress());
-            System.out.println("Name: " + localDevice.getFriendlyName());
+            parent.newMessage("Address: " + localDevice.getBluetoothAddress());
+            parent.newMessage("Name: " + localDevice.getFriendlyName());
 
             //find devices
             DiscoveryAgent agent = localDevice.getDiscoveryAgent();
 
-            System.out.println("Starting device inquiry...");
+            parent.newMessage("Starting device inquiry...");
             agent.startInquiry(DiscoveryAgent.GIAC, this);
 
             try {
@@ -46,20 +46,19 @@ public class BluetoothClient implements DiscoveryListener, Runnable {
             }
 
 
-            System.out.println("Device Inquiry Completed. ");
+            parent.newMessage("Device Inquiry Completed. ");
 
             //print all devices in vecDevices
             int deviceCount = vecDevices.size();
 
             if (deviceCount <= 0) {
-                System.out.println("No Devices Found .");
-                System.exit(0);
+                parent.newMessage("No Devices Found .");
             } else {
                 //print bluetooth device addresses and names in the format [ No. address (name) ]
-                System.out.println("Bluetooth Devices: ");
+                parent.newMessage("Bluetooth Devices: ");
                 for (int i = 0; i < deviceCount; i++) {
                     RemoteDevice remoteDevice = (RemoteDevice) vecDevices.elementAt(i);
-                    System.out.println((i + 1) + ". " + remoteDevice.getBluetoothAddress() + " (" + remoteDevice.getFriendlyName(true) + ")");
+                    parent.newMessage((i + 1) + ". " + remoteDevice.getBluetoothAddress() + " (" + remoteDevice.getFriendlyName(true) + ")");
                 }
             }
 
@@ -69,13 +68,13 @@ public class BluetoothClient implements DiscoveryListener, Runnable {
 //            String chosenIndex = bReader.readLine();
 //            int index = Integer.parseInt(chosenIndex.trim());
 
-            for (int index = 0; index < vecDevices.size(); index++) {
+            for (int index = 1; index < vecDevices.size(); index++) {
                 //check for spp service
                 RemoteDevice remoteDevice = (RemoteDevice) vecDevices.elementAt(index);
                 UUID[] uuidSet = new UUID[1];
                 uuidSet[0] = new UUID("446118f08b1e11e29e960800200c9a66", false);
 
-                System.out.println("\nSearching for service...");
+                parent.newMessage("\nSearching for service...");
                 agent.searchServices(null, uuidSet, remoteDevice, this);
 
                 try {
@@ -87,64 +86,70 @@ public class BluetoothClient implements DiscoveryListener, Runnable {
                 }
 
                 if (connectionURL == null) {
-                    System.out.println("Device does not support Simple SPP Service.");
-                    System.exit(0);
+                    parent.newMessage("Device does not support Simple SPP Service.");
+                    continue;
                 }
 
 
-                System.out.println("Connecting to client...");
+                parent.newMessage("Connecting to client...");
                 //connect to the server and send a line of text
                 StreamConnection streamConnection = (StreamConnection) Connector.open(connectionURL);
                 OutputStream tmpOut = streamConnection.openOutputStream();
                 InputStream tmpIn = streamConnection.openInputStream();
                 BufferedReader readInStream = new BufferedReader(new InputStreamReader(tmpIn));
                 BufferedWriter writeOutStream = new BufferedWriter(new OutputStreamWriter(tmpOut));
+                parent.newMessage("Connected!");
 
                 String recv = readInStream.readLine();
-                long androidID = Long.getLong(recv);
                 parent.newMessage("Android device ID is " + recv);
+                long androidID = Long.parseLong(recv);
 
                 // Send the android device my ID
-                writeOutStream.write(String.valueOf(parent.getDB().getMyID()));
+//                writeOutStream.write(String.valueOf(parent.getDB().getMyID()) + "\n");
+                long clientID = Math.abs(new HighQualityRandom().nextLong());
+                writeOutStream.write(String.valueOf(clientID) + "\n");
                 writeOutStream.flush();
 
                 // CHECK client ID and see what the latest DB line they have
                 recv = readInStream.readLine();
-                long latestLine = Long.getLong(recv);
-                parent.newMessage("Most recent DB line received byclient is: " + recv);
+                long latestLine = Long.parseLong(recv);
+                parent.newMessage("Most recent DB line received by client is: " + recv);
 
                 // Do some processing to build the DB for transmission and calculate the file size
                 File db = new File("./prombox.db");
-                writeOutStream.write(String.valueOf(db.length()));
+                writeOutStream.write(String.valueOf(db.length()) + "\n");
                 writeOutStream.flush();
                 parent.newMessage("File length I will send is " + String.valueOf(db.length()));
 
-                readInStream.close();
-                writeOutStream.close();
+//                readInStream.close();
+//                writeOutStream.close();
 
                 /////////////////////////////////////////////////////////////////////////////////
                 // BEGIN DOWNLOAD CODE //////////////////////////////////////////////////////////
                 /////////////////////////////////////////////////////////////////////////////////
                 FileInputStream fileIn = new FileInputStream(db);
+                BufferedInputStream bufFile = new BufferedInputStream(fileIn);
                 int downloadCounter = 0;
                 boolean streamsOpen = false;
 
-                long filesize = db.length();
+                int filesize = (int) db.length();
                 String filename = "testDB";
-
 
                 try {
 
-                    byte[] b = new byte[2048];
+                    byte[] b = new byte[filesize];
+                    bufFile.read(b, 0, b.length);
                     int length;
 
                     streamsOpen = true;
-                    while ((length = fileIn.read()) != -1) {
-                        tmpOut.write(b, 0, length);
-                        downloadCounter += length;
+//                    while ((length = fileIn.read()) != -1) {
+                        tmpOut.write(b, 0, filesize);
+                    tmpOut.flush();
+//                        downloadCounter += length;
 
-                        parent.newMessage("Uploading: " + downloadCounter + "/" + filesize);
-                    }
+//                        parent.newMessage("Uploading: " + downloadCounter + "/" + filesize);
+                        parent.newMessage("Uploading database file");
+//                    }
 
                 } catch (FileNotFoundException fnfe) {
                     parent.newMessage("Bluetooth: " + fnfe.getMessage());
@@ -169,7 +174,7 @@ public class BluetoothClient implements DiscoveryListener, Runnable {
                 // END DOWNLOAD CODE ////////////////////////////////////////////////////////////
                 /////////////////////////////////////////////////////////////////////////////////
 
-                System.out.println("Closing all connections and ending program...");
+                parent.newMessage("Closing all connections and ending program...");
                 tmpIn.close();
                 tmpOut.close();
                 streamConnection.close();
