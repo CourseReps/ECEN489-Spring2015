@@ -43,5 +43,4 @@ We currently have programs that read data from an Android device and can store s
 
 **Module Lead: Evelyn**
 ###Essentials:
-Solve issues with writing data to Fusion tables.
-*Monday 2/23/2014 Deliverables:* Oauth (work on this as a group.)
+Write data to Fusion tables using Java.
