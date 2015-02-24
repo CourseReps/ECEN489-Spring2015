@@ -111,7 +111,10 @@ Project Architecture
 
 ### Fusing Table
 
+
 ### Cloud Server
+
+2/23/2015 update:  The Notorious SVR will be receiving .db files from R2Data.  The databases will be named with a timestamp based on when R2Data pulled the data from the PB, and the SVR will parse the databases received from R2Data into a single organized database.  
 
 The Cloud 
 
@@ -121,12 +124,17 @@ The data mule is an Android app that can connects to the Sensor Box and acquires
 This data set should be stored locally in an SQLite database.
 Once this information is stored on the device, the data mule must seek an Internet Wi-Fi connection and transfer the data to the Cloud server.
 
+2/23/2015 update:
+
 ######PB-R2Data Interface Update
 -The interface from the PB to the R2Data will be implemented using Bluetooth communications. A Java server program will be written to take apart the local SQL database file and send the components over as a serilizable object to the Android app. The Android app will take the entries and compose a new local database on the R2Data. The format of the database is currently TBD.~gmnealusn
 
 
 
 ### [Sensor Box (GNU/Linux Debian)](https://github.com/CourseReps/ECEN489-Spring2015/tree/master/Project1/Team2/PromiscuousBox)
+
+2/23/2015 update:
+Responsibilities - 
 
 
 How to Use WireShark and Enable Monitor Mode
