@@ -142,3 +142,11 @@ How to Use WireShark and Enable Monitor Mode
 4. Start monitoring on the desired interface (it should be WLAN1)
 5. Profit!
 6. To return the card to normal operation, perform step 2 again, but use the command MODE MANAGED instead of monitor
+
+
+Managing Updating of the Wireshark in Monitor Mode
+--------------
+
+1. Due to the speed of people, we will only monitor in seconds instead of milliseconds
+2. Collections will work better than arrays due to not allowing duplicates
+~Bladeroybal Updated 6:04pm 2/23/2015
