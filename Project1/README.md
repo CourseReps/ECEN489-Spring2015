@@ -118,7 +118,7 @@ The Cloud
 
 ###The Notorious SVR
 
-2/23/2015 update:  The Notorious SVR will be receiving .db files from R2Data.  The databases will be named with a timestamp based on when R2Data pulled the data from the PB, and the SVR will parse the databases received from R2Data into a single organized database.  
+2/23/2015 update:  The Notorious SVR will be receiving .db files from R2Data.  The databases will be named with a timestamp based on when R2Data pulled the data from the PB, and the SVR will parse the databases received from R2Data into a single organized database.  There will be two tables in each .db file received from R2Data, one table will include only the PBID of the box that the data is bulled from, and the other table will include the MAC address and date/time stamp info.  The final SQLite database on the SVR will have 3 columns, on column with date/time stamp, one column with the MAC address, and another column with a PBID that tells which promiscuous box the date, time, and MAC address came from.
 
 
 ### Android DataMule aka (R2Data)
