@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="com.google.apis:google-api-services-fusiontables:v2-rev1-1.19.1" level="application" />
+    <orderEntry type="library" exported="" name="gson-2.1" level="application" />
+    <orderEntry type="library" exported="" name="SQLiteStudio" level="application" />
+    <orderEntry type="library" exported="" name="servlet-api" level="application" />
+  </component>
+</module>
