@@ -118,8 +118,7 @@ The Cloud
 
 ###The Notorious SVR
 
-2/23/2015 update:  The Notorious SVR will be receiving .db files from R2Data.  The databases will be named with a timestamp based on when R2Data pulled the data from the PB, and the SVR will parse the databases received from R2Data into a single organized database.  There will be two tables in each .db file received from R2Data, one table will include only the PBID of the box that the data is bulled from, and the other table will include the MAC address and date/time stamp info.  The final SQLite database on the SVR will have 3 columns, on column with date/time stamp, one column with the MAC address, and another column with a PBID that tells which promiscuous box the date, time, and MAC address came from.
-
+2/23/2015 update:  The Notorious SVR will be receiving .db files from R2Data.  The databases will be named with a timestamp based on when R2Data pulled the data from the PB, and the SVR will parse the databases received from R2Data into a single organized database.  There will be two tables in each .db file received from R2Data, one table will include only the PBID of the box that the data is pulled from, and the other table will include the MAC address and date/time stamp info.  The final SQLite database on the SVR will have 3 columns, one column with date/time stamp, one column with the MAC address, and another column with a PBID that tells which promiscuous box the date, time, and MAC address came from.
 
 ### Android DataMule aka (R2Data)
 
@@ -127,10 +126,8 @@ The data mule is an Android app that can connects to the Sensor Box and acquires
 This data set should be stored locally in an SQLite database.
 Once this information is stored on the device, the data mule must seek an Internet Wi-Fi connection and transfer the data to the Cloud server.
 
-2/23/2015 update:
-
-######PB-R2Data Interface Update
--The interface from the PB to the R2Data will be implemented using Bluetooth communications. A Java server program will be written to take apart the local SQL database file and send the components over as a serilizable object to the Android app. The Android app will take the entries and compose a new local database on the R2Data. The format of the database is currently TBD.~gmnealusn
+######PB-R2Data Interface Update 2/23/2015 update
+-The interface from the PB to the R2Data will be implemented using Bluetooth communications. A Java server program will be written to take the local SQL database file and based on the time stamp in the PB database file and the time stamp of the last transmission to the server the R2Data will query the PB, create a small temporary database locally, and send that database to the R2Data. This database will have a root table (with the PB id) and the primary table (with the mac address and time stamp). The database will then be sent to the Notorious SVR for comparisons.~gmnealusn
 
 
 
