@@ -114,9 +114,12 @@ Project Architecture
 
 ### Cloud Server
 
+The Cloud 
+
+###The Notorious SVR
+
 2/23/2015 update:  The Notorious SVR will be receiving .db files from R2Data.  The databases will be named with a timestamp based on when R2Data pulled the data from the PB, and the SVR will parse the databases received from R2Data into a single organized database.  
 
-The Cloud 
 
 ### Android DataMule aka (R2Data)
 
