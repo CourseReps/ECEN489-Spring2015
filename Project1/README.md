@@ -149,4 +149,5 @@ Managing Updating of the Wireshark in Monitor Mode
 
 1. Due to the speed of people, we will only monitor in seconds instead of milliseconds
 2. Collections will work better than arrays due to not allowing duplicates
+
 ~Bladeroybal Updated 6:04pm 2/23/2015
