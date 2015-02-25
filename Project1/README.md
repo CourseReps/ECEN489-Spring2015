@@ -131,11 +131,15 @@ Once this information is stored on the device, the data mule must seek an Intern
 
 
 
-### [Sensor Box (GNU/Linux Debian)](https://github.com/CourseReps/ECEN489-Spring2015/tree/master/Project1/Team2/PromiscuousBox)
+### Promiscuous Box (GNU/Linux Debian) 2/25/2015 update
 
-2/23/2015 update:
-Responsibilities - 
+The promiscuous box will use two programs.
+* The first [sniffs wifi frames](https://github.com/CourseReps/ECEN489-Spring2015/tree/master/Project1/Team2/PromiscuousBox) and extracts the MAC address information, then deposit it into a CSV file.  This first program will periodically create new files so there are no read/write conficts.  
+* The second opens the CSV files and parses the information.  It extracts MAC addresses, sorts them by timestamp (in seconds), removes duplicates, and removes undesired devices such as access points, and stores that information in an SQLite database.
 
+The current database format contains two tables: 
+* ROOT table, containing only the PBID
+* DATA table containing two fields: timestamp and MAC
 
 How to Use WireShark and Enable Monitor Mode
 --------------------
