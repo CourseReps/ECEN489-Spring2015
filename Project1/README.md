@@ -138,7 +138,7 @@ The promiscuous box will use two programs.
 * The second opens the CSV files and parses the information.  It extracts MAC addresses, sorts them by timestamp (in seconds), removes duplicates, and removes undesired devices such as access points, and stores that information in an SQLite database.
 
 The current database format contains two tables: 
-* ROOT table, containing only the PBID
+* ROOT table, containing only the local Promiscuous Box IDentification number (PBID)
 * DATA table containing two fields: timestamp and MAC
 
 How to Use WireShark and Enable Monitor Mode
