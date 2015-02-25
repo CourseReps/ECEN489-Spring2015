@@ -26,7 +26,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 5;
 
-    private static final String DATABASE_NAME = "IPAddressInfo.db";
+    private static String DATABASE_NAME = "IPAddressInfo.db";
     static String DB_PATH;
     private final Context myContext;
 
