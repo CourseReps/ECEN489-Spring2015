@@ -1,0 +1,122 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="ecen489.android_client.client_activity">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Latitude"
+        android:id="@+id/TV_latitude"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:singleLine="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Azimuth"
+        android:id="@+id/TV_azimuth"
+        android:layout_below="@+id/TV_latitude"
+        android:layout_alignLeft="@+id/TV_latitude"
+        android:layout_alignStart="@+id/TV_latitude"
+        android:layout_marginTop="49dp"
+        android:singleLine="false"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="WiFi"
+        android:id="@+id/TV_wifi"
+        android:layout_marginTop="76dp"
+        android:layout_below="@+id/TV_azimuth"
+        android:layout_alignLeft="@+id/TV_azimuth"
+        android:layout_alignStart="@+id/TV_azimuth"
+        android:singleLine="true"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Longitude"
+        android:id="@+id/TV_longitude"
+        android:gravity="center"
+        android:layout_below="@+id/TV_latitude"
+        android:layout_alignLeft="@+id/TV_azimuth"
+        android:layout_alignStart="@+id/TV_azimuth" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Sensor Type"
+        android:id="@+id/TV_sensor_type"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="top|left" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Pitch"
+        android:id="@+id/TV_pitch"
+        android:layout_below="@+id/TV_azimuth"
+        android:layout_alignLeft="@+id/TV_azimuth"
+        android:layout_alignStart="@+id/TV_azimuth"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Roll"
+        android:id="@+id/TV_roll"
+        android:layout_below="@+id/TV_pitch"
+        android:layout_alignLeft="@+id/TV_pitch"
+        android:layout_alignStart="@+id/TV_pitch"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Database"
+        android:id="@+id/TV_db"
+        android:gravity="center"
+        android:layout_below="@+id/TV_wifi"
+        android:layout_alignLeft="@+id/TV_wifi"
+        android:layout_alignStart="@+id/TV_wifi" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:id="@+id/butt_update"
+        android:layout_marginBottom="79dp"
+        android:layout_above="@+id/TV_latitude"
+        android:layout_centerHorizontal="true"
+        android:gravity="center" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send"
+        android:id="@+id/butt_send"
+        android:layout_marginBottom="51dp"
+        android:layout_above="@+id/butt_update"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>

@@ -20,16 +20,48 @@ public class Main {
         //Read in a CSV File
         BufferedReader br = new BufferedReader(new FileReader("snifflog_0.csv"));
         String line;
+
+        //Entering Bogus first line
+        PreparedStatement one = conn.prepareStatement("insert into sniffer values (?,?,?,?);");
+        one.setString(1, "999");
+        one.setString(2, "999");
+        one.setString(3, "MAC");
+        one.setString(4, "MAC");
+        one.addBatch();
+
+
+
+        one.executeBatch();
+        //Result Set
+        ResultSet rs = stat.executeQuery("SELECT * FROM sniffer;");
+
+
+
+        rs.next();
+
         while ( (line=br.readLine()) != null)
         {
             String[] values = line.split(",");    //your separator
 
             //String sql = "update people set firstname=? , lastname=? where id=?";
 
-            //Convert String to right type. Integer, double, date etc.
-            stat.executeUpdate("INSERT INTO sniffer VALUES(?,?,?,?);");
-            //Use a PeparedStatemant, it´s easier and safer
-            PreparedStatement ps = conn.prepareStatement("insert into sniffer values (?,?,?,?);");
+            //Check Database for the existing MAC
+
+            String mac = rs.getString("source");
+            System.out.println("MAC: " + mac);
+            System.out.println("Values: " + values[2]);
+            if (mac.contains(values[2])) {
+
+                System.out.println("Skip");
+
+                //ps.close();
+                //System.out.println("TIME: " + values[0]);
+                //System.out.println("MAC: " + values[2]);
+            }
+            else{
+
+                //Entering Data into Database
+                PreparedStatement ps = conn.prepareStatement("insert into sniffer values (?,?,?,?);");
 
                 ps.setString(1, values[0]);
                 ps.setString(2, values[1]);
@@ -37,22 +69,21 @@ public class Main {
                 ps.setString(4, values[3]);
                 ps.addBatch();
 
-            ps.executeBatch();
-            //ps.close();
+                ps.executeBatch();
+                rs.next();
+            }
         }
         br.close();
 
-        ResultSet rs = stat.executeQuery("select * from sniffer;");
-        while (rs.next()) {
-            System.out.println("time = " + rs.getString("second"));
-            System.out.println("MAC = " + rs.getString("source"));
-        }
+        //ResultSet rs = stat.executeQuery("select * from sniffer;");
+        //while (rs.next()) {
+        //   System.out.println("time = " + rs.getString("second"));
+        //    System.out.println("MAC = " + rs.getString("source"));
+        //}
+        //rs.close();
 
-
-
-        rs.close();
         conn.close();
 
-        System.out.println("Hello World!");
+        System.out.println("Finished!");
     }
 }

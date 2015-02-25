@@ -11,17 +11,17 @@ As part of every tutorial, the presenter must create or enhance a [wiki](https:/
 * [Networking](https://github.com/CourseReps/ECEN489-Spring2015/wiki/javanet) by Anudeep ~~on 2/2/2015~~
 * [Java Threads](https://github.com/CourseReps/ECEN489-Spring2015/wiki/threads) by George Sullivan ~~on 2/2/2015~~
 * [Git/GitHub with IntelliJ IDEA](https://github.com/CourseReps/ECEN489-Spring2015/wiki/gitidea) by Mandel Oats ~~on 2/2/2015~~
-* [Serialization](https://github.com/CourseReps/ECEN489-Spring2015/wiki/serialization) by Nagaraj ~~on 2/4/2015~~
+* [Serialization](https://github.com/CourseReps/ECEN489-Spring2015/wiki/serialization) by Nagaraj Janakiraman ~~on 2/4/2015~~
 * [JSON and GSON](https://github.com/CourseReps/ECEN489-Spring2015/wiki/json) by Evelyn Cifuentes ~~on 2/4/2015~~
 * [SQLite](https://github.com/CourseReps/ECEN489-Spring2015/wiki/sqlite) by Yajie Zeng ~~on 2/6/2015~~
 * [Java Database Connectivity (JDBC)](https://github.com/CourseReps/ECEN489-Spring2015/wiki/jdbc) by Benito Ramirez ~~on 2/9/2015~~
 * [Android Architecture](https://github.com/CourseReps/ECEN489-Spring2015/wiki/android) by Kevin Wilkens ~~on 2/9/2015~~
 * [SensorManager](https://github.com/CourseReps/ECEN489-Spring2015/wiki/sensor) by Pranay Kumar ~~on 2/9/2015~~
 * Coporate Software by Jeffrey Jensen ~~on 2/11/2015~~
-* [LocationManager](https://github.com/CourseReps/ECEN489-Spring2015/wiki/location) by Nagaraj Thenkarai Janakiraman ~~on 2/13/2015~~
-* [WifiManager](https://github.com/CourseReps/ECEN489-Spring2015/wiki/wifi) by Anudeep Tungala ~~on 2/13/2015~~
+* [LocationManager](https://github.com/CourseReps/ECEN489-Spring2015/wiki/location) by Nagaraj Janakiraman (2) ~~on 2/13/2015~~
+* [WifiManager](https://github.com/CourseReps/ECEN489-Spring2015/wiki/wifi) by Anudeep Tungala (2) ~~on 2/13/2015~~
 * [Android Studio](https://github.com/CourseReps/ECEN489-Spring2015/wiki/androidstudio) by Joshua Cano on ~~on 2/13/2015~~
 * [Bluetooth](https://github.com/CourseReps/ECEN489-Spring2015/wiki/bluetooth) by Randy Neal ~~on 2/16/2015~~
 * [Google Fusion Tables](https://github.com/CourseReps/ECEN489-Spring2015/wiki/fusiontables) by Trevor Dennis ~~on 2/16/2015~~
-* [Android Services](https://github.com/CourseReps/ECEN489-Spring2015/wiki/services) by George Sullivan on Friday  2/20/2015
-* [SQLite on Android](https://github.com/CourseReps/ECEN489-Spring2015/wiki/sqliteandroid) by Yajie Zeng on Wednesday 2/18/2015
+* [Android Services](https://github.com/CourseReps/ECEN489-Spring2015/wiki/services) by George Sullivan (2) ~~on 2/23/2015~~
+* [SQLite on Android](https://github.com/CourseReps/ECEN489-Spring2015/wiki/sqliteandroid) by Yajie Zeng on TBD
