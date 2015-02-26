@@ -29,9 +29,15 @@ public class Main {
         one.setString(4, "MAC");
         one.addBatch();
 
+
+
         one.executeBatch();
         //Result Set
         ResultSet rs = stat.executeQuery("SELECT * FROM sniffer;");
+
+
+
+        rs.next();
 
         while ( (line=br.readLine()) != null)
         {
@@ -42,13 +48,12 @@ public class Main {
             //Check Database for the existing MAC
 
             String mac = rs.getString("source");
-            System.out.println(mac);
-            System.out.println(values[2]);
-            if (mac .contains(values[2])) {
+            System.out.println("MAC: " + mac);
+            System.out.println("Values: " + values[2]);
+            if (mac.contains(values[2])) {
 
                 System.out.println("Skip");
 
-                //rs.next();
                 //ps.close();
                 //System.out.println("TIME: " + values[0]);
                 //System.out.println("MAC: " + values[2]);
