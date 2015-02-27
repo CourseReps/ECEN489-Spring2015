@@ -23,55 +23,63 @@ public class Main {
 
         //Entering Bogus first line
         PreparedStatement one = conn.prepareStatement("insert into sniffer values (?,?,?,?);");
-        one.setString(1, "999");
+        one.setString(1, "1424629174");
         one.setString(2, "999");
         one.setString(3, "MAC");
         one.setString(4, "MAC");
         one.addBatch();
-
-
-
         one.executeBatch();
+
         //Result Set
         ResultSet rs = stat.executeQuery("SELECT * FROM sniffer;");
 
-
-
         rs.next();
+
+
+        //Check Database for the existing MAC
+
+        String mac = rs.getString("source");
+        String time = rs.getString("second");
+
 
         while ( (line=br.readLine()) != null)
         {
+            rs = stat.executeQuery("SELECT * FROM sniffer;");
+
             String[] values = line.split(",");    //your separator
 
-            //String sql = "update people set firstname=? , lastname=? where id=?";
-
-            //Check Database for the existing MAC
-
-            String mac = rs.getString("source");
             System.out.println("MAC: " + mac);
             System.out.println("Values: " + values[2]);
-            if (mac.contains(values[2])) {
+            System.out.println("TIME: " + values[0]);
 
-                System.out.println("Skip");
+            do {
+                if (mac.contains(values[2])) {
 
-                //ps.close();
-                //System.out.println("TIME: " + values[0]);
-                //System.out.println("MAC: " + values[2]);
-            }
-            else{
+                        System.out.println("Skip");
+                        rs.next();
+                        br.readLine();
 
-                //Entering Data into Database
-                PreparedStatement ps = conn.prepareStatement("insert into sniffer values (?,?,?,?);");
+                        //ps.close();
+                        //System.out.println("TIME: " + values[0]);
+                        //System.out.println("MAC: " + values[2]);
+                    } else {
 
-                ps.setString(1, values[0]);
-                ps.setString(2, values[1]);
-                ps.setString(3, values[2]);
-                ps.setString(4, values[3]);
-                ps.addBatch();
+                        //Entering Data into Database
+                        PreparedStatement ps = conn.prepareStatement("insert into sniffer values (?,?,?,?);");
 
-                ps.executeBatch();
-                rs.next();
-            }
+                        ps.setString(1, values[0]);
+                        ps.setString(2, values[1]);
+                        ps.setString(3, values[2]);
+                        ps.setString(4, values[3]);
+                        ps.addBatch();
+
+                    ps.executeBatch();
+                    rs.next();
+                    mac = values[2];
+                    //time = rs.getString("second");
+                }
+            } while (time.contains(values[0]) && rs.next());
+            time=values[0];
         }
         br.close();
 
