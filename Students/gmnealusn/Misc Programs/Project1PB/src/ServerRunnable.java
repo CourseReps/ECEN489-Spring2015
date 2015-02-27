@@ -1,7 +1,7 @@
 class ServerRunnable implements Runnable {
 
     private ServerPanel parent;
-    private DBHandler dbHandler;
+   // private DBHandler dbHandler;
 //    private CommHandler commHandler;
     private BluetoothClient bluetoothClient;
     public boolean isRunning;
@@ -34,9 +34,9 @@ class ServerRunnable implements Runnable {
         // Close down running threads
     }
 
-    public DBHandler getDB() {
+   /* public DBHandler getDB() {
         return dbHandler;
-    }
+    }*/
 
     public void newMessage(String message) {
         parent.updateStatusBox(message);

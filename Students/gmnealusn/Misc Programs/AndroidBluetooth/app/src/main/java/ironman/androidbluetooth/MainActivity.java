@@ -1,5 +1,6 @@
 package ironman.androidbluetooth;
 
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +11,17 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -17,44 +29,40 @@ public class MainActivity extends ActionBarActivity {
     private EditText portField;
     private String serverIp;
     private int portNum;
+    private Button button;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        /**ipField = (EditText) findViewById(R.id.editText);
-
-        Button transmitButton = (Button)findViewById(R.id.Transmit);
-        transmitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                serverIp = ipField.getText().toString();
-                ipField.setText("");
-                TNServerConnection connect = new TNServerConnection(serverIp, db);
-                Thread clientThread = new Thread(connect);
-                clientThread.start();
-            }
-        });**/
-
+        button = (Button) findViewById(R.id.Transmit); // reference to the send button
         ipField = (EditText) findViewById(R.id.editText);
         portField = (EditText) findViewById(R.id.editText1);
 
-//TODO add status update for server connection
-        Button transmitButton = (Button) findViewById(R.id.Transmit);
-        transmitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
+        // Button press event listener
+        button.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View v) {
-                serverIp = ipField.getText().toString();
-                ipField.setText("");
-                portNum = Integer.parseInt(portField.getText().toString());
-                portField.setText("");
-                TNServerConnection connect = new TNServerConnection(serverIp, portNum);
-                Thread sendFileThread = new Thread(connect);
-                sendFileThread.start();
+             serverIp = ipField.getText().toString();
+             ipField.setText("");
+             portNum = Integer.parseInt(portField.getText().toString());
+             portField.setText("");
+             TNServerConnection connect = new TNServerConnection(serverIp, portNum);
+             Thread sendFileThread = new Thread(connect);
+             sendFileThread.start();
+             //messsage = textField.getText().toString(); // get the text message on the text field
+             //textField.setText(""); // Reset the text field to blank
+               // SendMessage sendMessageTask = new SendMessage();
+               // sendMessageTask.execute();
+                //executor.execute(new sendFile());
             }
         });
     }
+
+
+
+
 
     @Override
     protected void onStart() {

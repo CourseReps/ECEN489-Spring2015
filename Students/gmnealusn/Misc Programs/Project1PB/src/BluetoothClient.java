@@ -62,11 +62,6 @@ public class BluetoothClient implements DiscoveryListener, Runnable {
                 }
             }
 
-//            System.out.print("Choose Device index: ");
-//            BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-//
-//            String chosenIndex = bReader.readLine();
-//            int index = Integer.parseInt(chosenIndex.trim());
 
             for (int index = 1; index < vecDevices.size(); index++) {
                 //check for spp service
@@ -105,7 +100,6 @@ public class BluetoothClient implements DiscoveryListener, Runnable {
                 long androidID = Long.parseLong(recv);
 
                 // Send the android device my ID
-//                writeOutStream.write(String.valueOf(parent.getDB().getMyID()) + "\n");
                 long clientID = Math.abs(new HighQualityRandom().nextLong());
                 writeOutStream.write(String.valueOf(clientID) + "\n");
                 writeOutStream.flush();
@@ -121,8 +115,6 @@ public class BluetoothClient implements DiscoveryListener, Runnable {
                 writeOutStream.flush();
                 parent.newMessage("File length I will send is " + String.valueOf(db.length()));
 
-//                readInStream.close();
-//                writeOutStream.close();
 
                 /////////////////////////////////////////////////////////////////////////////////
                 // BEGIN DOWNLOAD CODE //////////////////////////////////////////////////////////
@@ -142,14 +134,12 @@ public class BluetoothClient implements DiscoveryListener, Runnable {
                     int length;
 
                     streamsOpen = true;
-//                    while ((length = fileIn.read()) != -1) {
+
                         tmpOut.write(b, 0, filesize);
                     tmpOut.flush();
-//                        downloadCounter += length;
 
-//                        parent.newMessage("Uploading: " + downloadCounter + "/" + filesize);
                         parent.newMessage("Uploading database file");
-//                    }
+
 
                 } catch (FileNotFoundException fnfe) {
                     parent.newMessage("Bluetooth: " + fnfe.getMessage());
