@@ -33,19 +33,32 @@ public class ServerImplementation implements Runnable {
             // Send the android device my ID
 //                writeOutStream.write(String.valueOf(parent.getDB().getMyID()) + "\n");
 //                long clientID = Math.abs(new HighQualityRandom().nextLong());
-//                String boxid = "PB2";
-//                tmpOut.write(boxid.getBytes());
+//            bufferedWriter.write("PB2" + "\n");
+//            bufferedWriter.flush();
+
 //                tmpOut.flush();
 
             // CHECK client ID and see what the latest DB line they have
-            recv = bufferedReader.readLine();
+
+            String lastPbTime = bufferedReader.readLine();
 //                long latestLine = Long.parseLong(recv);
-            System.out.println("Most recent DB line received by client is: " + recv);
+            System.out.println("Most recent DB line received by client is: " + lastPbTime);
 
             // CHECK client ID and see what the latest DB line they sent to svr
-            recv = bufferedReader.readLine();
+            String lastSvrTime = bufferedReader.readLine();
 //                long latestLine = Long.parseLong(recv);
-            System.out.println("Most recent DB line sent to SVR by client is: " + recv);
+            System.out.println("Most recent DB line sent to SVR by client is: " + lastSvrTime);
+
+
+            ///// CODE TO CREATE NEW DB CHUNK BEFORE SENDING IT TO R2DATA/////////
+
+//            DBHandler dbHandler = new DBHandler(lastPbTime,lastSvrTime);
+//            dbHandler.createTransferDB();
+//
+//            String lastTxTime = dbHandler.getLastTxTime().toString();
+//            bufferedWriter.write(lastTxTime + "\n");
+//            bufferedWriter.flush();
+
 
             // Do some processing to build the DB for transmission and calculate the file size
             File db = new File(".//prombox.db");
