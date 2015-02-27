@@ -107,7 +107,9 @@ Linux distro we will use: Ubuntu
 
 Project Architecture
 --------------------
+###Database Design  
 
+![alt tag](https://github.com/CourseReps/ECEN489-Spring2015/blob/master/Project1/DatabaseDesign.jpg)
 
 ### Fusing Table
 
