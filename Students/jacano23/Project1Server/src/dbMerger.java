@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+// Credit to Kevin
+
 public class dbMerger implements Runnable {
 
     static boolean transferConfirmation = false;
