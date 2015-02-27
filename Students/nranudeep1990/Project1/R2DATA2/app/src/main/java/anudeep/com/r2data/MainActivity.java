@@ -232,8 +232,7 @@ public class MainActivity extends ActionBarActivity {
                 bufferedWriter.flush();
 
 
-                //String boxid = readInStream.readLine();
-                // CHECK client ID and see what the latest DB line we have
+//                boxid = bufferedReader.readLine();
                 boxid = "PB2";
                 //notificationView.setText("PB Name is : "+boxid);
 
@@ -245,6 +244,9 @@ public class MainActivity extends ActionBarActivity {
                 latestLine = db.getSvrTime(boxid);
                 bufferedWriter.write(latestLine + "\n");
                 bufferedWriter.flush();
+
+//                String lastRxTime = bufferedReader.readLine();
+//                db.updatePbTime(boxid,lastRxTime);
 
 
 //                 String recv = readInStream.readLine();
