@@ -26,15 +26,15 @@ public class ServerImplementation implements Runnable {
             InputStream inStream=connection.openInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inStream));
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outStream));
-            String recv = bufferedReader.readLine();
-            System.out.println("Android device ID is " + recv);
+            String clientName = bufferedReader.readLine();
+            System.out.println("Android device ID is " + clientName);
             //long androidID = Long.parseLong(recv);
 
             // Send the android device my ID
 //                writeOutStream.write(String.valueOf(parent.getDB().getMyID()) + "\n");
 //                long clientID = Math.abs(new HighQualityRandom().nextLong());
-//            bufferedWriter.write("PB2" + "\n");
-//            bufferedWriter.flush();
+            bufferedWriter.write("PB2" + "\n");
+            bufferedWriter.flush();
 
 //                tmpOut.flush();
 
@@ -52,18 +52,20 @@ public class ServerImplementation implements Runnable {
 
             ///// CODE TO CREATE NEW DB CHUNK BEFORE SENDING IT TO R2DATA/////////
 
-//            DBHandler dbHandler = new DBHandler(lastPbTime,lastSvrTime);
-//            dbHandler.createTransferDB();
-//
-//            String lastTxTime = dbHandler.getLastTxTime().toString();
-//            bufferedWriter.write(lastTxTime + "\n");
-//            bufferedWriter.flush();
+            DBHandler dbHandler = new DBHandler(lastPbTime,lastSvrTime,clientName);
+            dbHandler.createTransferDB();
+
+           String lastTxTime = dbHandler.getLastTxTime().toString();
+//            String lastTxTime = "0";
+            bufferedWriter.write(lastTxTime + "\n");
+            bufferedWriter.flush();
 
 
             // Do some processing to build the DB for transmission and calculate the file size
-            File db = new File(".//prombox.db");
-//                writeOutStream.write(String.valueOf(db.length()) + "\n");
-//                writeOutStream.flush();
+            File db = new File(".//"+clientName+"localprombox.db");
+//            File db = new File(".//prombox.db");
+                bufferedWriter.write(String.valueOf(db.length()) + "\n");
+                bufferedWriter.flush();
             System.out.println("File length I will send is " + String.valueOf(db.length()));
 
 //                readInStream.close();
@@ -74,11 +76,11 @@ public class ServerImplementation implements Runnable {
             /////////////////////////////////////////////////////////////////////////////////
             FileInputStream fileIn = new FileInputStream(db);
             BufferedInputStream bufFile = new BufferedInputStream(fileIn);
-            int downloadCounter = 0;
+
             boolean streamsOpen = false;
 
             int filesize = (int) db.length();
-            String filename = "testDB";
+
 
             try {
 
@@ -87,14 +89,12 @@ public class ServerImplementation implements Runnable {
                 int length;
 
                 streamsOpen = true;
-//                    while ((length = fileIn.read()) != -1) {
+
                 outStream.write(b, 0, filesize);
                 outStream.flush();
-//                        downloadCounter += length;
 
-//                        parent.newMessage("Uploading: " + downloadCounter + "/" + filesize);
                 System.out.println("Uploading database file");
-//                    }
+
 
             } catch (FileNotFoundException fnfe) {
                 System.out.println("Bluetooth: " + fnfe.getMessage());
@@ -109,6 +109,9 @@ public class ServerImplementation implements Runnable {
                 if (streamsOpen) {
                     try {
                         fileIn.close();
+                        if(db.delete()){
+                            System.out.println("File deleted successfully!!");
+                        }
                     } catch (Exception e) {
                         System.out.println("Bluetooth: " + e.getMessage());
                     }

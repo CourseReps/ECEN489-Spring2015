@@ -232,8 +232,8 @@ public class MainActivity extends ActionBarActivity {
                 bufferedWriter.flush();
 
 
-//                boxid = bufferedReader.readLine();
-                boxid = "PB2";
+               boxid = bufferedReader.readLine();
+//                boxid = "PB2";
                 //notificationView.setText("PB Name is : "+boxid);
 
                 String latestLine = db.getPbTime(boxid);
@@ -245,13 +245,13 @@ public class MainActivity extends ActionBarActivity {
                 bufferedWriter.write(latestLine + "\n");
                 bufferedWriter.flush();
 
-//                String lastRxTime = bufferedReader.readLine();
-//                db.updatePbTime(boxid,lastRxTime);
+                String lastRxTime = bufferedReader.readLine();
+                db.updatePbTime(boxid,lastRxTime);
 
 
-//                 String recv = readInStream.readLine();
-//                long fileLength = Long.parseLong(recv);
-//                activity.updateText("File length I will receive is " + recv);
+                 String recv = bufferedReader.readLine();
+                long fileLength = Long.parseLong(recv);
+
 
 //                readInStream.close();
 //                writeOutStream.close();

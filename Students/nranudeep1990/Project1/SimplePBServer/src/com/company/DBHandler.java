@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.*;
 import java.sql.*;
 
 /**
@@ -14,11 +15,13 @@ public class DBHandler {
     private Statement stmt;
     private String sqlCommand;
     private Long lastTxTime;
+    private String r2Name;
 
-    public DBHandler(String lastPbTime, String lastSvrTime) {
+    public DBHandler(String lastPbTime, String lastSvrTime,String r2Name) {
 
         this.lastPbTime = Long.parseLong(lastPbTime);
         this.lastSvrTime = Long.parseLong(lastSvrTime);
+        this.r2Name = r2Name;
 
     }
 
@@ -26,14 +29,14 @@ public class DBHandler {
         try {
 
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\RhoadsWylde\\Desktop\\Master Clone\\prombox.db");
-
-            localC = DriverManager.getConnection("jdbc:sqlite:prombox.db");
+            c = DriverManager.getConnection("jdbc:sqlite:prombox.db");
+            createNewDB(".//prombox.db",".//"+r2Name+"localprombox.db");
+            localC = DriverManager.getConnection("jdbc:sqlite:"+r2Name+"localprombox.db");
 
             checkRoot();
             checkDb();
-            checkLocalRoot();
-            checkLocalDb();
+           // checkLocalRoot();
+           // checkLocalDb();
             populateLocalDB();
 
         }
@@ -135,33 +138,60 @@ public class DBHandler {
         }
 
 
-        System.out.println("Opened DATA database successfully");
+        System.out.println("Opened Local database successfully");
     }
 
     private void populateLocalDB()throws Exception{
 
 
-        if(lastPbTime==0 || lastSvrTime==0) {
+//        if(lastPbTime==0 && lastSvrTime==0) {
+//            sqlCommand = "select * from DATA";
+//        }
+//        else {
+//            sqlCommand = "select * from DATA where TIMES>"+lastSvrTime;
+//        }
+//        stmt = c.createStatement();
+//        ResultSet rs = stmt.executeQuery(sqlCommand);
+//
+//        Statement stmt2 = localC.createStatement();
+//        while(rs.next()){
+//            String localQuery = "insert into DATA(TIMES,MAC) values("+rs.getLong(2)+",'"+rs.getString(3)+"');";
+//            stmt2.executeUpdate(localQuery);
+//            setLastTxTime(rs.getLong(2));
+//        }
+//
+//        rs.close();
+//        stmt.close();
+//        stmt2.close();
+
+        try {
+            if(lastSvrTime!=0) {
+                sqlCommand = "delete from DATA where TIMES < "+lastSvrTime;
+                stmt = localC.createStatement();
+                stmt.executeUpdate(sqlCommand);
+                System.out.println("Successfully populated local DataBase");
+
+
+            }
             sqlCommand = "select * from DATA";
-        }
-        else {
-            sqlCommand = "select * from DATA where TIMES>"+lastSvrTime;
-        }
-        stmt = c.createStatement();
-        ResultSet rs = stmt.executeQuery(sqlCommand);
+            stmt = localC.createStatement();
+            ResultSet rs = stmt.executeQuery(sqlCommand);
+            while(rs.next()){
+                setLastTxTime(rs.getLong(2));
+            }
 
-        Statement stmt2 = localC.createStatement();
-        while(rs.next()){
-            String localQuery = "insert into DATA values("+rs.getLong(1)+",'"+rs.getString(2)+"');";
-            stmt2.executeUpdate(localQuery);
-            setLastTxTime(rs.getLong(1));
+            rs.close();
+            stmt.close();
+            c.close();
+            localC.close();
+
+        }
+        catch(Exception e) {
+            System.out.println("data manipulation failed");
+            e.printStackTrace();
         }
 
-        rs.close();
-        stmt.close();
-        stmt2.close();
 
-        System.out.println("Successfully created local DataBase");
 
     }
 
@@ -171,5 +201,33 @@ public class DBHandler {
 
     private void setLastTxTime(Long lastTxTime) {
         this.lastTxTime = lastTxTime;
+    }
+
+    private void createNewDB(String mainDb, String newDb){
+        try {
+            File oldDb =new File(mainDb);
+            File neoDb =new File(newDb);
+
+            InputStream inStream = new FileInputStream(oldDb);
+            OutputStream outStream = new FileOutputStream(neoDb);
+
+            byte[] buffer = new byte[1024];
+
+            int length;
+            //copy the file content in bytes
+            while ((length = inStream.read(buffer)) > 0){
+
+                outStream.write(buffer, 0, length);
+
+            }
+
+            inStream.close();
+            outStream.close();
+
+            System.out.println("File is copied successful!");
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }
