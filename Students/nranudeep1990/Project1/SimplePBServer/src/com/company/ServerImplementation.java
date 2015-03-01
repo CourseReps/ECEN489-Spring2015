@@ -55,7 +55,7 @@ public class ServerImplementation implements Runnable {
             DBHandler dbHandler = new DBHandler(lastPbTime,lastSvrTime,clientName);
             dbHandler.createTransferDB();
 
-           String lastTxTime = dbHandler.getLastTxTime().toString();
+           String lastTxTime = dbHandler.getLastTxId().toString();
 //            String lastTxTime = "0";
             bufferedWriter.write(lastTxTime + "\n");
             bufferedWriter.flush();

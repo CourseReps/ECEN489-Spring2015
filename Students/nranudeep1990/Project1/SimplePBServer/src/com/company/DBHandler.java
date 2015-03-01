@@ -8,19 +8,19 @@ import java.sql.*;
  */
 public class DBHandler {
 
-    private Long lastPbTime;
-    private Long lastSvrTime;
+    private Integer lastPbId;
+    private Integer lastSvrId;
     private Connection c;
     private Connection localC;
     private Statement stmt;
     private String sqlCommand;
-    private Long lastTxTime;
+    private Integer lastTxId;
     private String r2Name;
 
     public DBHandler(String lastPbTime, String lastSvrTime,String r2Name) {
 
-        this.lastPbTime = Long.parseLong(lastPbTime);
-        this.lastSvrTime = Long.parseLong(lastSvrTime);
+        this.lastPbId = Integer.parseInt(lastPbTime);
+        this.lastSvrId = Integer.parseInt(lastSvrTime);
         this.r2Name = r2Name;
 
     }
@@ -165,19 +165,19 @@ public class DBHandler {
 //        stmt2.close();
 
         try {
-            if(lastSvrTime!=0) {
-                sqlCommand = "delete from DATA where TIMES < "+lastSvrTime;
+            if(lastSvrId!=0) {
+                sqlCommand = "delete from DATA where ID < "+lastSvrId+";";
                 stmt = localC.createStatement();
                 stmt.executeUpdate(sqlCommand);
                 System.out.println("Successfully populated local DataBase");
 
 
             }
-            sqlCommand = "select * from DATA";
+            sqlCommand = "select * from DATA;";
             stmt = localC.createStatement();
             ResultSet rs = stmt.executeQuery(sqlCommand);
             while(rs.next()){
-                setLastTxTime(rs.getLong(2));
+                setLastTxId(rs.getInt(1));
             }
 
             rs.close();
@@ -195,13 +195,7 @@ public class DBHandler {
 
     }
 
-    public Long getLastTxTime() {
-        return lastTxTime;
-    }
 
-    private void setLastTxTime(Long lastTxTime) {
-        this.lastTxTime = lastTxTime;
-    }
 
     private void createNewDB(String mainDb, String newDb){
         try {
@@ -229,5 +223,13 @@ public class DBHandler {
         catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Integer getLastTxId() {
+        return lastTxId;
+    }
+
+    private void setLastTxId(Integer lastTxId) {
+        this.lastTxId = lastTxId;
     }
 }
