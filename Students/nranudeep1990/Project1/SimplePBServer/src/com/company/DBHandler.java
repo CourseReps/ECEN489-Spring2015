@@ -170,7 +170,7 @@ public class DBHandler {
                 stmt = localC.createStatement();
                 stmt.executeUpdate(sqlCommand);
                 System.out.println("Successfully populated local DataBase");
-
+                stmt.execute("VACUUM DATA;");
 
             }
             sqlCommand = "select * from DATA;";

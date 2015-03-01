@@ -7,7 +7,7 @@ public class Main_class {
         try {
             sniff.run_app();
         } catch (Exception e) {
-
+            System.out.println(e);
         }
     }
 }

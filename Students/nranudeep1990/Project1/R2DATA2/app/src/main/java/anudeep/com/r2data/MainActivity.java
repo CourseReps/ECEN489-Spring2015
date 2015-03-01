@@ -24,6 +24,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -36,6 +37,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.UUID;
 
@@ -162,31 +164,56 @@ public class MainActivity extends ActionBarActivity {
         @Override
         protected Void doInBackground(Void... args) {
             try {
-                conSocket = new Socket(serverIp,portNum);
-                FileInputStream fis = null;
+                int fileNum = 0;
                 File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                //for loop to check how many files exist
+                for(int i = 1; i<=4; i++){
+                    if (new File(directory,"PB"+i+".db").exists()){
+                        fileNum++;
+                    }
+                }
+                //create the connection for the SVR
+                conSocket = new Socket(serverIp,portNum);
+                InputStream is = conSocket.getInputStream();
+                OutputStream os = conSocket.getOutputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+                OutputStream outToClient = null;
+                PrintWriter out = new PrintWriter(os, true);
+                out.println(fileNum);
 
-                File myFile = new File(directory, "2.db");
-                byte[] mybytearray = new byte[(int) myFile.length()];
-
-                Notification = "File found.";
-                Log.d("WriteTable", "file exists = " + myFile.exists());
-
-                fis = new FileInputStream(myFile);
-                BufferedInputStream bis = new BufferedInputStream(fis);
-
-                Log.d("WriteTable", "Wrote value: " + myFile.length());
+                FileInputStream fis = null;
 
 
-                bis.read(mybytearray, 0, mybytearray.length);
-                OutputStream outToClient = conSocket.getOutputStream();
-                outToClient.write(mybytearray, 0, mybytearray.length);
-                outToClient.flush();
+                ///Loop for DB file senders
+                for (int dbNum = 1; dbNum <= 4; dbNum++) {
+                    if (new File(directory,"PB"+dbNum+".db").exists()) {
+                        File myFile = new File(directory, "PB"+dbNum+".db");
+                        byte[] mybytearray = new byte[(int) myFile.length()];
+                        Notification = "File found.";
+                        Log.d("WriteTable", "file exists = " + myFile.exists());
+                        fis = new FileInputStream(myFile);
+                        BufferedInputStream bis = new BufferedInputStream(fis);
+                        Log.d("WriteTable", "Wrote value: " + myFile.length());
+                        bis.read(mybytearray, 0, mybytearray.length);
+                        out.println(myFile.length());
+
+                        outToClient = conSocket.getOutputStream();
+                        outToClient.write(mybytearray, 0, mybytearray.length);
+                        outToClient.flush();
+
+//                        os.write(mybytearray, 0 , mybytearray.length);
+//                        String PBId = bufferedReader.readLine();
+                        String dataId = bufferedReader.readLine();
+                        db.updateSvrTime("PB"+dbNum, dataId);
+                        myFile.delete();
+                    }
+                }
                 outToClient.close();
-
                 conSocket.close();
+
             } catch (Exception e) {
                 e.printStackTrace();
+
             }
             return null;
         }
@@ -266,6 +293,11 @@ public class MainActivity extends ActionBarActivity {
 
 
                boxid = bufferedReader.readLine();
+                File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                if(new File(directory,boxid+".db").exists()) {
+                    new File(directory,boxid+".db").delete();
+
+                }
 //                boxid = "PB2";
                 //notificationView.setText("PB Name is : "+boxid);
 
@@ -317,9 +349,11 @@ public class MainActivity extends ActionBarActivity {
                     streamsOpen = true;
 
                     byte[] b = new byte[2048];
-                    int length;
+                    int length = 0;
 
-                    while ((length = is.read(b)) != -1) {
+//                    while ((length = is.read(b)) != -1) {
+                    while (downloadCounter<fileLength) {
+                        length = is.read(b);
                         os.write(b, 0, length);
                         downloadCounter += length;
 

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/pack_sniff.iml" filepath="$PROJECT_DIR$/pack_sniff.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SimplePBServer.iml" filepath="$PROJECT_DIR$/SimplePBServer.iml" />
     </modules>
   </component>
 </project>

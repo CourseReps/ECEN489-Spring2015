@@ -2,9 +2,10 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalTime;
+import java.util.*;
 
 import org.jnetpcap.Pcap;
 import org.jnetpcap.PcapBpfProgram;
@@ -33,9 +34,6 @@ public class pack_sniff {
         List<PcapIf> alldevs = new ArrayList<PcapIf>(); // Will be filled with NICs
         StringBuilder errbuf = new StringBuilder(); // For any error msgs
 
-        /***************************************************************************
-         * First get a list of devices on this system
-         **************************************************************************/
         int r = Pcap.findAllDevs(alldevs, errbuf);
         if (r == Pcap.NOT_OK || alldevs.isEmpty()) {
             System.err.printf("Can't read list of devices, error is %s", errbuf.toString());
@@ -59,9 +57,6 @@ public class pack_sniff {
             }
         }
 
-        /***************************************************************************
-         * Second we open up the selected device
-         **************************************************************************/
         final int snaplen = 64 * 1024;           // Capture all packets, no trucation
         int flags = Pcap.MODE_PROMISCUOUS; // capture all packets
         int timeout = 10;           // 10 seconds in millis
@@ -77,128 +72,86 @@ public class pack_sniff {
         pcap.close();
     }
 
-
-    /***************************************************************************
-     * Fourth we enter the loop and tell it to capture 10 packets. The loop
-     * method does a mapping of pcap.datalink() DLT value to JProtocol ID, which
-     * is needed by JScanner. The scanner scans the packet buffer and decodes
-     * the headers. The mapping is done automatically, although a variation on
-     * the loop method exists that allows the programmer to sepecify exactly
-     * which protocol ID to use as the data link type for this pcap interface.
-     **************************************************************************/
-
     public PcapPacketHandler<String> jpacketHandler = new PcapPacketHandler<String>() {
         database sql_db = new database("project1.db");
         String[] column_name = {"MAC", "TIME_STAMP"};
         String[] column_type = {"TEXT NULL", "LONG NULL"};
         String[] data = new String[2];
+        boolean trick = false;
 
         Ethernet eth = new Ethernet();
         List<String> MAC_addr = new ArrayList<String>();
+        HashSet hs_MAC = new HashSet();
         String temp_src;
         String temp_dest;
         boolean sig = false;
-        boolean trick = false;
+
+        boolean new_time = true;
+        long ms1 = 0;
+        long ms2 = 0;
+        Instant t1 = Instant.now();
+        Instant t2 = Instant.now();
+        Instant t3 = Instant.now();
 
         public void nextPacket(PcapPacket packet, String user) {
-            if(trick == false) {
-                try {
+            try {
+                if (trick == false) {
                     String stmt = "Create Table If Not Exists ROOT " +
-                                    "(PBID LONG)";
+                            "(PBID LONG)";
                     sql_db.open_db();
                     sql_db.create_table("MAC_address", column_name, column_type);
                     sql_db.single_stmt(stmt);
                     stmt = "INSERT INTO ROOT " +
                             "(PBID) VALUES (0851);";
                     sql_db.single_stmt(stmt);
-                    //sql_db.create_table("ROOT", root_col, root_type);
-                    //sql_db.insert_val_number("ROOT", root_id);
                     trick = true;
-                } catch (Exception e) {
-
                 }
-            }
 
-            if (packet.hasHeader(eth)) {
-                temp_dest = FormatUtils.mac(eth.destination());
-                temp_src = FormatUtils.mac(eth.source());
-                System.out.printf("Received packet at %s\n",
-                        packet.getCaptureHeader().timestampInMillis());
-
-                /*
-                if (MAC_addr.isEmpty()) {
-                    MAC_addr.add(temp_dest);
+                if (packet.hasHeader(eth)) {
+                    //temp_dest = FormatUtils.mac(eth.destination());
+                    temp_src = FormatUtils.mac(eth.source());
                     MAC_addr.add(temp_src);
-                    sig = true;
-                    System.out.println("Src MAC : " + MAC_addr.get(0));
-                    System.out.println("Dest MAC : " + MAC_addr.get(1));
-                }
 
-                for (int i = 0; i < MAC_addr.size(); ++i) {
-                    if (MAC_addr.get(i).equals(temp_src)) {
-                        sig = false;
-                        break;
-                    } else {
-                        sig = true;
+                    if (new_time == true) {
+                        t1 = Instant.now();
+                        new_time = false;
                     }
-                }
-                */
-                sig = true;
-                if (sig == true) {
-                    try {
-                        //MAC_addr.add(temp_dest);
-                        //MAC_addr.add(temp_src);
-                        data[0] = temp_src;
+                    t2 = Instant.now();
+                    ms1 = Duration.between(t1, t2).toMillis();
+                    ms2 = Duration.between(t2, t3).toMillis();
+                    if (ms1 > 999) {    // 999 = 1 second
+                        System.out.println(t2);
+                        hs_MAC.addAll(MAC_addr);
+                        MAC_addr.clear();
+                        MAC_addr.addAll(hs_MAC);    //remove duplicates
+                        hs_MAC.clear();
                         data[1] = Long.toString(packet.getCaptureHeader().timestampInMillis());
-                        sql_db.insert_val_string("MAC_address", data);
-                        System.out.println("Src MAC : " + temp_src);
-                        System.out.println("Dest MAC : " + temp_dest);
-                        sig = false;
-                    } catch (Exception e) {}
-                }
-
-            }
-
-                /*
-                if(packet.hasHeader(ip4)) {
-                    temp_dest = FormatUtils.mac(ip4.destination());
-                    temp_src = FormatUtils.mac(ip4.source());
-
-                    if(MAC_addr.isEmpty()){
-                        MAC_addr.add(temp_dest);
-                        MAC_addr.add(temp_src);
-                        sig = true;
-                        System.out.println("Src MAC : " + MAC_addr.get(0));
-                        System.out.println("Dest MAC : " + MAC_addr.get(1));
-                    }
-                    for(int i = 0; i < MAC_addr.size(); ++i){
-                        if(MAC_addr.get(i).equals(temp_dest) || MAC_addr.get(i).equals(temp_src)){
-                            sig = false;
-                            break;
-                        } else {
-                            sig = true;
+                        for (int i = 0; i < MAC_addr.size(); ++i) {
+                            data[0] = MAC_addr.get(i);
+                            sql_db.insert_val_string("MAC_address", data);
                         }
+                        System.out.println(MAC_addr);
+                        MAC_addr.clear();
+                        new_time = true;
                     }
-                    if(sig == true) {
-                        MAC_addr.add(temp_dest);
-                        MAC_addr.add(temp_src);
-                        String hexdump = packet.toHexdump(packet.size(), false, true, false);
-                        //System.out.println("Src MAC : " + hexdump);
-                        System.out.println("Src MAC : " + temp_src);
-                        System.out.println("Dest MAC : " + temp_dest);
-                        sig = false;
-                    }
-                }*/
-                /*
-                if(packet.hasHeader(tcp)) {
-                    System.out.printf("Received packet at %s caplen=%-4d len=%-4d test=%-4d %s\n",
-                            new Date(packet.getCaptureHeader().timestampInMillis()),
-                            packet.getCaptureHeader().caplen(),  // Length actually captured
-                            packet.getCaptureHeader().wirelen(), // Original length
-                            user                                 // User supplied object
-                    );
-
-                }*/
+                    /*
+                    if (ms2 > 99) {
+                        System.out.println(t2);
+                        hs_MAC.addAll(MAC_addr);
+                        data[1] = Long.toString(packet.getCaptureHeader().timestampInMillis());
+                        for (int i = 0; i < MAC_addr.size(); ++i) {
+                            data[0] = MAC_addr.get(i);
+                            sql_db.insert_val_string("MAC_address", data);
+                        }
+                        System.out.println(MAC_addr);
+                        MAC_addr.clear();
+                        new_time = true;
+                    }*/
+                    t3 = Instant.now();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     };
 

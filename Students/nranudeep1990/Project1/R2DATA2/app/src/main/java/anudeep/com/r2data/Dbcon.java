@@ -81,6 +81,6 @@ public class Dbcon extends SQLiteOpenHelper {
     }
 
     public void updateSvrTime(String boxid, String svrtime ){
-        getWritableDatabase().execSQL("update timetracker set lastPbTime='"+svrtime+"' where boxid='"+boxid+"';");
+        getWritableDatabase().execSQL("update timetracker set lastSVRTime='"+svrtime+"' where boxid='"+boxid+"';");
     }
 }
