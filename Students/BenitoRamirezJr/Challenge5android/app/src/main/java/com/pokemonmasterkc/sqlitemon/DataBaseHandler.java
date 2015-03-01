@@ -31,7 +31,6 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     public DataBaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
-        // TODO Auto-generated constructor stub
     }
 
     // Creating Tables
@@ -40,10 +39,6 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
         this.db = db;
         String createTable;
-
-//        CREATE_CONTACTS_TABLE = "create table " + TABLE_Languages + "("
-//                + KEY_ID + " int primary key autoincrement, " + KEY_NAME
-//                + " text not null);";
 
         createTable = "CREATE TABLE DATA (ID INTEGER PRIMARY KEY, LAT DOUBLE, LONG DOUBLE)";
 
@@ -122,18 +117,4 @@ public class DataBaseHandler extends SQLiteOpenHelper {
             return tableExists;
         }
     }
-
-
-    // Updating single record
-//    public int update(Values value) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//
-//        ContentValues values = new ContentValues();
-//        //values.put(KEY_NAME, value.getValue());
-//
-//        // updating row
-//        //return db.update(TABLE_NAME, values, KEY_ID + " = ?",
-//                //new String[] { String.valueOf(value.getId()) });
-//
-//    }
 }

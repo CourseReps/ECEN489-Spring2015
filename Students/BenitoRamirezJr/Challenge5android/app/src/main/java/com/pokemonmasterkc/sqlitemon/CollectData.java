@@ -28,7 +28,6 @@ public class CollectData implements Runnable {
             Log.d("Database", "Table already exists from onCreate method");
         i = 0;
         while (i < 10) {
-            //TODO: set loop condition
             try {
                 //long date = new Date().getTime();
                 Location loc1 = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
@@ -49,10 +48,6 @@ public class CollectData implements Runnable {
                 i++;
             }
         }
-        //TODO: set ipaddress field
-//        ConnectToServer connect = new ConnectToServer("10.202.106.237", db);
-//        Thread clientThread = new Thread(connect);
-//        clientThread.start();
     }
 
 

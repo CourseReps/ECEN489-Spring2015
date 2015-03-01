@@ -35,12 +35,9 @@ public class ConnectToServer implements Runnable {
             String received = null;
             received = reader.readLine();
 
-            //TODO: set lastid logic
             String sqlData = null;
             lastId = MainActivity.LASTID;
 
-            sqlData = db.getData(lastId);
-            printwriter.println(sqlData);
             //Log.d("ToServer", "Sent ID: " + lastId);
             entries = lastId + db.entries;
             //while (!(sqlData = db.getData(lastId)).equals(null)) {

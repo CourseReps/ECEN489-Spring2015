@@ -166,7 +166,7 @@ public class MainActivity extends ActionBarActivity {
                 FileInputStream fis = null;
                 File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
 
-                File myFile = new File(directory, "PB2.db");
+                File myFile = new File(directory, "2.db");
                 byte[] mybytearray = new byte[(int) myFile.length()];
 
                 Notification = "File found.";
