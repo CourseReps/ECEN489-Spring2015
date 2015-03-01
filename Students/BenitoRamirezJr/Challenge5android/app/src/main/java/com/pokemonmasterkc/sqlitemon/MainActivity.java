@@ -35,7 +35,6 @@ public class MainActivity extends Activity {
         senseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO Auto-generated method stub
                 Thread collectThread = new Thread(collector);
                 collectThread.start();
                 //Log.d("System", "Finished Sending Data");
