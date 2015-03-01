@@ -5,9 +5,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-/**
- * Created by kwilk_000 on 2/26/2015.
- */
 public class dbMerger implements Runnable {
 
     static boolean transferConfirmation = false;
@@ -42,8 +39,6 @@ public class dbMerger implements Runnable {
                 Class.forName("org.sqlite.JDBC");
                 c = DriverManager.getConnection("jdbc:sqlite:"+s+"\\main.db"); //connects to main database.
                 c.setAutoCommit(false);
-
-                //Class.forName("org.sqlite.JDBC");
                 c2 = DriverManager.getConnection("jdbc:sqlite:"+s+"\\AndroidTest.db"); //connects to received database
                 c2.setAutoCommit(false);
 
@@ -55,15 +50,6 @@ public class dbMerger implements Runnable {
                     sql = "CREATE TABLE DATA (ID INTEGER PRIMARY KEY, TIMES LONG, MAC TEXT, PBID LONG)";
                     stmt.executeUpdate(sql);
                 }
-
-                //Get Points from the client and load them into the database
-//            for (int i = 0; i < 10; i++) {
-//                stmt = c.createStatement();
-//                sql = "INSERT INTO TESTING (X, Y) VALUES (" + i + ", " + i + ");";
-//                stmt.executeUpdate(sql);
-//
-//                //System.out.println("Point (" + p.getX() + ", " + p.getY() + ") received from client and loaded into database");
-//            }
 
                 stmt = c2.createStatement();
                 stmt1 = c.createStatement();
@@ -126,9 +112,7 @@ public class dbMerger implements Runnable {
                         break;
                     }
                 }
-//            stmt = c.createStatement();
-//            sql = "INSERT INTO TESTING SELECT * FROM toMerge.TESTING";
-//            stmt.executeUpdate(sql);
+
                 stmt.close();
                 c.commit();
                 c.close();

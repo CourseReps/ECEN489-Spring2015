@@ -15,11 +15,6 @@ public class RootClass {
         f.setLocation(200, 200);
         f.setVisible(true);
 
-//        f.addWindowListener(new WindowAdapter() {
-//            public void WindowClosing(WindowEvent e) {
-//                clientPanel.disconnectClient();
-//                f.dispose();
-//            }
-//        });
+
     }
 }

@@ -15,8 +15,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="Begin Sensing"
-        android:textColor="#F00"/>
+        android:text="Start Collecting"
+        android:textColor="#ff9a0000"/>
 
     
     <EditText
@@ -35,6 +35,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="200dp"
         android:text="Send to Server"
-        android:textColor="#FF33B5E5"/>
+        android:textColor="#ff161975"/>
 
 </RelativeLayout>

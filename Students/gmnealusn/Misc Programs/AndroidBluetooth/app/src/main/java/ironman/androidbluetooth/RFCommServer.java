@@ -27,14 +27,14 @@ import java.net.URLConnection;
 import java.util.UUID;
 
 public class RFCommServer extends Thread {
-
-    //based on java.util.UUID
+    private int dbNumber = 0;
+    //Based on java.util.UUID
     private static UUID MY_UUID = UUID.fromString("446118f0-8b1e-11e2-9e96-0800200c9a66");
 
     // The local server socket
     private BluetoothServerSocket mmServerSocket;
 
-    // based on android.bluetooth.BluetoothAdapter
+    //Based on android.bluetooth.BluetoothAdapter
     private BluetoothAdapter mAdapter;
     private BluetoothDevice remoteDevice;
 
@@ -108,8 +108,6 @@ public class RFCommServer extends Thread {
                 long fileLength = Long.parseLong(recv);
                 activity.updateText("File length I will receive is " + recv);
 
-//                readInStream.close();
-//                writeOutStream.close();
 
                 /////////////////////////////////////////////////////////////////////////////////
                 // BEGIN DOWNLOAD CODE //////////////////////////////////////////////////////////
@@ -124,14 +122,20 @@ public class RFCommServer extends Thread {
                 int filesize = 0;
                 String filename = "testDB";
 
-
                 try {
-//                    File path = Environment.getExternalStoragePublicDirectory(
-//                            Environment.DIRECTORY_PICTURES);
-//                    saveFile = new File(activity.getExternalFilesDir("data"), filename);
-                    File savePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
-                    saveFile = new File(savePath, "prombox.db");
-                            //new File(activity.getExternalFilesDir("data"), filename);
+                    if(dbNumber == 0) {
+                        saveFile = new File("/storage/emulated/0/Documents/prombox" + dbNumber + ".db");
+                        dbNumber++;
+                    }
+                    else if(dbNumber > 0 && dbNumber < 10){
+                        saveFile = new File("/storage/emulated/0/Documents/prombox" + dbNumber + ".db");
+                        dbNumber++;
+                    }
+                    else if(dbNumber == 10){
+                        dbNumber = 0;
+                        saveFile = new File("/storage/emulated/0/Documents/prombox" + dbNumber + ".db");
+                        dbNumber++;
+                    }
 
                     is = tmpIn;
                     os = new FileOutputStream(saveFile); // OS to write to file

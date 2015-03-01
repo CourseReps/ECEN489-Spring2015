@@ -15,9 +15,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.BufferedInputStream;
@@ -53,13 +56,15 @@ public class MainActivity extends ActionBarActivity {
     OutputStream outStream;
     InputStream inputStream;
     String boxid;
+    Spinner spinner;
     Dbcon db;
     // Well known SPP UUID
     private static final UUID MY_UUID =
             UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     // Insert your server's MAC address
-    private static String address = "C0:F8:DA:E3:6D:05";
+//    private static String address = "C0:F8:DA:E3:6D:05";
+    private String address;
 
 
     @Override
@@ -71,7 +76,35 @@ public class MainActivity extends ActionBarActivity {
         transferButton = (Button)findViewById(R.id.button);
         notificationView = (TextView)findViewById(R.id.textView);
         loadButton     = (Button)findViewById(R.id.button2);
+        spinner = (Spinner) findViewById(R.id.spinner);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.Mac_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+
+                address=spinner.getSelectedItem().toString();
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                address = "C0:F8:DA:E3:6D:05";
+
+            }
+
+        });
+
         db = new Dbcon(getApplicationContext());
+
+
         transferButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,7 +166,7 @@ public class MainActivity extends ActionBarActivity {
                 FileInputStream fis = null;
                 File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
 
-                File myFile = new File(directory, "PB2.db");
+                File myFile = new File(directory, "2.db");
                 byte[] mybytearray = new byte[(int) myFile.length()];
 
                 Notification = "File found.";
@@ -232,9 +265,8 @@ public class MainActivity extends ActionBarActivity {
                 bufferedWriter.flush();
 
 
-                //String boxid = readInStream.readLine();
-                // CHECK client ID and see what the latest DB line we have
-                boxid = "PB2";
+               boxid = bufferedReader.readLine();
+//                boxid = "PB2";
                 //notificationView.setText("PB Name is : "+boxid);
 
                 String latestLine = db.getPbTime(boxid);
@@ -246,10 +278,13 @@ public class MainActivity extends ActionBarActivity {
                 bufferedWriter.write(latestLine + "\n");
                 bufferedWriter.flush();
 
+                String lastRxTime = bufferedReader.readLine();
+                db.updatePbTime(boxid,lastRxTime);
 
-//                 String recv = readInStream.readLine();
-//                long fileLength = Long.parseLong(recv);
-//                activity.updateText("File length I will receive is " + recv);
+
+                 String recv = bufferedReader.readLine();
+                long fileLength = Long.parseLong(recv);
+
 
 //                readInStream.close();
 //                writeOutStream.close();
