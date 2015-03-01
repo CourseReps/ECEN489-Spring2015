@@ -61,7 +61,7 @@ public class DBHandler {
             stmt.executeUpdate(sqlCommand);
 
             //long PBID = Math.abs(new HighQualityRandom().nextLong());
-            sqlCommand = "INSERT INTO ROOT (ID, PBID) VALUES ( 1, 'PB2' );";
+            sqlCommand = "INSERT INTO ROOT (ID, PBID) VALUES ( 1, '2' );";
             stmt.executeUpdate(sqlCommand);
 
             System.out.println("Created ID table successfully");
