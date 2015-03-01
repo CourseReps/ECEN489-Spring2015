@@ -111,7 +111,7 @@ Project Architecture
 
 ![alt tag](https://github.com/CourseReps/ECEN489-Spring2015/blob/master/Project1/DatabaseDesign.jpg)
 
-![alt tag](https://github.com/CourseReps/ECEN489-Spring2015/blob/master/Project1/Table_structure.jpg)
+![alt tag](https://github.com/CourseReps/ECEN489-Spring2015/blob/master/Project1/Table_structure.png)
 
 ### Fusion Table
 
