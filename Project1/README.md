@@ -114,7 +114,7 @@ Project Architecture
 ![alt tag](https://github.com/CourseReps/ECEN489-Spring2015/blob/master/Project1/Table_structure.png)
 
 ### Fusion Table
-
+![alt tag](https://github.com/CourseReps/ECEN489-Spring2015/blob/master/Project1/FusionTable_structure.png)
 
 
 ### Cloud Server
