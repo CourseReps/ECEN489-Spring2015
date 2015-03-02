@@ -2,12 +2,10 @@ import javax.swing.*;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.io.*;
-import java.io.ByteArrayOutputStream;
 import java.net.*;
 
-// Credit to Kevin
-
 public class DBFileWriter {
+    static int numberFiles = 0;
 
     public static void main(String[] args) throws IOException
     {
@@ -25,16 +23,19 @@ public class DBFileWriter {
                 server = new ServerSocket(port);
                 System.out.println("Waiting for client connection...");
                 clientSocket = server.accept();
-             //   is = clientSocket.getInputStream();
                 System.out.println("Client Connected!");
+                BufferedReader numFiles = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+                numberFiles = Integer.parseInt(numFiles.readLine());
+                System.out.println("number of files read " + numberFiles);
 
                 dbAcceptor writeDB = new dbAcceptor(clientSocket);
-                Thread dbWriteThread = new Thread(writeDB);
-                dbWriteThread.start();
+                writeDB.dbAccept();
+
             }
-            catch(IOException ex) {
-                System.out.println("Could not establish server socket on port " + port);
-                return;
+            catch(IOException ex){
+                    System.out.println("Could not establish server socket on port " + port);
+                    return;
             }
                 try {
                     server.close();
@@ -44,7 +45,7 @@ public class DBFileWriter {
                 }
 
         while (true) {
-            //ConnectToClient(9090);
+
             if ((keepOpen = JOptionPane.showConfirmDialog(null, "Continue with server operations?", "Make Selection", JOptionPane.YES_NO_OPTION)) == 1) {
                 break;
             }

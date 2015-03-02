@@ -1,83 +1,126 @@
 import java.io.*;
 import java.net.Socket;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-public class dbAcceptor implements Runnable{
+public class dbAcceptor{
 
+    public static String dbReceived = System.getProperty("user.dir");
     InputStream is = null;
+    //BufferedInputStream bis = null;
+    BufferedReader readFileAmt = null;
     OutputStream os = null;
     PrintWriter toClient = null;
     private Socket socket;
+    boolean dbTransferConfirm;
+    DataInputStream fileRead = null;
 
     dbAcceptor (Socket socket) {
         this.socket = socket;
+
     }
 
+    Connection receivedConnect = null;
     byte[] aByte = new byte[6022386];
-    int bytesRead, current;
+    int bytesRead = 0;
+    int current = 0;
     FileOutputStream fos = null;
     BufferedOutputStream bos = null;
 
-    public  void run(){
+    public  void dbAccept() {
+
+
+        //TODO RECEIVE INT FROM ANDROID STATING NUMBER OF FILES TO BE SENT
+        int n = 0;
+        String suffix = null;
+        String read = null;
+        try {
+
+            toClient = new PrintWriter(socket.getOutputStream(), true);
+            n = DBFileWriter.numberFiles;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("R2DATA is sending " + n + " files.");
+
+
+        for (int i = 0; i < n; i++) {
+            switch (i) {
+                case 1:
+                    suffix = "st";
+                case 2:
+                    suffix = "nd";
+                case 3:
+                    suffix = "rd";
+                default:
+                    suffix = "th";
+            }
+
             try {
-                System.out.println("inside try block in dbAcceptor run.");
+                System.out.println("Writing the " + i + suffix + " file.");
                 is = socket.getInputStream();
 
-                fos = new FileOutputStream("D:\\Softwares\\SQLite\\AndroidTest.db");
-                bos = new BufferedOutputStream(fos);
+                dbReceived = System.getProperty("user.dir") + "\\" + System.currentTimeMillis() + "AndroidTest.db";
+
+                fos = new FileOutputStream(dbReceived);
+                //bos = new BufferedOutputStream(fos);
                 System.out.println("before bytesRead.");
 
-                bytesRead = is.read(aByte, 0, aByte.length);
-
                 System.out.println("after bytesRead.");
-                current = bytesRead;
+                //current = bytesRead;
                 System.out.println("Server is Still Running, bytesRead Complete, input stream is not null.");
 
-                do {
-                    bytesRead = is.read(aByte, 0, (aByte.length - current));
-                    if(bytesRead >= 0)
-                        current += bytesRead;
-                } while (bytesRead > -1);
+                System.out.println("bytesRead: " + bytesRead);
 
                 System.out.println("Server is Still Running, exited bytesRead != 1 loop.");
+                readFileAmt = new BufferedReader(new InputStreamReader(new BufferedInputStream(is)));
+                int fileLength = Integer.parseInt(readFileAmt.readLine());
+                System.out.println(fileLength);
+                int length = 0;
+                byte[] b = new byte[fileLength];
 
-                bos.write(aByte, 0, current);
-                System.out.print(aByte);
-                bos.flush();
-
-                System.out.println("File Downloaded, " + current + "bytes transferred.");
-
-
-                dbMerger transferDB = new dbMerger(socket);
-                Thread transferDBThread = new Thread(transferDB);
-                transferDBThread.start();
-                boolean dbTransferConfirm;
-                toClient = new PrintWriter(socket.getOutputStream(), true);
-                while(true){
-                    dbTransferConfirm = dbMerger.transferConfirmation;
-
-                    if(dbTransferConfirm) {
-
-                        toClient.println(dbMerger.lastTimeStamp);
-                        toClient.println(dbMerger.lastPBID);
-                        System.out.println("File Transfer Confirmed.");
-                        bos.close();
-                        fos.close();
-                        socket.close();
-                        break;
-                    }
-                        Thread.sleep(100);
+                current = 0;
+                while (current<fileLength) {
+                    length = is.read(b);
+                    fos.write(b, 0, length);
+                    current+=length;
                 }
 
 
-            } catch (IOException ex) {
+                System.out.println("File " + dbReceived + " Downloaded, " + current + " bytes transferred.");
+
+                fos.close();
+
+                dbMerger transferDB = new dbMerger();
+                transferDB.dbMerge();
+                dbTransferConfirm = dbMerger.transferConfirmation;
+
+                    if (dbTransferConfirm) {
+
+                        toClient.println(String.valueOf(dbMerger.lastRowID));
+                        System.out.println("File Transfer Confirmed.");
+
+                    }
+
+                toClient.flush();
+            } catch (Exception ex) {
                 ex.printStackTrace();
-                // Do exception handling
+                System.out.print(ex.getMessage());
             }
-            catch (InterruptedException e) {
+
+        }
+            try {
+                socket.close();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
         }
+
+
+
 
     }
 
