@@ -186,15 +186,17 @@ public class FusionTablesSample {
           httpTransport, JSON_FACTORY, credential).setApplicationName(APPLICATION_NAME).build();
       // run commands
       listTables();
+
       String tableId = getTableId(TableName);
+      //deleteTable(tableId);
       if ( getTableId(TableName) == null) {
         tableId = createTable();
       }
-
+      //deleteTable(tableId);
       Class.forName("org.sqlite.JDBC");
       Connection conn = DriverManager.getConnection("jdbc:sqlite:test.db");
       Statement stat = conn.createStatement();
-
+/*
       stat.executeUpdate("drop table if exists "+TableName+";");
       System.out.println("123");
       stat.executeUpdate("create table "+TableName+" ("+column1+","+column2+","+column3+");");
@@ -225,19 +227,13 @@ public class FusionTablesSample {
       conn.setAutoCommit(false);
       prep.executeBatch();
       conn.setAutoCommit(true);
-
+*/
       ResultSet rs = stat.executeQuery("select * from "+TableName+";");
       while (rs.next()) {
-
-        System.out.println("column1 = " + rs.getString(column1));
-        System.out.println("column2 = " + rs.getString(column2));
-        System.out.println("column3 = " + rs.getString(column3));
+        insertData(tableId,rs.getString(column1),rs.getString(column2),rs.getString(column3));
       }
       rs.close();
       conn.close();
-      //String tableId = "1mI-4ufjiLuGRdOZGBRedjfujv3tjXPVtuNzXmKku";
-
-      //insertData(tableId);
 
       //deleteTable(tableId);
       // success!
@@ -297,9 +293,9 @@ public class FusionTablesSample {
 
     // Set columns for new table
     table.setColumns(Arrays.asList(
-        new Column().setName(column1).setType("DATETIME"),
+        new Column().setName(column1).setType("STRING"),
         new Column().setName(column2).setType("STRING"),
-        new Column().setName(column3).setType("NUMBER")));
+        new Column().setName(column3).setType("STRING")));
 
     // Adds a new column to the table.
     Fusiontables.Table.Insert t = fusiontables.table().insert(table);
@@ -312,9 +308,9 @@ public class FusionTablesSample {
 
   /** Inserts a row in the newly created table for the authenticated user. */
   private static void insertData(String tableId,String item1,String item2,String item3) throws IOException {
-    Sql sql = fusiontables.query().sql("INSERT INTO " + tableId + " (Text,Number,Location,Date) "
-        + "VALUES (" + "'Google Inc', " + "1, " + "'1600 Amphitheatre Parkway Mountain View, "
-        + "CA 94043, USA','" + new DateTime(new Date()) + "')");
+    Sql sql = fusiontables.query().sql("INSERT INTO " + tableId + " ("+column1+","+column2+","+column3+") "
+        + "VALUES ('" + item1+ "', '" +item2 +"', '" +item3+"')");
+
     try {
       sql.execute();
     } catch (IllegalArgumentException e) {
