@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Fusion Tables layers</title>
+    <style>
+        html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false"></script>
+    <script>
+var map, layer;
+
+function initialize() {
+  var chicago = new google.maps.LatLng(41.850033, -87.6500523);
+
+  map = new google.maps.Map(document.getElementById('map-canvas'), {
+    center: chicago,
+    zoom: 11
+  });
+
+  layer = new google.maps.FusionTablesLayer({
+    query: {
+      select: 'Latitude',
+      from: '1oG_MhFIk5HgBpCCYExRxx44WxmItk-NB25zC7Kki'
+    }
+  });
+  layer.setMap(map);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+</head>
+<body>
+<div id="map-canvas"></div>
+</body>
+</html>

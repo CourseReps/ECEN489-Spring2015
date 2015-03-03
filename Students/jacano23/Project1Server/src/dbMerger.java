@@ -1,129 +1,148 @@
-import java.io.File;
+
 import java.net.Socket;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-// Credit to Kevin
 
-public class dbMerger implements Runnable {
+public class dbMerger {
 
     static boolean transferConfirmation = false;
-    static long lastTimeStamp;
-    static String lastPBID;
+    static int lastRowID;
+    static int lastPBID;
     long x = 0;
     String y = null;
-    long z = 0;
+    int z = 0;
 
     private Socket socket;
 
-    dbMerger (Socket socket){
-        this.socket = socket;
-    }
-        public void run(){
+
+        public void dbMerge (){
             String sql;
             boolean creatingDB;
 
             //Declare database variables
-            Connection c = null, c2 = null;
+            Connection mainConnect = null, receivedConnect = null;
             Statement stmt = null;
             Statement stmt1 = null;
 
-            String s = "D:\\Softwares\\SQLite";
+            String addDB = dbAcceptor.dbReceived;
 
-            //Check if the db file must be created
-            File dbfile = new File(s + "\\main.db");
-            creatingDB = !dbfile.exists();
+            String s = System.getProperty("user.dir");
+
+
 
             try {
                 //Connect to the database
                 Class.forName("org.sqlite.JDBC");
-                c = DriverManager.getConnection("jdbc:sqlite:"+s+"\\main.db"); //connects to main database.
-                c.setAutoCommit(false);
-                c2 = DriverManager.getConnection("jdbc:sqlite:"+s+"\\AndroidTest.db"); //connects to received database
-                c2.setAutoCommit(false);
+                mainConnect = DriverManager.getConnection("jdbc:sqlite:"+s+"\\main.db"); //connects to main database.
+                mainConnect.setAutoCommit(false);
+
+                //Class.forName("org.sqlite.JDBC");
+                receivedConnect = DriverManager.getConnection("jdbc:sqlite:"+addDB); //connects to received database
+                receivedConnect.setAutoCommit(false);
 
                 System.out.println("Opened database successfully");
 
                 //Creates the table if the main database is being initially created.
-                if (creatingDB) {
-                    stmt = c.createStatement();
-                    sql = "CREATE TABLE DATA (ID INTEGER PRIMARY KEY, TIMES LONG, MAC TEXT, PBID LONG)";
+                try {
+                    stmt = mainConnect.createStatement();
+                    sql = "CREATE TABLE DATA (ID INTEGER PRIMARY KEY, TIME LONG, MAC TEXT, PBID INTEGER)";
+                    System.out.println("data table created.");
                     stmt.executeUpdate(sql);
                 }
+                catch(Exception e)
+                {
+                    System.err.println( e.getClass().getName() + ": " + e.getMessage());
+                }
 
-                stmt = c2.createStatement();
-                stmt1 = c.createStatement();
+                System.out.println("check 0");
+
+                stmt = receivedConnect.createStatement();
                 ResultSet rs = stmt.executeQuery( "SELECT * FROM DATA;" );//checks result set in table DATA from received database
-                stmt = c2.createStatement();
-                ResultSet root = stmt.executeQuery( "SELECT * FROM ROOT;" );//checks result set in table ROOT from received database
-                ResultSet rsMain = stmt1.executeQuery("SELECT * FROM DATA;");    //begin checking result set in main database
-                long main1 = 0;
-                String main2 = null;
-                long main3 = 0;
-                z = root.getLong("PBID");
+                System.out.println("check 1");
 
+
+
+                //todo the root table will be named "PBID" WITH AN ID COLUMN WITH DATA TYPE INTEGER
+                //TODO THE TIMES COLUMN WILL BE NAMED "TIME" WITH DATA TYPE LONG
+
+                System.out.println("check 3");
+                stmt1 = mainConnect.createStatement();
+                ResultSet rsMain = stmt1.executeQuery("SELECT * FROM DATA;");    //begin checking result set in main database
+                System.out.println("check 4");
+
+                long main1 = 0;
+                //System.out.println("check 5");
+                String main2 = null;
+
+               // z = root.getInt("ID");
+                System.out.println("check 5");
                 int duplicateCheck = 0;
-                while (rs.next()) {         //loops and moves cursor to next row until cursor hits the last row.
+                int i = 0;
+
+
+
+                while (rs.next()) {
                     x = rs.getLong("TIMES");
                     y = rs.getString("MAC");
-                     //reading data from android database.
-
-                    System.out.println("TIMES: " + x + "\nMAC: " + y + "\nPBID: " + z);
-
+                    i = rs.getInt("ID");
 
                     rsMain.close();
-                    rsMain = stmt1.executeQuery("SELECT * FROM DATA;"); //restarts result set checker for main database.
+                    stmt1 = mainConnect.createStatement();
+                    rsMain = stmt1.executeQuery("SELECT * FROM DATA;");
 
-                    while (rsMain.next()) { //loops through main database.
-                        main1 = rsMain.getLong("TIMES");
-                        main2 = rsMain.getString("MAC");
-
-                        if ((x == main1) && (y.equals(main2))) {   //checks main database for a possible duplicate entry before writing new data.
-                            duplicateCheck = 1;
-                            break;
-                        }
-                        else duplicateCheck = 0;
+                    if (duplicateCheck == 0) {
+                        stmt1 = mainConnect.createStatement();
+                        sql = "INSERT INTO DATA (TIME,MAC,PBID) VALUES (" + x + ", '" + y + "', 1);";
+                        stmt1.executeUpdate(sql);
                     }
+                }//  if (duplicateCheck==0){
+                    lastRowID = i;
+                    lastPBID = 1;//}
 
-                    if (duplicateCheck == 0) {//if data to be entered to main database is not duplicate data, insert data into main database.
 
-                        sql = "INSERT INTO DATA (TIMES, MAC, PBID) VALUES (" + x + ", " + y + ", " + z + ");";
-                        stmt.executeUpdate(sql);
+                stmt1 = mainConnect.createStatement();
+                sql = "DELETE FROM DATA WHERE ROWID NOT IN (SELECT MIN(ROWID) FROM DATA GROUP BY TIME, MAC);";
+                stmt1.executeUpdate(sql);//Deletes any rows with same entries in timestamp and mac address columns
+                System.out.println("Duplicate rows deleted if any exist in main database.");
 
-                    }
 
+
+                //TODO NEED TO CREATE CHECK TO CONFIRM THAT DATA WAS WRITTEN FROM THE INCOMING DATABASE TO THE MAIN DATABASE
+                //TODO AFTER CONFIRMATION IS COMPLETE, WRITE CODE TO DELETE FILE AND SEND CONFIRMATION TO ANDROID.
+
+                ResultSet lastPrimaryKey = stmt1.executeQuery("SELECT * FROM DATA;");
+                int lastID = 0;
+
+                stmt = mainConnect.createStatement();
+                lastPrimaryKey = stmt.executeQuery("SELECT ID FROM DATA ORDER BY ID DESC LIMIT 1;");
+
+                if(lastPrimaryKey.next())
+                    lastID = lastPrimaryKey.getInt(1);
+
+                System.out.println(lastID);
+                System.out.println("check 7 ");
+
+                if(lastRowID==(lastID)) {
+                    transferConfirmation = true;
                 }
+                else transferConfirmation = false;
+                //checks
+                System.out.println("Transfer Confirmation true.");
 
-                if (duplicateCheck==0){
-                    lastTimeStamp = x;
-                    lastPBID = y;
-                }
-
-                while(true) {
-                    if (rsMain.next()) { //checks last line of main database
-
-                        if ((x == main1) && (y.equals(main2)) && x!=0 && y!=null) {
-                            transferConfirmation = true;
-                            //checks
-                            System.out.println("Transfer Confirmation true.");
-                        }
-                    }
-                    else{
-                        break;
-                    }
-                }
+                //TODO USE SELECT * FROM TABLE WHERE.
 
                 stmt.close();
-                c.commit();
-                c.close();
-                c2.commit();
-                c2.close();
+                mainConnect.commit();
+                mainConnect.close();
+                receivedConnect.commit();
+                receivedConnect.close();
                 System.out.println("Database closed");
             }
             catch ( Exception e ) {
-                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                System.err.println( e.getClass().getName() + ": " + e.getMessage());
                 System.exit(0);
             }
 
