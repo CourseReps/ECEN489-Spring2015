@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="P1CsvParse:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/P1CsvParse_jar</output-path>
+    <root id="archive" name="P1CsvParse.jar">
+      <element id="module-output" name="P1CsvParse" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../includes/sqlite-jdbc-3.8.7.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
