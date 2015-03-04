@@ -16,10 +16,6 @@ public class FileServer {
 
     public static void main (String [] args ) throws IOException {
         int current, bytesRead;
-        int numFiles, numBytes, lastID;
-
-        Connection dbIN = null, dbOUT, dbFinal;
-        Statement stmt;
 
         String sql;
         boolean creatingDB;
@@ -43,60 +39,47 @@ public class FileServer {
                     sock = servsock.accept();
                     System.out.println("Accepted connection: " + sock);
 
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+                    //Timestamp the file
+                    //FILE_TO_RECEIVE += "\\" + System.currentTimeMillis() + sock.getInetAddress().getCanonicalHostName();
+                    FILE_TO_RECEIVE += "\\" + System.currentTimeMillis() + "_testing.db";
 
+                    // receive file
+                    byte[] mybytearray = new byte[FILE_SIZE];
+                    InputStream is = sock.getInputStream();
+                    fos = new FileOutputStream(FILE_TO_RECEIVE);
+                    bos = new BufferedOutputStream(fos);
+                    bytesRead = is.read(mybytearray, 0, mybytearray.length);
+                    current = bytesRead;
 
-                    numFiles = Integer.parseInt(reader.readLine());
+                    System.out.println("Before writing to file");
 
-                    for (int i = 0; i < numFiles; i++)
+                    do {
+                        bytesRead = is.read(mybytearray, current, (mybytearray.length - current));
+                        if (bytesRead >= 0) current += bytesRead;
+                    } while (bytesRead > -1);
+
+                    System.out.println("After adding to file");
+
+                    bos.write(mybytearray, 0, current);
+                    bos.flush();
+
+                    //System.out.println("Wrote data to database");
+
+                    File transferredFile = new File(FILE_TO_RECEIVE);
+                    out = new PrintWriter(sock.getOutputStream(), true);
+
+                    if(transferredFile.exists())
                     {
-                        //Timestamp the file
-                        //FILE_TO_RECEIVE += "\\" + System.currentTimeMillis() + sock.getInetAddress().getCanonicalHostName();
-                        FILE_TO_RECEIVE += "\\" + System.currentTimeMillis() + "_testing.db";
-
-                        numBytes = Integer.parseInt(reader.readLine());
-
-                        // receive file
-                        byte[] mybytearray = new byte[FILE_SIZE];
-                        InputStream is = sock.getInputStream();
-                        fos = new FileOutputStream(FILE_TO_RECEIVE);
-                        bos = new BufferedOutputStream(fos);
-                        bytesRead = is.read(mybytearray, 0, mybytearray.length);
-                        current = bytesRead;
-
-                        do {
-                            bytesRead = is.read(mybytearray, current, (mybytearray.length - current));
-                            if (bytesRead >= 0) current += bytesRead;
-                        } while (bytesRead > -1);
-
-                        bos.write(mybytearray, 0, current);
-                        bos.flush();
-
-                        //File dbIN = new File(FILE_TO_RECEIVE);
-                        out = new PrintWriter(sock.getOutputStream(), true);
-
-                        if(numBytes == bytesRead)
-                        {
-                            System.out.println("File " + FILE_TO_RECEIVE + " downloaded (" + current + " bytes read)");
-
-                            Class.forName("org.sqlite.JDBC");
-                            dbIN = DriverManager.getConnection("jdbc:sqlite:" + FILE_TO_RECEIVE);
-                            dbIN.setAutoCommit(false);
-                            //out.print("Got file");
-
-                            stmt = dbIN.createStatement();
-                            ResultSet rs = stmt.executeQuery( "SELECT * FROM DATA ORDER BY TIME DESC LIMIT 1;");
-
-                            lastID = rs.getInt("ID");
-
-                            out.println(String.valueOf(lastID));
-                        }
-                        else
-                        {
-                            System.out.println("File " + FILE_TO_RECEIVE + " was not downloaded correctly");
-                            //out.print("There was an error downloading the file");
-                        }
+                        System.out.println("File " + FILE_TO_RECEIVE + " downloaded (" + current + " bytes read)");
+                        out.println("It worked");
+                        System.out.println("Send message to droid");
                     }
+                    else
+                    {
+                        System.out.println("File " + FILE_TO_RECEIVE + " was not downloaded correctly");
+                        out.print("There was an error downloading the file");
+                    }
+                    //}
                 }
                 catch ( Exception e ) {
                     System.err.println( e.getClass().getName() + ": " + e.getMessage() );
@@ -116,10 +99,13 @@ public class FileServer {
                 //Declare database variables
                 //Connection dbIN, dbOUT, dbFinal;
                 //Statement stmt;
-                String newDB = "test2.db";
+                String newDB = "temp.db";
                 String finalDB = "final.db";
                 int numFolders;
                 PrintWriter toClient;
+
+                Connection dbIN = null, dbOUT, dbFinal;
+                Statement stmt;
 
 
                 SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -132,21 +118,26 @@ public class FileServer {
 
                 try {
                     //Connect to the database
-                   /* Class.forName("org.sqlite.JDBC");
+                    Class.forName("org.sqlite.JDBC");
                     dbIN = DriverManager.getConnection("jdbc:sqlite:" + FILE_TO_RECEIVE);
-                    dbIN.setAutoCommit(false);*/
+                    dbIN.setAutoCommit(false);
 
                     dbOUT = DriverManager.getConnection("jdbc:sqlite:" + newDB);
                     dbOUT.setAutoCommit(false);
 
                     System.out.println("Opened databases successfully");
 
-                    //If the db file was created then create the table CLICKS
+                    //If the db file was created then create the table DATA
                     if (creatingDB) {
                         stmt = dbOUT.createStatement();
                         sql = "CREATE TABLE DATA (PBID INTEGER, TIME LONG, MAC TEXT)";
                         stmt.executeUpdate(sql);
                     }
+
+                   /* stmt = dbIN.createStatement();
+                    ResultSet rs = stmt.executeQuery( "SELECT * FROM DATA ORDER BY TIME DESC LIMIT 1;");
+
+                    lastID = rs.getInt("ID");*/
 
                     dbFinal = DriverManager.getConnection("jdbc:sqlite:" + finalDB);
                     dbFinal.setAutoCommit(false);
