@@ -81,11 +81,13 @@ public class FileServer {
                         dbIN.setAutoCommit(false);
 
                         stmt = dbIN.createStatement();
-                        ResultSet rs = stmt.executeQuery( "SELECT * FROM DATA ORDER BY TIME DESC LIMIT 1;");
+                        ResultSet rs = stmt.executeQuery( "SELECT * FROM DATA ORDER BY ID DESC LIMIT 1;");
 
                         lastID = rs.getInt("ID");
 
                         out.println(lastID);
+
+                        System.out.println("Sent " + lastID + " to droid");
                     }
                     else
                     {
@@ -135,11 +137,11 @@ public class FileServer {
                     System.out.println("Opened databases successfully");
 
                     //If the db file was created then create the table DATA
-                    if (creatingDB) {
-                        stmt = dbOUT.createStatement();
-                        sql = "CREATE TABLE DATA (PBID INTEGER, TIME LONG, MAC TEXT)";
-                        stmt.executeUpdate(sql);
-                    }
+                    //if (creatingDB) {
+                    stmt = dbOUT.createStatement();
+                    sql = "CREATE TABLE IF NOT EXISTS DATA (PBID INTEGER, TIME LONG, MAC TEXT)";
+                    stmt.executeUpdate(sql);
+                    //}
 
                    /* stmt = dbIN.createStatement();
                     ResultSet rs = stmt.executeQuery( "SELECT * FROM DATA ORDER BY TIME DESC LIMIT 1;");
@@ -183,7 +185,7 @@ public class FileServer {
                     //if (creatingFinalDB) {
                     stmt = dbFinal.createStatement();
                     //sql = "CREATE TABLE DATA (ID INTEGER PRIMARY KEY, TIMES LONG, MAC TEXT, PBID LONG)";
-                    sql = "CREATE TABLE DATA (TIME TEXT, NUM_MACS INTEGER, NUM_PEOPLE INTEGER, PBID INTEGER, ADDED TEXT)";
+                    sql = "CREATE TABLE IF NOT EXISTS DATA (TIME TEXT, NUM_MACS INTEGER, NUM_PEOPLE INTEGER, PBID INTEGER, ADDED TEXT)";
                     stmt.executeUpdate(sql);
                     // }
 
@@ -220,7 +222,12 @@ public class FileServer {
                         stmt.executeUpdate(sql);
                     }
 
-                    //dbfile.delete();
+
+
+                    //Delete any duplicate data
+                    /*stmt = dbFinal.createStatement();
+                    sql = "DELETE FROM DATA WHERE ROWID NOT IN (SELECT MIN(ROWID) FROM DATA GROUP BY TIME, NUM_MACS, NUM_PEOPLE, PBID);";
+                    stmt.executeUpdate(sql);*/
 
 
                     stmt.close();
@@ -231,6 +238,7 @@ public class FileServer {
                     dbFinal.commit();
                     dbFinal.close();
                     System.out.println("Databases closed");
+                    dbfile.delete();
                 }
                 catch ( Exception e ) {
                     System.err.println( e.getClass().getName() + ": " + e.getMessage() );
