@@ -16,9 +16,13 @@ public class FileServer {
 
     public static void main (String [] args ) throws IOException {
         int current, bytesRead;
+        int lastID;
+
+        Connection dbIN = null, dbOUT, dbFinal;
+        Statement stmt;
 
         String sql;
-        boolean creatingDB;
+        boolean creatingDB, creatingFinalDB;
 
         InetAddress IP = InetAddress.getLocalHost();
         System.out.println("IP of my system is: " + IP.getHostAddress());
@@ -32,6 +36,7 @@ public class FileServer {
         PrintWriter out;
 
         try {
+            Class.forName("org.sqlite.JDBC");
             servsock = new ServerSocket(SOCKET_PORT);
             while (true) {
                 System.out.println("Waiting for an android device to connect...");
@@ -71,13 +76,21 @@ public class FileServer {
                     if(transferredFile.exists())
                     {
                         System.out.println("File " + FILE_TO_RECEIVE + " downloaded (" + current + " bytes read)");
-                        out.println("It worked");
-                        System.out.println("Send message to droid");
+
+                        dbIN = DriverManager.getConnection("jdbc:sqlite:" + FILE_TO_RECEIVE);
+                        dbIN.setAutoCommit(false);
+
+                        stmt = dbIN.createStatement();
+                        ResultSet rs = stmt.executeQuery( "SELECT * FROM DATA ORDER BY TIME DESC LIMIT 1;");
+
+                        lastID = rs.getInt("ID");
+
+                        out.println(lastID);
                     }
                     else
                     {
                         System.out.println("File " + FILE_TO_RECEIVE + " was not downloaded correctly");
-                        out.print("There was an error downloading the file");
+                        //out.print("There was an error downloading the file");
                     }
                     //}
                 }
@@ -104,10 +117,6 @@ public class FileServer {
                 int numFolders;
                 PrintWriter toClient;
 
-                Connection dbIN = null, dbOUT, dbFinal;
-                Statement stmt;
-
-
                 SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
                 String s = System.getProperty("user.dir");
@@ -118,9 +127,7 @@ public class FileServer {
 
                 try {
                     //Connect to the database
-                    Class.forName("org.sqlite.JDBC");
-                    dbIN = DriverManager.getConnection("jdbc:sqlite:" + FILE_TO_RECEIVE);
-                    dbIN.setAutoCommit(false);
+
 
                     dbOUT = DriverManager.getConnection("jdbc:sqlite:" + newDB);
                     dbOUT.setAutoCommit(false);
@@ -170,10 +177,10 @@ public class FileServer {
 
                     //Check if the db file must be created
                     File dbFinalfile = new File(s + "\\" + finalDB);
-                    creatingDB = !dbFinalfile.exists();
+                    creatingFinalDB = !dbFinalfile.exists();
 
                     //If the db file was created then create the table CLICKS
-                    //if (creatingDB) {
+                    //if (creatingFinalDB) {
                     stmt = dbFinal.createStatement();
                     //sql = "CREATE TABLE DATA (ID INTEGER PRIMARY KEY, TIMES LONG, MAC TEXT, PBID LONG)";
                     sql = "CREATE TABLE DATA (TIME TEXT, NUM_MACS INTEGER, NUM_PEOPLE INTEGER, PBID INTEGER, ADDED TEXT)";
@@ -232,6 +239,10 @@ public class FileServer {
 
                 FILE_TO_RECEIVE = System.getProperty("user.dir");
             }
+        }
+        catch (ClassNotFoundException e) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
         }
         finally {
             if (servsock != null) servsock.close();
