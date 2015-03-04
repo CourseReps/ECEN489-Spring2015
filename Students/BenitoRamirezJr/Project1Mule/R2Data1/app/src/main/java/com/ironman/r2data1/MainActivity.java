@@ -1,5 +1,4 @@
 package com.ironman.r2data1;
-
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
@@ -27,8 +26,6 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.DataOutput;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -36,20 +33,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.nio.Buffer;
 import java.util.UUID;
 
 public class MainActivity extends ActionBarActivity {
-
+    String dbNum = null;
     EditText ipAddress;
     EditText portNumber;
-    Button   transferButton;
+    Button transferButton;
     Button   loadButton;
     TextView notificationView;
     String serverIp;
@@ -61,7 +56,8 @@ public class MainActivity extends ActionBarActivity {
     OutputStream outStream;
     InputStream inputStream;
     String boxid;
-    Spinner spinner;
+    Spinner BTmac;
+    Spinner Filenum;
     Dbcon db;
     // Well known SPP UUID
     private static final UUID MY_UUID =
@@ -70,6 +66,7 @@ public class MainActivity extends ActionBarActivity {
     // Insert your server's MAC address
 //    private static String address = "C0:F8:DA:E3:6D:05";
     private String address;
+    private String name;
 
 
     @Override
@@ -81,30 +78,50 @@ public class MainActivity extends ActionBarActivity {
         transferButton = (Button)findViewById(R.id.button);
         notificationView = (TextView)findViewById(R.id.textView);
         loadButton     = (Button)findViewById(R.id.button2);
-        spinner = (Spinner) findViewById(R.id.spinner);
+        BTmac = (Spinner) findViewById(R.id.BTaddress);
+        Filenum = (Spinner) findViewById(R.id.File);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+//following code is for the bluetooth mac address spinner
+        ArrayAdapter<CharSequence> BT = ArrayAdapter.createFromResource(this,
                 R.array.Mac_array, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        BT.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
+        BTmac.setAdapter(BT);
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        BTmac.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int arg2, long arg3) {
 
-                address=spinner.getSelectedItem().toString();
+                address = BTmac.getSelectedItem().toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                address = "B4:B6:76:1E:6E:31";
 
+            }
+
+        });
+
+        ArrayAdapter<CharSequence> Files = ArrayAdapter.createFromResource(this,R.array.File_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        Files.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        Filenum.setAdapter(Files);
+
+        Filenum.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+
+                name = Filenum.getSelectedItem().toString();
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
-                address = "9C:B7:0D:AB:AA:41";
+                name = "PB1";
 
             }
-
         });
 
         db = new Dbcon(getApplicationContext());
@@ -181,33 +198,36 @@ public class MainActivity extends ActionBarActivity {
                 OutputStream os = conSocket.getOutputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
                 OutputStream outToClient = null;
-                PrintWriter out = new PrintWriter(os, true);
-                out.println(fileNum);
+                //PrintWriter out = new PrintWriter(os, true);
+                //out.println(fileNum);
 
                 FileInputStream fis = null;
-
+                File myFile = null;
 
                 ///Loop for DB file senders
-                for (int dbNum = 1; dbNum <= 4; dbNum++) {
-                    if (new File(directory,"PB"+dbNum+".db").exists()) {
-                        File myFile = new File(directory, "PB"+dbNum+".db");
-                        byte[] mybytearray = new byte[(int) myFile.length()];
-                        Notification = "File found.";
-                        Log.d("WriteTable", "file exists = " + myFile.exists());
-                        fis = new FileInputStream(myFile);
-                        BufferedInputStream bis = new BufferedInputStream(fis);
-                        Log.d("WriteTable", "Wrote value: " + myFile.length());
-                        bis.read(mybytearray, 0, mybytearray.length);
-                        outToClient = conSocket.getOutputStream();
-                        outToClient.write(mybytearray, 0, mybytearray.length);
-                        outToClient.flush();
-                        String PBId = bufferedReader.readLine();
-                        String dataId = bufferedReader.readLine();
-                        db.updateSvrTime(PBId, dataId);
-                    }
+
+                if (new File(directory,name+".db" ).exists()) {
+                    myFile = new File(directory, name+".db");
+                    byte[] mybytearray = new byte[(int) myFile.length()];
+                    Notification = "File found.";
+                    Log.d("WriteTable", "file exists = " + myFile.exists());
+                    fis = new FileInputStream(myFile);
+                    BufferedInputStream bis = new BufferedInputStream(fis);
+                    Log.d("WriteTable", "Wrote value: " + myFile.length());
+                    bis.read(mybytearray, 0, mybytearray.length);
+                    //out.println(myFile.length());
+///Hand Shake/////////////////////////////////////////////////////////////////////////
+                    outToClient = conSocket.getOutputStream();
+                    outToClient.write(mybytearray, 0, mybytearray.length);
+                    outToClient.flush();
+                    conSocket.shutdownOutput();
                 }
+                String dataId = bufferedReader.readLine();
+                Log.d("got:", dataId);
+                db.updateSvrTime( name, dataId);
                 outToClient.close();
                 conSocket.close();
+//              myFile.delete();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -237,19 +257,9 @@ public class MainActivity extends ActionBarActivity {
         protected Void doInBackground(Void... args) {
 
             mAdapter = BluetoothAdapter.getDefaultAdapter();
-//            if (mAdapter.isEnabled()) {
-//                notificationView.setText("Bluetooth Enabled");
-//            } else {
-//                //Prompt user to turn on Bluetooth
-//                Intent enableBtIntent = new Intent(mAdapter.ACTION_REQUEST_ENABLE);
-//                startActivityForResult(enableBtIntent, 1);
-//            }
+
             BluetoothDevice device = mAdapter.getRemoteDevice(address);
 
-            // Two things are needed to make a connection:
-            //   A MAC address, which we got above.
-            //   A Service ID or UUID.  In this case we are using the
-            //     UUID for SPP.
             try {
                 mSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
             } catch (IOException e) {
@@ -285,14 +295,16 @@ public class MainActivity extends ActionBarActivity {
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outStream));
 
                 // Send the server my ID
-                //long clientID = Math.abs(new HighQualityRandom().nextLong());
-                bufferedWriter.write("R2Data1" + "\n");
+                bufferedWriter.write("R2Data-4" + "\n");
                 bufferedWriter.flush();
 
 
                 boxid = bufferedReader.readLine();
-//                boxid = "PB2";
-                //notificationView.setText("PB Name is : "+boxid);
+                File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                if(new File(directory,boxid+".db").exists()) {
+                    new File(directory,boxid+".db").delete();
+
+                }
 
                 String latestLine = db.getPbTime(boxid);
                 bufferedWriter.write(latestLine + "\n");
@@ -311,8 +323,6 @@ public class MainActivity extends ActionBarActivity {
                 long fileLength = Long.parseLong(recv);
 
 
-//                readInStream.close();
-//                writeOutStream.close();
 
                 /////////////////////////////////////////////////////////////////////////////////
                 // BEGIN DOWNLOAD CODE //////////////////////////////////////////////////////////
@@ -325,30 +335,25 @@ public class MainActivity extends ActionBarActivity {
                 boolean streamsOpen = false;
 
                 int filesize = 0;
-//                String filename = "testDB";
-
 
                 try {
-//                    File path = Environment.getExternalStoragePublicDirectory(
-//                            Environment.DIRECTORY_PICTURES);
-//                    saveFile = new File(activity.getExternalFilesDir("data"), filename);
-                    //File savePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+
                     File savePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
                     saveFile = new File(savePath, boxid+".db");
-                    //new File(activity.getExternalFilesDir("data"), filename);
                     Notification = "Received file into Downloads/"+boxid+".db";
                     is = inputStream;
                     os = new FileOutputStream(saveFile); // OS to write to file
                     streamsOpen = true;
 
                     byte[] b = new byte[2048];
-                    int length;
+                    int length = 0;
 
-                    while ((length = is.read(b)) != -1) {
+
+                    while (downloadCounter<fileLength) {
+                        length = is.read(b);
                         os.write(b, 0, length);
                         downloadCounter += length;
 
-                        //activity.updateText("Downloading: " + downloadCounter + "/" + filesize);
                     }
 
                 } catch (FileNotFoundException fnfe) {

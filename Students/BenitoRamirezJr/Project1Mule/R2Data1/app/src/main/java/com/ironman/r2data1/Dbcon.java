@@ -16,15 +16,12 @@ public class Dbcon extends SQLiteOpenHelper {
     public Dbcon(Context context) {
 
         super(context, DATABASE_NAME, null, 1);
-
-
     }
 
     @Override
 
     public void onCreate(SQLiteDatabase database) {
 
-//        database.execSQL("CREATE TABLE datatracker (_id INTEGER PRIMARY KEY AUTOINCREMENT, bssid TEXT, rssi INTEGER, location TEXT, flag TEXT);");
         database.execSQL("CREATE TABLE timetracker (boxid TEXT NOT NULL PRIMARY KEY, lastPbTime TEXT DEFAULT 0, lastSVRTime TEXT DEFAULT 0);");
         ContentValues contentValues = new ContentValues(1);
         contentValues.put("boxid","PB1");
@@ -44,7 +41,6 @@ public class Dbcon extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS timetracker");
 
         onCreate(db);
-
     }
 
 //    public Long addRecord(String location, String bssid, Integer rssi, String flag){
