@@ -53,7 +53,7 @@ public class FusionTablesHelper {
     /** Authorizes the installed application to access user's protected data. */
     public Credential authorize() throws Exception {
         // load client secrets
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(FusionTables.class.getResourceAsStream("client_secrets.json")));
+        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(FusionTablesHelper.class.getResourceAsStream("client_secrets.json")));
         if (clientSecrets.getDetails().getClientId().startsWith("Enter")
                 || clientSecrets.getDetails().getClientSecret().startsWith("Enter ")) {
             System.out.println(
