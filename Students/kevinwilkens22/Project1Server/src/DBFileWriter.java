@@ -5,6 +5,7 @@ import java.io.*;
 import java.io.ByteArrayOutputStream;
 import java.net.*;
 
+
 /**
  * Created by kwilk_000 on 2/22/2015.
  */
@@ -17,10 +18,19 @@ public class DBFileWriter {
         int keepOpen = 0;
         byte[] aByte = new byte[1];
         int bytesRead;
+        int port = 0;
         Socket clientSocket = null;
         ServerSocket server = null;
         //System.out.println("Current IP Address: " + InetAddress.getLocalHost().getHostAddress());
-        int port = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ServerSocket port: ", JOptionPane.YES_NO_OPTION));
+
+        while(true) {
+            try {
+                port = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ServerSocket port: ", JOptionPane.YES_NO_OPTION));
+                break;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         //System.out.println("Server socket established on port number: " + port);
 
         while (true) {
@@ -45,7 +55,6 @@ public class DBFileWriter {
                 return;
             }
 
-
             try {
                 server.close();
             } catch (IOException e) {
@@ -53,14 +62,13 @@ public class DBFileWriter {
             }
 
                 //ConnectToClient(9090);
-                if ((keepOpen = JOptionPane.showConfirmDialog(null, "Continue with server operations?", "Make Selection", JOptionPane.YES_NO_OPTION)) == 1) {
+                /*if ((keepOpen = JOptionPane.showConfirmDialog(null, "Continue with server operations?", "Make Selection", JOptionPane.YES_NO_OPTION)) == 1) {
                     break;
-                }
+                }*/
 
-
-
-            System.exit(0);
         }
+        //System.exit(0);
     }
+
 }
 

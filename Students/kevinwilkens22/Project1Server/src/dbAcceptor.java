@@ -66,7 +66,7 @@ public class dbAcceptor{
                     if (bytesRead >= 0)
                         current += bytesRead;
 
-                    System.out.println("current: " + current);
+                    //System.out.println("current: " + current);
                 } while (bytesRead > -1);
                 System.out.println("Server is Still Running, exited bytesRead != 1 loop.");
 
