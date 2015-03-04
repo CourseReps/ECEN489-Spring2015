@@ -1,21 +1,25 @@
+package com.company;
+
 /**
  * Created by PRANAY KUMAR on 3/1/2015.
  */
+
 import java.io.File;
 import java.net.Socket;
 import java.sql.*;
 
 
-public class MergeWindowFinal implements Runnable {
+public class MergeWindow implements Runnable {
 
-    static boolean transferConfirmation = false;
-    static long lastTimeStamp, lastTSBeforeMerge, receivedFirstTS, receivedFirstID, lastTSwindowed = 0, lastTSAfterMerge;
+    static boolean transferConfirmation;
+    static long lastTimeStamp, lastTSBeforeMerge, receivedFirstTS, receivedFirstID, lastTSwindowed = 0, lastTSAfterMerge, firstTS;
     static String lastMACAfterMerge;
+    static int lastIDAfterMerge;
     Integer receivedID;
 
     private Socket socket;
 
-    MergeWindowFinal (Socket socket){
+    MergeWindow (Socket socket){
         this.socket = socket;
     }
 
@@ -24,7 +28,7 @@ public class MergeWindowFinal implements Runnable {
     public void run(){
 
 
-
+        transferConfirmation = false;
         //Declare database variables
         Connection mainConnect, receivedConnect,regressionConnect;
         Statement mainstmt = null;
@@ -32,7 +36,7 @@ public class MergeWindowFinal implements Runnable {
         Statement regressionstmt = null;
 
 
-        String addDB = dbAcceptor.dbReceived;
+        String addDB = MuleData.dbReceived;
 
         // String s = System.getProperty("user.dir");
 
@@ -65,11 +69,11 @@ public class MergeWindowFinal implements Runnable {
                 mainstmt.executeUpdate(sql);
                 System.out.println("DATA table created in master db");
 
-                }
+            }
             catch(Exception e)
-                {
+            {
                 System.err.println( e.getClass().getName() + ": " + e.getMessage());
-                }
+            }
 
             regressionstmt = regressionConnect.createStatement();
 
@@ -141,7 +145,7 @@ public class MergeWindowFinal implements Runnable {
                         }
                         // required as the resultset rs1 no longer exists after deleting rows in the table it was connected to i.e., DATA
 
-                            rs1 = receivedstmt.executeQuery("SELECT * FROM DATA WHERE TIME =  " + String.valueOf(lastTSBeforeMerge) + ";");
+                        rs1 = receivedstmt.executeQuery("SELECT * FROM DATA WHERE TIME =  " + String.valueOf(lastTSBeforeMerge) + ";");
 
 
                     }
@@ -203,16 +207,21 @@ public class MergeWindowFinal implements Runnable {
             System.out.println("regression table ");
 
             ResultSet rs5 = mainstmt.executeQuery("SELECT * FROM DATA WHERE PBID ="+String.valueOf(receivedID)+";");
-            while (rs5.next()){
+            if(rs5.next()){
+                firstTS= rs5.getLong("TIME");
+                while (rs5.next()){
 
-                lastTSAfterMerge = rs5.getLong("TIME");
-                lastMACAfterMerge = rs5.getString("MAC");
+                    lastTSAfterMerge = rs5.getLong("TIME");
+                    lastMACAfterMerge = rs5.getString("MAC");
+                    lastIDAfterMerge = rs5.getInt("ID");
+                }
 
             }
 
 
 
-            lastTSwindowed=0;
+
+            lastTSwindowed= firstTS;
             try {
 
                 ResultSet regrs = regressionstmt.executeQuery("SELECT * FROM DATA2 WHERE PBID =" + String.valueOf(receivedID) + ";");
@@ -238,23 +247,26 @@ public class MergeWindowFinal implements Runnable {
                 System.out.println(" lastTSAfterMerge = "+ String.valueOf(lastTSAfterMerge));
                 System.out.println("lastTSAfterMerge-lastTSwindowed) is greater than 20");
 
-                while(( tempts < (lastTSAfterMerge-100000000) )){ // < lastTSaftermerge because there can be more entries at lastTSAfterMerge. SO dont include  lastTSAfterMerge in windowing
+                while(( tempts < (lastTSAfterMerge) )){ // < lastTSaftermerge because there can be more entries at lastTSAfterMerge. SO dont include  lastTSAfterMerge in windowing
 
                     //System.out.println("before rs3 and tempts = "+ String.valueOf(tempts));
 
                     //try {
-                        long maxtempts = tempts + 100000000;
-                        long mintempts = tempts + 1;
-                        ResultSet mainrs3 = mainstmt.executeQuery("SELECT DISTINCT MAC FROM DATA WHERE PBID =" + String.valueOf(receivedID) + " AND TIME IN (" + String.valueOf(mintempts) + "," + String.valueOf(maxtempts) + ");");
-                        int count=0;
-                        tempts = maxtempts ;
-                        while(mainrs3.next()){
-                            count= count + 1;
-                        }
-                       // System.out.println("before updte ");
-                        regressionstmt.executeUpdate("INSERT INTO DATA2 VALUES(" + String.valueOf(tempts) + ", " + String.valueOf(count) + ", null, " + String.valueOf(receivedID) + ", 'NO');");
+                    long maxtempts = tempts + 10;
+                    long mintempts = tempts + 1;
+                    String sql145= "SELECT DISTINCT MAC FROM DATA WHERE PBID =" + String.valueOf(receivedID) + " AND TIME IN (" + String.valueOf(mintempts) + "," + String.valueOf(maxtempts) + ");";
+                    //  ResultSet mainrs3 = mainstmt.executeQuery("SELECT DISTINCT MAC FROM DATA WHERE PBID =" + String.valueOf(receivedID) + " AND TIME IN (" + String.valueOf(mintempts) + "," + String.valueOf(maxtempts) + ");");
+                    ResultSet mainrs3 = mainstmt.executeQuery(sql145);
+                    //System.out.println(sql145);
+                    int count=0;
+                    tempts = maxtempts ;
+                    while(mainrs3.next()){
+                        count= count + 1;
+                    }
+                    // System.out.println("before updte ");
+                    regressionstmt.executeUpdate("INSERT INTO DATA2 VALUES(" + String.valueOf(tempts) + ", " + String.valueOf(count) + ", null, " + String.valueOf(receivedID) + ", 'NO');");
 
-                   // }
+                    // }
                     //catch (NullPointerException ne){
                     //    System.out.println("mainrs3 is null");
                     //}
@@ -267,6 +279,7 @@ public class MergeWindowFinal implements Runnable {
             System.out.println("last time stamp "+ String.valueOf(lastTSAfterMerge));
             System.out.println("last mac address "+ lastMACAfterMerge);
             transferConfirmation = true;
+            transferConfirmation = false;
 
             mainstmt.close();
             mainConnect.commit();
@@ -289,3 +302,4 @@ public class MergeWindowFinal implements Runnable {
 
 
 }
+
