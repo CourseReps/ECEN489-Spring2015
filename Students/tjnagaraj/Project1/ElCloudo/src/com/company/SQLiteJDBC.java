@@ -16,7 +16,7 @@ public class SQLiteJDBC
         try {
             Class.forName("org.sqlite.JDBC");
             connection= DriverManager.getConnection("jdbc:sqlite:final.db");
-            System.out.println("Successfully opened database");
+           // System.out.println("Successfully opened database");
         } catch (Exception e) {
             System.err.println(e.getClass().getName()+":"+e.getMessage());
             System.exit(0);
@@ -28,7 +28,7 @@ public class SQLiteJDBC
         try {
 
             statement = connection.createStatement();
-            String sql = "SELECT * FROM " + tableName + " WHERE ADDED='YES'";
+            String sql = "SELECT * FROM " + tableName + " WHERE ADDED='NO'";
             ResultSet rs = statement.executeQuery(sql);
             int count = 0;
             boolean finish=true;
@@ -42,7 +42,7 @@ public class SQLiteJDBC
                 row.setNum_people(rs.getInt("NUM_MACS"));
                 row.setPbid(rs.getInt("PBID"));
                 fusionTablesHelper.insertData(tableId, row);
-                String sql2 = "UPDATE " + tableName + " SET ADDED='NO' WHERE TIME= '" + rs.getString("TIME") + "'";
+                String sql2 = "UPDATE " + tableName + " SET ADDED='YES' WHERE TIME= '" + rs.getString("TIME") + "'";
                 Statement stmt2 = connection.createStatement();
                 stmt2.execute(sql2);
                 stmt2.close();

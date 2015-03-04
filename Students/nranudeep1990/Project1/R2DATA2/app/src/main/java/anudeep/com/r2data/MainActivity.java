@@ -27,6 +27,9 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -59,7 +62,9 @@ public class MainActivity extends ActionBarActivity {
     InputStream inputStream;
     String boxid;
     Spinner spinner;
+    Spinner Filenum;
     Dbcon db;
+    String name;
     // Well known SPP UUID
     private static final UUID MY_UUID =
             UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
@@ -79,6 +84,8 @@ public class MainActivity extends ActionBarActivity {
         notificationView = (TextView)findViewById(R.id.textView);
         loadButton     = (Button)findViewById(R.id.button2);
         spinner = (Spinner) findViewById(R.id.spinner);
+//        Filenum = (Spinner) findViewById(R.id.spinner2);
+
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.Mac_array, android.R.layout.simple_spinner_item);
@@ -103,6 +110,27 @@ public class MainActivity extends ActionBarActivity {
             }
 
         });
+
+//        ArrayAdapter<CharSequence> Files = ArrayAdapter.createFromResource(this,R.array.File_array, android.R.layout.simple_spinner_item);
+//        // Specify the layout to use when the list of choices appears
+//        Files.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        // Apply the adapter to the spinner
+//        Filenum.setAdapter(Files);
+//
+//        Filenum.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            public void onItemSelected(AdapterView<?> arg0, View arg1,
+//                                       int arg2, long arg3) {
+//
+//                name = Filenum.getSelectedItem().toString();
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> arg0) {
+//                name = "PB2";
+//
+//            }
+//        });
 
         db = new Dbcon(getApplicationContext());
 
@@ -167,54 +195,56 @@ public class MainActivity extends ActionBarActivity {
                 int fileNum = 0;
                 File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
                 //for loop to check how many files exist
-                for(int i = 1; i<=4; i++){
-                    if (new File(directory,"PB"+i+".db").exists()){
-                        fileNum++;
+//                for(int i = 1; i<=4; i++){
+//                    if (new File(directory,"PB"+i+".db").exists()){
+//                        fileNum++;
+//                    }
+//                }
+                for(int i=1; i<=4;i++) {
+                    if(new File(directory,"PB"+i+".db").exists()) {
+                        //create the connection for the SVR
+                        conSocket = new Socket(serverIp,portNum);
+                        InputStream is = conSocket.getInputStream();
+                        OutputStream os = conSocket.getOutputStream();
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+                        OutputStream outToClient = null;
+                        //PrintWriter out = new PrintWriter(os, true);
+                        //out.println(fileNum);
+
+                        FileInputStream fis = null;
+                        File myFile = null;
+
+                        ///Loop for DB file senders
+
+//                        if (new File(directory,name+".db" ).exists()) {
+                            myFile = new File(directory, "PB"+i+".db");
+                            byte[] mybytearray = new byte[(int) myFile.length()];
+                            Notification = "File found.";
+                            Log.d("WriteTable", "file exists = " + myFile.exists());
+                            fis = new FileInputStream(myFile);
+                            BufferedInputStream bis = new BufferedInputStream(fis);
+                            Log.d("WriteTable", "Wrote value: " + myFile.length());
+                            bis.read(mybytearray, 0, mybytearray.length);
+                            //out.println(myFile.length());
+///Hand Shake/////////////////////////////////////////////////////////////////////////
+                            outToClient = conSocket.getOutputStream();
+                            outToClient.write(mybytearray, 0, mybytearray.length);
+                            outToClient.flush();
+                            conSocket.shutdownOutput();
+                            String dataId = bufferedReader.readLine();
+                            Log.d("got:", dataId);
+                            db.updateSvrTime( "PB"+i, dataId);
+//                        }
+                        outToClient.close();
+                        conSocket.close();
+//                      myFile.delete();
                     }
                 }
-                //create the connection for the SVR
-                conSocket = new Socket(serverIp,portNum);
-                InputStream is = conSocket.getInputStream();
-                OutputStream os = conSocket.getOutputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
-                OutputStream outToClient = null;
-                PrintWriter out = new PrintWriter(os, true);
-                out.println(fileNum);
-
-                FileInputStream fis = null;
-
-
-                ///Loop for DB file senders
-                for (int dbNum = 1; dbNum <= 4; dbNum++) {
-                    if (new File(directory,"PB"+dbNum+".db").exists()) {
-                        File myFile = new File(directory, "PB"+dbNum+".db");
-                        byte[] mybytearray = new byte[(int) myFile.length()];
-                        Notification = "File found.";
-                        Log.d("WriteTable", "file exists = " + myFile.exists());
-                        fis = new FileInputStream(myFile);
-                        BufferedInputStream bis = new BufferedInputStream(fis);
-                        Log.d("WriteTable", "Wrote value: " + myFile.length());
-                        bis.read(mybytearray, 0, mybytearray.length);
-                        out.println(myFile.length());
-
-                        outToClient = conSocket.getOutputStream();
-                        outToClient.write(mybytearray, 0, mybytearray.length);
-                        outToClient.flush();
-
-//                        os.write(mybytearray, 0 , mybytearray.length);
-//                        String PBId = bufferedReader.readLine();
-                        String dataId = bufferedReader.readLine();
-                        db.updateSvrTime("PB"+dbNum, dataId);
-                        myFile.delete();
-                    }
-                }
-                outToClient.close();
-                conSocket.close();
-
             } catch (Exception e) {
                 e.printStackTrace();
 
             }
+            Notification = "All files Transfered";
             return null;
         }
 
@@ -351,14 +381,13 @@ public class MainActivity extends ActionBarActivity {
                     byte[] b = new byte[2048];
                     int length = 0;
 
-//                    while ((length = is.read(b)) != -1) {
                     while (downloadCounter<fileLength) {
                         length = is.read(b);
                         os.write(b, 0, length);
                         downloadCounter += length;
 
-                        //activity.updateText("Downloading: " + downloadCounter + "/" + filesize);
                     }
+
 
                 } catch (FileNotFoundException fnfe) {
                     Log.e("UH OH", Log.getStackTraceString(fnfe));

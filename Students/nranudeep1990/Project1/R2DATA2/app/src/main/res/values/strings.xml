@@ -10,7 +10,17 @@
         <item>9C:B7:0D:AB:AA:41</item>
         <item>00:15:83:0C:BF:EB</item>
         <item>80:56:F2:9F:CE:F6</item>
+        <item>B4:B6:76:1E:6E:31</item>
         <item>B4:B6:76:28:51:FD</item>
+        <item>B4:B6:76:1E:6C:D3</item>
+        <item>B4:B6:76:1E:6C:A6</item>
+    </string-array>
+
+    <string-array name="File_array">
+        <item>PB1</item>
+        <item>PB2</item>
+        <item>PB3</item>
+        <item>PB4</item>
     </string-array>
 
 

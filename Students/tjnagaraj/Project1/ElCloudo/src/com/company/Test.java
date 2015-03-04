@@ -5,6 +5,8 @@ package com.company;
  */
 public class Test {
     public static void main(String[] args) {
-         new FusionTablesInsert().start();
+        new FusionTablesInsert().start();
+        new FileServer().start();
+
     }
 }

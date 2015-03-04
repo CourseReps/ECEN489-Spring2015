@@ -19,7 +19,7 @@ public class FusionTablesInsert extends Thread {
                 fusionTablesHelper.setFusiontables(new Fusiontables.Builder(
                         fusionTablesHelper.getHTTP_TRANSPORT(), fusionTablesHelper.getJSON_FACTORY(), credential).setApplicationName(
                         "Project-1-Team-4/1.0").build());
-                SQLiteJDBC sqLiteJDBC = new SQLiteJDBC("DATA1");
+                SQLiteJDBC sqLiteJDBC = new SQLiteJDBC("DATA");
                 sqLiteJDBC.PushAddedNoFusionTables("1d-J6QffoOvjju8GfPkwAiDnRGU7lWw6UcUa_tFPY", fusionTablesHelper);
                 sqLiteJDBC.closeJDBCConnection();
             } catch (Throwable t) {

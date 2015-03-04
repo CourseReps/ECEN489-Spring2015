@@ -27,8 +27,8 @@ public class DBHandler {
         try {
 
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("C:\\Users\\Benito\\Desktop\\SQLite\\prombox.db");
-            createNewDB(".//prombox.db",".//"+r2Name+"localprombox.db");
+            c = DriverManager.getConnection("jdbc:sqlite:PB4.db");
+            createNewDB(".//PB4.db",".//"+r2Name+"localprombox.db");
             localC = DriverManager.getConnection("jdbc:sqlite:"+r2Name+"localprombox.db");
 
             checkRoot();
@@ -79,7 +79,7 @@ public class DBHandler {
             stmt = c.createStatement();
             sqlCommand = "CREATE TABLE DATA " +
                     "(ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    " TIMES           LONG    NOT NULL, " +
+                    " TIME           LONG    NOT NULL, " +
                     " MAC            CHAR(50)     NOT NULL)";
             stmt.executeUpdate(sqlCommand);
 
@@ -127,7 +127,7 @@ public class DBHandler {
             stmt = localC.createStatement();
             sqlCommand = "CREATE TABLE DATA " +
                     "(ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    " TIMES           LONG    NOT NULL, " +
+                    " TIME           LONG    NOT NULL, " +
                     " MAC            CHAR(50)     NOT NULL)";
             stmt.executeUpdate(sqlCommand);
 
@@ -146,14 +146,14 @@ public class DBHandler {
 //            sqlCommand = "select * from DATA";
 //        }
 //        else {
-//            sqlCommand = "select * from DATA where TIMES>"+lastSvrTime;
+//            sqlCommand = "select * from DATA where TIME>"+lastSvrTime;
 //        }
 //        stmt = c.createStatement();
 //        ResultSet rs = stmt.executeQuery(sqlCommand);
 //
 //        Statement stmt2 = localC.createStatement();
 //        while(rs.next()){
-//            String localQuery = "insert into DATA(TIMES,MAC) values("+rs.getLong(2)+",'"+rs.getString(3)+"');";
+//            String localQuery = "insert into DATA(TIME,MAC) values("+rs.getLong(2)+",'"+rs.getString(3)+"');";
 //            stmt2.executeUpdate(localQuery);
 //            setLastTxTime(rs.getLong(2));
 //        }
