@@ -29,8 +29,8 @@ public class DBHandler {
         try {
 
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:prombox.db");
-            createNewDB(".//prombox.db",".//"+r2Name+"localprombox.db");
+            c = DriverManager.getConnection("jdbc:sqlite:PB4.db");
+            createNewDB(".//PB4.db",".//"+r2Name+"localprombox.db");
             localC = DriverManager.getConnection("jdbc:sqlite:"+r2Name+"localprombox.db");
 
             checkRoot();
@@ -109,7 +109,7 @@ public class DBHandler {
             stmt.executeUpdate(sqlCommand);
 
             //long PBID = Math.abs(new HighQualityRandom().nextLong());
-            sqlCommand = "INSERT INTO ROOT (ID, PBID) VALUES ( 1, 'PB2' );";
+            sqlCommand = "INSERT INTO ROOT (ID, PBID) VALUES ( 1, 'PB4' );";
             stmt.executeUpdate(sqlCommand);
 
             System.out.println("Created ID table successfully");
@@ -144,25 +144,7 @@ public class DBHandler {
     private void populateLocalDB()throws Exception{
 
 
-//        if(lastPbTime==0 && lastSvrTime==0) {
-//            sqlCommand = "select * from DATA";
-//        }
-//        else {
-//            sqlCommand = "select * from DATA where TIMES>"+lastSvrTime;
-//        }
-//        stmt = c.createStatement();
-//        ResultSet rs = stmt.executeQuery(sqlCommand);
-//
-//        Statement stmt2 = localC.createStatement();
-//        while(rs.next()){
-//            String localQuery = "insert into DATA(TIMES,MAC) values("+rs.getLong(2)+",'"+rs.getString(3)+"');";
-//            stmt2.executeUpdate(localQuery);
-//            setLastTxTime(rs.getLong(2));
-//        }
-//
-//        rs.close();
-//        stmt.close();
-//        stmt2.close();
+
 
         try {
             if(lastSvrId!=0) {

@@ -12,24 +12,24 @@
         android:hint="Enter IP Address here"
         android:inputType="number|numberDecimal"
         android:digits="0123456789."
-        android:layout_below="@+id/textView"
+        android:layout_above="@+id/editText2"
         android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editText2"
-        android:layout_below="@+id/editText"
-        android:layout_centerHorizontal="true"
         android:hint="Enter Port here"
-        android:inputType="number" />
+        android:inputType="number"
+        android:layout_above="@+id/button"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/transfer"
         android:id="@+id/button"
-        android:layout_below="@+id/editText2"
+        android:layout_above="@+id/File"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -44,8 +44,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/File"
-        android:layout_below="@+id/button"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/editText2"
+        android:layout_alignStart="@+id/editText2"
+        android:layout_alignRight="@+id/editText2"
+        android:layout_alignEnd="@+id/editText2" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,9 +64,19 @@
         android:layout_height="wrap_content"
         android:id="@+id/BTaddress"
         android:layout_below="@+id/button2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignLeft="@+id/editText"
+        android:layout_alignStart="@+id/editText"
+        android:layout_alignRight="@+id/editText"
+        android:layout_alignEnd="@+id/editText" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Welcome to R2Data-4: Select the right PB file to send under transfer or select the appropriate BTMac address of the PB."
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/editText" />
 
 
 </RelativeLayout>
