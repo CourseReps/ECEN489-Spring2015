@@ -11,10 +11,10 @@
     </string-array>
 
     <string-array name="File_array">
-        <item>PB1</item>
-        <item>PB2</item>
-        <item>PB3</item>
-        <item>PB4</item>
+        <item>PB1.db</item>
+        <item>PB2.db</item>
+        <item>PB3.db</item>
+        <item>PB4.db</item>
     </string-array>
 
 

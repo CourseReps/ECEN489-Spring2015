@@ -122,7 +122,7 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public void onNothingSelected(AdapterView<?> arg0) {
-            name = "PB1";
+            name = "PB1.db";
 
         }
         });
@@ -209,8 +209,8 @@ public class MainActivity extends ActionBarActivity {
 
                 ///Loop for DB file senders
 
-                    if (new File(directory,name+".db" ).exists()) {
-                        myFile = new File(directory, name+".db");
+                    if (new File(directory,name).exists()) {
+                        myFile = new File(directory, name);
                         byte[] mybytearray = new byte[(int) myFile.length()];
                         Notification = "File found.";
                         Log.d("WriteTable", "file exists = " + myFile.exists());
@@ -223,11 +223,11 @@ public class MainActivity extends ActionBarActivity {
                         outToClient = conSocket.getOutputStream();
                         outToClient.write(mybytearray, 0, mybytearray.length);
                         outToClient.flush();
-                        conSocket.shutdownOutput();
+
                         }
-                String dataId = bufferedReader.readLine();
-                Log.d("got:", dataId);
-                db.updateSvrTime( name, dataId);
+                //String dataId = bufferedReader.readLine();
+                //Log.d("got:", dataId);
+                //db.updateSvrTime( name, dataId);
                 outToClient.close();
                 conSocket.close();
 //              myFile.delete();
@@ -260,9 +260,19 @@ public class MainActivity extends ActionBarActivity {
         protected Void doInBackground(Void... args) {
 
             mAdapter = BluetoothAdapter.getDefaultAdapter();
-
+//            if (mAdapter.isEnabled()) {
+//                notificationView.setText("Bluetooth Enabled");
+//            } else {
+//                //Prompt user to turn on Bluetooth
+//                Intent enableBtIntent = new Intent(mAdapter.ACTION_REQUEST_ENABLE);
+//                startActivityForResult(enableBtIntent, 1);
+//            }
             BluetoothDevice device = mAdapter.getRemoteDevice(address);
 
+            // Two things are needed to make a connection:
+            //   A MAC address, which we got above.
+            //   A Service ID or UUID.  In this case we are using the
+            //     UUID for SPP.
             try {
                 mSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
             } catch (IOException e) {
@@ -298,7 +308,8 @@ public class MainActivity extends ActionBarActivity {
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outStream));
 
                 // Send the server my ID
-                bufferedWriter.write("R2Data-4" + "\n");
+                //long clientID = Math.abs(new HighQualityRandom().nextLong());
+                bufferedWriter.write("R2Data2" + "\n");
                 bufferedWriter.flush();
 
 
@@ -308,6 +319,8 @@ public class MainActivity extends ActionBarActivity {
                     new File(directory,boxid+".db").delete();
 
                 }
+//                boxid = "PB2";
+                //notificationView.setText("PB Name is : "+boxid);
 
                 String latestLine = db.getPbTime(boxid);
                 bufferedWriter.write(latestLine + "\n");
@@ -326,6 +339,8 @@ public class MainActivity extends ActionBarActivity {
                 long fileLength = Long.parseLong(recv);
 
 
+//                readInStream.close();
+//                writeOutStream.close();
 
                 /////////////////////////////////////////////////////////////////////////////////
                 // BEGIN DOWNLOAD CODE //////////////////////////////////////////////////////////
@@ -343,6 +358,7 @@ public class MainActivity extends ActionBarActivity {
 
                     File savePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
                     saveFile = new File(savePath, boxid+".db");
+                    //new File(activity.getExternalFilesDir("data"), filename);
                     Notification = "Received file into Downloads/"+boxid+".db";
                     is = inputStream;
                     os = new FileOutputStream(saveFile); // OS to write to file
@@ -357,6 +373,7 @@ public class MainActivity extends ActionBarActivity {
                         os.write(b, 0, length);
                         downloadCounter += length;
 
+                        //activity.updateText("Downloading: " + downloadCounter + "/" + filesize);
                     }
 
                 } catch (FileNotFoundException fnfe) {

@@ -7,18 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="bluecove-2.1.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="sqlite-jdbc-3.8.7" level="project" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/64-bit-bluecove-2.1.1-SNAPSHOT.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <NATIVE>
-          <root url="jar://$USER_HOME$/Downloads/64-bit-bluecove-2.1.1-SNAPSHOT.jar!/" />
-        </NATIVE>
-        <SOURCES />
-      </library>
-    </orderEntry>
   </component>
 </module>

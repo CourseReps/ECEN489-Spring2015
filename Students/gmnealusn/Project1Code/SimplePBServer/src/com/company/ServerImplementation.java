@@ -33,7 +33,7 @@ public class ServerImplementation implements Runnable {
             // Send the android device my ID
 //                writeOutStream.write(String.valueOf(parent.getDB().getMyID()) + "\n");
 //                long clientID = Math.abs(new HighQualityRandom().nextLong());
-            bufferedWriter.write("PB4" + "\n");
+            bufferedWriter.write("PB2" + "\n");
             bufferedWriter.flush();
 
 //                tmpOut.flush();
