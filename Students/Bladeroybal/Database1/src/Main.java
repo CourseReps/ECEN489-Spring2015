@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.sql.*;
 import java.util.*;
+import java.util.StringTokenizer;
 
 
 public class Main {
@@ -52,6 +53,8 @@ public class Main {
         int totalLines = 0;
         HashSet<String> entrySet = new HashSet<String>();
         String lastTime = "null";
+        StringTokenizer tokenizer;
+        String thisTime;
 
 
 
@@ -82,12 +85,18 @@ public class Main {
 
                     //BEGIN Parsing and Filtering
                     while (line != null) {
+
+                        //Tokenizer
+                        tokenizer = new StringTokenizer(line, ",");
+                        thisTime = tokenizer.nextToken();
                         // rs = stat.executeQuery("SELECT * FROM DATA;");
 
                         String[] values = line.split(",");    //Comma separator
 
                         //Changing the time from a string into an integer
                         long timeint = Integer.parseInt(values[0]);
+
+                        String insert = values[2];
 
 
                         //Printing Values
@@ -106,7 +115,7 @@ public class Main {
                         if (!lastTime.equals(currentTime)) {
                             entrySet = new HashSet<String>();
                             Iterator<String> iterator = entrySet.iterator();
-                            System.out.println("I'm aware my time is different");
+                            //System.out.println("I'm aware my time is different");
 
                         //Dumping into Database
                             while (iterator.hasNext()) {
@@ -119,10 +128,22 @@ public class Main {
 
                         //Store into HashSet if not null
                         if (!values[2].toLowerCase().contains("ff:ff:ff:ff:ff") && !values[2].contains("null")) {
-                            entrySet.add(values[2]);
-                            entrySet.add(values[2].replaceAll("\\s+", ""));
+                            lastTime = currentTime;
+                            while (lastTime.equals(currentTime) || line != null){
+                                values = line.split(",");
+                                entrySet.add(values[2]);
+                                entrySet.add(values[2].replaceAll("\\s+", ""));
+                                //System.out.println("MAC: " + values[2]);
+                                line = br.readLine();
+                                insert = values[2];
+                                currentTime = values[0];
+                            }
+                            //System.out.println("MAC Found");
+                            //entrySet.add(values[2]);
+                            //entrySet.add(values[2].replaceAll("\\s+", ""));
+                            line = br.readLine();
                         }
-                        lastTime=currentTime;
+                        //lastTime=currentTime;
                         line = br.readLine();
                     }
                     f.setWritable(true);
