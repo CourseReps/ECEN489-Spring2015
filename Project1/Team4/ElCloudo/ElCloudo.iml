@@ -7,7 +7,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="com.googlecode.efficient-java-matrix-library:ejml:0.25" level="application" />
+    <orderEntry type="library" exported="" name="com.google.apis:google-api-services-fusiontables:v2-rev1-1.19.1" level="application" />
+    <orderEntry type="library" exported="" name="gson-2.1" level="application" />
+    <orderEntry type="library" name="SQLiteStudio" level="application" />
+    <orderEntry type="library" exported="" name="servlet-api" level="application" />
     <orderEntry type="library" exported="" name="sqlite-jdbc-3.8.7" level="application" />
   </component>
 </module>

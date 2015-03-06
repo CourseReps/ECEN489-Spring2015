@@ -226,9 +226,9 @@ public class FileServer extends Thread {
 
                         while(finalRS.next())
                             macCtr++;
-                       int num_people= (int)(0+0.5*macCtr);
+
                         stmt = dbFinal.createStatement();
-                        sql = "INSERT INTO DATA (TIME, NUM_MACS, NUM_PEOPLE, PBID, ADDED) VALUES ('" + DATE_FORMAT.format(i * 1000) + "', " + macCtr + ", num_people, " + pbid + ", 'NO');";
+                        sql = "INSERT INTO DATA (TIME, NUM_MACS, NUM_PEOPLE, PBID, ADDED) VALUES ('" + DATE_FORMAT.format(i * 1000) + "', " + macCtr + ", 0, " + pbid + ", 'NO');";
                         stmt.executeUpdate(sql);
                     }
 
