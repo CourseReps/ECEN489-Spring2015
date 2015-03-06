@@ -2,7 +2,7 @@ Project 1: Team 2
 =================
 
 [Project 1 Wiki Page](https://github.com/CourseReps/ECEN489-Spring2015/wiki/Project-1-Team-2)  
-[Project 1 Report Page](https://github.com/CourseReps/ECEN489-Spring2015/wiki/Project-1-Team-2-Report)  
+[Project 1 Report](https://github.com/CourseReps/ECEN489-Spring2015/wiki/Project-1-Team-2-Report)  
   
 [Wireless Packet Sniffer](https://github.com/CourseReps/ECEN489-Spring2015/tree/master/Project1/Team2/PromiscuousBox)
 
