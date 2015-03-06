@@ -9,9 +9,9 @@ public class Merger {
 
     public static void main(String[] args) {
         String sql;
-        boolean creatingDB;
-        String newDB = "test2.db";
-        String finalDB = "final.db";
+        boolean creatingDB, creatingFinalDB;
+        String newDB = "temp.db";
+        String finalDB = "finalPrombox222.db";
 
         SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
@@ -28,7 +28,7 @@ public class Merger {
         try {
             //Connect to the database
             Class.forName("org.sqlite.JDBC");
-            dbIN = DriverManager.getConnection("jdbc:sqlite:testing.db");
+            dbIN = DriverManager.getConnection("jdbc:sqlite:prombox2.db");
             dbIN.setAutoCommit(false);
 
             //Class.forName("org.sqlite.JDBC");
@@ -42,12 +42,12 @@ public class Merger {
             System.out.println("Opened databases successfully");
 
             //If the db file was created then create the table CLICKS
-            if (creatingDB) {
+            //if (creatingDB) {
                 stmt = dbOUT.createStatement();
                 //sql = "CREATE TABLE DATA (ID INTEGER PRIMARY KEY, TIMES LONG, MAC TEXT, PBID LONG)";
-                sql = "CREATE TABLE DATA (PBID INTEGER, TIME LONG, MAC TEXT)";
+                sql = "CREATE TABLE IF NOT EXISTS DATA (PBID INTEGER, TIME LONG, MAC TEXT)";
                 stmt.executeUpdate(sql);
-            }
+            //}
 
             //Get Points from the client and load them into the database
 //            for (int i = 0; i < 10; i++) {
@@ -60,9 +60,11 @@ public class Merger {
 
             //Get the PBID which indicates which PB the data came from
             stmt = dbIN.createStatement();
-            ResultSet rootRS = stmt.executeQuery( "SELECT * FROM PBID;" );
+            //ResultSet rootRS = stmt.executeQuery( "SELECT * FROM PBID;" );
+            ResultSet rootRS = stmt.executeQuery( "SELECT * FROM ROOT;" );
 
-            long pbid = rootRS.getLong("ID");
+            //long pbid = rootRS.getLong("ID");
+            long pbid = rootRS.getLong("PBID");
 
             //Delete any duplicate data
             stmt = dbIN.createStatement();
@@ -94,13 +96,13 @@ public class Merger {
 
             //Check if the db file must be created
             File dbFinalfile = new File(s + "\\" + finalDB);
-            creatingDB = !dbFinalfile.exists();
+            creatingFinalDB = !dbFinalfile.exists();
 
             //If the db file was created then create the table CLICKS
-            //if (creatingDB) {
+            //if (creatingFinalDB) {
                 stmt = dbFinal.createStatement();
                 //sql = "CREATE TABLE DATA (ID INTEGER PRIMARY KEY, TIMES LONG, MAC TEXT, PBID LONG)";
-                sql = "CREATE TABLE DATA (TIME TEXT, NUM_MACS INTEGER, NUM_PEOPLE INTEGER, PBID INTEGER, ADDED TEXT)";
+                sql = "CREATE TABLE IF NOT EXISTS DATA (TIME TEXT, NUM_MACS INTEGER, NUM_PEOPLE INTEGER, PBID INTEGER, ADDED TEXT)";
                 stmt.executeUpdate(sql);
            // }
 
@@ -115,29 +117,40 @@ public class Merger {
 
             ResultSet finalRS;
             long end;
-            int macCtr;
+            int macCtr = 0;
+            long window = 10;
 
-            for(long i = startTime; i <= endTime; i += 10)
+            for(long i = startTime; i <= endTime; i += window)
             {
-                end = i + 10;
-                stmt = dbOUT.createStatement();
-                finalRS = stmt.executeQuery("SELECT * FROM DATA WHERE (TIME >= " + i + " AND TIME < " + end + ") GROUP BY MAC;");
+                end = i + window;
+
+                //stmt = dbOUT.createStatement();
+                //sql = "DELETE FROM DATA WHERE ROWID NOT IN (SELECT MIN(ROWID) FROM DATA WHERE (TIME >= " + i + " AND TIME < " + end + ") GROUP BY MAC);";
                 //stmt.executeUpdate(sql);
 
-                if(!finalRS.isBeforeFirst())
+
+                stmt = dbOUT.createStatement();
+                //finalRS = stmt.executeQuery("SELECT * FROM DATA WHERE (TIME >= " + i + " AND TIME < " + end + ") GROUP BY MAC;");
+                //finalRS = stmt.executeQuery("SELECT DISTINCT MAC FROM DATA WHERE (TIME >= " + i + " AND TIME < " + end + ");");
+                finalRS = stmt.executeQuery("SELECT DISTINCT MAC FROM DATA WHERE TIME IN (" + String.valueOf(i) + ", " + String.valueOf(end) + ");");
+                //stmt.executeUpdate(sql);
+
+                /*if(!finalRS.isBeforeFirst())
                     macCtr = 1;
                 else
-                    macCtr = 0;
+                    macCtr = 0;*/
+
+                macCtr = 0;
 
                 while(finalRS.next())
                     macCtr++;
 
                 stmt = dbFinal.createStatement();
-                sql = "INSERT INTO DATA (TIME, NUM_MACS, NUM_PEOPLE, PBID, ADDED) VALUES ('" + DATE_FORMAT.format(i * 1000) + "', " + macCtr + ", 0, " + pbid + ", 'NO');";
+                sql = "INSERT INTO DATA (TIME, NUM_MACS, NUM_PEOPLE, PBID, ADDED) VALUES ('" + DATE_FORMAT.format(end * 1000) + "', " + macCtr + ", 0, " + pbid + ", 'NO');";
                 stmt.executeUpdate(sql);
             }
 
-            //dbfile.delete();
+
 
             stmt.close();
             dbIN.commit();
@@ -147,6 +160,7 @@ public class Merger {
             dbFinal.commit();
             dbFinal.close();
             System.out.println("Databases closed");
+            dbfile.delete();
         }
         catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );

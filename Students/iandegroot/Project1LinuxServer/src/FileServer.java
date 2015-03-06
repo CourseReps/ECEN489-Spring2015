@@ -201,18 +201,16 @@ public class FileServer {
                     ResultSet finalRS;
                     long end;
                     int macCtr;
+                    int window = 10;
 
-                    for(long i = startTime; i <= endTime; i += 10)
+                    for(long i = startTime; i <= endTime; i += window)
                     {
-                        end = i + 10;
+                        end = i + window;
                         stmt = dbOUT.createStatement();
-                        finalRS = stmt.executeQuery("SELECT * FROM DATA WHERE (TIME >= " + i + " AND TIME < " + end + ") GROUP BY MAC;");
+                        finalRS = stmt.executeQuery("SELECT DISTINCT MAC FROM DATA WHERE TIME IN (" + String.valueOf(i) + ", " + String.valueOf(end) + ");");
                         //stmt.executeUpdate(sql);
 
-                        if(!finalRS.isBeforeFirst())
-                            macCtr = 1;
-                        else
-                            macCtr = 0;
+                        macCtr = 0;
 
                         while(finalRS.next())
                             macCtr++;
