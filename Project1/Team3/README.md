@@ -8,3 +8,6 @@
 
 ####Check out our Wiki!
 [Team 3 Wiki](https://github.com/CourseReps/ECEN489-Spring2015/wiki/Project-1-Team-3)
+
+
+[Team 3 Report](https://github.com/CourseReps/ECEN489-Spring2015/wiki/Project-1-Team-3-Report)

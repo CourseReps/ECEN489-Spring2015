@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="servlet-api">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/SERVLET API TOMCAT/servlet-api.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/Google API/google-api-services-fusiontables-v2-rev1-1.19.1.jar!/" />
+      <root url="file://$USER_HOME$/Downloads/Google API/libs" />
+      <root url="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.8.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/Downloads/Google API/libs" />
+      <root url="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.8.7.jar!/" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/Downloads/Google API/libs" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Downloads/Google API/libs" recursive="false" type="SOURCES" />
+  </library>
+</component>
