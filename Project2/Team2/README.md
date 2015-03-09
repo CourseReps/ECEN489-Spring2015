@@ -8,7 +8,7 @@ Project 2: Team 2
 * Blade Octaviano Roybal, Bladeroybal
 * Kevin Christopher Wilkens, kevinwilkens22
 
- ###Responsibilities
+###Responsibilities
 * RF - Blade
 * Microcontroller - Evelyn
 * Server - Josh
