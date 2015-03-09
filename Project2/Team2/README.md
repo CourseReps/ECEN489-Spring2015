@@ -7,3 +7,9 @@ Project 2: Team 2
 * Joshua Anthony Cano, jacano23
 * Blade Octaviano Roybal, Bladeroybal
 * Kevin Christopher Wilkens, kevinwilkens22
+
+* Responsibilities
+* RF - Blade
+* Microcontroller - Evelyn
+* Server - Josh
+* OpenCV - Kevin
