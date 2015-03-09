@@ -15,18 +15,18 @@ Project 1 Roles
 
 -Facial Recognition
 
-  -Capture face with 2 cameras
+      -Capture face with 2 cameras
   
-  -use the photos with open CV to isolate the face (2 people using Android and 2 using native)
+      -use the photos with open CV to isolate the face (2 people using Android and 2 using native)
   
 -Microcontroller (2 people for ping sensor and 2 people for gain)
 
-  -control antenna gain, changing the voltage will change the gain (2 people)
+   -control antenna gain, changing the voltage will change the gain (2 people)
   
       -distance that the signal can go
       
       -direction of the signal
       
-    -communicate with the NUC via usb serial
+      -communicate with the NUC via usb serial
     
-  -"ping" sensor (2 people)
+      -"ping" sensor (2 people)
