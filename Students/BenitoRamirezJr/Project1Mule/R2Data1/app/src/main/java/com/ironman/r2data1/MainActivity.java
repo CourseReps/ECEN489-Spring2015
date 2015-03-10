@@ -295,7 +295,7 @@ public class MainActivity extends ActionBarActivity {
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outStream));
 
                 // Send the server my ID
-                bufferedWriter.write("R2Data-4" + "\n");
+                bufferedWriter.write("R2Data1" + "\n");
                 bufferedWriter.flush();
 
 
