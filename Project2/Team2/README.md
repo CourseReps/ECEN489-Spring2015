@@ -6,9 +6,9 @@ Project 2: Team 2
 * Evelyn Susanah Cifuentes, cifuentesevelyn
 * Joshua Anthony Cano, jacano23
 * Blade Octaviano Roybal, Bladeroybal
-* * Kevin Christopher Wilkens, kevinwilkens22
+* Kevin Christopher Wilkens, kevinwilkens22
 
- **Responsibilities**
+###Responsibilities
 * RF - Blade
 * Microcontroller - Evelyn
 * Server - Josh
