@@ -14,12 +14,12 @@ Project 1 Roles
 -RF
 
 -Sensing Box/Server
-      -Box: Collect and store MAC addresses;
-      -Box: Once per second, send MAC addresses to server (using Hashsets);
-      -Server: Compare MAC addresses, compare to see if one exists on all four sensors;
-      -Server: Tell microcontroller to change antenna gain;
-      -Server: Receive ping sensor;
-      -Server: Tell OpenCV to turn on video and take pictures, receive # of people in image;
+      -Box: Collect and store MAC addresses;  
+      -Box: Once per second, send MAC addresses to server (using Hashsets);  
+      -Server: Compare MAC addresses, compare to see if one exists on all four sensors;  
+      -Server: Tell microcontroller to change antenna gain;  
+      -Server: Receive ping sensor;  
+      -Server: Tell OpenCV to turn on video and take pictures, receive # of people in image;  
 
 -Facial Recognition
 
