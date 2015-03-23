@@ -30,7 +30,7 @@ Project 1 Roles
 
 Facial Recognition Receive JSON  
   
-{
+{  
 	“command”:	 “takePicture”  
 	“timestamp”:  123456789  
 }  
