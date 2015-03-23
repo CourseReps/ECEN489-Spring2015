@@ -29,24 +29,24 @@ Project 1 Roles
       Server Port: 2222
 
 Facial Recognition Receive JSON  
-
+  
 {
-	“command”:	 “takePicture”
-	“timestamp”:  123456789
-}
-
-Facial Recognition Send JSON  
-
-{
-	“command”:	 “connect”
-	“deviceName”:  “deviceName”
-}
-
-{
-	“command”:	 “filename”
-	“filename”:  “deviceName_123456789”
-}
-
+	“command”:	 “takePicture”  
+	“timestamp”:  123456789  
+}  
+  
+Facial Recognition Send JSON    
+  
+{  
+	“command”:	 “connect”  
+	“deviceName”:  “deviceName”  
+}  
+  
+{    
+	“command”:	 “filename”  
+	“filename”:  “deviceName_123456789”  
+}  
+  
   
 -Microcontroller (2 people for ping sensor and 2 people for gain)
 
