@@ -25,3 +25,4 @@ As part of every tutorial, the presenter must create or enhance a [wiki](https:/
 * [Google Fusion Tables](https://github.com/CourseReps/ECEN489-Spring2015/wiki/fusiontables) by Trevor Dennis ~~on 2/16/2015~~
 * [Android Services](https://github.com/CourseReps/ECEN489-Spring2015/wiki/services) by George Sullivan (2) ~~on 2/23/2015~~
 * [SQLite on Android](https://github.com/CourseReps/ECEN489-Spring2015/wiki/sqliteandroid) by Yajie Zeng on TBD
+* [Power Divider](https://github.com/CourseReps/ECEN489-Spring2015/wiki/Power-Divider) by Blade Roybal, Rong Liu, Benito Ramirez
