@@ -3,6 +3,7 @@ package com.nagaraj.facedetection;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.WindowManager;
 
@@ -18,8 +19,12 @@ import org.opencv.core.MatOfRect;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
+import org.opencv.highgui.Highgui;
+import org.opencv.imgproc.CLAHE;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.imgproc.Subdiv2D;
 import org.opencv.objdetect.CascadeClassifier;
+import org.opencv.photo.Photo;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -54,9 +59,9 @@ public class DetectActivity extends Activity
 
         try {
             // Defining the path to XML file where the features are stored
-            InputStream is = getResources().openRawResource(R.raw.lbpcascade_frontalface);
+            InputStream is = getResources().openRawResource(R.raw.haarcascade_frontalface_default);
             File cascadeDir = getDir("cascade", Context.MODE_PRIVATE);
-            File mCascadeFile = new File(cascadeDir, "lbpcascade_frontalface.xml");
+            File mCascadeFile = new File(cascadeDir, "haarcascade_frontalface_alt.xml");
             FileOutputStream os = new FileOutputStream(mCascadeFile);
             byte[] buffer = new byte[4096];
             int bytesRead;
@@ -81,16 +86,18 @@ public class DetectActivity extends Activity
         // Prevent the screen from locking when the application is running
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         openCvCameraView = new JavaCameraView(this, -1);
+        openCvCameraView.setCameraIndex(1);
         setContentView(openCvCameraView);
         openCvCameraView.setCvCameraViewListener(this);
     }
 
     @Override
     public void onCameraViewStarted(int width, int height) {
+
         grayImage = new Mat(height, width, CvType.CV_8UC4);
 
         // Normalizing the face size to 20% of the screen height
-        absoluteFaceSize = (int) (height * 0.2);
+        absoluteFaceSize = (int) (height*0.2);
     }
 
     @Override
@@ -111,8 +118,13 @@ public class DetectActivity extends Activity
 
         // Draw a rectangle around the faces, if found any
         Rect[] facesArray = faces.toArray();
-        for (int i = 0; i <facesArray.length; i++)
+        Rect rectCrop;
+        for (int i = 0; i <facesArray.length; i++) {
             Core.rectangle(aInputFrame, facesArray[i].tl(), facesArray[i].br(), new Scalar(0, 255, 0, 255), 3);
+            rectCrop = new Rect(facesArray[i].x, facesArray[i].y, facesArray[i].width, facesArray[i].height);
+            Mat image_roi = new Mat(aInputFrame,rectCrop);
+            Highgui.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/cropimage_"+i+".png", image_roi);
+        }
         return aInputFrame;
     }
 
@@ -121,4 +133,5 @@ public class DetectActivity extends Activity
         super.onResume();
         OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_6, this, mLoaderCallback);
     }
+
 }
