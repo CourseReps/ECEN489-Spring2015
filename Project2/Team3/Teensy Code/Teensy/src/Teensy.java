@@ -10,8 +10,9 @@ import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 import java.io.*;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
-import org.json.JSONObject;
+import org.json.*;
 
 public class Teensy implements SerialPortEventListener {
     SerialPort serialPort = null;
@@ -24,10 +25,10 @@ public class Teensy implements SerialPortEventListener {
             "COM5", // Windows
     };
 
-   String serverAddress;
-   Socket socketNew;      //creates new socket
-   ObjectOutput output;  //constructs output stream for the system info
-
+   String serverIP;
+   Socket socket;      //creates new socket
+   //ObjectOutput output;  //constructs output stream for the system info
+   OutputStreamWriter output ;
 
     private String appName;
     private BufferedReader input;
@@ -109,7 +110,6 @@ public class Teensy implements SerialPortEventListener {
         JSONObject pingFlag = new JSONObject();
         JSONObject boomFlag = new JSONObject();
 
-
         try {
             switch (oEvent.getEventType() ) {
                 case SerialPortEvent.DATA_AVAILABLE:
@@ -126,28 +126,36 @@ public class Teensy implements SerialPortEventListener {
                     presPadOn = Double.parseDouble(part2); //turn the second part into a double for presPadOn
                     //System.out.println(distance);
                     //System.out.println(presPadOn);
+
                     if (distance <= 96 && presPadOn > 1000){ //this loop will check for presPadOn high and if the person is range of the ping sensor.
                         System.out.println(ping1);
                         System.out.println(ping2);
                         pingFlag.put("command", ping1);
                         boomFlag.put("command", ping2);
-                        /*System.out.println(pingFlag);
-                        System.out.println(boomFlag);*/
-                        output.writeObject(pingFlag);
-                        output.writeObject(boomFlag);
+
+                        try (OutputStreamWriter out = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8))
+                            {
+                                out.write(pingFlag.toString());
+                                out.write(boomFlag.toString());
+                            }
                     }
                     else if (distance <= 96){
                         System.out.println(ping1);
                         pingFlag.put("command", ping1);
-                        /*System.out.println(pingFlag);*/
-                        output.writeObject(pingFlag);
 
+                        try (OutputStreamWriter out = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8))
+                        {
+                            out.write(pingFlag.toString());
+                        }
                     }
                     else if (presPadOn > 1000){
                         System.out.println(ping2);
                         boomFlag.put("command", ping2);
-                        /*System.out.println(boomFlag);*/
-                        output.writeObject(boomFlag);
+
+                        try (OutputStreamWriter out = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8))
+                        {
+                            out.write(boomFlag.toString());
+                        }
                     }
                     else {}
 
@@ -165,8 +173,8 @@ public class Teensy implements SerialPortEventListener {
     public Teensy() {
         appName = getClass().getName();
         try {
-            socketNew = new Socket(serverAddress, 9000);      //creates new socket
-            output = new ObjectOutputStream(socketNew.getOutputStream());  //constructs output stream for the system info
+            socket = new Socket(serverIP, 9000);      //creates new socket
+            //output = new ObjectOutputStream(socket.getOutputStream());  //constructs output stream for the system info
         }
         catch (Exception e) {
             System.err.println(e.toString());
