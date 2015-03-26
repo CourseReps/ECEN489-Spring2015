@@ -19,7 +19,7 @@
         android:layout_marginTop="100dp"
         android:hint="@string/edit_port_message"/>
 
-    <Button
+    <!--<Button
         android:id="@+id/Transmit"
         android:onClick="startFaceDetect"
         android:layout_width="wrap_content"
@@ -28,8 +28,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="130dp"
-        android:text="Send to Server" />
-
+        android:text="Send to Server" />!-->
     <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
