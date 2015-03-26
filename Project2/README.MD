@@ -25,6 +25,28 @@ Project 1 Roles
 
       -Capture face with 2 cameras;
       -use the photos with open CV to isolate the face (2 people using Android and 2 using native)
+      
+      Server Port: 2222
+
+Facial Recognition Receive JSON  
+  
+{  
+	“command”:	 “takePicture”  
+	“timestamp”:  123456789  
+}  
+  
+Facial Recognition Send JSON    
+  
+{  
+	“command”:	 “connect”  
+	“deviceName”:  “deviceName”  
+}  
+  
+{    
+	“command”:	 “filename”  
+	“filename”:  “deviceName_123456789”  
+}  
+  
   
 -Microcontroller (2 people for ping sensor and 2 people for gain)
 

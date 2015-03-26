@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="rxtx-2.2pre2">
+    <CLASSES>
+      <root url="file://$USER_HOME$/Documents/Teensy/rxtx-2.2pre2.jar" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$USER_HOME$/Documents/Teensy/rxtx-2.2pre2.jar" recursive="false" />
+  </library>
+</component>
