@@ -28,9 +28,7 @@ public class MainActivity extends ActionBarActivity {
     static String devID = null;
     private boolean connected = false;
 
-//TODO add status update for server connection
-
-            public void startFaceDetect(View view) {
+       /*     public void startFaceDetect(View view) {
 
             ipField = (EditText) findViewById(R.id.editText);
             portField = (EditText) findViewById(R.id.editText1);
@@ -40,7 +38,11 @@ public class MainActivity extends ActionBarActivity {
                 portNum = Integer.parseInt(portField.getText().toString());
                 portField.setText("");
 
-                new connectToServer().execute();
+               new connectToServer().execute();
+
+               *//* connectToServer connect = new connectToServer(serverIp, portNum);
+                Thread connectionThread = new Thread(connect);
+                connectionThread.start();*//*
 
 //                try {
 //                    socket = new Socket(serverIp, portNum);  //connect to server
@@ -78,13 +80,43 @@ public class MainActivity extends ActionBarActivity {
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                }
-        }
+
+                while (true) {
+                    if ((connectToServer.text).equals("take picture")) {
+                        Intent intent = new Intent(this, FaceDetect.class);
+                        startActivity(intent);
+                        System.out.println(text + "\n" + devID);
+                        break;
+                    }
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+        }*/
 
     @Override
         protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        new connectToServer().execute();
 
+        while (true) {
+
+            try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+            if ((connectToServer.text).equals("take picture")) {
+                Intent intent = new Intent(this, FaceDetect.class);
+                startActivity(intent);
+                System.out.println(text + "\n" + devID);
+                break;
+            }
+
+        }
     }
 
     @Override
