@@ -16,6 +16,7 @@ import android.view.WindowManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
@@ -35,6 +36,7 @@ import org.opencv.imgproc.Subdiv2D;
 import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.photo.Photo;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -43,6 +45,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 
 public class DetectActivity extends Activity
@@ -51,7 +54,9 @@ public class DetectActivity extends Activity
     private CameraBridgeViewBase openCvCameraView;
     private CascadeClassifier cascadeClassifier;
     private Mat grayImage;
+    private Mat currentGrayImage;
     private int absoluteFaceSize;
+    private int currentabsoluteFaceSize;
     public static boolean flag = false;
     public String picFileName;
     public JSONObject connect;
@@ -119,7 +124,7 @@ public class DetectActivity extends Activity
         grayImage = new Mat(height, width, CvType.CV_8UC4);
 
         // Normalizing the face size to 20% of the screen height
-        absoluteFaceSize = (int) (height*0.2);
+        absoluteFaceSize = (int) (height * 0.2);
     }
 
     @Override
@@ -142,35 +147,35 @@ public class DetectActivity extends Activity
         // Draw a rectangle around the faces, if found any
         Rect[] facesArray = faces.toArray();
         Rect rectCrop;
-        for (int i = 0; i <facesArray.length; i++) {
+        for (int i = 0; i < facesArray.length; i++) {
             Core.rectangle(aInputFrame, facesArray[i].tl(), facesArray[i].br(), new Scalar(0, 255, 0, 255), 3);
             rectCrop = new Rect(facesArray[i].x, facesArray[i].y, facesArray[i].width, facesArray[i].height);
-            Mat image_roi = new Mat(aInputFrame,rectCrop);
-            if(flag==true) {
-              //  fileName=new JSONObject();
+            Mat image_roi = new Mat(aInputFrame, rectCrop);
+           if (flag == true) {
+                fileName = new JSONObject();
                 if (facesArray.length == 1) {
-                    picFileName= "/Android_" + timeStamp + ".jpeg";
-               //     Highgui.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)  + picFileName, image_roi);
+                    picFileName = "/Android_" + timeStamp + ".jpeg";
+                    Highgui.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + picFileName, image_roi);
                     // Send the JSON command with the Devicename_Timestamp
-                /*    try {
+                    try {
                         fileName.put("command", "filename");
                         fileName.put("filename", picFileName);
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    }*/
-                    flag = false;
-                }
-                else{
-                   /* try {
+                    }
+
+                } else {
+                    try {
                         fileName.put("command", "filename");
                         fileName.put("filename", "NULL");
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    }*/
+                    }
                     //Send the JSON command to the server with Device name NULL
-             //      new SendToServer().execute();
+
                 }
-            }
+               flag = false;
+             }
         }
 
         return aInputFrame;
@@ -183,109 +188,98 @@ public class DetectActivity extends Activity
     }
 
 
-    public class SendToServer extends AsyncTask<Void,Void,Void> {
-        public Void doInBackground(Void... params) {
-            try {
-              //  outputStreamWriter =new OutputStreamWriter(socket.getOutputStream());
-                outputStreamWriter.write(fileName.toString());
-                outputStreamWriter.flush();
-               // outputStreamWriter.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
-
-    public class ConnectToServer extends AsyncTask<Void,Void,Void> {
-        private String serverIP="10.202.60.189";
-        private  int port=9000;
+    public class ConnectToServer extends AsyncTask<Void, Void, Void> {
+        private String serverIP = "10.202.101.132";
+        private int port = 9000;
         String text = null;
 
 
-    /*connectToServer (String ip, int port) {
-        this.serverIp = ip;
-        this.port = port;   //this.messsage = message;
-    }*/
+
 
         public Void doInBackground(Void... params) {
-            //Socket socket;
-//        try {
-//
-//
-////            connected = socket.isConnected();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
 
             try {
                 socket = new Socket(serverIP, port);  //connect to server
-                InputStreamReader readCommand = new InputStreamReader(socket.getInputStream());
+                BufferedReader bufferedReader= new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 outputStreamWriter = new OutputStreamWriter(socket.getOutputStream());
-                connect= new JSONObject();
-                connect.put("command","connect");
-                connect.put("deviceName","Android");
-                outputStreamWriter.write(connect.toString());
+                connect = new JSONObject();
+                connect.put("command", "connect");
+                connect.put("deviceName", "Android");
+                outputStreamWriter.write(connect.toString() + "\n");
                 outputStreamWriter.flush();
                 //   outputStreamWriter.close();
-                JsonReader reader = new JsonReader(readCommand);
 
 
-                while(true) {
+                while (true) {
+                    String jsonString = bufferedReader.readLine();
+                    JSONObject jsonObject = (JSONObject) new JSONTokener(jsonString).nextValue();
 
-                    reader.beginObject();
 
-                    while (reader.hasNext()) {
-                        String name = reader.nextName();
-                        if (name.equals("command")) {
-                            text = reader.nextString();
-                            //                    System.out.println(text);
-                        } else if (name.equals("timestamp")) {
-                            timeStamp = reader.nextString();
-                            //                      System.out.println(devID);
-                        } else {
-                            reader.skipValue();
-                        }
-                        //   System.out.println(name);
-                    }
-                    reader.endObject();
+                    timeStamp = jsonObject.getString("timestamp");
+                    String commandName = jsonObject.getString("command");
+                    if (commandName.equals("takePicture")) {
 
-                    if (text.equals("takePicture")) {
                         flag = true;
-                        imageProcessing();
+                        while (true) {
+                            if (flag == false) {
+                                try {
+                                    outputStreamWriter.write(fileName.toString() + "\n");
+                                    outputStreamWriter.flush();
+                                    // outputStreamWriter.close();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                break;
+                            }
+
+                        }
+                        //imageProcessing();
+
+
+                       /* try {
+                            //  outputStreamWriter =new OutputStreamWriter(socket.getOutputStream());
+                            outputStreamWriter.write(fileName.toString());
+                            outputStreamWriter.flush();
+                            // outputStreamWriter.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }*/
 //                    System.out.println(text + "\n" + devID);
                     }
 
-
                 }
-
+                } catch (IOException e1) {
+                e1.printStackTrace();
+            } catch (JSONException e1) {
+                e1.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
         }
-        public void imageProcessing(){
-            Imgproc.cvtColor(currentFrame, grayImage, Imgproc.COLOR_RGBA2RGB);
+
+        public void imageProcessing() {
+            Imgproc.cvtColor(currentFrame, currentGrayImage, Imgproc.COLOR_RGBA2RGB);
             // Initializing the faces array where the faces will be  stored
             MatOfRect faces = new MatOfRect();
             // Use the classifier to detect faces
             if (cascadeClassifier != null) {
-                cascadeClassifier.detectMultiScale(grayImage, faces, 1.1, 2, 2,
-                        new Size(absoluteFaceSize, absoluteFaceSize), new Size());
+                cascadeClassifier.detectMultiScale(currentGrayImage, faces, 1.1, 2, 2,
+                        new Size(currentabsoluteFaceSize, currentabsoluteFaceSize), new Size());
             }
 
             // Draw a rectangle around the faces, if found any
             Rect[] facesArray = faces.toArray();
             Rect rectCrop;
-            for (int i = 0; i <facesArray.length; i++) {
+            for (int i = 0; i < facesArray.length; i++) {
                 Core.rectangle(currentFrame, facesArray[i].tl(), facesArray[i].br(), new Scalar(0, 255, 0, 255), 3);
                 rectCrop = new Rect(facesArray[i].x, facesArray[i].y, facesArray[i].width, facesArray[i].height);
-                Mat image_roi = new Mat(currentFrame,rectCrop);
-                if(flag==true) {
-                    fileName=new JSONObject();
+                Mat image_roi = new Mat(currentFrame, rectCrop);
+                if (flag == true) {
+                    fileName = new JSONObject();
                     if (facesArray.length == 1) {
-                        picFileName= "/Android_" + timeStamp + ".jpeg";
-                        Highgui.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)  + picFileName, image_roi);
+                        picFileName = "/Android_" + timeStamp + ".jpeg";
+                        Highgui.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + picFileName, image_roi);
                         // Send the JSON command with the Devicename_Timestamp
                         try {
                             fileName.put("command", "filename");
@@ -294,8 +288,7 @@ public class DetectActivity extends Activity
                             e.printStackTrace();
                         }
                         flag = false;
-                    }
-                    else{
+                    } else {
                         try {
                             fileName.put("command", "filename");
                             fileName.put("filename", "NULL");
@@ -303,17 +296,11 @@ public class DetectActivity extends Activity
                             e.printStackTrace();
                         }
                         //Send the JSON command to the server with Device name NULL
-                        try {
-                            //  outputStreamWriter =new OutputStreamWriter(socket.getOutputStream());
-                            outputStreamWriter.write(fileName.toString());
-                            outputStreamWriter.flush();
-                            // outputStreamWriter.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
 
-                                            }
+
+                    }
                 }
+            }
         }
     }
 }
