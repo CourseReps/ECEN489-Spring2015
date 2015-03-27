@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="java-json">
+    <CLASSES>
+      <root url="file://$USER_HOME$/Downloads/java-json.jar" />
+      <root url="jar://$USER_HOME$/Downloads/ch-rxtx-2.2-20081207-win-x64/ch-rxtx-2.2-20081207-win-x64/RXTXcomm.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <NATIVE>
+      <root url="file://$USER_HOME$/Downloads/ch-rxtx-2.2-20081207-win-x64/ch-rxtx-2.2-20081207-win-x64" />
+      <root url="file://$USER_HOME$/Downloads/ch-rxtx-2.2-20081207-win-x64/ch-rxtx-2.2-20081207-win-x64" />
+    </NATIVE>
+    <SOURCES>
+      <root url="file://$USER_HOME$/Downloads/java-json.jar" />
+      <root url="file://C:/Program Files/Java/jdk1.8.0_31" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/Downloads/java-json.jar" recursive="false" />
+    <jarDirectory url="file://C:/Program Files/Java/jdk1.8.0_31" recursive="false" type="SOURCES" />
+    <jarDirectory url="file://$USER_HOME$/Downloads/java-json.jar" recursive="false" type="SOURCES" />
+  </library>
+</component>
