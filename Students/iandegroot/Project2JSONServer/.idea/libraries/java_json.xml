@@ -1,7 +1,6 @@
 <component name="libraryTable">
-  <library name="RXTXcomm">
+  <library name="java-json">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Documents/Teensy/RXTXcomm.jar!/" />
       <root url="jar://$USER_HOME$/Documents/Teensy/java-json.jar/java-json.jar!/" />
     </CLASSES>
     <JAVADOC />
