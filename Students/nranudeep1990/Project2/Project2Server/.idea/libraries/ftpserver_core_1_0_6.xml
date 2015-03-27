@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ftpserver-core-1.0.6">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/ftpserver-core-1.0.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
