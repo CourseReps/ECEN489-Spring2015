@@ -1,10 +1,17 @@
 package com.nagaraj.facedetection;
 
 import android.app.Activity;
+import android.app.IntentService;
 import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.ActionBarActivity;
+import android.util.JsonReader;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.WindowManager;
 
 import org.opencv.android.BaseLoaderCallback;
@@ -29,6 +36,8 @@ import org.opencv.photo.Photo;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.Socket;
 
 
 public class DetectActivity extends Activity
@@ -38,7 +47,7 @@ public class DetectActivity extends Activity
     private CascadeClassifier cascadeClassifier;
     private Mat grayImage;
     private int absoluteFaceSize;
-
+    public static boolean flag = false;
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -82,6 +91,7 @@ public class DetectActivity extends Activity
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+       new ConnectToServer().execute();
         super.onCreate(savedInstanceState);
         // Prevent the screen from locking when the application is running
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -123,8 +133,18 @@ public class DetectActivity extends Activity
             Core.rectangle(aInputFrame, facesArray[i].tl(), facesArray[i].br(), new Scalar(0, 255, 0, 255), 3);
             rectCrop = new Rect(facesArray[i].x, facesArray[i].y, facesArray[i].width, facesArray[i].height);
             Mat image_roi = new Mat(aInputFrame,rectCrop);
-            Highgui.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/cropimage_"+i+".png", image_roi);
+            if(flag==true) {
+                if (facesArray.length == 1) {
+                    Highgui.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/cropimage_" + i + ".png", image_roi);
+                    // Send the JSON command with the Devicename_Timestamp
+                    flag = false;
+                }
+                else{
+                    //Send the JSON command to the server with Device name NULL
+                }
+            }
         }
+
         return aInputFrame;
     }
 
@@ -134,4 +154,64 @@ public class DetectActivity extends Activity
         OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_6, this, mLoaderCallback);
     }
 
+    /*public void callFacedetection(){
+        Intent intent = new Intent(this, DetectActivity.class);
+        startActivity(intent);
+    }*/
+
+    public class ConnectToServer extends AsyncTask<Void,Void,Void> {
+        private String serverIP="10.202.124.204";
+        private  int port=9000;
+        String text = null;
+        String devID = null;
+
+    /*connectToServer (String ip, int port) {
+        this.serverIp = ip;
+        this.port = port;   //this.messsage = message;
+    }*/
+
+        public Void doInBackground(Void... params) {
+            //Socket socket;
+//        try {
+//
+//
+////            connected = socket.isConnected();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+            try {
+                Socket socket = new Socket(serverIP, port);  //connect to serverd
+                InputStreamReader readCommand = new InputStreamReader(socket.getInputStream());
+                JsonReader reader = new JsonReader(readCommand);
+                reader.beginObject();
+
+                while(reader.hasNext()){
+                    String name = reader.nextName();
+                    if (name.equals("Command")) {
+                        text = reader.nextString();
+    //                    System.out.println(text);
+                    }
+                    else if(name.equals("DeviceID")){
+                        devID = reader.nextString();
+  //                      System.out.println(devID);
+                    }
+                    else {
+                        reader.skipValue();
+                    }
+                    //   System.out.println(name);
+                }
+                reader.endObject();
+
+                if(text.equals("take picture")){
+                    flag = true;
+//                    System.out.println(text + "\n" + devID);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
 }
