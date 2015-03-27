@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
@@ -35,8 +37,11 @@ import org.opencv.photo.Photo;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 
@@ -48,6 +53,12 @@ public class DetectActivity extends Activity
     private Mat grayImage;
     private int absoluteFaceSize;
     public static boolean flag = false;
+    public String picFileName;
+    public JSONObject connect;
+    public JSONObject fileName;
+    public Socket socket;
+    public String timeStamp;
+    public OutputStreamWriter outputStreamWriter;
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -91,7 +102,7 @@ public class DetectActivity extends Activity
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-       new ConnectToServer().execute();
+        new ConnectToServer().execute();
         super.onCreate(savedInstanceState);
         // Prevent the screen from locking when the application is running
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -134,13 +145,28 @@ public class DetectActivity extends Activity
             rectCrop = new Rect(facesArray[i].x, facesArray[i].y, facesArray[i].width, facesArray[i].height);
             Mat image_roi = new Mat(aInputFrame,rectCrop);
             if(flag==true) {
+                fileName=new JSONObject();
                 if (facesArray.length == 1) {
-                    Highgui.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/cropimage_" + i + ".png", image_roi);
+                    picFileName= "/Android_" + timeStamp + ".jpeg";
+                    Highgui.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)  + picFileName, image_roi);
                     // Send the JSON command with the Devicename_Timestamp
+                    try {
+                        fileName.put("command", "filename");
+                        fileName.put("filename", picFileName);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     flag = false;
                 }
                 else{
+                    try {
+                        fileName.put("command", "filename");
+                        fileName.put("filename", "NULL");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     //Send the JSON command to the server with Device name NULL
+                   new SendToServer().execute();
                 }
             }
         }
@@ -158,12 +184,25 @@ public class DetectActivity extends Activity
         Intent intent = new Intent(this, DetectActivity.class);
         startActivity(intent);
     }*/
+    public class SendToServer extends AsyncTask<Void,Void,Void> {
+        public Void doInBackground(Void... params) {
+            try {
+              //  outputStreamWriter =new OutputStreamWriter(socket.getOutputStream());
+                outputStreamWriter.write(fileName.toString());
+                outputStreamWriter.flush();
+               // outputStreamWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
 
     public class ConnectToServer extends AsyncTask<Void,Void,Void> {
         private String serverIP="10.202.124.204";
         private  int port=9000;
         String text = null;
-        String devID = null;
+
 
     /*connectToServer (String ip, int port) {
         this.serverIp = ip;
@@ -181,31 +220,40 @@ public class DetectActivity extends Activity
 //        }
 
             try {
-                Socket socket = new Socket(serverIP, port);  //connect to serverd
+                socket = new Socket(serverIP, port);  //connect to server
                 InputStreamReader readCommand = new InputStreamReader(socket.getInputStream());
+                outputStreamWriter = new OutputStreamWriter(socket.getOutputStream());
+                connect= new JSONObject();
+                connect.put("command","connect");
+                connect.put("deviceName","Android");
+                outputStreamWriter.write(connect.toString());
+                outputStreamWriter.flush();
+             //   outputStreamWriter.close();
                 JsonReader reader = new JsonReader(readCommand);
-                reader.beginObject();
 
-                while(reader.hasNext()){
-                    String name = reader.nextName();
-                    if (name.equals("Command")) {
-                        text = reader.nextString();
-    //                    System.out.println(text);
-                    }
-                    else if(name.equals("DeviceID")){
-                        devID = reader.nextString();
-  //                      System.out.println(devID);
-                    }
-                    else {
-                        reader.skipValue();
-                    }
-                    //   System.out.println(name);
-                }
-                reader.endObject();
+                while(true) {
+                    reader.beginObject();
 
-                if(text.equals("take picture")){
-                    flag = true;
+                    while (reader.hasNext()) {
+                        String name = reader.nextName();
+                        if (name.equals("command")) {
+                            text = reader.nextString();
+                            //                    System.out.println(text);
+                        } else if (name.equals("timestamp")) {
+                            timeStamp = reader.nextString();
+                            //                      System.out.println(devID);
+                        } else {
+                            reader.skipValue();
+                        }
+                        //   System.out.println(name);
+                    }
+                    reader.endObject();
+
+                    if (text.equals("takePicture")) {
+                        flag = true;
 //                    System.out.println(text + "\n" + devID);
+                    }
+
                 }
 
             } catch (Exception e) {
