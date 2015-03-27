@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="slf4j-log4j12-1.5.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/slf4j-log4j12-1.5.2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/slf4j-api-1.5.2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/spring-beans-2.5.5.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/spring-context-2.5.5.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/ftplet-api-1.0.6.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/log4j-1.2.14.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/aopalliance-1.0.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/jcl-over-slf4j-1.5.2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/spring-core-2.5.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

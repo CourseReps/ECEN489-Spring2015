@@ -2,8 +2,11 @@
   <library name="RXTXcomm">
     <CLASSES>
       <root url="jar://$USER_HOME$/Documents/Teensy/RXTXcomm.jar!/" />
+      <root url="jar://$USER_HOME$/Documents/Teensy/java-json.jar/java-json.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Documents/Teensy/java-json.jar/java-json.jar!/" />
+    </SOURCES>
   </library>
 </component>

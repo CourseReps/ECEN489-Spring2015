@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="JavaProject:jar">
+    <output-path>$USER_HOME$/cproj</output-path>
+    <root id="archive" name="JavaProject.jar">
+      <element id="module-output" name="JavaProject" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../includes/json-simple-1.1.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

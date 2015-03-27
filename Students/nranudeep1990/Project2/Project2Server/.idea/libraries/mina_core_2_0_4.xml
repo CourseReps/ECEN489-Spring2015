@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="mina-core-2.0.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/mina-core-2.0.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

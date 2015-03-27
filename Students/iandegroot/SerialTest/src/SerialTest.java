@@ -1,21 +1,23 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
+
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
+
+import java.net.Socket;
 import java.util.Enumeration;
 import java.util.Scanner;
+import org.json.JSONObject;
 
 
 public class SerialTest implements SerialPortEventListener {
     SerialPort serialPort;
     /** The port we're normally going to use. */
     private static final String PORT_NAMES[] = {
-            "/dev/tty.usbserial-A9007UX1", // Mac OS X
-            "/dev/ttyACM0", // Raspberry Pi
-            "/dev/ttyUSB0", // Linux
+//            "/dev/tty.usbserial-A9007UX1", // Mac OS X
+//            "/dev/ttyACM0", // Raspberry Pi
+//            "/dev/ttyUSB0", // Linux
             "COM7", // Windows
     };
     /**
@@ -25,17 +27,16 @@ public class SerialTest implements SerialPortEventListener {
      */
     private BufferedReader input;
     /** The output stream to the port */
-    private static OutputStream output;
+    private static PrintWriter pwJSON;
     /** Milliseconds to block while waiting for port open */
     private static final int TIME_OUT = 2000;
     /** Default bits per second for COM port. */
     private static final int DATA_RATE = 9600;
 
-    public void initialize() {
-        // the next line is for Raspberry Pi and
-        // gets us into the while loop and was suggested here was suggested http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
-        //System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
+    static String serverAddress = "127.0.0.1";
+    static Socket socket;
 
+    public void initialize() {
         CommPortIdentifier portId = null;
         Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
 
@@ -67,7 +68,6 @@ public class SerialTest implements SerialPortEventListener {
 
             // open the streams
             input = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
-            output = serialPort.getOutputStream();
 
             // add event listeners
             serialPort.addEventListener(this);
@@ -83,6 +83,15 @@ public class SerialTest implements SerialPortEventListener {
      */
     public synchronized void close() {
         if (serialPort != null) {
+            pwJSON.println("quit");
+
+            try {
+                input.close();
+                pwJSON.close();
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             serialPort.removeEventListener();
             serialPort.close();
         }
@@ -92,10 +101,22 @@ public class SerialTest implements SerialPortEventListener {
      * Handle an event on the serial port. Read the data and print it.
      */
     public synchronized void serialEvent(SerialPortEvent oEvent) {
+        JSONObject pingJSON = new JSONObject();
+
         if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
             try {
-                String inputLine=input.readLine();
-                System.out.println(inputLine);
+                String inputLine = input.readLine();
+                Double inches = Double.parseDouble(inputLine);
+                //System.out.println(inches);
+
+                if (inches <= 86 && inches >= 70) {
+                    pingJSON.put("command", "PersonFound");
+                    pwJSON.println(pingJSON);
+                    //pwJSON.println("PersonFound");
+                    System.out.println(inches);
+                }
+
+
             } catch (Exception e) {
                 System.err.println(e.toString());
             }
@@ -107,26 +128,23 @@ public class SerialTest implements SerialPortEventListener {
         Scanner userIn = new Scanner(System.in);
         byte data = -1;
 
+        try {
+            socket = new Socket(serverAddress, 9090);
+            pwJSON = new PrintWriter(socket.getOutputStream(), true);
+        }
+        catch (Exception e) {
+            e.getMessage();
+        }
+
         SerialTest main = new SerialTest();
         main.initialize();
-        /*Thread t=new Thread() {
-            public void run() {
-                //the following line will keep this app alive for 1000 seconds,
-                //waiting for events to occur and responding to them (printing incoming messages to console).
-                try {Thread.sleep(1000000);} catch (InterruptedException ie) {}
-            }
-        };
-        t.start();*/
-        System.out.println("Started");
+
+        System.out.println("Started - Enter 0 to close:");
 
         while(data != 0) {
-
-            System.out.print("Enter an integer to send to Teensy: ");
             data = userIn.nextByte();
 
-            output.write(data);
-
-            try {Thread.sleep(500);} catch (InterruptedException ie) {}
+            //try {Thread.sleep(500);} catch (InterruptedException ie) {}
         }
 
         System.out.println("Finished");
