@@ -24,4 +24,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile project(':openCVLibrary2411')
     compile 'org.json:json:20141113'
+    compile files('src/main/java/ftp4j-1.7.2.jar')
 }

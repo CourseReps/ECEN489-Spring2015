@@ -47,6 +47,12 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import it.sauronsoftware.ftp4j.FTPAbortedException;
+import it.sauronsoftware.ftp4j.FTPClient;
+import it.sauronsoftware.ftp4j.FTPDataTransferException;
+import it.sauronsoftware.ftp4j.FTPException;
+import it.sauronsoftware.ftp4j.FTPIllegalReplyException;
+
 
 public class DetectActivity extends Activity
         implements CameraBridgeViewBase.CvCameraViewListener {
@@ -65,6 +71,10 @@ public class DetectActivity extends Activity
     public String timeStamp;
     public OutputStreamWriter outputStreamWriter;
     public static Mat currentFrame;
+    private String serverIP = "10.202.115.89";
+    private int port = 9000;
+    private String username="test";
+    private String passsword="test";
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -189,18 +199,15 @@ public class DetectActivity extends Activity
 
 
     public class ConnectToServer extends AsyncTask<Void, Void, Void> {
-        private String serverIP = "10.202.101.132";
-        private int port = 9000;
+
         String text = null;
-
-
 
 
         public Void doInBackground(Void... params) {
 
             try {
                 socket = new Socket(serverIP, port);  //connect to server
-                BufferedReader bufferedReader= new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 outputStreamWriter = new OutputStreamWriter(socket.getOutputStream());
                 connect = new JSONObject();
                 connect.put("command", "connect");
@@ -217,12 +224,13 @@ public class DetectActivity extends Activity
 
                     timeStamp = jsonObject.getString("timestamp");
                     String commandName = jsonObject.getString("command");
-                    if (commandName.equals("takePicture")) {
+                    if (commandName.equals("take_picture")) {
 
                         flag = true;
                         while (true) {
                             if (flag == false) {
                                 try {
+                                    ftpTransfer();
                                     outputStreamWriter.write(fileName.toString() + "\n");
                                     outputStreamWriter.flush();
                                     // outputStreamWriter.close();
@@ -233,22 +241,11 @@ public class DetectActivity extends Activity
                             }
 
                         }
-                        //imageProcessing();
 
-
-                       /* try {
-                            //  outputStreamWriter =new OutputStreamWriter(socket.getOutputStream());
-                            outputStreamWriter.write(fileName.toString());
-                            outputStreamWriter.flush();
-                            // outputStreamWriter.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }*/
-//                    System.out.println(text + "\n" + devID);
                     }
 
                 }
-                } catch (IOException e1) {
+            } catch (IOException e1) {
                 e1.printStackTrace();
             } catch (JSONException e1) {
                 e1.printStackTrace();
@@ -258,49 +255,37 @@ public class DetectActivity extends Activity
             return null;
         }
 
-        public void imageProcessing() {
-            Imgproc.cvtColor(currentFrame, currentGrayImage, Imgproc.COLOR_RGBA2RGB);
-            // Initializing the faces array where the faces will be  stored
-            MatOfRect faces = new MatOfRect();
-            // Use the classifier to detect faces
-            if (cascadeClassifier != null) {
-                cascadeClassifier.detectMultiScale(currentGrayImage, faces, 1.1, 2, 2,
-                        new Size(currentabsoluteFaceSize, currentabsoluteFaceSize), new Size());
-            }
 
-            // Draw a rectangle around the faces, if found any
-            Rect[] facesArray = faces.toArray();
-            Rect rectCrop;
-            for (int i = 0; i < facesArray.length; i++) {
-                Core.rectangle(currentFrame, facesArray[i].tl(), facesArray[i].br(), new Scalar(0, 255, 0, 255), 3);
-                rectCrop = new Rect(facesArray[i].x, facesArray[i].y, facesArray[i].width, facesArray[i].height);
-                Mat image_roi = new Mat(currentFrame, rectCrop);
-                if (flag == true) {
-                    fileName = new JSONObject();
-                    if (facesArray.length == 1) {
-                        picFileName = "/Android_" + timeStamp + ".jpeg";
-                        Highgui.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + picFileName, image_roi);
-                        // Send the JSON command with the Devicename_Timestamp
-                        try {
-                            fileName.put("command", "filename");
-                            fileName.put("filename", picFileName);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        flag = false;
-                    } else {
-                        try {
-                            fileName.put("command", "filename");
-                            fileName.put("filename", "NULL");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        //Send the JSON command to the server with Device name NULL
+          public void ftpTransfer () {
+                FTPClient ftpClient = new FTPClient();
 
-
-                    }
+                try {
+                    ftpClient.connect(serverIP,9019);
+                    ftpClient.login(username, passsword);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (FTPIllegalReplyException e) {
+                    e.printStackTrace();
+                } catch (FTPException e) {
+                    e.printStackTrace();
                 }
-            }
+                java.io.File imageFile = new java.io.File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + picFileName);
+                try {
+                    ftpClient.upload(imageFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (FTPIllegalReplyException e) {
+                    e.printStackTrace();
+                } catch (FTPException e) {
+                    e.printStackTrace();
+                } catch (FTPDataTransferException e) {
+                    e.printStackTrace();
+                } catch (FTPAbortedException e) {
+                    e.printStackTrace();
+                }
+
+
+
         }
     }
 }
