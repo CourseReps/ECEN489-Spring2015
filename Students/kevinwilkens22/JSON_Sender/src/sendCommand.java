@@ -53,17 +53,17 @@ public class sendCommand {
                 System.out.println(read.readLine());
 
                 OutputStreamWriter out = new OutputStreamWriter(clientSocket.getOutputStream());
-                out.write(command.toString() + "\n");
-                out.flush();
+                out.write(command.toString());
+//                out.flush();
 //                out.close();
 
                 System.out.println("sent first command");
 
                 System.out.println(read.readLine());
 
-                out = new OutputStreamWriter(clientSocket.getOutputStream());
-                out.write(command1.toString()+"\n");
-                out.flush();
+//                out = new OutputStreamWriter(clientSocket.getOutputStream());
+                out.write(command1.toString());
+//                out.flush();
 //                out.close();
 
                 Thread.sleep(2000);
