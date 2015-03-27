@@ -59,6 +59,7 @@ public class DetectActivity extends Activity
     public Socket socket;
     public String timeStamp;
     public OutputStreamWriter outputStreamWriter;
+    public static Mat currentFrame;
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -127,6 +128,7 @@ public class DetectActivity extends Activity
 
     @Override
     public Mat onCameraFrame(Mat aInputFrame) {
+        currentFrame = aInputFrame;
         // Create a grayscale image
         Imgproc.cvtColor(aInputFrame, grayImage, Imgproc.COLOR_RGBA2RGB);
         // Initializing the faces array where the faces will be  stored
@@ -145,28 +147,28 @@ public class DetectActivity extends Activity
             rectCrop = new Rect(facesArray[i].x, facesArray[i].y, facesArray[i].width, facesArray[i].height);
             Mat image_roi = new Mat(aInputFrame,rectCrop);
             if(flag==true) {
-                fileName=new JSONObject();
+              //  fileName=new JSONObject();
                 if (facesArray.length == 1) {
                     picFileName= "/Android_" + timeStamp + ".jpeg";
-                    Highgui.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)  + picFileName, image_roi);
+               //     Highgui.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)  + picFileName, image_roi);
                     // Send the JSON command with the Devicename_Timestamp
-                    try {
+                /*    try {
                         fileName.put("command", "filename");
                         fileName.put("filename", picFileName);
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                     flag = false;
                 }
                 else{
-                    try {
+                   /* try {
                         fileName.put("command", "filename");
                         fileName.put("filename", "NULL");
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                     //Send the JSON command to the server with Device name NULL
-                   new SendToServer().execute();
+             //      new SendToServer().execute();
                 }
             }
         }
@@ -180,10 +182,7 @@ public class DetectActivity extends Activity
         OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_6, this, mLoaderCallback);
     }
 
-    /*public void callFacedetection(){
-        Intent intent = new Intent(this, DetectActivity.class);
-        startActivity(intent);
-    }*/
+
     public class SendToServer extends AsyncTask<Void,Void,Void> {
         public Void doInBackground(Void... params) {
             try {
@@ -199,7 +198,7 @@ public class DetectActivity extends Activity
     }
 
     public class ConnectToServer extends AsyncTask<Void,Void,Void> {
-        private String serverIP="10.202.124.204";
+        private String serverIP="10.202.60.189";
         private  int port=9000;
         String text = null;
 
@@ -228,10 +227,12 @@ public class DetectActivity extends Activity
                 connect.put("deviceName","Android");
                 outputStreamWriter.write(connect.toString());
                 outputStreamWriter.flush();
-             //   outputStreamWriter.close();
+                //   outputStreamWriter.close();
                 JsonReader reader = new JsonReader(readCommand);
 
+
                 while(true) {
+
                     reader.beginObject();
 
                     while (reader.hasNext()) {
@@ -251,8 +252,10 @@ public class DetectActivity extends Activity
 
                     if (text.equals("takePicture")) {
                         flag = true;
+                        imageProcessing();
 //                    System.out.println(text + "\n" + devID);
                     }
+
 
                 }
 
@@ -260,6 +263,57 @@ public class DetectActivity extends Activity
                 e.printStackTrace();
             }
             return null;
+        }
+        public void imageProcessing(){
+            Imgproc.cvtColor(currentFrame, grayImage, Imgproc.COLOR_RGBA2RGB);
+            // Initializing the faces array where the faces will be  stored
+            MatOfRect faces = new MatOfRect();
+            // Use the classifier to detect faces
+            if (cascadeClassifier != null) {
+                cascadeClassifier.detectMultiScale(grayImage, faces, 1.1, 2, 2,
+                        new Size(absoluteFaceSize, absoluteFaceSize), new Size());
+            }
+
+            // Draw a rectangle around the faces, if found any
+            Rect[] facesArray = faces.toArray();
+            Rect rectCrop;
+            for (int i = 0; i <facesArray.length; i++) {
+                Core.rectangle(currentFrame, facesArray[i].tl(), facesArray[i].br(), new Scalar(0, 255, 0, 255), 3);
+                rectCrop = new Rect(facesArray[i].x, facesArray[i].y, facesArray[i].width, facesArray[i].height);
+                Mat image_roi = new Mat(currentFrame,rectCrop);
+                if(flag==true) {
+                    fileName=new JSONObject();
+                    if (facesArray.length == 1) {
+                        picFileName= "/Android_" + timeStamp + ".jpeg";
+                        Highgui.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)  + picFileName, image_roi);
+                        // Send the JSON command with the Devicename_Timestamp
+                        try {
+                            fileName.put("command", "filename");
+                            fileName.put("filename", picFileName);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        flag = false;
+                    }
+                    else{
+                        try {
+                            fileName.put("command", "filename");
+                            fileName.put("filename", "NULL");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        //Send the JSON command to the server with Device name NULL
+                        try {
+                            //  outputStreamWriter =new OutputStreamWriter(socket.getOutputStream());
+                            outputStreamWriter.write(fileName.toString());
+                            outputStreamWriter.flush();
+                            // outputStreamWriter.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                                            }
+                }
         }
     }
 }
