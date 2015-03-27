@@ -1,9 +1,7 @@
 /**
  * Created by RhoadsWylde on 3/26/2015.
  */
-/**
- * Created by RhoadsWylde on 3/25/2015.
- */
+
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
@@ -25,10 +23,9 @@ public class Teensy implements SerialPortEventListener {
             "COM5", // Windows
     };
 
-   String serverIP;
-   Socket socket;      //creates new socket
-   //ObjectOutput output;  //constructs output stream for the system info
-   OutputStreamWriter output ;
+   String serverIP = "10.202.97.218";
+   int port = 2222;
+
 
     private String appName;
     private BufferedReader input;
@@ -117,7 +114,9 @@ public class Teensy implements SerialPortEventListener {
                         input = new BufferedReader(
                                 new InputStreamReader(
                                         serialPort.getInputStream()));
+
                     }
+
                     String inputLine = input.readLine();
                     String[] parts = inputLine.split("-");//take the string from the arduino and split it into two
                     String part1 = parts[0]; //part 1 of the split
@@ -133,7 +132,10 @@ public class Teensy implements SerialPortEventListener {
                         pingFlag.put("command", ping1);
                         boomFlag.put("command", ping2);
 
-                        try (OutputStreamWriter out = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8))
+                        try (
+                                Socket socket = new Socket(serverIP, port);
+                                OutputStreamWriter out = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8)
+                            )
                             {
                                 out.write(pingFlag.toString());
                                 out.write(boomFlag.toString());
@@ -143,7 +145,10 @@ public class Teensy implements SerialPortEventListener {
                         System.out.println(ping1);
                         pingFlag.put("command", ping1);
 
-                        try (OutputStreamWriter out = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8))
+                        try (
+                                Socket socket = new Socket(serverIP, port);
+                                OutputStreamWriter out = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8)
+                            )
                         {
                             out.write(pingFlag.toString());
                         }
@@ -152,7 +157,10 @@ public class Teensy implements SerialPortEventListener {
                         System.out.println(ping2);
                         boomFlag.put("command", ping2);
 
-                        try (OutputStreamWriter out = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8))
+                        try (
+                                Socket socket = new Socket(serverIP, port);
+                                OutputStreamWriter out = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8)
+                            )
                         {
                             out.write(boomFlag.toString());
                         }
@@ -173,8 +181,6 @@ public class Teensy implements SerialPortEventListener {
     public Teensy() {
         appName = getClass().getName();
         try {
-            socket = new Socket(serverIP, 9000);      //creates new socket
-            //output = new ObjectOutputStream(socket.getOutputStream());  //constructs output stream for the system info
         }
         catch (Exception e) {
             System.err.println(e.toString());
