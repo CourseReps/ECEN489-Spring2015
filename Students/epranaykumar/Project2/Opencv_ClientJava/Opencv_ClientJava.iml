@@ -11,22 +11,13 @@
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../../assignments/commons-net-3.3.jar!/" />
-          <root url="jar://$MODULE_DIR$/../../../assignments/ejml-0.23.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../assignments/json-simple-1.1.1.jar!/" />
           <root url="jar://$MODULE_DIR$/../../../assignments/sqlite-jdbc-3.8.7.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
           <root url="jar://$MODULE_DIR$/../../../assignments/sqlite-jdbc-3.8.7.jar!/" />
         </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../assignments/json-simple-1.1.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
       </library>
     </orderEntry>
   </component>

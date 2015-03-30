@@ -1,73 +1,71 @@
-/**
- * Created by PRANAY KUMAR on 3/27/2015.
- */
 
+import javax.swing.*;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.net.*;
 
-        import javax.swing.*;
-        import java.io.IOException;
-        import java.net.InetAddress;
-        import java.io.*;
-        import java.io.ByteArrayOutputStream;
-        import java.net.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Scanner;
 
-        import java.io.File;
-        import java.io.FileInputStream;
-        import java.io.IOException;
-        import java.io.InputStream;
-        import java.io.OutputStream;
-        import java.util.Scanner;
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
-        import org.apache.commons.net.ftp.FTP;
-        import org.apache.commons.net.ftp.FTPClient;
-        import org.json.simple.JSONObject;
-        import org.json.simple.JSONValue;
-
-public class Basecode {
+public class Main {
 
     public static void main(String[] args) throws IOException
     {
         // write your code here
         // ProcessBuilder proc = new ProcessBuilder("<your_exe>", "exe_args");
         // proc.start();
-       /* try{
+        try{
             Scanner cmd_input = new Scanner(System.in);
 
-            System.out.println("Please enter the IP address of Server.");
-            String ip = cmd_input.next();
-
+            //System.out.println("Please enter the IP address of Server.");
+            //String ip = cmd_input.next();
+            String ip = "10.202.115.90";
             int portNumber = 9000;
             Socket clientSocket = new Socket(ip, portNumber);
+            System.out.println("connected to Server.");
 
             BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             PrintWriter wr_to_server = new PrintWriter(clientSocket.getOutputStream(), true);
-       */
 
-            String server = "10.202.100.80";
-            int port = 21;
-            String user = "epranaykumar@gmail.com";
-            String pass = "PranayKumar";
+            String server = "10.202.115.246";
+            int port = 9019;
+            String user = "test";
+            String pass = "test";
 
 
-        /*    String deviceid = "4";
+            String deviceid = "4";
 
+            System.out.println("send the connected command to JSON object");
             JSONObject sendDeviceProp = new JSONObject();
-            sendDeviceProp.put("connect", deviceid); //new Integer(4)
+            sendDeviceProp.put("command", "connect");
+            sendDeviceProp.put("deviceName", deviceid); //new Integer(4)
 
             wr_to_server.println(sendDeviceProp.toString());
             wr_to_server.flush();
-       */
 
 
 
-         /*   while(true) {
+
+            while(true) {
 
                 String line = input.readLine();
                 JSONObject obj = (JSONObject) JSONValue.parse(line);
 
-                String timestamp = obj.get("takepicture").toString();
+                String timestamp = obj.get("timestamp").toString();
                 System.out.println(" received timestamp : " + timestamp);
 
-         */
+
                 FTPClient ftpClient = new FTPClient();
                 try {
 
@@ -89,13 +87,14 @@ public class Basecode {
                     Runtime r = Runtime.getRuntime();
                     Process p2 = r.exec("P:\\Masters Courses\\Mobile Sensing\\course_repository\\Project2\\Project2_FaceDetection\\FaceDetection\\Debug\\FaceDetection.exe"); //absolute or relative path
 
-                    /* ftpClient.connect(server, port);
+
+                    ftpClient.connect(server, port);
                     ftpClient.login(user, pass);
                     ftpClient.enterLocalPassiveMode();
 
                     ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
-*/
+
 
                     int count=0;
                     while(count==0){
@@ -105,7 +104,7 @@ public class Basecode {
                     if (count == 1) {
                         File cropped_image = new File(directory + "th0.jpg");
 
-                        String server_image = "deviceid_timestamp.jpg";
+                        String server_image = deviceid+"_"+timestamp+".jpg";
                         InputStream inputStream = new FileInputStream(cropped_image);
 
                         System.out.println("Start uploading first file");
@@ -116,46 +115,53 @@ public class Basecode {
                         }
 
 
-                    /*
+
                         JSONObject sendImageName = new JSONObject();
+
+                        sendImageName.put("command", "filename");
                         sendImageName.put("filename", deviceid + "_" + timestamp); //new Integer(4)
 
-                        wr_to_server.println(sendDeviceProp.toString());
+                        wr_to_server.println(sendImageName.toString());
                         wr_to_server.flush();
-                    */
 
-                    }
-             /*       else {
+                    } else {
 
                         JSONObject sendImageName = new JSONObject();
-                        sendImageName.put("filename", "null"); //new Integer(4)
+                        sendImageName.put("command", "filename");
+                        sendImageName.put("filename", "NULL"); //new Integer(4)
 
-                        wr_to_server.println(sendDeviceProp.toString());
+                        wr_to_server.println(sendImageName.toString());
                         wr_to_server.flush();
                     }
-             */
 
+                    if (ftpClient.isConnected()) {
+                        ftpClient.logout();
+                        ftpClient.disconnect();
+                    }
+
+                    //int exitVal = p2.exitValue();
 
                 } catch (IOException ex) {
                     System.out.println(ex.getMessage());
                     ex.printStackTrace();
-                } finally {
+                }
+                /*finally {
                     try {
                         if (ftpClient.isConnected()) {
                             ftpClient.logout();
                             ftpClient.disconnect();
                         }
-            //            clientSocket.close();
+                        clientSocket.close();
 
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
 
-                }
+                }*/
             }
         }
 
-   /*     catch (Exception e) {
+        catch (Exception e) {
 
             System.out.println("Error handling : " + e);
         }
@@ -163,7 +169,6 @@ public class Basecode {
     }
 }
 
-*/
 
 /*
 

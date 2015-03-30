@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/OpencvClientJava.iml" filepath="$PROJECT_DIR$/OpencvClientJava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Opencv_ClientJava.iml" filepath="$PROJECT_DIR$/Opencv_ClientJava.iml" />
     </modules>
   </component>
 </project>
