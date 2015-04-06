@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="aopalliance-1.0">
+    <CLASSES>
+      <root url="jar:///media/alice/DEBIAN 7_8_/Anudeep/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/aopalliance-1.0.jar!/" />
+      <root url="jar:///media/alice/DEBIAN 7_8_/Anudeep/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/ftplet-api-1.0.6.jar!/" />
+      <root url="jar:///media/alice/DEBIAN 7_8_/Anudeep/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/ftpserver-core-1.0.6.jar!/" />
+      <root url="jar:///media/alice/DEBIAN 7_8_/Anudeep/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/jcl-over-slf4j-1.5.2.jar!/" />
+      <root url="jar:///media/alice/DEBIAN 7_8_/Anudeep/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/log4j-1.2.14.jar!/" />
+      <root url="jar:///media/alice/DEBIAN 7_8_/Anudeep/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/mina-core-2.0.4.jar!/" />
+      <root url="jar:///media/alice/DEBIAN 7_8_/Anudeep/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/slf4j-api-1.5.2.jar!/" />
+      <root url="jar:///media/alice/DEBIAN 7_8_/Anudeep/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/slf4j-log4j12-1.5.2.jar!/" />
+      <root url="jar:///media/alice/DEBIAN 7_8_/Anudeep/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/spring-beans-2.5.5.jar!/" />
+      <root url="jar:///media/alice/DEBIAN 7_8_/Anudeep/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/spring-context-2.5.5.jar!/" />
+      <root url="jar:///media/alice/DEBIAN 7_8_/Anudeep/ftpserver-1.0.6/apache-ftpserver-1.0.6/common/lib/spring-core-2.5.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
