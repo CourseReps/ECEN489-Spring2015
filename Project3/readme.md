@@ -13,11 +13,12 @@ This project is broken down into three major major subsystems:
 
 This project has **X** functional components:  
 (LIST IS TENTATIVE)  
-Component Name | Language or API | Subsystem  
---- | --- | ---  
-Server Database Management | Java/SQLite | SB  
-User Authentication/Credentials | ??? API | SB  
-MAC Address tracking | PCAP | SB  
+Component Name | Language or API | Subsystem
+--- | --- | ---
+Server Database Management | Java/SQLite | SB
+User Authentication/Credentials | ??? API | SB
+MAC Address tracking | PCAP | SB
+
 Social media integration | Facebook | SB  
 Image processing/object identification | OpenCV | LI  
 Facial recognition | OpenCV | LI  
