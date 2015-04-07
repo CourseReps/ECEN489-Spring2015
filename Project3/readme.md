@@ -61,8 +61,8 @@ Password | The password (or password hash) for this user
 
 Column Name | Details 
 --- | --- 
-ID1 | See notes below
-ID2 | See note below
+ID1 | See text below
+ID2 |      "
 The friends table will contain pairs of IDs.  These IDs will match up with the users in the USERS table.  Each pair of IDs constitutes a friendship between to users.  To improve searching efficiency, whenever a new friendship is established, a pair of entries is created for each relationship.
 
 For example, if John (ID: 1001) and Jane (ID: 1337) become friends, the following entries will be added to the FRIENDS table:
