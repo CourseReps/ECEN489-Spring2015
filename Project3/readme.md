@@ -84,7 +84,7 @@ The REQUEST table is populated when a user makes a friend request.  If the recie
 
 Column Name | SQL Name | Details 
 --- | --- | ---
-ID | locid | Auto-incrementing key for this location. Used in CHECK-INS table
+ID (Key) | locid | Auto-incrementing key for this location. Used in CHECK-INS table
 Location Name | locname | Plain English label for this LOI
 Picture Info | locimg | Image processing information for object identification (or reference to where the information can be found)
 GPS Coords | locgps | Lat/Lon coordinates of this location
@@ -92,7 +92,7 @@ GPS Coords | locgps | Lat/Lon coordinates of this location
 **CHECK-INS TABLE**
 
 Column Name | SQL Name | Details 
---- | --- 
+--- | --- | ---
 User ID (Key1) | chkuid | ID reference for the user who is being checked in
 Timestamp (Key2) | chkts | Timestamp for this check-in (in absolute millis)
 Location ID | chklid | ID Reference for the LOI being checked in to
