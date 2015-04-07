@@ -1,7 +1,7 @@
 Project 3: Social Location Sharing
 ====================================
 
-![IMAGE HERE](http://www.redcylindersoftware.com/489/Prpject3img.jpg)
+![IMAGE WILL GO HERE](http://www.redcylindersoftware.com/489/Prpject3img.jpg)
 
 This project will allow users to be tracked in space and time.  Users will have the ability to "check in" to a series of predetermined locations and track the check-in activities of their friends.
 
@@ -103,6 +103,10 @@ A dual key is used in this table as a way of passively ensuring that are no dupl
 ###### User Authentication/Credentials
 ###### Social media integration
 #### Image processing/object identification
+The proposed object identification component of this project makes use of 3-D printed objects to determine a user's location.  Several unique shapes will be printed -- each will be used to represent a unique LOI.  A user will point their smartphone camera at one of these objects and an app will automatically identify the object and the LOI it represents.  Internally, this will be accomplished using Android and OpenCV or similar image processing APIs.
+
+User check-in through object identification demonstrates a level of complexity and understanding beyond using a simple QR code reader API.
+
 ###### MAC Address tracking
 ###### Facial recognition
 ###### QR Code reader
