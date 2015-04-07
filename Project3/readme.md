@@ -30,7 +30,7 @@ to be continued... | |
 
 #####Subsystem Breakdown
 
-Markdown | Less | Pretty
+Component Name | Language or API | Subsystem
 --- | --- | ---
 *Still* | `renders` | **nicely**
 1 | 2 | 3
