@@ -28,3 +28,8 @@ User greeting | Java or microcontroller? | UF
 to be continued... | |  
 
 #####Subsystem Breakdown
+
+Markdown | Less | Pretty
+--- | --- | ---
+*Still* | `renders` | **nicely**
+1 | 2 | 3
