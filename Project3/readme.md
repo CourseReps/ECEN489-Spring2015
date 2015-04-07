@@ -98,7 +98,7 @@ Timestamp (Key2) | chkts | Timestamp for this check-in (in absolute millis)
 Location ID | chklid | ID Reference for the LOI being checked in to
 Method | chkmeth | The means by which this user is being checked in (object identification, MAC sniffing, facial recognition, etc)
 Details/Data | chkdata | Additional relevant information pertaining to the check-in -- MAC Addr for MAC sniffing, filename for facial recognition, etc
-A dual key is used in this table to ensure that are no duplicate check-ins for users.
+A dual key is used in this table as a way of passively ensuring that are no duplicate check-ins.
 
 ###### User Authentication/Credentials
 ###### Social media integration
@@ -108,4 +108,16 @@ A dual key is used in this table to ensure that are no duplicate check-ins for u
 ###### QR Code reader
 ###### Voice Recognition
 #### User application
+The user application will provide the primary interface between the user and the rest of the project.  The expected application lifecycle is as follows:
+
+ID | Activity | Behavior | Exit Conditions (next activity) 
+--- | --- | --- | ---
+1 | Login | User registration/login screen | User logs in (2 first login, 3 otherwise)
+2 | Friend Manager | List friends, allow user to add/remove new friends | User cancels/done (3)
+3 | Friend Feed | Show list of friends' recent check-ins | User requests change to another activity (2, 4-7)
+4 | Check-In | Provide manual check-in interface (take picture, scan QR code, etc) | User cancels (3) or Checks In (5)
+5 | Current Location | Show statistics of current location (friends checked in, previous check-ins) | User cancels (3)
+6 | Location History | Show location history for this user (on map?) | User cancels (3)
+7 | Logout | User feedback while logging out/shutting down | Logged out -- end program
+
 ###### User greeting
