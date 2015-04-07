@@ -28,13 +28,13 @@ User application | Android | UF
 User greeting | Java or microcontroller? | UF  
 to be continued... | |  
 
-### Subsystem Breakdown
-##### Server Backbone (SB)
+## Subsystem Breakdown
+#### Server Backbone (SB)
 The server backbone will house all backend functionality.  Basic functions are the storage and maintenance of user and location information.  The storage method of choice for this information is SQLite, and the backend programming language of choice is Java.
 
 User information includes things like login credentials, user "friendships", and location tracking over time.  Location information includes things like location name, object identification information, and (possibly) GPS coordinates.
 
-##### Location Identification (LI)
+#### Location Identification (LI)
 This subsystem will provide necessary functionality to allow the SB to identify and track users as they move between Predetermined Locations of Interest (PLI).  The means used to identify that a user is in the vicinity of a PLI **have not been finalized at this time**, but methods of "checking in" include:
 
 - Using a smartphone camera and image processing to photograph a unique object at the PLI
@@ -42,10 +42,10 @@ This subsystem will provide necessary functionality to allow the SB to identify 
 - Using facial or voice recognition to physically identify a user near a PLI
 - Using a QR code and reader as a robust method of checking in to a PLI
 
-##### User Feedback (UF)
+#### User Feedback (UF)
 User feedback consists of everything that the end user may interact with.  **Currently,** this consists of an Android application and (possibly) a "user greeting" system that will provide an audio or visual cue (display an image, play a sound, send a text) that indicates the user has been recognized at a PLI.
 
-### Functional Component Breakdown
+## Functional Component Breakdown
 #### Server Database Management
 ###### User Authentication/Credentials
 ###### Social media integration
