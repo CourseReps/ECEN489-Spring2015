@@ -62,8 +62,8 @@ Password | The password (or password hash) for this user
 Column Name | Details 
 --- | --- 
 ID1 | See text below
-ID2 |      "
-The friends table will contain pairs of IDs.  These IDs will match up with the users in the USERS table.  Each pair of IDs constitutes a friendship between to users.  To improve searching efficiency, whenever a new friendship is established, a pair of entries is created for each relationship.
+ID2 | See text below
+The FRIENDS table will contain pairs of IDs.  These IDs will match up with the users in the USERS table.  Each pair of IDs constitutes a friendship between to users.  To improve searching efficiency, whenever a new friendship is established, a pair of entries is created for each relationship.
 
 For example, if John (ID: 1001) and Jane (ID: 1337) become friends, the following entries will be added to the FRIENDS table:
 
@@ -71,6 +71,32 @@ ID1 | ID2
 --- | --- 
 1001 | 1337
 1337 | 1001
+
+**REQUEST TABLE**
+
+Column Name | Details 
+--- | --- 
+Originator | User who made the friend request
+Recipient | User who will respond to the request
+The REQUEST table is populated when a user makes a friend request.  If the recieving user responds to the friend request, the entry in this table is removed and a pair of friendship entries are created in the FRIENDS table (if accepted).
+
+**LOCATIONS TABLE**
+Column Name | Details 
+--- | --- 
+ID | User who made the friend request
+Location Name | Plain English label for this LOI
+Picture Info | Image processing information for object identification (or reference to where the information can be found)
+GPS Coords | Lat/Lon coordinates of this location
+
+**CHECK-INS TABLE**
+Column Name | Details 
+--- | --- 
+USER ID (Key 1) | ID reference for the user who is being checked in
+Timestamp (Key 2) | Timestamp for this check-in (in absolute millis)
+Location ID | ID Reference for the LOI being checked in to
+Method | The means by which this user is being checked in (object identification, MAC sniffing, facial recognition, etc)
+Details/Data | Additional relevant information pertaining to the check-in -- MAC Addr for MAC sniffing, filename for facial recognition, etc
+
 
 ###### User Authentication/Credentials
 ###### Social media integration
