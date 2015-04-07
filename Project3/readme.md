@@ -47,6 +47,31 @@ User feedback consists of everything that the end user may interact with.  **Cur
 
 ## Functional Component Breakdown
 #### Server Database Management
+Server Backbone information will be stored in a series of SQLite tables as follows:
+
+**USERS TABLE**
+
+Column Name | Details 
+--- | --- 
+ID (Key) | Auto-incrementing key for this user.  Used in Friends, Friend Requests, and Check-Ins tables
+Username | User-selected username -- also what is displayed for other users on their friends list
+Password | The password (or password hash) for this user
+
+**FRIENDS TABLE**
+
+Column Name | Details 
+--- | --- 
+ID1 | See notes below
+ID2 | See note below
+The friends table will contain pairs of IDs.  These IDs will match up with the users in the USERS table.  Each pair of IDs constitutes a friendship between to users.  To improve searching efficiency, whenever a new friendship is established, a pair of entries is created for each relationship.
+
+For example, if John (ID: 1001) and Jane (ID: 1337) become friends, the following entries will be added to the FRIENDS table:
+
+ID1 | ID2 
+--- | --- 
+1001 | 1337
+1337 | 1001
+
 ###### User Authentication/Credentials
 ###### Social media integration
 #### Image processing/object identification
