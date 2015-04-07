@@ -93,7 +93,7 @@ GPS Coords | Lat/Lon coordinates of this location
 
 Column Name | Details 
 --- | --- 
-USER ID (Key 1) | ID reference for the user who is being checked in
+User ID (Key 1) | ID reference for the user who is being checked in
 Timestamp (Key 2) | Timestamp for this check-in (in absolute millis)
 Location ID | ID Reference for the LOI being checked in to
 Method | The means by which this user is being checked in (object identification, MAC sniffing, facial recognition, etc)
