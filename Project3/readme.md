@@ -43,12 +43,16 @@ This subsystem will provide necessary functionality to allow the SB to identify 
 - Using a QR code and reader as a robust method of checking in to a PLI
 
 ##### User Feedback (UF)
-User feedback consists of everything that the end user may interact with.  **Currently,** this consists of an Android application and (possibly) a "user greeting" system that will provide an audio or visual cue that indicates the user has been recognized at a PLI.
+User feedback consists of everything that the end user may interact with.  **Currently,** this consists of an Android application and (possibly) a "user greeting" system that will provide an audio or visual cue (display an image, play a sound, send a text) that indicates the user has been recognized at a PLI.
 
 ### Functional Component Breakdown
-##### Server Database Management
-
-##### Image Processing/Object Identification
-
-##### User Application
-
+#### Server Database Management
+###### User Authentication/Credentials
+###### Social media integration
+#### Image processing/object identification
+###### MAC Address tracking
+###### Facial recognition
+###### QR Code reader
+###### Voice Recognition
+#### User application
+###### User greeting
