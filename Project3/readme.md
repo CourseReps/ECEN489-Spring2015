@@ -81,6 +81,7 @@ Recipient | User who will respond to the request
 The REQUEST table is populated when a user makes a friend request.  If the recieving user responds to the friend request, the entry in this table is removed and a pair of friendship entries are created in the FRIENDS table (if accepted).
 
 **LOCATIONS TABLE**
+
 Column Name | Details 
 --- | --- 
 ID | User who made the friend request
@@ -89,6 +90,7 @@ Picture Info | Image processing information for object identification (or refere
 GPS Coords | Lat/Lon coordinates of this location
 
 **CHECK-INS TABLE**
+
 Column Name | Details 
 --- | --- 
 USER ID (Key 1) | ID reference for the user who is being checked in
