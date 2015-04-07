@@ -1,7 +1,7 @@
 Project 3: Social Location Sharing
 ====================================
 
-![IMAGE WILL GO HERE](http://www.redcylindersoftware.com/489/Prpject3img.jpg)
+![IMAGE WILL GO HERE](http://www.redcylindersoftware.com/489/Project3img.jpg)
 
 This project will allow users to be tracked in space and time.  Users will have the ability to "check in" to a series of predetermined locations and track the check-in activities of their friends.
 
