@@ -13,18 +13,18 @@ This project is broken down into three major major subsystems:
 
 This project has **X** functional components:  
 (LIST IS TENTATIVE)  
-Component Name | Language/API | Subsystem
----|---|---
-Server Database Management | Java/SQLite | SB
-User Authentication/Credentials | ??? API | SB
-MAC Address tracking | PCAP | SB
-Social media integration | Facebook | SB
-Image processing/object identification | OpenCV | LI
-Facial recognition | OpenCV | LI
-QR Code reader | Android | LI
-Voice Recognition | ??? API | LI
-User application | Android | UF
-User greeting | Java or microcontroller? | UF
-to be continued... | |
+Component Name | Language/API | Subsystem  
+---|---|---  
+Server Database Management | Java/SQLite | SB  
+User Authentication/Credentials | ??? API | SB  
+MAC Address tracking | PCAP | SB  
+Social media integration | Facebook | SB  
+Image processing/object identification | OpenCV | LI  
+Facial recognition | OpenCV | LI  
+QR Code reader | Android | LI  
+Voice Recognition | ??? API | LI  
+User application | Android | UF  
+User greeting | Java or microcontroller? | UF  
+to be continued... | |  
 
 #####Subsystem Breakdown
