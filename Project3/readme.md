@@ -101,17 +101,17 @@ Details/Data | chkdata | Additional relevant information pertaining to the check
 A dual key is used in this table as a way of passively ensuring that are no duplicate check-ins.
 
 ###### User Authentication/Credentials
-###### Social media integration
-#### Image processing/object identification
+###### Social Media Integration
+#### Image Processing/Object Identification
 The proposed object identification component of this project makes use of 3-D printed objects to determine a user's location.  Several unique shapes will be printed -- each will be used to represent a unique LOI.  A user will point their smartphone camera at one of these objects and an app will automatically identify the object and the LOI it represents.  Internally, this will be accomplished using Android and OpenCV or similar image processing APIs.
 
 User check-in through object identification demonstrates a level of complexity and understanding beyond using a simple QR code reader API.
 
-###### MAC Address tracking
-###### Facial recognition
-###### QR Code reader
+###### MAC Address Tracking
+###### Facial Recognition
+###### QR Code Reader
 ###### Voice Recognition
-#### User application
+#### User Application
 The user application will provide the primary interface between the user and the rest of the project.  The expected application lifecycle is as follows:
 
 ID | Activity | Behavior | Exit Conditions (next activity) 
@@ -124,4 +124,4 @@ ID | Activity | Behavior | Exit Conditions (next activity)
 6 | Location History | Show location history for this user (on map?) | User cancels (3)
 7 | Logout | User feedback while logging out/shutting down | Logged out -- end program
 
-###### User greeting
+###### User Greeting
