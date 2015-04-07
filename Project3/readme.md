@@ -51,53 +51,53 @@ Server Backbone information will be stored in a series of SQLite tables as follo
 
 **USERS TABLE**
 
-Column Name | Details 
---- | --- 
-ID (Key) | Auto-incrementing key for this user.  Used in Friends, Friend Requests, and Check-Ins tables
-Username | User-selected username -- also what is displayed for other users on their friends list
-Password | The password (or password hash) for this user
+Column Name | SQL Name | Details 
+--- | --- | ---
+ID (Key) | userid | Auto-incrementing key for this user.  Used in Friends, Friend Requests, and Check-Ins tables
+Username | username | User-selected username -- also what is displayed for other users on their friends list
+Password | password | The password (or password hash) for this user
 
 **FRIENDS TABLE**
 
-Column Name | Details 
---- | --- 
-ID1 | See text below
-ID2 | See text below
+Column Name | SQL Name | Details 
+--- | --- | ---
+ID1 | id1 | See text below
+ID2 | id2 | See text below
 The FRIENDS table will contain pairs of IDs.  These IDs will match up with the users in the USERS table.  Each pair of IDs constitutes a friendship between to users.  To improve searching efficiency, whenever a new friendship is established, a pair of entries is created for each relationship.
 
 For example, if John (ID: 1001) and Jane (ID: 1337) become friends, the following entries will be added to the FRIENDS table:
 
-ID1 | ID2 
+id1 | id2 
 --- | --- 
 1001 | 1337
 1337 | 1001
 
 **REQUEST TABLE**
 
-Column Name | Details 
---- | --- 
-Originator | User who made the friend request
-Recipient | User who will respond to the request
+Column Name | SQL Name | Details 
+--- | --- | ---
+Originator | reqid1 | User who made the friend request
+Recipient | reqid2 | User who will respond to the request
 The REQUEST table is populated when a user makes a friend request.  If the recieving user responds to the friend request, the entry in this table is removed and a pair of friendship entries are created in the FRIENDS table (if accepted).
 
 **LOCATIONS TABLE**
 
-Column Name | Details 
---- | --- 
-ID | User who made the friend request
-Location Name | Plain English label for this LOI
-Picture Info | Image processing information for object identification (or reference to where the information can be found)
-GPS Coords | Lat/Lon coordinates of this location
+Column Name | SQL Name | Details 
+--- | --- | ---
+ID | locid | Auto-incrementing key for this location. Used in CHECK-INS table
+Location Name | locname | Plain English label for this LOI
+Picture Info | locimg | Image processing information for object identification (or reference to where the information can be found)
+GPS Coords | locgps | Lat/Lon coordinates of this location
 
 **CHECK-INS TABLE**
 
-Column Name | Details 
+Column Name | SQL Name | Details 
 --- | --- 
-User ID (Key1) | ID reference for the user who is being checked in
-Timestamp (Key2) | Timestamp for this check-in (in absolute millis)
-Location ID | ID Reference for the LOI being checked in to
-Method | The means by which this user is being checked in (object identification, MAC sniffing, facial recognition, etc)
-Details/Data | Additional relevant information pertaining to the check-in -- MAC Addr for MAC sniffing, filename for facial recognition, etc
+User ID (Key1) | chkuid | ID reference for the user who is being checked in
+Timestamp (Key2) | chkts | Timestamp for this check-in (in absolute millis)
+Location ID | chklid | ID Reference for the LOI being checked in to
+Method | chkmeth | The means by which this user is being checked in (object identification, MAC sniffing, facial recognition, etc)
+Details/Data | chkdata | Additional relevant information pertaining to the check-in -- MAC Addr for MAC sniffing, filename for facial recognition, etc
 A dual key is used in this table to ensure that are no duplicate check-ins for users.
 
 ###### User Authentication/Credentials
