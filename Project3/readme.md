@@ -13,7 +13,7 @@ This project is broken down into three major major subsystems:
 
 This project has **X** functional components:  
 (LIST IS TENTATIVE)  
-Component Name | Language/API | Subsystem  
+Component Name | Language or API | Subsystem  
 --- | --- | ---  
 Server Database Management | Java/SQLite | SB  
 User Authentication/Credentials | ??? API | SB  
