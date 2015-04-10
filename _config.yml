@@ -1,0 +1,10 @@
+# Site settings
+exclude: [".gitignore", "README.md", "Gemfile"]
+title: ""
+email: ""
+description: "Project 3"
+url: "https://ECEN489-Spring2015.github.io"
+baseurl: "" # GitHub
+github_username: "BenitoRamirezJr"
+# Build settings
+markdown: kramdown
