@@ -7,13 +7,22 @@ This project will be build on top of Project 1 using statistics/ analytics of MA
 to focus on a central area.  When a MAC address is sensed in this overlapped area, a picture will be taken using
 a camera next to tv.  This system will try to link a person to the mac address and possibly the image. 
 
+**Startup Order:**
 
+1 - Server
 
-Project 1 Roles
+2 - Clients
 
--RF
+3 - OpenCV and Ping Sensors
 
--Sensing Box/Server
+NOTE: If any of the OpenCV or Ping programs are disconnected the associated client should be restarted. 
+
+### Project 1 Roles
+
+**-RF**
+
+**-Sensing Box/Server**
+
       -Box: Collect and store MAC addresses;  
       -Box: Once per second, send MAC addresses to server (using Hashsets);  
       -Server: Compare MAC addresses, compare to see if one exists on all four sensors;  
@@ -21,7 +30,7 @@ Project 1 Roles
       -Server: Receive ping sensor;  
       -Server: Tell OpenCV to turn on video and take pictures, receive # of people in image;  
 
--Facial Recognition
+**-Facial Recognition**
 
       -Capture face with 2 cameras;
       -use the photos with open CV to isolate the face (2 people using Android and 2 using native)
@@ -48,10 +57,11 @@ Facial Recognition Send JSON
 }  
   
   
--Microcontroller (2 people for ping sensor and 2 people for gain)
+**-Microcontroller (Ping Sensors)**
 
       -control antenna gain, changing the voltage will change the gain (2 people)
       distance that the signal can go;
       direction of the signal;
       communicate with the NUC via usb serial;
       -"ping" sensor (2 people)
+      -All 4 people are now using ping sensors

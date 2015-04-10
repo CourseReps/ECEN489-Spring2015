@@ -1,6 +1,6 @@
 Cloud-Enabled Mobile Sensing
 ============================
-## ECEN489-Sping2015
+## ECEN489-Spring2015
 
 Students enrolled in ECEN 489-501 and ECEN 689-605 will be using this GitHub repository as the primary remote repository for source code management (SCM).
 

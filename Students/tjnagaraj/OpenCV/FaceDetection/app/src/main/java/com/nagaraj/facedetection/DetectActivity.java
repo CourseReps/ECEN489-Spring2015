@@ -71,8 +71,10 @@ public class DetectActivity extends Activity
     public String timeStamp;
     public OutputStreamWriter outputStreamWriter;
     public static Mat currentFrame;
-    private String serverIP = "10.202.115.89";
-    private int port = 9000;
+    private String ftpServerIP = "10.202.115.89";
+    private String serverIP = "10.202.104.106";
+    private int portFTP = 9019;
+    private int portServer = 9000;
     private String username="test";
     private String passsword="test";
 
@@ -206,7 +208,7 @@ public class DetectActivity extends Activity
         public Void doInBackground(Void... params) {
 
             try {
-                socket = new Socket(serverIP, port);  //connect to server
+                socket = new Socket(serverIP, portServer);  //connect to server
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 outputStreamWriter = new OutputStreamWriter(socket.getOutputStream());
                 connect = new JSONObject();
@@ -260,7 +262,7 @@ public class DetectActivity extends Activity
                 FTPClient ftpClient = new FTPClient();
 
                 try {
-                    ftpClient.connect(serverIP,9019);
+                    ftpClient.connect(ftpServerIP,9019);
                     ftpClient.login(username, passsword);
                 } catch (IOException e) {
                     e.printStackTrace();
