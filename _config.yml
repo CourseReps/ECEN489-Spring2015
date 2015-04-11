@@ -1,6 +1,6 @@
 # Site settings
 exclude: [".gitignore", "README.md", "Gemfile"]
-title: "Locamigo"
+title: "Physicamigo"
 email: ""
 description: "Location-Specific Friend Analytics"
 url: "http://coursereps.github.io"
