@@ -2,9 +2,9 @@
 exclude: [".gitignore", "README.md", "Gemfile"]
 title: "Group Project"
 email: ""
-description: "Project 3"
+description: "Group Project"
 url: "https://coursereps.github.io"
-baseurl: "ECEN489-Spring2015"
+baseurl: "/ECEN489-Spring2015"
 github_username: "BenitoRamirezJr"
 # Build settings
 markdown: kramdown
