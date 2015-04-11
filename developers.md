@@ -4,7 +4,7 @@ title: Development Team
 permalink: /Developers.html
 ---
 
-This initiative is supported by a team of highly skilled engineers with complementary skill sets.
+This initiative is supported by a team of highly talented engineers with complementary skill sets.
 Management is performed through a flat structure, yet members have well defined tasks attuned to individual strengths.
 Every member on the team possesses valuable hands-on experience and a list of pertinent accomplishments.
 The project features national and international experts with industrial, military, and academic backgrounds.
