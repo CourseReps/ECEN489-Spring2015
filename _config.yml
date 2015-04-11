@@ -3,8 +3,8 @@ exclude: [".gitignore", "README.md", "Gemfile"]
 title: ""
 email: ""
 description: "Project 3"
-url: "https://ECEN489-Spring2015.github.io"
-baseurl: "" # GitHub
+url: "https://http://coursereps.github.io"
+baseurl: "ECEN489-Spring2015"
 github_username: "BenitoRamirezJr"
 # Build settings
 markdown: kramdown
