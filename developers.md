@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Students
-permalink: /Students.html
+title: Developers
+permalink: /Developers.html
 ---
 
 Texas A&M University is dedicated to the discovery, development, communication, and application of knowledge in a wide range of academic and professional fields.
