@@ -38,7 +38,7 @@ The project features national and international experts with industrial, militar
 * Hong Pan, [hongpan0507](https://github.com/hongpan0507)
 
 ## Business and Finance
-* Blade Octaviano Roybal, [Bladeroybal] (https://github.com/Bladeroybal)
+* Blade Octaviano Roybal, [Bladeroybal](https://github.com/Bladeroybal)
 * Yajie Zeng, [yjzeng8833](https://github.com/yjzeng8833)
 
 ## Public Relations and Web Presence
