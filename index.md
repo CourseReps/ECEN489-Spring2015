@@ -4,5 +4,4 @@ title: About
 permalink: /index.html
 ---
 
-![Prof. J.-F. Chamberland](assets/photo.jpg)
-
+Welcome to the Project website
