@@ -2,7 +2,7 @@
 exclude: [".gitignore", "README.md", "Gemfile"]
 title: "Locamigo"
 email: ""
-description: "Group Project"
+description: "Location-Specific Friend Analytics"
 url: "http://coursereps.github.io"
 baseurl: "/ECEN489-Spring2015"
 github_username: "BenitoRamirezJr"
