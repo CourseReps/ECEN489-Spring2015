@@ -1,6 +1,6 @@
 # Site settings
 exclude: [".gitignore", "README.md", "Gemfile"]
-title: "Group Project"
+title: "Locamigo"
 email: ""
 description: "Group Project"
 url: "http://coursereps.github.io"
