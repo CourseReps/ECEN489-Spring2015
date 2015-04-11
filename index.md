@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Project
+title: Home
 permalink: /index.html
 ---
 
-Welcome to the Project website
+Welcome to the Physicamigo website
