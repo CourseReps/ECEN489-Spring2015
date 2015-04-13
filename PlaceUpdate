@@ -6,8 +6,10 @@ An example of all that I need is:
 Date: 4/13/15
 Division: Public Relations and Web Presence
 Employee Name: Benito Ramirez
+##Choose one or more of the options below.
 Update: Website is up and running. Click here Website.
-Request: I need a description of the tasks from each division of the Development Team.
+Request: @Name I need a description of the tasks from each division of the Development Team.
+Answer: @Name Description of task
 
 UPDATES:
 
