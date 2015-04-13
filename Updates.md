@@ -4,7 +4,6 @@ title: Updates
 permalink: /Updates.html
 ---
 
-##Updates
 * Date: 4/13/15
 * Division: Public Relations and Web Presence
 * Employee Name: Benito Ramirez
