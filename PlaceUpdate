@@ -11,5 +11,23 @@ Update: Website is up and running. Click here Website.
 Request: @Name I need a description of the tasks from each division of the Development Team.
 Answer: @Name Description of task
 
-UPDATES:
+UPDATES:  
 
+Date: 4/14/15
+Division: Physical Devices and Virtualization
+Employee Name: Kevin Wilkens
+Answer: @Benito Ramirez 
+The Physical Devices and Virtalization division provides the initial setup of the physical computer containing the server.  This 
+includes placing the nuc in a specified location on campus and providing a list of all of the software and packages currently installed on the 
+nuc.  This list can be found here:  [List of currently installed packages.](https://github.com/CourseReps/ECEN489-Spring2015/blob/master/Project3/packages.txt)  
+
+Also, this division performs initial setup of the HTTP server using Apache.  More details on this will be included later.  
+
+
+Date: 4/14/15
+Division: Physical Devices and Virtualization
+Employee Name: Kevin Wilkens
+Request: @Everyone  
+Please review the list of currently installed packages on the server computer.  Also, please 
+check to see if the packages your division requires are already installed, 
+and leave a request in this updates section for any additional packages your division needs.
