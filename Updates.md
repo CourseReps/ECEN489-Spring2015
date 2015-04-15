@@ -20,3 +20,17 @@ permalink: /Updates.html
 * Employee Name: Ian DeGroot
 * Answer: Description - This division is in charge of specifying the type of communicaiton used along with the format of each message. 
 JSON.Simple will be used for this project. The jar file can be downloaded [here](https://code.google.com/p/json-simple/).
+
+### JSON Messages
+
+**Action:** Get friends
+
+*Client Message:* {"selectFriends":"sampleUser"}
+
+*Server Message:* {"friends":[{"username":"John0"},{"username":"John1"}]}
+
+**Action:** Add new check in
+
+*Client Message:* {"checkIn":{"method":"openCV","location":2,"time":1429112854192,"userName":"Bob"}}
+
+*Server Message:* {"outcome":true}
