@@ -14,3 +14,8 @@ permalink: /Updates.html
 * Division: Physical Devices and Virtualization
 * Employee Name: Kevin Wilkens
 * Request: @Everyone  Please review the list of currently installed packages on the server computer.  Also, please check to see if the packages your division requires are already installed, and leave a request in this updates section for any additional packages your division needs.
+
+## Date: 4/14/15
+* Division: Data Integrity and Information Management
+* Employee Name: Ian DeGroot
+* Answer: Description - This division is in charge of specifying the type of communicaiton used along with the format of each message. 
