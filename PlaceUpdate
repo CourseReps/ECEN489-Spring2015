@@ -58,3 +58,9 @@ JSON Messages
 *Client Message:* {"checkIn":{"method":"openCV","location":2,"time":1429112854192,"userName":"Bob"}}
 
 *Server Message:* {"outcome":true}
+  
+Date: 4/15/15
+Division: Networking and Server-Client Architecture
+Employee Name: Pranay Kumar
+Update:  
+Created a working communication architecture between Server-Client using Java Sockets. The code can be found [here](https://github.com/CourseReps/ECEN489-Spring2015/tree/master/Students/epranaykumar/Project3/Network_Module/src)
