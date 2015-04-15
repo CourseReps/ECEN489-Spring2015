@@ -23,6 +23,9 @@ aisleriot					install
 alsa-base					install
 alsa-utils					install
 anacron						install
+apache2						install
+apache2-bin					install
+apache2-data					install
 apg						install
 app-install-data				install
 app-install-data-partner			install
@@ -43,6 +46,7 @@ apturl-common					install
 aspell						install
 aspell-en					install
 at-spi2-core					install
+authbind					install
 avahi-autoipd					install
 avahi-daemon					install
 avahi-utils					install
@@ -327,6 +331,7 @@ gstreamer1.0-x:amd64				install
 gtk2-engines-murrine:amd64			install
 gtk3-engines-unico:amd64			install
 gucharmap					install
+gufw						install
 guile-2.0-libs					install
 gvfs:amd64					install
 gvfs-backends					install
@@ -412,6 +417,10 @@ libacl1:amd64					install
 libapparmor-perl				install
 libapparmor1:amd64				install
 libappindicator3-1				install
+libapr1:amd64					install
+libaprutil1:amd64				install
+libaprutil1-dbd-sqlite3:amd64			install
+libaprutil1-ldap:amd64				install
 libapt-inst1.5:amd64				install
 libapt-pkg-perl					install
 libapt-pkg4.12:amd64				install
@@ -494,6 +503,7 @@ libcdr-0.0-0					install
 libcgmanager0:amd64				install
 libcheese-gtk23:amd64				install
 libcheese7:amd64				install
+libck-connector0:amd64				install
 libclass-accessor-perl				install
 libclone-perl					install
 libcloog-isl4:amd64				install
@@ -513,6 +523,9 @@ libcolorhug1:amd64				install
 libcolumbus1:amd64				install
 libcolumbus1-common				install
 libcomerr2:amd64				install
+libcommons-collections3-java			install
+libcommons-dbcp-java				install
+libcommons-pool-java				install
 libcompizconfig0				install
 libcrack2:amd64					install
 libcroco3:amd64					install
@@ -556,6 +569,7 @@ libebackend-1.2-7				install
 libebook-1.2-14					install
 libebook-contacts-1.2-0				install
 libecal-1.2-16					install
+libecj-java					install
 libedata-book-1.2-20				install
 libedata-cal-1.2-23				install
 libedataserver-1.2-18				install
@@ -626,6 +640,7 @@ libgee2:amd64					install
 libgeis1:amd64					install
 libgeoclue0:amd64				install
 libgeoip1:amd64					install
+libgeronimo-jta-1.1-spec-java			install
 libgettextpo-dev:amd64				install
 libgettextpo0:amd64				install
 libgexiv2-2:amd64				install
@@ -1009,6 +1024,7 @@ libsemanage-common				install
 libsemanage1:amd64				install
 libsensors4:amd64				install
 libsepol1:amd64					install
+libservlet3.0-java				install
 libsgutils2-2					install
 libshout3:amd64					install
 libsigc++-2.0-0c2a:amd64			install
@@ -1072,6 +1088,7 @@ libtimedate-perl				install
 libtimezonemap1					install
 libtinfo5:amd64					install
 libtk8.6:amd64					install
+libtomcat7-java					install
 libtotem-plparser18				install
 libtotem0					install
 libtsan0:amd64					install
@@ -1221,15 +1238,20 @@ linux-headers-3.13.0-32				install
 linux-headers-3.13.0-32-generic			install
 linux-headers-3.13.0-45				install
 linux-headers-3.13.0-45-generic			install
+linux-headers-3.13.0-49				install
+linux-headers-3.13.0-49-generic			install
 linux-headers-generic				install
 linux-image-3.13.0-32-generic			install
 linux-image-3.13.0-45-generic			install
+linux-image-3.13.0-49-generic			install
 linux-image-extra-3.13.0-32-generic		install
 linux-image-extra-3.13.0-45-generic		install
+linux-image-extra-3.13.0-49-generic		install
 linux-image-generic				install
 linux-libc-dev:amd64				install
 linux-signed-generic				install
 linux-signed-image-3.13.0-45-generic		install
+linux-signed-image-3.13.0-49-generic		install
 linux-signed-image-generic			install
 linux-sound-base				install
 locales						install
@@ -1276,6 +1298,7 @@ nautilus-sendto-empathy				install
 nautilus-share					install
 ncurses-base					install
 ncurses-bin					install
+ncurses-term					install
 net-tools					install
 netbase						install
 netcat-openbsd					install
@@ -1300,6 +1323,8 @@ openjdk-7-jre-headless:amd64			install
 openoffice.org-hyphenation			install
 openprinting-ppds				install
 openssh-client					install
+openssh-server					install
+openssh-sftp-server				install
 openssl						install
 oracle-java8-installer				install
 os-prober					install
@@ -1389,6 +1414,7 @@ python-libxml2					install
 python-lockfile					install
 python-lxml					install
 python-minimal					install
+python-netifaces				install
 python-notify					install
 python-ntdb					install
 python-oauthlib					install
@@ -1538,7 +1564,9 @@ speech-dispatcher				install
 speech-dispatcher-audio-plugins:amd64		install
 sphinx-voxforge-hmm-en				install
 sphinx-voxforge-lm-en				install
+ssh						install
 ssh-askpass-gnome				install
+ssh-import-id					install
 ssl-cert					install
 strace						install
 sudo						install
@@ -1573,6 +1601,9 @@ thunderbird-locale-en-us			install
 time						install
 tk						install
 tk8.6						install
+tomcat7						install
+tomcat7-admin					install
+tomcat7-common					install
 toshset						install
 totem						install
 totem-common					install
