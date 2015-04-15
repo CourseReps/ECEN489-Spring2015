@@ -6,13 +6,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
 
-public class ProcessRequest implements Runnable {
-
-    String request;
-
-    ProcessRequest(String rqst) {
-        request = rqst;
-    }
+public class ProcessRequest {
 
     //Takes a string in JSON format and outputs a JSON object
     @SuppressWarnings("unchecked")
@@ -29,14 +23,14 @@ public class ProcessRequest implements Runnable {
         return json;
     }
 
-    public void run() {
+    String process(String request) {
         JSONObject jsonObject = new JSONObject();
 
         jsonObject = stringToJSON(request);
 
         System.out.println("Received timestamp: " + jsonObject.get("timestamp").toString());
 
-        clientResponse = jsonObject;
+        return jsonObject.toString();
     }
 
 }
