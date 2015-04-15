@@ -64,3 +64,9 @@ Division: Networking and Server-Client Architecture
 Employee Name: Pranay Kumar
 Update:  
 Created a working communication architecture between Server-Client using Java Sockets. The code can be found [here](https://github.com/CourseReps/ECEN489-Spring2015/tree/master/Students/epranaykumar/Project3/Network_Module/src)
+
+Date: 4/15/15
+Division: Networking and Server-Client Architecture
+Employee Name: Rong Liu
+Update:  
+https://cert.tamu.edu/docs/process/ have all the process to generate a CSR file. This file will be submitted to TAMU in order to obtain ssl certificate.
