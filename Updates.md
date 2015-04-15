@@ -19,3 +19,4 @@ permalink: /Updates.html
 * Division: Data Integrity and Information Management
 * Employee Name: Ian DeGroot
 * Answer: Description - This division is in charge of specifying the type of communicaiton used along with the format of each message. 
+JSON.Simple will be used for this project. The jar file can be downloaded [here](https://code.google.com/p/json-simple/).
