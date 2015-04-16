@@ -57,3 +57,8 @@ Division: Networking and Server-Client Architecture
 Employee Name: Rong Liu
 Update:  
 https://cert.tamu.edu/docs/process/ have all the process to generate a CSR file. This file will be submitted to TAMU in order to obtain ssl certificate.
+
+Division: Security and Authentication
+Employee Name: Nagaraj Thenkarai Janakiraman & Trevor Glen Dennis
+Answer: Description - This division is responsible for creating a Sign-in application that allow users to login using standard Authentication
+procedure(Hashing and Salting) or using their Google+ account to get access to the application.
