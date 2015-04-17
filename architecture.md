@@ -11,6 +11,8 @@ The Physical Devices and Virtalization division provides the initial setup of th
 nuc.
 
 ### Networking and Server-Client Architecture
+This division is responsible to send and recieve JSON objects through sockets overlayed by http.
+We utilized the Java API for web services on Apache Tomcat.
 
 ### Data Integrity and Information Management
 This division is in charge of specifying the type of communicaiton used along with the format of each message. JSON.Simple will be used for this project.
@@ -30,6 +32,9 @@ and maintaining the databases.
 ### Special Projects
 
 ### Business and Finance
+The Chief Financial Officer office is responsible for projecting costs and revenue for the startup, ECEN 489, to 
+be presented to venture capital investors along with a pitch. We are also responsible for developing a wiki and broad instructions on the steps 
+involved for an individual to develop their own startup.
 
 ### Public Relations and Web Presence
 
