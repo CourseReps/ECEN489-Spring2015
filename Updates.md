@@ -36,11 +36,19 @@ permalink: /Updates.html
 - Employee Name: Rong Liu   
 - Update:  https://cert.tamu.edu/docs/process/ have all the process to generate a CSR file. This file will be submitted to TAMU in order to obtain ssl certificate.  
 
-***Division: Security and Authentication***
-- Employee Name: Nagaraj Thenkarai Janakiraman & Trevor Glen Dennis
-- Answer: Description - This division is responsible for creating a Sign-in application that allow users to login using standard Authentication procedure(Hashing and Salting) or using their Google+ account to get access to the application.
+***Division: Security and Authentication***    
+- Employee Name: Nagaraj Thenkarai Janakiraman & Trevor Glen Dennis     
+- Answer:@Benito Description - This division is responsible for creating a Sign-in application that allow users to login using standard Authentication procedure(Hashing and Salting) or using their Google+ account to get access to the application.
 
 ##Date: 4/17/15
-***Division: Account Managment and Administration***
-- Employee Name: Randy Neal
+***Division: Account Managment and Administration***    
+- Employee Name: Randy Neal    
 - Request: @Nagaraj Thenkarai Janakiraman & Trevor Dennis: can you let me know the provisions you have made regarding system admin login? In other words, are you providing a system admin login and password or do we need to develop one?, Thank you.
+
+***Division: Networking and Server-Client Architecture***     
+- Employee Name: Joshua Cano, Anudeep Tungala, Rong Liu, Pranay Eedara    
+- Update: @Benito Project Architecture Description- This division is responsible to send and recieve JSON objects through sockets overlayed by http. We utilized the Java API for web services on Apache Tomcat.
+
+***Division: Business and Finance***    
+- Employee Name: Blade Roybal, Yajie Zeng    
+- Answer: @Benito Description - The Chief Financial Officer office is responsible for projecting costs and revenue for the startup, ECEN 489, to be presented to venture capital investors along with a pitch. We are also responsible for developing a wiki and broad instructions on the steps involved for an individual to develop their own startup.
