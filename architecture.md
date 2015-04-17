@@ -37,5 +37,4 @@ be presented to venture capital investors along with a pitch. We are also respon
 involved for an individual to develop their own startup.
 
 ### Public Relations and Web Presence
-
-### Advisory Board
+The Public Relaitons and Web Presence division is responsible for creating and maintaining the Physicamigo website. The website serves as a informational platform for investors to gain knowledge of our project. The website also serves as the main form of cummunication for the Physicamigo employees.
