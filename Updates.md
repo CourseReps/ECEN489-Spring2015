@@ -20,6 +20,10 @@ permalink: /Updates.html
 - Request: @Everyone  Please review the list of currently installed packages on the server computer.  Also, please check to see if the packages your division requires are already installed, and leave a request in this updates section for any additional packages your division needs.   
 
 ##Date: 4/15/15
+***Division: Account Managment and Administration***
+- Employee Name: Randy Neal
+- Answer: @Benito Ramirez The Account Management and Administration division is responsible for maintaining user accounts, this includes: creating, deleting, modifying user accounts, and assisting users with trouble shooting account issues. Additionally, this division monitors the databases on the server and ensures their integrity, this task involves: adding, removing, and changing location data; and maintaining the databases.
+
 ***Division: Data Integrity and Information Management***    
 - Employee Name: Ian DeGroot   
 - Answer: Description - This division is in charge of specifying the type of communicaiton used along with the format of each message. JSON.Simple will be used for this project. The JSON.Simple jar file can be downloaded [here](https://code.google.com/p/json-simple/). JSON Message formatting can be found [here](https://github.com/CourseReps/ECEN489-Spring2015/blob/master/Project3/JSONMessages.md).   
@@ -31,3 +35,11 @@ permalink: /Updates.html
 ***Division: Networking and Server-Client Architecture***    
 - Employee Name: Rong Liu   
 - Update:  https://cert.tamu.edu/docs/process/ have all the process to generate a CSR file. This file will be submitted to TAMU in order to obtain ssl certificate.  
+
+***Division: Security and Authentication***
+- Employee Name: Nagaraj Thenkarai Janakiraman & Trevor Glen Dennis
+- Answer: Description - This division is responsible for creating a Sign-in application that allow users to login using standard Authentication procedure(Hashing and Salting) or using their Google+ account to get access to the application.
+
+***Division: Account Managment and Administration***
+- Employee Name: Randy Neal
+- Request: @Nagaraj Thenkarai Janakiraman & Trevor Dennis: can you let me know the provisions you have made regarding system admin login? In other words, are you providing a system admin login and password or do we need to develop one?, Thank you.
