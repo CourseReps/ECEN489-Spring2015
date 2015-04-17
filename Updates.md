@@ -40,6 +40,7 @@ permalink: /Updates.html
 - Employee Name: Nagaraj Thenkarai Janakiraman & Trevor Glen Dennis
 - Answer: Description - This division is responsible for creating a Sign-in application that allow users to login using standard Authentication procedure(Hashing and Salting) or using their Google+ account to get access to the application.
 
+##Date: 4/17/15
 ***Division: Account Managment and Administration***
 - Employee Name: Randy Neal
 - Request: @Nagaraj Thenkarai Janakiraman & Trevor Dennis: can you let me know the provisions you have made regarding system admin login? In other words, are you providing a system admin login and password or do we need to develop one?, Thank you.
