@@ -69,3 +69,12 @@ Division: Account Managment and Administration
 Employee Name: Randy Neal
 Request: @Nagaraj Thenkarai Janakiraman & Trevor Dennis: can you let me know the provisions you have made regarding system admin 
 login? In other words, are you providing a system admin login and password or do we need to develop one?, Thank you.
+
+Date:04/16/2015
+Division: Networking and Server-Client Architecture
+Employee Name: Joshua Cano, Anudeep Tungala, Rong Liu, Pranay Eedara
+Update:
+Project Architecture Description- This division is responsible to send and recieve JSON objects through sockets overlayed by http.
+We utilized the Java API for web services on Apache Tomcat.
+
+
