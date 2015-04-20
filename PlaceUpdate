@@ -83,3 +83,9 @@ Employee Name: Blade Roybal, Yajie Zeng
 Answer: @Benito Description - The Chief Financial Officer office is responsible for projecting costs and revenue for the startup, ECEN 489, to 
 be presented to venture capital investors along with a pitch. We are also responsible for developing a wiki and broad instructions on the steps 
 involved for an individual to develop their own startup.
+
+Date: 04/19/2015
+Division: Database
+Employee Name: Mandel Oats, Evelyn Cifuentes
+Update:  Created a database with SQLite from which information is going to be pulled and added to for each user. Also created hooks for the tables, which are Java 
+functions that are to be used within another program for facilitated manipulation of the tables in the database.
