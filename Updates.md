@@ -19,6 +19,10 @@ permalink: /Updates.html
 - Employee Name: Kevin Wilkens   
 - Request: @Everyone  Please review the list of currently installed packages on the server computer.  Also, please check to see if the packages your division requires are already installed, and leave a request in this updates section for any additional packages your division needs.   
 
+***Division: Networking and Server-Client Architecture***    
+- Employee Name: Naga Raghavendra Anudeep Tungala    
+- Update: Created a web service and published it on local server.  Successfully tested using a java remote client.    
+
 ##Date: 4/15/15
 ***Division: Account Managment and Administration***
 - Employee Name: Randy Neal
@@ -38,7 +42,11 @@ permalink: /Updates.html
 
 ***Division: Security and Authentication***    
 - Employee Name: Nagaraj Thenkarai Janakiraman & Trevor Glen Dennis     
-- Answer:@Benito Description - This division is responsible for creating a Sign-in application that allow users to login using standard Authentication procedure(Hashing and Salting) or using their Google+ account to get access to the application.
+- Answer:@Benito Description - This division is responsible for creating a Sign-in application that allow users to login using standard Authentication procedure(Hashing and Salting) or using their Google+ account to get access to the application.    
+
+***Division: Networking and Server-Client Architecture***    
+- Employee Name: Naga Raghavendra Anudeep Tungala    
+- Update: Published the web service on elcloudo and successfully integrated with Ian's JSON wrapper.    
 
 ##Date: 4/17/15
 ***Division: Account Managment and Administration***    
@@ -51,4 +59,14 @@ permalink: /Updates.html
 
 ***Division: Business and Finance***    
 - Employee Name: Blade Roybal, Yajie Zeng    
-- Answer: @Benito Description - The Chief Financial Officer office is responsible for projecting costs and revenue for the startup, ECEN 489, to be presented to venture capital investors along with a pitch. We are also responsible for developing a wiki and broad instructions on the steps involved for an individual to develop their own startup.
+- Answer: @Benito Description - The Chief Financial Officer office is responsible for projecting costs and revenue for the startup, ECEN 489, to be presented to venture capital investors along with a pitch. We are also responsible for developing a wiki and broad instructions on the steps involved for an individual to develop their own startup.    
+
+***Division: Networking and Server-Client Architecture***    
+- Employee Name: Naga Raghavendra Anudeep Tungala    
+- Update: Tried to configure HTTPS connection on Tomcat7 with the help from Server Administrator Kevin. The Java Keystore file imported from the certificates given by Rong were not useful.    
+
+##Date: 4/19/15
+***Division: Networking and Server-Client Architecture***    
+- Employee Name: Naga Raghavendra Anudeep Tungala    
+- Update: Created a self signed certificate and It worked fine on elcloudo and able to make successful HTTPS connection.    
+
