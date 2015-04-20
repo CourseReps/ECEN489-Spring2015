@@ -84,8 +84,22 @@ Answer: @Benito Description - The Chief Financial Officer office is responsible 
 be presented to venture capital investors along with a pitch. We are also responsible for developing a wiki and broad instructions on the steps 
 involved for an individual to develop their own startup.
 
-Date: 04/19/2015
-Division: Database
-Employee Name: Mandel Oats, Evelyn Cifuentes
-Update:  Created a database with SQLite from which information is going to be pulled and added to for each user. Also created hooks for the tables, which are Java 
-functions that are to be used within another program for facilitated manipulation of the tables in the database.
+Date: 4/14/15
+Division: Networking and Server-Client Architecture
+Employee Name: Naga Raghavendra Anudeep Tungala
+Update: Created a web service and published it on local server.  Successfully tested using a java remote client.
+
+Date: 4/15/15
+Division: Networking and Server-Client Architecture
+Employee Name: Naga Raghavendra Anudeep Tungala
+Update: Published the web service on elcloudo and successfully integrated with Ian's JSON wrapper.
+
+Date: 4/17/15
+Division: Networking and Server-Client Architecture
+Employee Name: Naga Raghavendra Anudeep Tungala
+Update: Tried to configure HTTPS connection on Tomcat7 with the help from Server Administrator Kevin. The Java Keystore file imported from the certificates given by Rong were not useful.
+
+Date: 4/19/15
+Division: Networking and Server-Client Architecture
+Employee Name: Naga Raghavendra Anudeep Tungala
+Update: Created a self signed certificate and It worked fine on elcloudo and able to make successful HTTPS connection.
