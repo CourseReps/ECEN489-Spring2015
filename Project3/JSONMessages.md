@@ -16,13 +16,13 @@
 
 *Client Message:* {"recentFriends":{"locations":["EIC","ZachShack"],"username":"Jim"}}
 
-*Server Message:* {"recentFriends":[{"location":"EIC","friends":{"friend00":"sampleUsername00", ... ,"friend04":"sampleUsername04"}},"location":"ZachShack",...]}
+*Server Message:* {"recentFriends":[{"location":"EIC","friends":{"friend0":"Bob", ... ,"friend4":"Alice"}},"location":"ZachShack",...]}
 
 **Action:** Get friend's last five locations
 
 *Client Message:* {"recentLocs":{"friends":["Alice","Bob","Charlie"],"username":"Jim"}}
 
-*Server Message:* {"friendsLocs":[{"locations":{"location00":"sampleLocation00",...,"location04":"sampleLocation04"},"username":"Alice"},{"locations":{"location10":"sampleLocation10",...,"location14":"sampleLocation14"},"username":"Bob"}, {...}, "username":"Charlie"]}
+*Server Message:* {"friendsLocs":[{"locations":{"location0":"EIC",...,"location4":"ZachShack"},"username":"Alice"},{"locations":{"location0":"Bright",...,"location4":"EIC"},"username":"Bob"}, {...}, "username":"Charlie"]}
 
 **Action:** Get friends
 
