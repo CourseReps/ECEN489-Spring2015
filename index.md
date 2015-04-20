@@ -4,4 +4,4 @@ title: Home
 permalink: /index.html
 ---
 
-Welcome to the Physicamigo website
+Welcome to the ![](http://imgur.com/Y7a18dM) website
