@@ -8,13 +8,13 @@
 
 **Action:** Add new check in
 
-*Client Message:* {"checkIn":{"method":"openCV","location":2,"time":1429112854192,"userName":"Bob"}}
+*Client Message:* {"checkIn":{"method":"openCV","location":"EIC","time":1429112854192,"userName":"Bob"}}
 
 *Server Message:* {"outcome":"success"}
 
 **Action:** Get last 5 friends at a location
 
-*Client Message:* {"recentFriends":{"location":"EIC","username":"Jim"}}
+*Client Message:* {"recentFriends":{"locations":["EIC","ZachShack"],"username":"Jim"}}
 
 *Server Message:* {"recentFriends":[{"location":"EIC","friends":{"friend00":"sampleUsername00", ... ,"friend04":"sampleUsername04"}},"location":"ZachShack",...]}
 
