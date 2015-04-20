@@ -8,7 +8,7 @@
 
 **Action:** Add new check in
 
-*Client Message:* {"checkIn":{"method":"openCV","location":"EIC","time":1429112854192,"userName":"Bob"}}
+*Client Message:* {"checkIn":{"method":"openCV","location":"EIC","time":1429112854192,"username":"Bob"}}
 
 *Server Message:* {"outcome":"success"}
 
