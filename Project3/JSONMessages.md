@@ -28,5 +28,5 @@
 
 *Client Message:* {"selectFriends":"Jim"}
 
-*Server Message:* {"friends":[{"username":"Alice"},{"username":"Bob"}]}
+*Server Message:* {"friends":["Alice","Bob","Charlie","David","Elliot"]}
 
