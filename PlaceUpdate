@@ -109,3 +109,9 @@ Division: Database
 Employee Name: Mandel Oats
 Update: Updated the database tables and hooks: Location now has Latitude and Longitude. Deleted Requests table.
 Request: @DevelopmentTeam Pull the new code for updates. 
+
+Date: 4/23/15
+Division: Database
+Employee Name: Mandel Oats
+Update: Fixed error in DB hooks for getFriends() function.
+Request: @DevelopmentTeam Pull the new code for updates. 
