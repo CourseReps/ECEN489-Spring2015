@@ -279,7 +279,7 @@ public class DBHelper {
     public ArrayList<String> getFriends(int userID){
         ArrayList<String> arrayList = new ArrayList<String>();
         try {
-            ResultSet rs = stmt.executeQuery("SELECT USERNAME FROM USERS INNER JOIN FRIENDS ON USERS.ID = FRIENDS.USERS_ID AND USERS.ID != "+userID);
+            ResultSet rs = stmt.executeQuery("SELECT USERNAME FROM USERS INNER JOIN FRIENDS ON FRIENDS.USERS_ID ="+userID+" AND USERS.ID = FRIENDS.FRIEND_USERS_ID");
             while(rs.next()){
                 String username = rs.getString("USERNAME");
                 arrayList.add(username);
