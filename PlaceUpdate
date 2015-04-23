@@ -104,6 +104,12 @@ Division: Networking and Server-Client Architecture
 Employee Name: Naga Raghavendra Anudeep Tungala
 Update: Created a self signed certificate and It worked fine on elcloudo and able to make successful HTTPS connection.
 
+Date: 04/19/2015
+Division: Database
+Employee Name: Mandel Oats, Evelyn Cifuentes
+Update:  Created a database with SQLite from which information is going to be pulled and added to for each user. Also created hooks for the tables, which are Java 
+functions that are to be used within another program for facilitated manipulation of the tables in the database.
+
 Date: 4/20/15
 Division: Database
 Employee Name: Mandel Oats
