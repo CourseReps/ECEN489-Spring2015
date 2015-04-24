@@ -15,11 +15,11 @@ public class Main {
         ArrayList<CheckIn> checkIns2 = new ArrayList<CheckIn>();
         dbHelper.openDB();
         dbHelper.createDB();
-        dbHelper.addUser("Mandel", "Password", "SALT");
-        dbHelper.addUser("Trevor", "Password", "SALT");
-        dbHelper.addUser("Benito", "Password", "SALT");
-        dbHelper.addUser("Chamberland", "Password", "SALT");
-        dbHelper.addUser("Ian", "Password", "SALT");
+        dbHelper.addUser("Mandel","Mandel","SessionID1", "Password", "SALT");
+        dbHelper.addUser("Trevor", "Trevor", "SessionID2", "Password", "SALT");
+        dbHelper.addUser("Benito", "Benito","SessionID3","Password", "SALT");
+        dbHelper.addUser("Chamberland", "Chamberland", "SessionID4", "Password", "SALT");
+        dbHelper.addUser("Ian","Ian","SessionID5", "Password", "SALT");
         dbHelper.addLocation("Home", 12.567888, 12.567, "Image");
         dbHelper.addLocation("School", 12.567888, 12.567, "Image");
         int mandelId = dbHelper.getUserIDByName("Mandel");
@@ -45,6 +45,8 @@ public class Main {
         for(CheckIn ci : checkIns2){
             System.out.println("["+ci.getUserName()+","+ci.getLocationName()+"]");
         }
+        int mandelFromSession = dbHelper.getUserIDBySessionID("SessionID1");
+        System.out.println("Mandels ID from session: "+ mandelFromSession);
         dbHelper.deleteFriend(mandelId,trevorId);
         mandelfriends = dbHelper.getFriends(mandelId);
         System.out.println(mandelfriends.toString());

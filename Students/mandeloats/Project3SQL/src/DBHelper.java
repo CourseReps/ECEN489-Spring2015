@@ -33,6 +33,8 @@ public class DBHelper {
             sql = "CREATE TABLE IF NOT EXISTS 'USERS' (" +
                     "'ID' INTEGER PRIMARY KEY NOT NULL,"+
                     "'USERNAME' VARCHAR(45) NOT NULL,"+
+                    "'NAME' VARCHAR(45) NOT NULL,"+
+                    "'SESSION_ID' VARCHAR(45),"+
                     "'PASSWORD' VARCHAR(128) NOT NULL,"+
                     "'SALT' VARCHAR(45) NOT NULL)";
 
@@ -110,11 +112,11 @@ public class DBHelper {
         }
             
     }
-    public void addUser(String userName, String password, String salt ){ //set userID to -1 if adding
+    public void addUser(String userName, String name, String sessionID, String password, String salt ){ //set userID to -1 if adding
             try{
                 String sql;
-                sql = "INSERT INTO USERS (USERNAME, PASSWORD, SALT) VALUES ('"+
-                        userName + "', '" + password + "', '" + salt+ "')";
+                sql = "INSERT INTO USERS (USERNAME, NAME, SESSION_ID, PASSWORD, SALT) VALUES ('"+
+                        userName + "', '"+ name +"', '"+sessionID+"', '" + password + "', '" + salt+ "')";
                 
                 stmt.executeUpdate(sql);
 
@@ -275,6 +277,18 @@ public class DBHelper {
         }
         return locID;
         
+    }
+    public int getUserIDBySessionID(String sessionID){
+        int userID = -1;
+        try {
+            ResultSet rs = stmt.executeQuery("SELECT ID, USERNAME FROM USERS WHERE SESSION_ID ='" + sessionID+"'");
+            userID = rs.getInt("ID");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return userID;
+
     }
     public ArrayList<String> getFriends(int userID){
         ArrayList<String> arrayList = new ArrayList<String>();
