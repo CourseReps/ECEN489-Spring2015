@@ -121,3 +121,9 @@ Division: Database
 Employee Name: Mandel Oats
 Update: Fixed error in DB hooks for getFriends() function.
 Request: @DevelopmentTeam Pull the new code for updates. 
+
+Date: 4/23/15
+Division: Client CheckIn Based on ImageProcessing
+Employee Name: Pranay Kumar
+Update: Created a working Object Recognition Activity on all Android Versions including Android 5.X.X
+Request: @Public Divisions & Web Presence  Please include this Division 
