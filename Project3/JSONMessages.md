@@ -1,5 +1,15 @@
 # JSON Messages
 
+**Action:** Login
+
+*Client Message:* {"login":{"username":"Jim", "password":"pass"}}
+
+*Server Message:* {"loginOutcome":{"outcome":"success", "sessionID":1}}
+
+or 
+
+{"loginOutcome":{"outcome":"failure", "sessionID":0}}
+
 **Action:** Add friends
 
 *Client Message:* {"addFriends":{"friends":["Alice","Bob","Charlie"],"username":"Jim"}}
