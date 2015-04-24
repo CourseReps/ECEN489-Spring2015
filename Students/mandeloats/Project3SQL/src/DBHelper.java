@@ -26,8 +26,11 @@ public class DBHelper {
     }
     public void createDB(){
         try{
+            String sql = "PRAGMA foreign_keys = ON";
+            
+            stmt.execute(sql);
 
-            String sql = "CREATE TABLE IF NOT EXISTS 'USERS' (" +
+            sql = "CREATE TABLE IF NOT EXISTS 'USERS' (" +
                     "'ID' INTEGER PRIMARY KEY NOT NULL,"+
                     "'USERNAME' VARCHAR(45) NOT NULL,"+
                     "'PASSWORD' VARCHAR(128) NOT NULL,"+
@@ -37,8 +40,8 @@ public class DBHelper {
 
 
             sql = "CREATE TABLE IF NOT EXISTS 'FRIENDS' ("+
-                    "'USERS_ID' INT NOT NULL,"+
-                    "'FRIEND_USERS_ID' INT NOT NULL,"+
+                    "'USERS_ID' INTEGER NOT NULL,"+
+                    "'FRIEND_USERS_ID' INTEGER NOT NULL,"+
                     "PRIMARY KEY ('USERS_ID', 'FRIEND_USERS_ID'),"+
                     "FOREIGN KEY ('USERS_ID')"+
                     "REFERENCES 'USERS' ('ID')" +
@@ -53,30 +56,31 @@ public class DBHelper {
             sql = "CREATE TABLE IF NOT EXISTS 'LOCATIONS' ("+
                     "'ID' INTEGER PRIMARY KEY NOT NULL,"+
                     "'NAME' VARCHAR(45) NOT NULL,"+
-                    "'IMAGE' VARCHAR(45) NOT NULL,"+
-                    "'GPS' VARCHAR(45) NOT NULL)";
+                    "'LATITUDE' REAL,"+
+                    "'LONGITUDE' REAL,"+
+                    "'IMAGE' VARCHAR(45))";
 
             stmt.executeUpdate(sql);
 
 
             sql = "CREATE TABLE IF NOT EXISTS 'CHECKINS' ("+
-                    "'USERS_ID' INT NOT NULL,"+
-                    "'LOCATIONS_ID' INT NOT NULL,"+
-                    "'TIMESTAMP' INT NOT NULL,"+
-                    "'METHOD' VARCHAR(45) NULL,"+
+                    "'USERS_ID' INTEGER NOT NULL,"+
+                    "'LOCATIONS_ID' INTEGER NOT NULL,"+
+                    "'TIMESTAMP' INTEGER NOT NULL,"+
+                    "'METHOD' VARCHAR(45),"+
                     "PRIMARY KEY ('USERS_ID', 'TIMESTAMP'),"+
                     "FOREIGN KEY ('USERS_ID')"+
-                    "REFERENCES 'USERS' ('ID'),"+
+                    "REFERENCES 'USERS' ('ID') ON DELETE CASCADE,"+
                     "FOREIGN KEY ('LOCATIONS_ID')"+
-                    "REFERENCES 'LOCATIONS' ('ID'))";
+                    "REFERENCES 'LOCATIONS' ('ID') ON DELETE CASCADE )";
 
             stmt.executeUpdate(sql);
 
 
-
+/*
             sql = "CREATE TABLE IF NOT EXISTS 'REQUESTS' ("+
-                    "'USERS_ID' INT NOT NULL,"+
-                    "'FRIEND_USERS_ID' INT NOT NULL,"+
+                    "'USERS_ID' INTEGER NOT NULL,"+
+                    "'FRIEND_USERS_ID' INTEGER NOT NULL,"+
                     "PRIMARY KEY ('USERS_ID', 'FRIEND_USERS_ID'),"+
                     "FOREIGN KEY ('USERS_ID')"+
                     "REFERENCES 'USERS' ('ID') "+
@@ -87,7 +91,7 @@ public class DBHelper {
 
 
             stmt.executeUpdate(sql);
-
+*/
         }
         
         catch(Exception e){
@@ -134,11 +138,11 @@ public class DBHelper {
         }
         
     }
-    public void addLocation(String name, String image, String gps){
+    public void addLocation(String name, double latitude, double longitude, String image){
         try{
             String sql;
-            sql = "INSERT INTO LOCATIONS (NAME, IMAGE, GPS) VALUES ('"+
-                    name + "', '" + image + "', '" + gps+ "')";
+            sql = "INSERT INTO LOCATIONS (NAME, LATITUDE, LONGITUDE, IMAGE) VALUES ('"+
+                    name + "', "+latitude+", "+longitude+", '" + image + "')";
 
             stmt.executeUpdate(sql);
 
@@ -275,7 +279,7 @@ public class DBHelper {
     public ArrayList<String> getFriends(int userID){
         ArrayList<String> arrayList = new ArrayList<String>();
         try {
-            ResultSet rs = stmt.executeQuery("SELECT USERNAME FROM USERS INNER JOIN FRIENDS ON USERS.ID = FRIENDS.USERS_ID AND USERS.ID != "+userID);
+            ResultSet rs = stmt.executeQuery("SELECT USERNAME FROM USERS INNER JOIN FRIENDS ON FRIENDS.USERS_ID ="+userID+" AND USERS.ID = FRIENDS.FRIEND_USERS_ID");
             while(rs.next()){
                 String username = rs.getString("USERNAME");
                 arrayList.add(username);

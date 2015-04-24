@@ -1,13 +1,42 @@
 # JSON Messages
 
-**Action:** Get friends
+**Action:** Login
 
-*Client Message:* {"selectFriends":"sampleUser"}
+*Client Message:* {"login":{"username":"Jim", "password":"pass"}}
 
-*Server Message:* {"friends":[{"username":"John0"},{"username":"John1"}]}
+*Server Message:* {"loginOutcome":{"outcome":"success", "sessionID":1}}
+
+or 
+
+{"loginOutcome":{"outcome":"failure", "sessionID":0}}
+
+**Action:** Add friends
+
+*Client Message:* {"addFriends":{"friends":["Alice","Bob","Charlie"],"username":"Jim"}}
+
+*Server Message:* {"outcome":"success"}
 
 **Action:** Add new check in
 
-*Client Message:* {"checkIn":{"method":"openCV","location":2,"time":1429112854192,"userName":"Bob"}}
+*Client Message:* {"checkIn":{"method":"openCV","location":"EIC","time":1429112854192,"username":"Bob"}}
 
-*Server Message:* {"outcome":true}
+*Server Message:* {"outcome":"success"}
+
+**Action:** Get last 5 friends at a location
+
+*Client Message:* {"recentFriends":{"locations":["EIC","ZachShack"],"username":"Jim"}}
+
+*Server Message:* {"recentFriends":[{"location":"EIC","friends":["Alice","Bob","Charlie","David","Elliot"]},"location":"ZachShack",...]}
+
+**Action:** Get friend's last five locations
+
+*Client Message:* {"recentLocs":{"friends":["Alice","Bob","Charlie"],"username":"Jim"}}
+
+*Server Message:* {"friendsLocs":[{"locations":["EIC","ZachShack","Bright","MSC","Rudder"],"username":"Alice"},{"locations":["EIC","ZachShack","Bright","MSC","Rudder"],"username":"Bob"}, [...], "username":"Charlie"]}
+
+**Action:** Get friends
+
+*Client Message:* {"selectFriends":"Jim"}
+
+*Server Message:* {"friends":["Alice","Bob","Charlie","David","Elliot"]}
+

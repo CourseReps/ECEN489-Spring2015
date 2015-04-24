@@ -18,11 +18,16 @@ public class Main {
         dbHelper.addUser("Mandel", "Password", "SALT");
         dbHelper.addUser("Trevor", "Password", "SALT");
         dbHelper.addUser("Benito", "Password", "SALT");
-        dbHelper.addLocation("Home", "Image", "coordinates");
-        dbHelper.addLocation("School","Image","coordinates");
+        dbHelper.addUser("Chamberland", "Password", "SALT");
+        dbHelper.addUser("Ian", "Password", "SALT");
+        dbHelper.addLocation("Home", 12.567888, 12.567, "Image");
+        dbHelper.addLocation("School", 12.567888, 12.567, "Image");
         int mandelId = dbHelper.getUserIDByName("Mandel");
         int trevorId = dbHelper.getUserIDByName("Trevor");
         int benitoId = dbHelper.getUserIDByName("Benito");
+        int chamberlandID = dbHelper.getUserIDByName("Chamberland");
+        int ianID = dbHelper.getUserIDByName("Ian");
+        dbHelper.addFriend(mandelId,ianID);
         dbHelper.addFriend(mandelId,trevorId);
         dbHelper.addFriend(mandelId,benitoId);
         ArrayList<String> mandelfriends = dbHelper.getFriends(mandelId);
@@ -44,7 +49,7 @@ public class Main {
         mandelfriends = dbHelper.getFriends(mandelId);
         System.out.println(mandelfriends.toString());
         dbHelper.deleteLocation(dbHelper.getLocationIDByName("Home"));
-        dbHelper.deleteUser(mandelId);
+        dbHelper.deleteUser(trevorId);
         
         dbHelper.closeDB();
         
