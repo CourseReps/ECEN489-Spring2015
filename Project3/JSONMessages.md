@@ -4,11 +4,17 @@
 
 *Client Message:* {"login":{"username":"Jim", "password":"pass"}}
 
-*Server Message:* {"loginOutcome":{"outcome":"success", "sessionID":1}}
+*Server Message:* {"loginOutcome":{"outcome":"success", "sessionID":"hashedID"}}
 
 or 
 
-{"loginOutcome":{"outcome":"failure", "sessionID":0}}
+{"loginOutcome":{"outcome":"failure", "sessionID":"null"}}
+
+**Action:** Logout
+
+*Client Message:* {"logout":{"username":"Jim"}}
+
+*Server Message:* No server response
 
 **Action:** Add friends
 
