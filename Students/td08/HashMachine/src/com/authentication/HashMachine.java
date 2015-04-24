@@ -12,13 +12,28 @@ public class HashMachine {
        32 character (128 bit) randomly generated salt. Second element contains 64 character (256 bit)
        salted hashed password. Each element is stored as a string.
      */
-    public static String[] generateUserHash (String password) throws NoSuchAlgorithmException {
+    public static String[] generateSaltedUserHash (String password) throws NoSuchAlgorithmException {
         String salt = getSalt();
         String securePassword = get_SHA_256_SaltedPassword(password, salt);
         String[] credential = new String[2];
         credential[0] = salt;
         credential[1] = securePassword;
         return credential;
+    }
+
+    //Method that generates a 64 character (256 bit) unsalted hashed password
+    public static String generateUnsaltedUserHash (String password) throws NoSuchAlgorithmException {
+        String hash = get_SHA_256_unsaltedPassword(password);
+        return hash;
+    }
+
+    //Method that generates a 16 character (64 bit) hex token used for validating an authenticated user
+    public static String generateSessionID () throws NoSuchAlgorithmException {
+        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+        byte[] random = new byte[8];
+        sr.nextBytes(random);
+        return getHexString(random);
+
     }
 
     //Method that generates a 64 character (256 bit) salted hash using the SHA-256 algorithm
