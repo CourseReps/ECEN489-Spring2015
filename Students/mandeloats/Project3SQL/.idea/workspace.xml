@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="543b9d56-92f2-4159-a295-ba3e40f924bf" name="Default" comment="" />
+    <list default="true" id="543b9d56-92f2-4159-a295-ba3e40f924bf" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="Project3SQL.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -17,34 +21,28 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="DaemonCodeAnalyzer">
-    <disable_hints />
-  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="Project3SQL" />
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6051873" vertical-offset="45" max-vertical-offset="900">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DBHelper.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DBHelper.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DBHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="1890">
-              <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="31" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="method#openDB#0;class#DBHelper#0" expanded="false" />
                 <element signature="method#closeDB#0;class#DBHelper#0" expanded="false" />
                 <element signature="method#addUser#0;class#DBHelper#0" expanded="false" />
@@ -60,61 +58,20 @@
                 <element signature="method#getLocationIDByName#0;class#DBHelper#0" expanded="false" />
                 <element signature="method#getCheckInByLocation#0;class#DBHelper#0" expanded="false" />
                 <element signature="method#getCheckInByUser#0;class#DBHelper#0" expanded="false" />
-                <marker date="1429159193000" expanded="true" signature="644:904" placeholder="CREATE TABLE..IF..." />
-                <marker date="1429159193000" expanded="true" signature="966:1175" placeholder="CREATE TABLE..IF..." />
-                <marker date="1429159193000" expanded="true" signature="966:1177" placeholder="CREATE TABLE..IF..." />
-                <marker date="1429159193000" expanded="true" signature="966:1177" placeholder="CREATE TABLE..IF..." />
-                <marker date="1429159193000" expanded="true" signature="966:1177" placeholder="CREATE TABLE..IF..." />
-                <marker date="1429159193000" expanded="true" signature="966:1462" placeholder="CREATE TABLE..IF..." />
-                <marker date="1429159193000" expanded="true" signature="1524:1778" placeholder="CREATE TABLE..IF..." />
-                <marker date="1429159193000" expanded="true" signature="1840:2344" placeholder="CREATE TABLE..IF..." />
-                <marker date="1429159193000" expanded="true" signature="2407:2907" placeholder="CREATE TABLE..IF..." />
-                <marker date="1429159193000" expanded="true" signature="2760:2907" placeholder="CREATE TABLE..IF..." />
-                <marker date="1429159193000" expanded="true" signature="3430:3484" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="3430:3524" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="3430:3527" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="3430:3544" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="3430:3545" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="3430:3547" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="3430:3560" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="3826:3854" placeholder="DELETE FROM ..." />
-                <marker date="1429159193000" expanded="true" signature="4124:4226" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="4124:4238" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="4481:4513" placeholder="DELETE FROM ..." />
-                <marker date="1429159193000" expanded="true" signature="4765:4821" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="4765:4822" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="4765:4853" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="4765:4866" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="4951:5052" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="5294:5330" placeholder="DELETE FROM ..." />
-                <marker date="1429159193000" expanded="true" signature="5294:5362" placeholder="DELETE FROM ..." />
-                <marker date="1429159193000" expanded="true" signature="5432:5502" placeholder="DELETE FROM ..." />
-                <marker date="1429159193000" expanded="true" signature="5779:5853" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="5779:5885" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="5779:5900" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="5779:5916" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="5779:5927" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="5779:5928" placeholder="INSERT INTO ..." />
-                <marker date="1429159193000" expanded="true" signature="6159:6195" placeholder="SELECT USERN..USER..." />
-                <marker date="1429159193000" expanded="true" signature="6514:6550" placeholder="SELECT NAME ..LOCATIONS..." />
-                <marker date="1429159193000" expanded="true" signature="6932:6979" placeholder="SELECT FROM USERS..." />
-                <marker date="1429159193000" expanded="true" signature="6932:6980" placeholder="SELECT USERN..USERS..." />
-                <marker date="1429159193000" expanded="true" signature="6932:6995" placeholder="SELECT ID, U..USERS..." />
-                <marker date="1429159193000" expanded="true" signature="7329:7372" placeholder="SELECT FROM USERS..." />
-                <marker date="1429159193000" expanded="true" signature="7329:7373" placeholder="SELECT NAME ..LOCATIONS..." />
-                <marker date="1429159193000" expanded="true" signature="7329:7392" placeholder="SELECT ID, N..LOCATIONS..." />
-                <marker date="1429159193000" expanded="true" signature="7727:7766" placeholder="SELECT FROM FRIENDS..." />
-                <marker date="1429159193000" expanded="true" signature="7728:7754" placeholder="SELECT USERN..USERS..." />
-                <marker date="1429159193000" expanded="true" signature="7728:7754" placeholder="SELECT USERN..USERS..." />
-                <marker date="1429159193000" expanded="true" signature="7728:7766" placeholder="SELECT FROM FRIENDS..." />
-                <marker date="1429159193000" expanded="true" signature="8366:8434" placeholder="SELECT USERS..." />
-                <marker date="1429159193000" expanded="true" signature="9272:9351" placeholder="SELECT USERS..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -128,13 +85,16 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="42" />
-    <option name="y" value="22" />
-    <option name="width" value="1260" />
-    <option name="height" value="670" />
+  <component name="NamedScopeManager">
+    <order />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1" />
+    <option name="y" value="1" />
+    <option name="width" value="1364" />
+    <option name="height" value="736" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -159,7 +119,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -168,8 +127,34 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Project3SQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Project3SQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Project3SQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Project3SQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -183,10 +168,10 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/sqlite-jdbc-3.8.7.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="dynamic.classpath" value="false" />
   </component>
@@ -196,25 +181,117 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
-    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
-      <module name="" />
-      <setting name="vmparams" value="" />
-      <setting name="cmdLine" value="run-app" />
-      <setting name="depsClasspath" value="false" />
-      <setting name="passParentEnv" value="true" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <setting name="launchBrowser" value="false" />
-      <method />
-    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
       <method />
     </configuration>
-    <configuration default="true" type="executeSpecs" factoryName="Gauge Execution">
-      <setting name="environment" value="" />
-      <setting name="specsToExecute" value="" />
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -223,22 +300,6 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -269,184 +330,6 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <pass-parent-envs>true</pass-parent-envs>
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
-      <option name="BCName" value="" />
-      <option name="IOSSimulatorSdkPath" value="" />
-      <option name="adlOptions" value="" />
-      <option name="airProgramParameters" value="" />
-      <option name="appDescriptorForEmulator" value="Android" />
-      <option name="debugTransport" value="USB" />
-      <option name="debuggerSdkRaw" value="BC SDK" />
-      <option name="emulator" value="NexusOne" />
-      <option name="emulatorAdlOptions" value="" />
-      <option name="fastPackaging" value="true" />
-      <option name="fullScreenHeight" value="0" />
-      <option name="fullScreenWidth" value="0" />
-      <option name="launchUrl" value="false" />
-      <option name="launcherParameters">
-        <LauncherParameters>
-          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
-          <option name="launcherType" value="OSDefault" />
-          <option name="newPlayerInstance" value="false" />
-          <option name="playerPath" value="/Applications/Flash Player Debugger.app" />
-        </LauncherParameters>
-      </option>
-      <option name="mobileRunTarget" value="Emulator" />
-      <option name="moduleName" value="" />
-      <option name="overriddenMainClass" value="" />
-      <option name="overriddenOutputFileName" value="" />
-      <option name="overrideMainClass" value="false" />
-      <option name="runTrusted" value="true" />
-      <option name="screenDpi" value="0" />
-      <option name="screenHeight" value="0" />
-      <option name="screenWidth" value="0" />
-      <option name="url" value="http://" />
-      <option name="usbDebugPort" value="7936" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <method />
-    </configuration>
-    <configuration default="true" type="ChromiumRemoteDebugType" factoryName="Chromium Remote">
-      <option name="name" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JarApplication" factoryName="JAR Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list />
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <method />
-    </configuration>
-    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
-      <option name="BCName" value="" />
-      <option name="launcherParameters">
-        <LauncherParameters>
-          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
-          <option name="launcherType" value="OSDefault" />
-          <option name="newPlayerInstance" value="false" />
-          <option name="playerPath" value="/Applications/Flash Player Debugger.app" />
-        </LauncherParameters>
-      </option>
-      <option name="moduleName" value="" />
-      <option name="trusted" value="true" />
-      <method />
-    </configuration>
-    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="myFilePath" />
-      <option name="GLUE" />
-      <option name="myNameFilter" />
-      <option name="myGeneratedName" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
-      <module name="" />
-      <option name="ACTIVITY_CLASS" value="" />
-      <option name="MODE" value="default_activity" />
-      <option name="DEPLOY" value="true" />
-      <option name="ARTIFACT_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <method />
-    </configuration>
     <configuration default="false" name="Main" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -475,6 +358,9 @@
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="543b9d56-92f2-4159-a295-ba3e40f924bf" name="Default" comment="" />
@@ -490,36 +376,36 @@
     <option name="totallyTimeSpent" value="22699000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="42" y="22" width="1260" height="670" extended-state="0" />
+    <frame x="1" y="1" width="1364" height="736" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3979239" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32871974" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33887044" sideWeight="0.49406528" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33887044" sideWeight="0.5059347" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24958949" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32871974" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32741934" sideWeight="0.49707174" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25222552" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3979239" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -532,11 +418,6 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="myTodoPanelSettings">
-      <TodoPanelSettings />
-    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -565,114 +446,17 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DBHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1128" max-vertical-offset="1515">
-          <caret line="328" column="0" selection-start-line="328" selection-start-column="0" selection-end-line="328" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#openDB#0;class#DBHelper#0" expanded="false" />
-            <element signature="method#closeDB#0;class#DBHelper#0" expanded="false" />
-            <element signature="method#addUser#0;class#DBHelper#0" expanded="false" />
-            <element signature="method#deleteUser#0;class#DBHelper#0" expanded="false" />
-            <element signature="method#addLocation#0;class#DBHelper#0" expanded="false" />
-            <element signature="method#deleteLocation#0;class#DBHelper#0" expanded="false" />
-            <element signature="method#addFriend#0;class#DBHelper#0" expanded="false" />
-            <element signature="method#deleteFriend#0;class#DBHelper#0" expanded="false" />
-            <element signature="method#checkIn#0;class#DBHelper#0" expanded="false" />
-            <element signature="method#getUserName#0;class#DBHelper#0" expanded="false" />
-            <element signature="method#getLocationName#0;class#DBHelper#0" expanded="false" />
-            <element signature="method#getUserIDByName#0;class#DBHelper#0" expanded="false" />
-            <element signature="method#getLocationIDByName#0;class#DBHelper#0" expanded="false" />
-            <element signature="method#getCheckInByLocation#0;class#DBHelper#0" expanded="false" />
-            <element signature="method#getCheckInByUser#0;class#DBHelper#0" expanded="false" />
-            <marker date="1429159193000" expanded="true" signature="644:904" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="966:1175" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="966:1177" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="966:1177" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="966:1177" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="966:1462" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="1524:1778" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="1840:2344" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="2407:2907" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="2760:2907" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="3430:3484" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="3430:3524" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="3430:3527" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="3430:3544" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="3430:3545" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="3430:3547" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="3430:3560" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="3826:3854" placeholder="DELETE FROM ..." />
-            <marker date="1429159193000" expanded="true" signature="4124:4226" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="4124:4238" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="4481:4513" placeholder="DELETE FROM ..." />
-            <marker date="1429159193000" expanded="true" signature="4765:4821" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="4765:4822" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="4765:4853" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="4765:4866" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="4951:5052" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="5294:5330" placeholder="DELETE FROM ..." />
-            <marker date="1429159193000" expanded="true" signature="5294:5362" placeholder="DELETE FROM ..." />
-            <marker date="1429159193000" expanded="true" signature="5432:5502" placeholder="DELETE FROM ..." />
-            <marker date="1429159193000" expanded="true" signature="5779:5853" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="5779:5885" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="5779:5900" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="5779:5916" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="5779:5927" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="5779:5928" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="6159:6195" placeholder="SELECT USERN..USER..." />
-            <marker date="1429159193000" expanded="true" signature="6514:6550" placeholder="SELECT NAME ..LOCATIONS..." />
-            <marker date="1429159193000" expanded="true" signature="6932:6979" placeholder="SELECT FROM USERS..." />
-            <marker date="1429159193000" expanded="true" signature="6932:6980" placeholder="SELECT USERN..USERS..." />
-            <marker date="1429159193000" expanded="true" signature="6932:6995" placeholder="SELECT ID, U..USERS..." />
-            <marker date="1429159193000" expanded="true" signature="7329:7372" placeholder="SELECT FROM USERS..." />
-            <marker date="1429159193000" expanded="true" signature="7329:7373" placeholder="SELECT NAME ..LOCATIONS..." />
-            <marker date="1429159193000" expanded="true" signature="7329:7392" placeholder="SELECT ID, N..LOCATIONS..." />
-            <marker date="1429159193000" expanded="true" signature="7727:7766" placeholder="SELECT FROM FRIENDS..." />
-            <marker date="1429159193000" expanded="true" signature="7728:7754" placeholder="SELECT USERN..USERS..." />
-            <marker date="1429159193000" expanded="true" signature="7728:7754" placeholder="SELECT USERN..USERS..." />
-            <marker date="1429159193000" expanded="true" signature="7728:7766" placeholder="SELECT FROM FRIENDS..." />
-            <marker date="1429159193000" expanded="true" signature="8366:8434" placeholder="SELECT USERS..." />
-            <marker date="1429159193000" expanded="true" signature="9272:9351" placeholder="SELECT USERS..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CheckIn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="585">
-          <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
-          <folding>
-            <element signature="e#629#630#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CheckIn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.984375" vertical-offset="0" max-vertical-offset="495">
-          <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
-          <folding>
-            <element signature="e#629#630#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DBHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="1890">
+        <state vertical-scroll-proportion="0.0">
           <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="method#openDB#0;class#DBHelper#0" expanded="false" />
             <element signature="method#closeDB#0;class#DBHelper#0" expanded="false" />
             <element signature="method#addUser#0;class#DBHelper#0" expanded="false" />
@@ -688,65 +472,84 @@
             <element signature="method#getLocationIDByName#0;class#DBHelper#0" expanded="false" />
             <element signature="method#getCheckInByLocation#0;class#DBHelper#0" expanded="false" />
             <element signature="method#getCheckInByUser#0;class#DBHelper#0" expanded="false" />
-            <marker date="1429159193000" expanded="true" signature="644:904" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="966:1175" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="966:1177" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="966:1177" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="966:1177" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="966:1462" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="1524:1778" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="1840:2344" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="2407:2907" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="2760:2907" placeholder="CREATE TABLE..IF..." />
-            <marker date="1429159193000" expanded="true" signature="3430:3484" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="3430:3524" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="3430:3527" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="3430:3544" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="3430:3545" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="3430:3547" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="3430:3560" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="3826:3854" placeholder="DELETE FROM ..." />
-            <marker date="1429159193000" expanded="true" signature="4124:4226" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="4124:4238" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="4481:4513" placeholder="DELETE FROM ..." />
-            <marker date="1429159193000" expanded="true" signature="4765:4821" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="4765:4822" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="4765:4853" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="4765:4866" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="4951:5052" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="5294:5330" placeholder="DELETE FROM ..." />
-            <marker date="1429159193000" expanded="true" signature="5294:5362" placeholder="DELETE FROM ..." />
-            <marker date="1429159193000" expanded="true" signature="5432:5502" placeholder="DELETE FROM ..." />
-            <marker date="1429159193000" expanded="true" signature="5779:5853" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="5779:5885" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="5779:5900" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="5779:5916" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="5779:5927" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="5779:5928" placeholder="INSERT INTO ..." />
-            <marker date="1429159193000" expanded="true" signature="6159:6195" placeholder="SELECT USERN..USER..." />
-            <marker date="1429159193000" expanded="true" signature="6514:6550" placeholder="SELECT NAME ..LOCATIONS..." />
-            <marker date="1429159193000" expanded="true" signature="6932:6979" placeholder="SELECT FROM USERS..." />
-            <marker date="1429159193000" expanded="true" signature="6932:6980" placeholder="SELECT USERN..USERS..." />
-            <marker date="1429159193000" expanded="true" signature="6932:6995" placeholder="SELECT ID, U..USERS..." />
-            <marker date="1429159193000" expanded="true" signature="7329:7372" placeholder="SELECT FROM USERS..." />
-            <marker date="1429159193000" expanded="true" signature="7329:7373" placeholder="SELECT NAME ..LOCATIONS..." />
-            <marker date="1429159193000" expanded="true" signature="7329:7392" placeholder="SELECT ID, N..LOCATIONS..." />
-            <marker date="1429159193000" expanded="true" signature="7727:7766" placeholder="SELECT FROM FRIENDS..." />
-            <marker date="1429159193000" expanded="true" signature="7728:7754" placeholder="SELECT USERN..USERS..." />
-            <marker date="1429159193000" expanded="true" signature="7728:7754" placeholder="SELECT USERN..USERS..." />
-            <marker date="1429159193000" expanded="true" signature="7728:7766" placeholder="SELECT FROM FRIENDS..." />
-            <marker date="1429159193000" expanded="true" signature="8366:8434" placeholder="SELECT USERS..." />
-            <marker date="1429159193000" expanded="true" signature="9272:9351" placeholder="SELECT USERS..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6051873" vertical-offset="45" max-vertical-offset="900">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DBHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="328" column="0" selection-start-line="328" selection-start-column="0" selection-end-line="328" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#openDB#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#closeDB#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#addUser#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#deleteUser#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#addLocation#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#deleteLocation#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#addFriend#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#deleteFriend#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#checkIn#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#getUserName#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#getLocationName#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#getUserIDByName#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#getLocationIDByName#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#getCheckInByLocation#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#getCheckInByUser#0;class#DBHelper#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CheckIn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CheckIn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.984375">
+          <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DBHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="31" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
+          <folding>
+            <element signature="method#openDB#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#closeDB#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#addUser#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#deleteUser#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#addLocation#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#deleteLocation#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#addFriend#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#deleteFriend#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#checkIn#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#getUserName#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#getLocationName#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#getUserIDByName#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#getLocationIDByName#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#getCheckInByLocation#0;class#DBHelper#0" expanded="false" />
+            <element signature="method#getCheckInByUser#0;class#DBHelper#0" expanded="false" />
           </folding>
         </state>
       </provider>
