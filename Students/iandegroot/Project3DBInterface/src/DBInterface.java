@@ -19,12 +19,19 @@ public class DBInterface {
     public static ArrayList<UserWithLocations> getRecentLocs(String username, ArrayList<String> friends) {
         DBHelper dbHelper = new DBHelper();
         ArrayList<UserWithLocations> friendsWithLocs = new ArrayList<UserWithLocations>();
-        ArrayList<CheckIn> checkIns = new ArrayList<CheckIn>();
+        ArrayList<CheckIn> checkIns;
+
 
         dbHelper.openDB();
         for (String f : friends) {
             checkIns = dbHelper.getCheckInByUser(dbHelper.getUserIDByName(f));
-            //friendsWithLocs.add(new UserWithLocations(f, ))
+
+            ArrayList<String> locs = new ArrayList<String>();
+
+            for (int i = 0; i < 3; i++)
+                locs.add(checkIns.get(i).getLocationName());
+
+            friendsWithLocs.add(new UserWithLocations(f, locs));
         }
 
         return friendsWithLocs;

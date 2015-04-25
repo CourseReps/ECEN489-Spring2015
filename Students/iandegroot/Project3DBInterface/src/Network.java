@@ -21,22 +21,33 @@ public class Network implements Runnable{
 
                   try {
                       // receive querry
+                      while(true) {
 
-                      BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                      querry = input.readLine();
+                          BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                          querry = input.readLine();
 
-                      // call processor thread
+                          if(querry.equals("disconnect")) {
+                              clientSocket.close();
+                              System.out.println("Recieved \"disconnect\" command \nClient Socket Closed  ");
+                              break;
+                          }
+                          System.out.println("\nReceived Querry: " + querry);
 
-                      ProcessRequest Response = new ProcessRequest();
-                      String clientResponse = Response.process(querry);
+                          // call processRequest Method
+
+                          ProcessRequest Response = new ProcessRequest();
+                          String clientResponse = Response.process(querry);
 
 
-                      // Send back string clientResponse
-                      PrintWriter wr_to_app = new PrintWriter(clientSocket.getOutputStream(), true);
-                      wr_to_app.println( clientResponse);
-                      wr_to_app.flush();
+                          // Send back string clientResponse
+                          PrintWriter wr_to_app = new PrintWriter(clientSocket.getOutputStream(), true);
+                          wr_to_app.println(clientResponse);
+                          wr_to_app.flush();
 
-                      clientSocket.close();
+                          System.out.println("Sent ClientResponse: " + clientResponse);
+
+
+                      }
                    }
 
                  catch (Exception ex) {

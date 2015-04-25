@@ -26,7 +26,13 @@ public class Server {
 
 
             while (true) {
+
+                if(server.isClosed()){
+                    server = new ServerSocket(port);
+                }
+
                 try {
+
                 System.out.println("Waiting for client connection...");
                 clientSocket = server.accept();
                 System.out.println("Client Connected!");
@@ -35,14 +41,16 @@ public class Server {
                 Thread dbWriteThread = new Thread(writeDB);
                 dbWriteThread.start();
 
-            }
+                }
+
                 catch (IOException ex) {
                     System.out.println("Could not establish server socket on port " + port);
                     ex.printStackTrace();
-                    clientSocket.close();
+                    server.close();
                 }
 
         }
+
 
     }
 
