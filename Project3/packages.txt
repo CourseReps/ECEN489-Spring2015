@@ -1,7 +1,6 @@
-#List of Current Packages Installed on Server
+#List of packages installed on server  
 
-
-account-plugin-aim				install
+taaccount-plugin-aim				install
 account-plugin-facebook				install
 account-plugin-flickr				install
 account-plugin-google				install
@@ -106,6 +105,7 @@ cups-filters-core-drivers			install
 cups-pk-helper					install
 cups-ppdc					install
 cups-server-common				install
+curl						install
 dash						install
 dbus						install
 dbus-x11					install
@@ -262,6 +262,8 @@ gir1.2-unity-5.0:amd64				install
 gir1.2-vte-2.90					install
 gir1.2-webkit-3.0				install
 gir1.2-wnck-3.0					install
+git						install
+git-man						install
 gkbd-capplet					install
 glib-networking:amd64				install
 glib-networking-common				install
@@ -418,6 +420,7 @@ libapparmor-perl				install
 libapparmor1:amd64				install
 libappindicator3-1				install
 libapr1:amd64					install
+libapr1-dev					install
 libaprutil1:amd64				install
 libaprutil1-dbd-sqlite3:amd64			install
 libaprutil1-ldap:amd64				install
@@ -580,6 +583,7 @@ libelf1:amd64					install
 libelfg0:amd64					install
 libemail-valid-perl				install
 libenchant1c2a:amd64				install
+liberror-perl					install
 libespeak1:amd64				install
 libestr0					install
 libevdocument3-4				install
@@ -764,6 +768,7 @@ libjbig0:amd64					install
 libjbig2dec0					install
 libjpeg-turbo8:amd64				install
 libjpeg8:amd64					install
+libjs-jquery					install
 libjson-c2:amd64				install
 libjson-glib-1.0-0:amd64			install
 libjson-glib-1.0-common				install
@@ -1009,6 +1014,9 @@ librsvg2-2:amd64				install
 librsvg2-common:amd64				install
 librsync1:amd64					install
 librtmp0:amd64					install
+libruby1.9.1					install
+libruby1.9.1-dbg				install
+libruby2.0:amd64				install
 libsamplerate0:amd64				install
 libsane:amd64					install
 libsane-common					install
@@ -1017,6 +1025,8 @@ libsasl2-2:amd64				install
 libsasl2-modules:amd64				install
 libsasl2-modules-db:amd64			install
 libsbc1:amd64					install
+libsctp-dev					install
+libsctp1:amd64					install
 libsecret-1-0:amd64				install
 libsecret-common				install
 libselinux1:amd64				install
@@ -1067,7 +1077,9 @@ libtag1-vanilla:amd64				install
 libtag1c2a:amd64				install
 libtalloc2:amd64				install
 libtasn1-6:amd64				install
+libtcl8.5:amd64					install
 libtcl8.6:amd64					install
+libtcltk-ruby1.9.1				install
 libtdb1:amd64					install
 libtelepathy-farstream3:amd64			install
 libtelepathy-glib0:amd64			install
@@ -1087,6 +1099,7 @@ libtiff5:amd64					install
 libtimedate-perl				install
 libtimezonemap1					install
 libtinfo5:amd64					install
+libtk8.5:amd64					install
 libtk8.6:amd64					install
 libtomcat7-java					install
 libtotem-plparser18				install
@@ -1121,6 +1134,7 @@ libuuid-perl					install
 libuuid1:amd64					install
 libv4l-0:amd64					install
 libv4lconvert0:amd64				install
+libv8-3.14.5					install
 libvisio-0.0-0					install
 libvisual-0.4-0:amd64				install
 libvisual-0.4-plugins:amd64			install
@@ -1224,6 +1238,7 @@ libxvmc1:amd64					install
 libxxf86dga1:amd64				install
 libxxf86vm1:amd64				install
 libyajl2:amd64					install
+libyaml-0-2:amd64				install
 libyaml-tiny-perl				install
 libyelp0					install
 libzeitgeist-1.0-1				install
@@ -1234,17 +1249,13 @@ lightdm						install
 lintian						install
 linux-firmware					install
 linux-generic					install
-linux-headers-3.13.0-32				install
-linux-headers-3.13.0-32-generic			install
 linux-headers-3.13.0-45				install
 linux-headers-3.13.0-45-generic			install
 linux-headers-3.13.0-49				install
 linux-headers-3.13.0-49-generic			install
 linux-headers-generic				install
-linux-image-3.13.0-32-generic			install
 linux-image-3.13.0-45-generic			install
 linux-image-3.13.0-49-generic			install
-linux-image-extra-3.13.0-32-generic		install
 linux-image-extra-3.13.0-45-generic		install
 linux-image-extra-3.13.0-49-generic		install
 linux-image-generic				install
@@ -1254,6 +1265,7 @@ linux-signed-image-3.13.0-45-generic		install
 linux-signed-image-3.13.0-49-generic		install
 linux-signed-image-generic			install
 linux-sound-base				install
+lksctp-tools					install
 locales						install
 lockfile-progs					install
 login						install
@@ -1306,6 +1318,7 @@ network-manager					install
 network-manager-gnome				install
 network-manager-pptp				install
 network-manager-pptp-gnome			install
+nodejs						install
 notify-osd					install
 notify-osd-icons				install
 ntfs-3g						install
@@ -1513,6 +1526,7 @@ qtdeclarative5-ubuntu-ui-extras-browser-plugin-assets	install
 qtdeclarative5-ubuntu-ui-toolkit-plugin:amd64	install
 qtdeclarative5-unity-action-plugin:amd64	install
 qtdeclarative5-window-plugin:amd64		install
+rbenv						install
 readline-common					install
 remmina						install
 remmina-common					install
@@ -1527,9 +1541,20 @@ rhythmbox-plugin-cdrecorder			install
 rhythmbox-plugin-magnatune			install
 rhythmbox-plugin-zeitgeist			install
 rhythmbox-plugins				install
+ri1.9.1						install
 rsync						install
 rsyslog						install
 rtkit						install
+ruby						install
+ruby-dev					install
+ruby-full					install
+ruby1.9.1					install
+ruby1.9.1-dev					install
+ruby1.9.1-examples				install
+ruby1.9.1-full					install
+ruby2.0						install
+ruby2.0-dev:amd64				install
+rubygems-integration				install
 samba-common					install
 samba-common-bin				install
 samba-libs:amd64				install
@@ -1704,11 +1729,15 @@ usb-modeswitch-data				install
 usbmuxd						install
 usbutils					install
 util-linux					install
+uuid-dev					install
 uuid-runtime					install
 vbetool						install
+vim						install
 vim-common					install
+vim-runtime					install
 vim-tiny					install
 vino						install
+vsftpd						install
 wamerican					install
 wbritish					install
 webaccounts-extension-common			install
@@ -1802,3 +1831,4 @@ zenity						install
 zenity-common					install
 zip						install
 zlib1g:amd64					install
+zlib1g-dev:amd64				install
