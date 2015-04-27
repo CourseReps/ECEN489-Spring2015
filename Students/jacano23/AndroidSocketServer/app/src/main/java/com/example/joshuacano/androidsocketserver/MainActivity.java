@@ -45,10 +45,12 @@ public class MainActivity extends ActionBarActivity {
         et = (EditText) findViewById(R.id.EditText01);
         connect = (Button) findViewById(R.id.connectButton);
 
-        connect.setOnClickListener((v) -> {
-            connect.setEnabled(false);
-            new Client(getApplicationContext()).execute();
-
+        connect.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                connect.setEnabled(false);
+                new Client(getApplicationContext()).execute();
+            }
         });
 
     }
