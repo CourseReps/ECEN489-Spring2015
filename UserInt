@@ -1,3 +1,11 @@
 A MAC address infrastructure will be produced by Hong Pan
 Android application with Open CV to recognize an item to determine the location of a person will be created by Pranay Eedara.
 Web infrastructure prototypre will be created by Nagaraj Thenkarai Janakiraman.
+
+1st demo is the client over the java socket that uses the client athentication
+2nd demo is pulling a circle and updating friends on mandels database.
+3rd demo will do a full integrated https demo
+
+friday josh will make the android https demo
+and Randy demo administritorial demo
+friday mac address client moved to friday. Automatic client registration.
