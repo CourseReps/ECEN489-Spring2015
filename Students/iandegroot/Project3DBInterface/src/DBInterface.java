@@ -10,7 +10,7 @@ public class DBInterface {
         ArrayList<String> friends = new ArrayList<String>();
 
         dbHelper.openDB();
-        friends = dbHelper.getFriends(dbHelper.getUserIDByName(username));
+        friends = dbHelper.getFriends(dbHelper.getUserIDByUserName(username));
         dbHelper.closeDB();
 
         return friends;
@@ -24,7 +24,7 @@ public class DBInterface {
 
         dbHelper.openDB();
         for (String f : friends) {
-            checkIns = dbHelper.getCheckInByUser(dbHelper.getUserIDByName(f));
+            checkIns = dbHelper.getCheckInByUser(dbHelper.getUserIDByUserName(f));
 
             ArrayList<String> locs = new ArrayList<String>();
 

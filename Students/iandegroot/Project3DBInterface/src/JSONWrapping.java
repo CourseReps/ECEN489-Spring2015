@@ -30,6 +30,34 @@ public class JSONWrapping {
 
     /*********** Client Wrapping ***********/
 
+    //Takes in a username and a password and outputs a JSON object with this information
+    @SuppressWarnings("unchecked")
+    static JSONObject getLoginJSON(String username, String password) {
+        JSONObject login = new JSONObject();
+        JSONObject user = new JSONObject();
+
+        user.put("username", username);
+        user.put("password", password);
+
+        login.put("login", user);
+
+        return login;
+    }
+
+    //Takes in a username and a password and outputs a JSON object with this information
+    @SuppressWarnings("unchecked")
+    static JSONObject getLogoutJSON(String username, String sessID) {
+        JSONObject logout = new JSONObject();
+        JSONObject user = new JSONObject();
+
+        user.put("username", username);
+        user.put("sessionID", sessID);
+
+        logout.put("logout", user);
+
+        return logout;
+    }
+
     //Takes in a username and a list of friends and outputs a JSON object with this information
     @SuppressWarnings("unchecked")
     static JSONObject getAddFriendsJSON(String username, ArrayList<String> friends, String sessID) {
@@ -122,6 +150,24 @@ public class JSONWrapping {
 
     /*********** Server Wrapping ***********/
 
+    //Takes in a username and a password and outputs a JSON object with this information
+    @SuppressWarnings("unchecked")
+    static JSONObject getLoginOutcomeJSON(boolean outcome, String sessID) {
+        JSONObject loginOutcome = new JSONObject();
+        JSONObject user = new JSONObject();
+
+        if (outcome)
+            user.put("outcome", "success");
+        else
+            user.put("outcome", "failure");
+
+        user.put("sessionID", sessID);
+
+        loginOutcome.put("loginOutcome", user);
+
+        return loginOutcome;
+    }
+
     //Takes in a boolean value and outputs an insert outcome JSON object
     //True -> success
     //False -> failure
@@ -136,7 +182,7 @@ public class JSONWrapping {
         return reply;
     }
 
-    //Takes in a list of locations and and list of friends and outputs a JSON object with 5 most recent friends for each location
+    /*//Takes in a list of locations and and list of friends and outputs a JSON object with 5 most recent friends for each location
     @SuppressWarnings("unchecked")
     static JSONObject getLocsRecentFriendsJSON(ArrayList<String> locs, ArrayList<ArrayList<String>> friends) {
         JSONObject recentFriends = new JSONObject();
@@ -159,35 +205,36 @@ public class JSONWrapping {
         recentFriends.put("recentFriends", locations);
 
         return recentFriends;
+    }*/
+
+    //Takes in a list of locations and and list of friends and outputs a JSON object with 5 most recent friends for each location
+    @SuppressWarnings("unchecked")
+    static JSONObject getLocsRecentFriendsJSON(ArrayList<LocWithCheckIns> locsWithCheckIns) {
+        JSONObject recentFriends = new JSONObject();
+        JSONArray locations = new JSONArray();
+
+        for (int i = 0; i < locsWithCheckIns.size(); i++) {
+            JSONArray jsonfriends = new JSONArray();
+            JSONObject location = new JSONObject();
+
+            ArrayList<CheckInData> temps = new ArrayList<CheckInData>(locsWithCheckIns.get(i).checkIns);
+
+            for (int j = 0; j < temps.size(); j++) {
+                jsonfriends.add(temps.get(j));
+            }
+
+            location.put("location", locsWithCheckIns.get(i).name);
+            location.put("friends", jsonfriends);
+
+            locations.add(location);
+        }
+
+        recentFriends.put("recentFriends", locations);
+
+        return recentFriends;
     }
 
     /*//Takes in a list of usernames and a list of locations and outputs a JSON object with the 5 most recent locations for each friend
-    @SuppressWarnings("unchecked")
-    static JSONObject getRecentLocsJSON(ArrayList<String> friends, ArrayList<ArrayList<String>> locs) {
-        JSONObject friendsLocations = new JSONObject();
-        JSONArray jsonfriends = new JSONArray();
-
-        for (int i = 0; i < friends.size(); i++) {
-            JSONArray locations = new JSONArray();
-            JSONObject friend = new JSONObject();
-
-            for (int j = 0; j < locs.size(); j++) {
-                locations.add(locs.get(i).get(j));
-            }
-
-            friend.put("username", friends.get(i));
-            friend.put("locations", locations);
-
-            jsonfriends.add(friend);
-        }
-
-        friendsLocations.put("recentLocs", jsonfriends);
-
-        return friendsLocations;
-    }*/
-
-
-    //Takes in a list of usernames and a list of locations and outputs a JSON object with the 5 most recent locations for each friend
     @SuppressWarnings("unchecked")
     static JSONObject getRecentLocsJSON(ArrayList<UserWithLocations> usersWithLocs) {
         JSONObject friendsLocations = new JSONObject();
@@ -204,6 +251,33 @@ public class JSONWrapping {
             }
 
             friend.put("username", usersWithLocs.get(i).username);
+            friend.put("locations", locations);
+
+            jsonfriends.add(friend);
+        }
+
+        friendsLocations.put("recentLocs", jsonfriends);
+
+        return friendsLocations;
+    }*/
+
+    //Takes in a list of usernames and a list of locations and outputs a JSON object with the 5 most recent locations for each friend
+    @SuppressWarnings("unchecked")
+    static JSONObject getReturnRecentLocsJSON(ArrayList<UserWithCheckIns> usersWithCheckIns) {
+        JSONObject friendsLocations = new JSONObject();
+        JSONArray jsonfriends = new JSONArray();
+
+        for (int i = 0; i < usersWithCheckIns.size(); i++) {
+            JSONArray locations = new JSONArray();
+            JSONObject friend = new JSONObject();
+
+            ArrayList<CheckInData> locs = new ArrayList<CheckInData>(usersWithCheckIns.get(i).checkIns);
+
+            for (int j = 0; j < locs.size(); j++) {
+                locations.add(locs.get(j));
+            }
+
+            friend.put("username", usersWithCheckIns.get(i).username);
             friend.put("locations", locations);
 
             jsonfriends.add(friend);
@@ -229,7 +303,7 @@ public class JSONWrapping {
     }
 
     /*********** Client Unwrapping ***********/
-
+/*
     static ArrayList<Location> unwrapRecentFriends(JSONArray jsonlocations) {
         JSONObject data;
         JSONArray jsonfriends;
@@ -242,7 +316,7 @@ public class JSONWrapping {
             jsonfriends = (JSONArray)data.get("friends");
 
             for (int j = 0; j < jsonfriends.size(); j++)
-                friends.add((String)jsonfriends.get(j));
+                friends.add(jsonfriends.get(j));
 
             ArrayList<String> temp = new ArrayList<String>(friends);
 
@@ -276,6 +350,54 @@ public class JSONWrapping {
         }
 
         return friends;
+    }*/
+
+    static ArrayList<LocWithCheckIns> unwrapRecentFriends(JSONArray jsonlocations) {
+        JSONObject data;
+        JSONArray jsonfriends;
+        ArrayList<CheckInData> friends = new ArrayList<CheckInData>();
+        ArrayList<LocWithCheckIns> locs = new ArrayList<LocWithCheckIns>();
+
+        for(int i = 0; i < jsonlocations.size(); i++) {
+            data = (JSONObject)jsonlocations.get(i);
+
+            jsonfriends = (JSONArray)data.get("friends");
+
+            for (int j = 0; j < jsonfriends.size(); j++)
+                friends.add((CheckInData)jsonfriends.get(j));
+
+            ArrayList<CheckInData> temp = new ArrayList<CheckInData>(friends);
+
+            locs.add(new LocWithCheckIns((String)data.get("location"), temp));
+
+            friends.clear();
+        }
+
+        return locs;
+    }
+
+    static ArrayList<UserWithCheckIns> unwrapRecentLocs(JSONArray jsonfriendsWithLocs) {
+        JSONObject data;
+        JSONArray jsonlocs;
+        ArrayList<CheckInData> locs = new ArrayList<CheckInData>();
+        ArrayList<UserWithCheckIns> friends = new ArrayList<UserWithCheckIns>();
+
+        for(int i = 0; i < jsonfriendsWithLocs.size(); i++) {
+            data = (JSONObject)jsonfriendsWithLocs.get(i);
+
+            jsonlocs = (JSONArray)data.get("locations");
+
+            for (int j = 0; j < jsonlocs.size(); j++)
+                locs.add((CheckInData)jsonlocs.get(j));
+
+            ArrayList<CheckInData> temp = new ArrayList<CheckInData>(locs);
+
+            friends.add(new UserWithCheckIns((String)data.get("username"), temp));
+
+            locs.clear();
+        }
+
+        return friends;
     }
 
     static ArrayList<String> unwrapFriends(JSONArray jsonfriends) {
@@ -289,28 +411,37 @@ public class JSONWrapping {
     }
 
     static void clientUnwrapping(JSONObject jsonResponse) {
-        String response;
+        String response, sessionID;
         JSONArray locations;
         JSONArray friendsWithLocs;
         JSONArray friendsArray;
+        JSONObject loginOutcome;
 
         ArrayList<Location> locArray;
+        ArrayList<LocWithCheckIns> testLocArray;
         ArrayList<Friend> friendArray;
         ArrayList<String> sFriendArray;
+        ArrayList<UserWithCheckIns> testFriendArray;
 
-        if ((response = (String)jsonResponse.get("outcome")) != null) {
+        if ((loginOutcome = (JSONObject)jsonResponse.get("loginOutcome")) != null) {
+                response = (String)loginOutcome.get("outcome");
+                sessionID = (String)loginOutcome.get("sessionID");
+
+                System.out.println(response + " " + sessionID + "\n");
+        }
+        else if ((response = (String)jsonResponse.get("outcome")) != null) {
             if (response.equals("success"))
                 System.out.println("Insert was successful\n");
             else
                 System.out.println("Insert failed\n");
         }
         else if ((locations = (JSONArray)jsonResponse.get("recentFriends")) != null) {
-            locArray = unwrapRecentFriends(locations);
-            System.out.println(locArray + "\n");
+            testLocArray = unwrapRecentFriends(locations);
+            System.out.println(testLocArray + "\n");
         }
         else if ((friendsWithLocs = (JSONArray)jsonResponse.get("recentLocs")) != null) {
-            friendArray = unwrapRecentLocs(friendsWithLocs);
-            System.out.println(friendArray + "\n");
+            testFriendArray = unwrapRecentLocs(friendsWithLocs);
+            System.out.println(testFriendArray + "\n");
         }
         else if ((friendsArray = (JSONArray)jsonResponse.get("friends")) != null) {
             sFriendArray = unwrapFriends(friendsArray);
@@ -382,6 +513,10 @@ public class JSONWrapping {
 
     static JSONObject serverUnwrapping(JSONObject jsonRequest) {
         String selectFriendsUser, sessionID;
+        String newUser, newUserPassword;
+        String logoutUser;
+        JSONObject jsonlogin;
+        JSONObject jsonlogout;
         JSONObject friendsToAdd;
         JSONObject jsonCheckInData;
         JSONObject recentFriends;
@@ -396,8 +531,21 @@ public class JSONWrapping {
         response = null;
 
 
-        if ((friendsToAdd = (JSONObject)jsonRequest.get("addFriends")) != null) {
+        if ((jsonlogin = (JSONObject)jsonRequest.get("login")) != null) {
+            newUser = (String)jsonlogin.get("username");
+            newUserPassword = (String)jsonlogin.get("password");
+
+            System.out.println(newUser + " " + newUserPassword + "\n");
+        }
+        else if ((jsonlogout = (JSONObject)jsonRequest.get("logout")) != null) {
+            logoutUser = (String)jsonlogout.get("username");
+            sessionID = (String)jsonlogout.get("sessionID");
+
+            System.out.println(logoutUser + " " + sessionID + "\n");
+        }
+        else if ((friendsToAdd = (JSONObject)jsonRequest.get("addFriends")) != null) {
             uwf = unwrapAddFriends(friendsToAdd);
+
             System.out.println(uwf + "\n");
         }
         else if ((jsonCheckInData = (JSONObject)jsonRequest.get("checkIn")) != null) {
@@ -410,7 +558,7 @@ public class JSONWrapping {
         }
         else if ((recentLocations = (JSONObject)jsonRequest.get("recentLocs")) != null) {
             uwf = unwrapRecentLocs(recentLocations);
-            //response = getRecentLocsJSON(DBInterface.getRecentLocs(uwf.username, uwf.friends));
+            //response = getReturnRecentLocsJSON(DBInterface.getRecentLocs(uwf.username, uwf.friends));
             System.out.println(uwf + "\n");
         }
         else if ((jsonSelectFriends = (JSONObject)jsonRequest.get("selectFriends")) != null) {
@@ -434,6 +582,9 @@ public class JSONWrapping {
         ArrayList<String> testLocs = new ArrayList<String>();
         ArrayList<ArrayList<String>> testLocsArray = new ArrayList<ArrayList<String>>();
         ArrayList<UserWithLocations> usersWithLocs = new ArrayList<UserWithLocations>();
+        ArrayList<UserWithCheckIns> usersWithCheckIns = new ArrayList<UserWithCheckIns>();
+        ArrayList<LocWithCheckIns> locsWithCheckIns = new ArrayList<LocWithCheckIns>();
+        ArrayList<CheckInData> checkIns = new ArrayList<CheckInData>();
 
         testFriends.add("Alice");
         testFriends.add("Bob");
@@ -459,13 +610,43 @@ public class JSONWrapping {
         testLocsArray.add(testLocs);
         testLocsArray.add(testLocs);
 
+        checkIns.add(new CheckInData("openCV", "EIC", "Alice", 1000));
+        checkIns.add(new CheckInData("openCV", "ZachShack", "Bob", 1001));
+        checkIns.add(new CheckInData("openCV", "Bright", "Charlie", 1002));
+        checkIns.add(new CheckInData("openCV", "MSC", "David", 1003));
+        checkIns.add(new CheckInData("openCV", "Rudder", "Elliot", 1004));
+
         usersWithLocs.add(new UserWithLocations("Alice", testLocs));
         usersWithLocs.add(new UserWithLocations("Bob", testLocs));
         usersWithLocs.add(new UserWithLocations("Charlie", testLocs));
         usersWithLocs.add(new UserWithLocations("David", testLocs));
         usersWithLocs.add(new UserWithLocations("Elliot", testLocs));
 
+        usersWithCheckIns.add(new UserWithCheckIns("Alice", checkIns));
+        usersWithCheckIns.add(new UserWithCheckIns("Bob", checkIns));
+        usersWithCheckIns.add(new UserWithCheckIns("Charlie", checkIns));
+        usersWithCheckIns.add(new UserWithCheckIns("David", checkIns));
+        usersWithCheckIns.add(new UserWithCheckIns("Elliot", checkIns));
+
+        locsWithCheckIns.add(new LocWithCheckIns("EIC", checkIns));
+        locsWithCheckIns.add(new LocWithCheckIns("ZachShack", checkIns));
+        locsWithCheckIns.add(new LocWithCheckIns("Bright", checkIns));
+        locsWithCheckIns.add(new LocWithCheckIns("MSC", checkIns));
+        locsWithCheckIns.add(new LocWithCheckIns("Rudder", checkIns));
+
         /*********** Test Wrapping and Unwrapping ***********/
+
+        result = getLoginJSON("Bob", "pass");
+
+        System.out.println(result);
+
+        serverUnwrapping(result);
+
+        result = getLogoutJSON("Bob", "asdf");
+
+        System.out.println(result);
+
+        serverUnwrapping(result);
 
         result = getAddFriendsJSON("Bob", testFriends, "asdf");
 
@@ -497,19 +678,25 @@ public class JSONWrapping {
 
         serverUnwrapping(result);
 
+        result = getLoginOutcomeJSON(true, "asdf");
+
+        System.out.println(result);
+
+        clientUnwrapping(result);
+
         result = getOutcomeJSON(true);
 
         System.out.println(result);
 
         clientUnwrapping(result);
 
-        result = getLocsRecentFriendsJSON(testLocs, testFriendsArray);
+        result = getLocsRecentFriendsJSON(locsWithCheckIns);
 
         System.out.println(result);
 
         clientUnwrapping(result);
 
-        result = getRecentLocsJSON(usersWithLocs);
+        result = getReturnRecentLocsJSON(usersWithCheckIns);
 
         System.out.println(result);
 

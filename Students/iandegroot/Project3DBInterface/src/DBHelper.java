@@ -1,9 +1,10 @@
 //import com.sun.tools.javac.comp.Check;
 
-import javax.xml.transform.Result;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by mandel on 4/15/15.
@@ -254,7 +255,7 @@ public class DBHelper {
         return null;
         
     }
-    public int getUserIDByName(String userName){ //identical usernames fail
+    public int getUserIDByUserName(String userName){ //identical usernames fail
         int userID = -1;
         try {
             ResultSet rs = stmt.executeQuery("SELECT ID, USERNAME FROM USERS WHERE USERNAME ='" + userName+"'");
@@ -265,6 +266,18 @@ public class DBHelper {
         }
         return userID;
         
+    }
+    public int getUserIDByName(String name){ //identical Names fail
+        int userID = -1;
+        try {
+            ResultSet rs = stmt.executeQuery("SELECT ID, NAME FROM USERS WHERE NAME ='" + name+"'");
+            userID = rs.getInt("ID");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return userID;
+
     }
     public int getLocationIDByName(String locationName){//identical location names fail
         int locID = -1;
