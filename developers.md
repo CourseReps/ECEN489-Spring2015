@@ -48,4 +48,11 @@ The project features national and international experts with industrial, militar
 * Jean-Francois Chamberland, [chmbrlnd](https://github.com/chmbrlnd)
 * Gregory H. Huff, [ghuff](https://github.com/ghuff)
 
+**Networking and Server-Client Architecture**
 
+Joshua Cano | Rong Liu | Pranay Eedara | Anudeep Tungala  
+--- | --- | --- | ---
+![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) |
+Description | Description | Description | Description |
+
+---
