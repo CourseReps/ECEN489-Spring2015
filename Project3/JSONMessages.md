@@ -8,7 +8,7 @@
 
 or 
 
-{"loginOutcome":{"outcome":"failure", "sessionID":"null"}}
+*Server Message:* {"loginOutcome":{"outcome":"failure", "sessionID":"null"}}
 
 **Action:** Logout
 
@@ -32,13 +32,13 @@ or
 
 *Client Message:* {"recentFriends":{"locations":["EIC","ZachShack"],"username":"Jim","sessionID":"hashedID"}}
 
-*Server Message:* {"recentFriends":[{"location":"EIC","friends":["Alice","Bob","Charlie","David","Elliot"]},"location":"ZachShack",...]}
+*Server Message:* {"recentFriends":[{"location":"EIC","friends":[Method: openCV, Location: EIC, Time: 1000, Username: Alice,Method: openCV, Location: ZachShack, Time: 1001, Username: Bob,...]},{"location":"ZachShack",...]}]}
 
 **Action:** Get friend's last five locations
 
 *Client Message:* {"recentLocs":{"friends":["Alice","Bob","Charlie"],"username":"Jim","sessionID":"hashedID"}}
 
-*Server Message:* {"friendsLocs":[{"locations":["EIC","ZachShack","Bright","MSC","Rudder"],"username":"Alice"},{"locations":["EIC","ZachShack","Bright","MSC","Rudder"],"username":"Bob"}, [...], "username":"Charlie"]}
+*Server Message:* {"recentLocs":[{"locations":[Method: openCV, Location: EIC, Time: 1000, Username: Alice,Method: openCV, Location: ZachShack, Time: 1001, Username: Bob,...],"username":"Alice"}, ,{"locations":[...],"username":"Bob"}]}
 
 **Action:** Get friends
 
