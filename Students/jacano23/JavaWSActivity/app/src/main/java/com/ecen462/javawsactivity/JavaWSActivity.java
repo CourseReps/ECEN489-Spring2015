@@ -17,6 +17,8 @@ import org.json.JSONObject;
 
 public class JavaWSActivity extends Activity {
 
+    CheckInClient checkIn;
+
     Button b;
     TextView tv;
     //EditText et;
@@ -38,15 +40,17 @@ public class JavaWSActivity extends Activity {
         //Button Click Listener
         b.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-
+                /*
                 JSONObject object = new JSONObject();
                 try {
-                    object.put("timestamp", "1234");
+                    object.put("timestamp", "3453895");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                editText = "{\"timestamp\":\"123456\"}";
+                //editText = "{\"timestamp\":\"123456\"}";
+                editText = object.toString();
+                */
                 AsyncCallWS task = new AsyncCallWS();
                 task.execute();
 
@@ -57,7 +61,9 @@ public class JavaWSActivity extends Activity {
     private class AsyncCallWS extends AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... params) {
-            displayText = WebServiceHttps.invokeHelloWorldWS(editText,"getServerResponse");
+            //checkIn.JsonHandler();
+//            displayText = WebServiceHttps.invokeHelloWorldWS(editText,"getServerResponse");
+            displayText = CheckInClient.JsonHandler();
             return null;
         }
 
