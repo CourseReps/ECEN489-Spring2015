@@ -7,6 +7,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -532,24 +533,80 @@ public class JSONWrapping {
 
 
         if ((jsonlogin = (JSONObject)jsonRequest.get("login")) != null) {
+            String storedPass;
             newUser = (String)jsonlogin.get("username");
             newUserPassword = (String)jsonlogin.get("password");
+            //call DBInterface.getPassword to retrieve stored hashed password
+            storedPass = DBInterface.getPassword(newUser);
+            //call HashMachine.securelyValidateUnsaltedPassword to validate client login. Will return true if matched.
+            try {
+                //if previous call returns true, call HashMachine.generateSessionID to generate a token for the client
+                if(HashMachine.securelyValidateUnsaltedPassword(newUserPassword, storedPass)) {
+                    sessionID = HashMachine.generateSessionID();
+                    //call DBInterface.addSessionID to add login token to database
+                    DBInterface.addSessionID(newUser, sessionID);
+
+                    //send token to client
+                    response = getLoginOutcomeJSON(true, sessionID);
+                }
+                else
+                    response = getLoginOutcomeJSON(false, "null");
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+
+
 
             System.out.println(newUser + " " + newUserPassword + "\n");
         }
         else if ((jsonlogout = (JSONObject)jsonRequest.get("logout")) != null) {
+
             logoutUser = (String)jsonlogout.get("username");
             sessionID = (String)jsonlogout.get("sessionID");
+
+
+            if (DBInterface.checkForValidSessionID(logoutUser, sessionID)) {
+                //call DBInterface.resetSessionID to remove session ID token from table
+                DBInterface.resetSessionID(logoutUser);
+
+                //send client logout message
+                response = getOutcomeJSON(true);
+            }
+            else
+                response = getOutcomeJSON(false);
 
             System.out.println(logoutUser + " " + sessionID + "\n");
         }
         else if ((friendsToAdd = (JSONObject)jsonRequest.get("addFriends")) != null) {
             uwf = unwrapAddFriends(friendsToAdd);
+            //call DBInterface.getSessionID to retrieve stored token for client
+            //check stored token against jsonRequest.get("sessionID")
+            //if matched, continue with execution
+
+            if (DBInterface.checkForValidSessionID((String)friendsToAdd.get("username"), (String)friendsToAdd.get("sessionID"))) {
+                //call DBInterface.resetSessionID to remove session ID token from table
+
+                //send client logout message
+                response = getOutcomeJSON(DBInterface.AddFriends(uwf));
+            }
+            else
+                response = getOutcomeJSON(false);
 
             System.out.println(uwf + "\n");
         }
         else if ((jsonCheckInData = (JSONObject)jsonRequest.get("checkIn")) != null) {
             cid = unwrapCheckIn(jsonCheckInData);
+
+            if (DBInterface.checkForValidSessionID((String)jsonCheckInData.get("username"), (String)jsonCheckInData.get("sessionID"))) {
+                //call DBInterface.resetSessionID to remove session ID token from table
+                DBInterface.addCheckIn(cid);
+
+                //send client logout message
+                response = getOutcomeJSON(true);
+            }
+            else
+                response = getOutcomeJSON(false);
+
             System.out.println(cid + "\n");
         }
         else if ((recentFriends = (JSONObject)jsonRequest.get("recentFriends")) != null) {

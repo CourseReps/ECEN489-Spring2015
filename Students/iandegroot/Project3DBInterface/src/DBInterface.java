@@ -37,4 +37,84 @@ public class DBInterface {
         return friendsWithLocs;
     }
 
+    //Added by Ian 4/28/15
+    public static void addCheckIn(CheckInData ci) {
+        DBHelper dbHelper = new DBHelper();
+
+        dbHelper.openDB();
+        dbHelper.checkIn(dbHelper.getUserIDByUserName(ci.username), dbHelper.getLocationIDByName(ci.location), ci.time, ci.method);
+        dbHelper.closeDB();
+    }
+
+    //Given a username and a sessionID from that user, this function checks if the given sessionID is valid
+    public static boolean checkForValidSessionID(String username, String sessionID) {
+        String storedSessID;
+
+        //call DBInterface.getSessionID to retrieve stored token for client
+        storedSessID = DBInterface.getSessionID(username);
+
+        if (storedSessID.equals(sessionID))
+            return true;
+        else
+            return false;
+    }
+    //End added by Ian
+
+    //Added by Trevor 4/27/15
+    public static String getSessionID(String username) {
+        DBHelper dbHelper = new DBHelper();
+        String sessionID = null;
+
+        dbHelper.openDB();
+        sessionID = dbHelper.getSessionIDByUserName(username);
+        dbHelper.closeDB();
+
+        return sessionID;
+    }
+
+    public static String getPassword(String username) {
+        DBHelper dbHelper = new DBHelper();
+        String pass = null;
+
+        dbHelper.openDB();
+        pass = dbHelper.getPassByUserName(username);
+        dbHelper.closeDB();
+
+        return pass;
+    }
+
+    public static void addSessionID(String username, String ID) {
+        DBHelper dbHelper = new DBHelper();
+        dbHelper.openDB();
+        dbHelper.addSessionID(username, ID);
+        dbHelper.closeDB();
+    }
+
+    public static void resetSessionID(String username) {
+        DBHelper dbHelper = new DBHelper();
+        dbHelper.openDB();
+        dbHelper.resetSessionID(username);
+        dbHelper.closeDB();
+    }
+
+    //End added by Trevor
+
+    // Updated by Nagaraj on 4/28/2015
+    public static Boolean AddFriends(UserWithFriends userWithFriends){
+        Boolean outcome = false;  // default
+        DBHelper dbHelper = new DBHelper();
+        dbHelper.openDB();
+        Integer userID = dbHelper.getUserIDByUserName(userWithFriends.username);
+        for (String friendName : userWithFriends.friends){
+            Integer friendUserID = dbHelper.getUserIDByName(friendName);
+            dbHelper.addFriend(userID,friendUserID);
+            dbHelper.addFriend(friendUserID,userID);
+        }
+        outcome =true;
+
+        return outcome;
+    }
+
+    //End add by Nagaraj
+
 }
