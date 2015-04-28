@@ -290,6 +290,44 @@ public class DBHelper {
         return userID;
 
     }
+
+    //Added by Trevor on 4/27/15
+    public String getSessionIDByUserName(String userName) {
+        String sessionID = null;
+        try {
+            ResultSet rs = stmt.executeQuery("SELECT SESSION_ID FROM USERS WHERE USERNAME ='" + userName + "'");
+            sessionID = rs.getString("SESSION_ID");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sessionID;
+    }
+    public String getPassByUserName (String userName) {
+        String pass = null;
+        try {
+            ResultSet rs = stmt.executeQuery("SELECT PASSWORD FROM USERS WHERE USERNAME ='" + userName + "'");
+            pass = rs.getString("PASSWORD");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pass;
+    }
+    public void resetSessionID (String userName) {
+        //used for logging out
+        try {
+            String sql;
+            sql = "UPDATE USERS SET SESSION_ID = '' WHERE USERNAME = " + userName;
+
+            stmt.executeUpdate(sql);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //End added by Trevor
+
     public ArrayList<String> getFriends(int userID){
         ArrayList<String> arrayList = new ArrayList<String>();
         try {
