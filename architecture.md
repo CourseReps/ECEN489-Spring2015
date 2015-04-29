@@ -18,6 +18,7 @@ We utilized the Java API for web services on Apache Tomcat.
 This division is in charge of specifying the type of communicaiton used along with the format of each message. JSON.Simple will be used for this project.
 
 ### Database Engine and Storage
+Created a database with SQLite from which information is going to be pulled and added to for each user. Also created hooks for the tables, which are Java functions that are to be used within another program for facilitated manipulation of the tables in the database.
 
 ### Security and Authentication 
 This division is responsible for creating a Sign-in application that allow users to login using standard Authentication
