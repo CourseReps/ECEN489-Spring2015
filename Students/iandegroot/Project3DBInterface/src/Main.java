@@ -1,3 +1,4 @@
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 /**
@@ -10,11 +11,20 @@ public class Main {
         ArrayList<CheckIn> checkIns2 = new ArrayList<CheckIn>();
         dbHelper.openDB();
         dbHelper.createDB();
-        dbHelper.addUser("Mandel", "Mandel", "asdf", "Password", "SALT");
-        dbHelper.addUser("Trevor", "Trevor", "sdfg", "Password", "SALT");
-        dbHelper.addUser("Benito", "Benito", "qewr", "Password", "SALT");
-        dbHelper.addUser("Josh", "Josh", "zxcv", "Password", "SALT");
-        dbHelper.addUser("Blade", "Blade", "wert", "Password", "SALT");
+
+        String Password=null;
+        try {
+            Password = HashMachine.generateUnsaltedUserHash("password");
+            dbHelper.addUser("Mandel", "Mandel", "asdf", Password, "SALT");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        dbHelper.addUser("Mandel", "Mandel", "asdf", Password, "SALT");
+        dbHelper.addUser("Trevor", "Trevor", "sdfg", Password, "SALT");
+        dbHelper.addUser("Benito", "Benito", "qewr", Password, "SALT");
+        dbHelper.addUser("Josh", "Josh", "zxcv", Password, "SALT");
+        dbHelper.addUser("Blade", "Blade", "wert", Password, "SALT");
         dbHelper.addLocation("Home", 12.567888, 12.567, "Image");
         dbHelper.addLocation("School", 12.567888, 12.567, "Image");
         dbHelper.addLocation("EIC", 12.567888, 12.567, "Image");
@@ -26,8 +36,8 @@ public class Main {
         int joshId = dbHelper.getUserIDByUserName("Josh");
         int bladeId = dbHelper.getUserIDByUserName("Blade");
 
-        dbHelper.addFriend(mandelId,trevorId);
-        dbHelper.addFriend(mandelId,benitoId);
+        //dbHelper.addFriend(mandelId,trevorId);
+        //dbHelper.addFriend(mandelId,benitoId);
         dbHelper.addFriend(mandelId,joshId);
         dbHelper.addFriend(mandelId,bladeId);
 

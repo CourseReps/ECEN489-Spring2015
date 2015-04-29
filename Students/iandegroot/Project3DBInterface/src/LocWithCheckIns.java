@@ -4,10 +4,10 @@ import java.util.ArrayList;
  * Created by Richa on 4/27/2015.
  */
 public class LocWithCheckIns {
-    public ArrayList<CheckInData> checkIns = new ArrayList<CheckInData>();
+    public ArrayList<CheckIn> checkIns = new ArrayList<CheckIn>();
     public String name;
 
-    LocWithCheckIns(String n, ArrayList<CheckInData> cis) {
+    LocWithCheckIns(String n, ArrayList<CheckIn> cis) {
         checkIns = cis;
         name = n;
     }
@@ -16,7 +16,7 @@ public class LocWithCheckIns {
     public String toString() {
         String arrayS = "";
 
-        for (CheckInData s : checkIns)
+        for (CheckIn s : checkIns)
             arrayS += s.toString() + " ";
 
         return "Location name: " + name + ", CheckIns: " + arrayS;

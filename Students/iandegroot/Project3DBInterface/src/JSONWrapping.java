@@ -218,7 +218,7 @@ public class JSONWrapping {
             JSONArray jsonfriends = new JSONArray();
             JSONObject location = new JSONObject();
 
-            ArrayList<CheckInData> temps = new ArrayList<CheckInData>(locsWithCheckIns.get(i).checkIns);
+            ArrayList<CheckIn> temps = new ArrayList<CheckIn>(locsWithCheckIns.get(i).checkIns);
 
             for (int j = 0; j < temps.size(); j++) {
                 jsonfriends.add(temps.get(j));
@@ -272,7 +272,7 @@ public class JSONWrapping {
             JSONArray locations = new JSONArray();
             JSONObject friend = new JSONObject();
 
-            ArrayList<CheckInData> locs = new ArrayList<CheckInData>(usersWithCheckIns.get(i).checkIns);
+            ArrayList<CheckIn> locs = new ArrayList<CheckIn>(usersWithCheckIns.get(i).checkIns);
 
             for (int j = 0; j < locs.size(); j++) {
                 locations.add(locs.get(j));
@@ -356,7 +356,7 @@ public class JSONWrapping {
     static ArrayList<LocWithCheckIns> unwrapRecentFriends(JSONArray jsonlocations) {
         JSONObject data;
         JSONArray jsonfriends;
-        ArrayList<CheckInData> friends = new ArrayList<CheckInData>();
+        ArrayList<CheckIn> friends = new ArrayList<CheckIn>();
         ArrayList<LocWithCheckIns> locs = new ArrayList<LocWithCheckIns>();
 
         for(int i = 0; i < jsonlocations.size(); i++) {
@@ -365,9 +365,9 @@ public class JSONWrapping {
             jsonfriends = (JSONArray)data.get("friends");
 
             for (int j = 0; j < jsonfriends.size(); j++)
-                friends.add((CheckInData)jsonfriends.get(j));
+                friends.add((CheckIn)jsonfriends.get(j));
 
-            ArrayList<CheckInData> temp = new ArrayList<CheckInData>(friends);
+            ArrayList<CheckIn> temp = new ArrayList<CheckIn>(friends);
 
             locs.add(new LocWithCheckIns((String)data.get("location"), temp));
 
@@ -380,7 +380,7 @@ public class JSONWrapping {
     static ArrayList<UserWithCheckIns> unwrapRecentLocs(JSONArray jsonfriendsWithLocs) {
         JSONObject data;
         JSONArray jsonlocs;
-        ArrayList<CheckInData> locs = new ArrayList<CheckInData>();
+        ArrayList<CheckIn> locs = new ArrayList<CheckIn>();
         ArrayList<UserWithCheckIns> friends = new ArrayList<UserWithCheckIns>();
 
         for(int i = 0; i < jsonfriendsWithLocs.size(); i++) {
@@ -389,9 +389,9 @@ public class JSONWrapping {
             jsonlocs = (JSONArray)data.get("locations");
 
             for (int j = 0; j < jsonlocs.size(); j++)
-                locs.add((CheckInData)jsonlocs.get(j));
+                locs.add((CheckIn)jsonlocs.get(j));
 
-            ArrayList<CheckInData> temp = new ArrayList<CheckInData>(locs);
+            ArrayList<CheckIn> temp = new ArrayList<CheckIn>(locs);
 
             friends.add(new UserWithCheckIns((String)data.get("username"), temp));
 
@@ -468,16 +468,16 @@ public class JSONWrapping {
         return (new UserWithFriends(user, friends));
     }
 
-    static CheckInData unwrapCheckIn(JSONObject data) {
+    static CheckIn unwrapCheckIn(JSONObject data) {
         String method, loc, username;
         int time;
 
         method = (String)data.get("method");
         loc = (String)data.get("location");
         username = (String)data.get("username");
-        time = (Integer)data.get("time");
+        time = (int)(long)(Long)data.get("time");
 
-        return (new CheckInData(method, loc, username, time));
+        return (new CheckIn(username, loc, time, method));
     }
 
     static UserWithLocations unwrapRecentFriends(JSONObject jsonRecentFriends) {
@@ -513,7 +513,7 @@ public class JSONWrapping {
     }
 
     static JSONObject serverUnwrapping(JSONObject jsonRequest) {
-        String selectFriendsUser, sessionID;
+        String selectFriendsUser = "", sessionID = "";
         String newUser, newUserPassword;
         String logoutUser;
         JSONObject jsonlogin;
@@ -526,7 +526,7 @@ public class JSONWrapping {
         JSONObject response;
 
         UserWithFriends uwf;
-        CheckInData cid;
+        CheckIn cid = null;
         UserWithLocations uwl;
 
         response = null;
@@ -554,8 +554,6 @@ public class JSONWrapping {
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
             }
-
-
 
             System.out.println(newUser + " " + newUserPassword + "\n");
         }
@@ -611,18 +609,33 @@ public class JSONWrapping {
         }
         else if ((recentFriends = (JSONObject)jsonRequest.get("recentFriends")) != null) {
             uwl = unwrapRecentFriends(recentFriends);
+
+            if (DBInterface.checkForValidSessionID((String)recentFriends.get("username"), (String)recentFriends.get("sessionID"))) {
+                response = getLocsRecentFriendsJSON(DBInterface.getRecentFriends(uwl.username, uwl.locations));
+            }
+            else
+                response = getOutcomeJSON(false);
+
             System.out.println(uwl + "\n");
         }
         else if ((recentLocations = (JSONObject)jsonRequest.get("recentLocs")) != null) {
             uwf = unwrapRecentLocs(recentLocations);
-            //response = getReturnRecentLocsJSON(DBInterface.getRecentLocs(uwf.username, uwf.friends));
+            if (DBInterface.checkForValidSessionID((String)recentLocations.get("username"), (String)recentLocations.get("sessionID"))) {
+                response = getReturnRecentLocsJSON(DBInterface.getRecentLocs(uwf.username, uwf.friends));
+            }
+            else
+                response = getOutcomeJSON(false);
+
             System.out.println(uwf + "\n");
         }
         else if ((jsonSelectFriends = (JSONObject)jsonRequest.get("selectFriends")) != null) {
-            //Get friends based on username
-            //response = getFriendsJSON(DBInterface.selectFriends(selectFriendsUser));
-            sessionID = (String)jsonSelectFriends.get("sessionID");
-            selectFriendsUser = (String)jsonSelectFriends.get("username");
+            if (DBInterface.checkForValidSessionID((String)jsonSelectFriends.get("username"), (String)jsonSelectFriends.get("sessionID"))) {
+                sessionID = (String)jsonSelectFriends.get("sessionID");
+                selectFriendsUser = (String)jsonSelectFriends.get("username");
+
+                response = getFriendsJSON(DBInterface.selectFriends(selectFriendsUser));
+            }
+
             System.out.println(selectFriendsUser + " " + sessionID + "\n");
         }
 
@@ -641,7 +654,7 @@ public class JSONWrapping {
         ArrayList<UserWithLocations> usersWithLocs = new ArrayList<UserWithLocations>();
         ArrayList<UserWithCheckIns> usersWithCheckIns = new ArrayList<UserWithCheckIns>();
         ArrayList<LocWithCheckIns> locsWithCheckIns = new ArrayList<LocWithCheckIns>();
-        ArrayList<CheckInData> checkIns = new ArrayList<CheckInData>();
+        ArrayList<CheckIn> checkIns = new ArrayList<CheckIn>();
 
         testFriends.add("Alice");
         testFriends.add("Bob");
@@ -667,11 +680,11 @@ public class JSONWrapping {
         testLocsArray.add(testLocs);
         testLocsArray.add(testLocs);
 
-        checkIns.add(new CheckInData("openCV", "EIC", "Alice", 1000));
-        checkIns.add(new CheckInData("openCV", "ZachShack", "Bob", 1001));
-        checkIns.add(new CheckInData("openCV", "Bright", "Charlie", 1002));
-        checkIns.add(new CheckInData("openCV", "MSC", "David", 1003));
-        checkIns.add(new CheckInData("openCV", "Rudder", "Elliot", 1004));
+        checkIns.add(new CheckIn("Alice", "EIC", 1000, "openCV"));
+        checkIns.add(new CheckIn("Bob", "EIC", 1001, "openCV"));
+        checkIns.add(new CheckIn("CHarlie", "EIC", 1002, "openCV"));
+        checkIns.add(new CheckIn("David", "EIC", 1003, "openCV"));
+        checkIns.add(new CheckIn("Elliot", "EIC", 1004, "openCV"));
 
         usersWithLocs.add(new UserWithLocations("Alice", testLocs));
         usersWithLocs.add(new UserWithLocations("Bob", testLocs));
