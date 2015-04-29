@@ -39,7 +39,7 @@ Description | Description | Description | Description |
 
 Randy Neal |
 --- |
-![image](http://i.imgur.com/SLoAN1f.jpg) |
+![image](http://i.imgur.com/gBFfmli.jpg) |
 Description |
 
 * Randy Allen Neal, [gmnealusn](https://github.com/gmnealusn)
