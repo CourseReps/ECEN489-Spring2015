@@ -13,6 +13,12 @@ The project features national and international experts with industrial, militar
 * Kevin Wilkens, [kevinwilkens22](https://github.com/kevinwilkens22)
 
 ## Networking and Server-Client Architecture
+
+Joshua Cano | Rong Liu | Pranay Eedara | Anudeep Tungala  
+--- | --- | --- | ---
+![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) |
+Description | Description | Description | Description |
+
 * Joshua Cano, [jacano23](https://github.com/jacano23)
 * Rong Liu, [liur180855](https://github.com/liur180855)
 * Pranay Eedara, [epranaykumar](https://github.com/epranaykumar)
@@ -30,6 +36,12 @@ The project features national and international experts with industrial, militar
 * Nagaraj Thenkarai Janakiraman, [tjnagaraj](https://github.com/tjnagaraj)
 
 ## Account Managment and Administration
+
+Randy Neal |
+--- |
+![image](http://i.imgur.com/JCYhUac.jpg) |
+Description |
+
 * Randy Allen Neal, [gmnealusn](https://github.com/gmnealusn)
 
 ## Special Projects
@@ -48,11 +60,3 @@ The project features national and international experts with industrial, militar
 * Jean-Francois Chamberland, [chmbrlnd](https://github.com/chmbrlnd)
 * Gregory H. Huff, [ghuff](https://github.com/ghuff)
 
-**Networking and Server-Client Architecture**
-
-Joshua Cano | Rong Liu | Pranay Eedara | Anudeep Tungala  
---- | --- | --- | ---
-![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) |
-Description | Description | Description | Description |
-
----
