@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "CommHandlerImplService", targetNamespace = "http://ws.slscomm.com/", wsdlLocation = "http://localhost:8080/SLSComm/commhandler?wsdl")
+@WebServiceClient(name = "CommHandlerImplService", targetNamespace = "http://ws.slscomm.com/", wsdlLocation = "https://elcloudo.tamu.edu:8443/SLSComm/commhandler?wsdl")
 public class CommHandlerImplService
     extends Service
 {
@@ -30,7 +30,7 @@ public class CommHandlerImplService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:8080/SLSComm/commhandler?wsdl");
+            url = new URL("https://elcloudo.tamu.edu:8443/SLSComm/commhandler?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

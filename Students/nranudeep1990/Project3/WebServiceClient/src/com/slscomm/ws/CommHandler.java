@@ -28,8 +28,8 @@ public interface CommHandler {
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://ws.slscomm.com/CommHandler/getHelloWorldAsStringRequest", output = "http://ws.slscomm.com/CommHandler/getHelloWorldAsStringResponse")
-    public String getHelloWorldAsString(
+    @Action(input = "http://ws.slscomm.com/CommHandler/getServerResponseRequest", output = "http://ws.slscomm.com/CommHandler/getServerResponseResponse")
+    public String getServerResponse(
         @WebParam(name = "arg0", partName = "arg0")
         String arg0);
 
