@@ -28,13 +28,13 @@ or
 
 *Server Message:* {"outcome":"success"}
 
-**Action:** Get last 5 friends at a location
+**Action:** Get last three friends at a location
 
 *Client Message:* {"recentFriends":{"locations":["EIC","ZachShack"],"username":"Jim","sessionID":"hashedID"}}
 
 *Server Message:* {"recentFriends":[{"location":"EIC","friends":["Alice","EIC",1000,"openCV","Bob","EIC",1001,"openCV",...]},{{"location":"ZachShack",...]}]}
 
-**Action:** Get friend's last five locations
+**Action:** Get friend's last three locations
 
 *Client Message:* {"recentLocs":{"friends":["Alice","Bob"],"username":"Jim","sessionID":"hashedID"}}
 
