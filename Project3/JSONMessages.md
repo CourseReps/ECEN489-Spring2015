@@ -28,17 +28,17 @@ or
 
 *Server Message:* {"outcome":"success"}
 
-**Action:** Get last 5 friends at a location
+**Action:** Get last three friends at a location
 
 *Client Message:* {"recentFriends":{"locations":["EIC","ZachShack"],"username":"Jim","sessionID":"hashedID"}}
 
-*Server Message:* {"recentFriends":[{"location":"EIC","friends":[Method: openCV, Location: EIC, Time: 1000, Username: Alice,Method: openCV, Location: ZachShack, Time: 1001, Username: Bob,...]},{"location":"ZachShack",...]}]}
+*Server Message:* {"recentFriends":[{"location":"EIC","friends":["Alice","EIC",1000,"openCV","Bob","EIC",1001,"openCV",...]},{{"location":"ZachShack",...]}]}
 
-**Action:** Get friend's last five locations
+**Action:** Get friend's last three locations
 
-*Client Message:* {"recentLocs":{"friends":["Alice","Bob","Charlie"],"username":"Jim","sessionID":"hashedID"}}
+*Client Message:* {"recentLocs":{"friends":["Alice","Bob"],"username":"Jim","sessionID":"hashedID"}}
 
-*Server Message:* {"recentLocs":[{"locations":[Method: openCV, Location: EIC, Time: 1000, Username: Alice,Method: openCV, Location: ZachShack, Time: 1001, Username: Bob,...],"username":"Alice"}, ,{"locations":[...],"username":"Bob"}]}
+*Server Message:* {"recentLocs":[{"locations":["Alice","EIC",1000,"openCV","Alice","EIC",1001,"openCV",...],"username":"Alice"},{"locations":[...],"username":"Bob"}]}
 
 **Action:** Get friends
 

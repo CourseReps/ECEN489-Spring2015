@@ -8,8 +8,9 @@ import javax.jws.WebService;
 public class CommHandlerImpl implements CommHandler{
 
 	@Override
-	public int getHelloWorldAsString(int x) {
-		return x*2;
+	public String getServerResponse(String query) {
+		ProcessRequest proRequest = new ProcessRequest();
+		return proRequest.process(query);
 	}
 }
 

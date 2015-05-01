@@ -10,6 +10,6 @@ import javax.jws.soap.SOAPBinding.Style;
 @SOAPBinding(style = Style.RPC)
 public interface CommHandler{
  
-	@WebMethod int getHelloWorldAsString(int x);
+	@WebMethod String getServerResponse(String query);
  
 }

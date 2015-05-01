@@ -174,11 +174,12 @@ public class DBHelper {
     public void addFriend(int userID, int friendID){
         try{
             String sql;
+            /*
             sql = "INSERT INTO FRIENDS (USERS_ID, FRIEND_USERS_ID) VALUES ("+
                     userID+","+friendID+")";
             
             stmt.executeUpdate(sql);
-            
+            */
             sql = "INSERT INTO FRIENDS (USERS_ID, FRIEND_USERS_ID) VALUES ("+
                     friendID+","+userID+")";
 
@@ -375,7 +376,7 @@ public class DBHelper {
         ArrayList<CheckIn> checkIns = new ArrayList<CheckIn>();
         try {
             Statement s = c.createStatement();
-            ResultSet rs = s.executeQuery("SELECT USERS_ID,TIMESTAMP, METHOD FROM CHECKINS WHERE LOCATIONS_ID = " + locationID + " ORDER BY TIMESTAMP DESC");
+            ResultSet rs = s.executeQuery("SELECT USERS_ID,TIMESTAMP, METHOD FROM CHECKINS WHERE LOCATIONS_ID = " + locationID + " ORDER BY TIMESTAMP DESC LIMIT 3");
             while(rs.next()){
                 int userID = rs.getInt("USERS_ID");
                 String username = getUserName(userID);
@@ -399,7 +400,7 @@ public class DBHelper {
         ArrayList<CheckIn> checkIns = new ArrayList<CheckIn>();
         try {
             Statement s = c.createStatement();
-            ResultSet rs = s.executeQuery("SELECT USERS_ID, LOCATIONS_ID, TIMESTAMP, METHOD FROM CHECKINS WHERE USERS_ID ="+userID+" ORDER BY TIMESTAMP DESC");
+            ResultSet rs = s.executeQuery("SELECT USERS_ID, LOCATIONS_ID, TIMESTAMP, METHOD FROM CHECKINS WHERE USERS_ID ="+userID+" ORDER BY TIMESTAMP DESC LIMIT 3");
             while(rs.next()){
                 int locID = rs.getInt("LOCATIONS_ID");
                 String username = getUserName(userID);
