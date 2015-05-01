@@ -43,6 +43,9 @@ import java.util.ArrayList;
 public class SignIn extends FragmentActivity implements
         ConnectionCallbacks, OnConnectionFailedListener,
         ResultCallback<LoadPeopleResult>, View.OnClickListener {
+
+    String location;
+   static Boolean setCheckInButton = false;
     // Check In Client
     private CheckInClient client = new CheckInClient();
     private User user = new User();
@@ -190,9 +193,11 @@ public class SignIn extends FragmentActivity implements
                 case R.id.addFriend:
                     Intent myIntent = new Intent(SignIn.this, FriendActivity.class);
                     startActivity(myIntent);
+
                     break;
                 case R.id.checkInLocation:
-                    Intent cVIntent = new Intent(SignIn.this, ObjRecActivity.class);
+                    Intent cVIntent = new Intent(SignIn.this, Digit_Recognition.class);
+                    setCheckInButton = true;
                     startActivity(cVIntent);
                     // New Activity for OpenCV
                     break;
@@ -201,6 +206,7 @@ public class SignIn extends FragmentActivity implements
             }
         }
     }
+
 
     public class LoginTask extends AsyncTask<String, Void, String>{
 
@@ -240,8 +246,11 @@ public class SignIn extends FragmentActivity implements
     }
 
 
+
+
     @Override
     public void onConnected(Bundle connectionHint) {
+
         // Reaching onConnected means we consider the user signed in.
         Log.i(TAG, "onConnected");
         //mStatus.setText("Status: Signed In");
@@ -252,12 +261,20 @@ public class SignIn extends FragmentActivity implements
         Plus.PeopleApi.loadConnected(mGoogleApiClient).setResultCallback(this);
 
         //ArrayList<String> addFriendsToDatabase = mCirclesList;
+        if (setCheckInButton) {
+            Intent intent = getIntent();
+            location = (intent.getStringExtra(Digit_Recognition.location));
 
+            Log.i(TAG, "Inside OnConnect");
+            mStatus.setText(location);
+            setCheckInButton = false;
+        }
         updateUI(true);
 
 
         // Indicate that the sign in process is complete.
         mSignInProgress = STATE_DEFAULT;
+
     }
 
     private void updateUI(boolean isSignedIn) {

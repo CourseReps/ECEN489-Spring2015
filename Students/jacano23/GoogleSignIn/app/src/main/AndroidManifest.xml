@@ -35,7 +35,7 @@
             android:name="com.google.android.gms.6.5.87"
             android:value="@integer/google_play_services_version" />
         <activity
-            android:name="com.ecen489.slidermenu.SignInActivity"
+            android:name=".SignIn"
             android:label="GoogleSignIn"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -53,10 +53,11 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ObjRecActivity"
+            android:name=".Digit_Recognition"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
-            android:configChanges="keyboardHidden|orientation">
+            android:configChanges="keyboardHidden|orientation"
+            android:theme = "@android:style/Theme.NoTitleBar.Fullscreen">
 
         </activity>
     </application>
