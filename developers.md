@@ -14,15 +14,10 @@ The project features national and international experts with industrial, militar
 
 ## Networking and Server-Client Architecture
 
-Joshua Cano | Rong Liu | Pranay Eedara | Anudeep Tungala  
+[Joshua Cano](https://github.com/jacano23) | [Rong Liu](https://github.com/liur180855) | [Pranay Eedara](https://github.com/epranaykumar) | [Anudeep Tungala](https://github.com/nranudeep1990)  
 --- | --- | --- | ---
 ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) |
 Description | Description | Description | Description |
-
-* Joshua Cano, [jacano23](https://github.com/jacano23)
-* Rong Liu, [liur180855](https://github.com/liur180855)
-* Pranay Eedara, [epranaykumar](https://github.com/epranaykumar)
-* Anudeep Tungala, [nranudeep1990](https://github.com/nranudeep1990)
 
 ## Data Integrity and Information Management
 * Ian Paul DeGroot, [iandegroot](https://github.com/iandegroot)
@@ -37,12 +32,10 @@ Description | Description | Description | Description |
 
 ## Account Managment and Administration
 
-Randy Neal |
+[Randy Allen Neal](https://github.com/gmnealusn) |
 --- |
 ![image](http://i.imgur.com/7Bc1z6K.jpg) |
 Description |
-
-* Randy Allen Neal, [gmnealusn](https://github.com/gmnealusn)
 
 ## Special Projects
 * George Sullivan, [I-Love-Github](https://github.com/I-Love-Github)
@@ -54,7 +47,11 @@ Description |
 * Yajie Zeng, [yjzeng8833](https://github.com/yjzeng8833)
 
 ## Public Relations and Web Presence
-* Benito Ramirez, [BenitoRamirezJr](https://github.com/BenitoRamirezJr)
+
+[Benito Ramirez Jr.](https://github.com/BenitoRamirezJr) |
+--- |
+![image](http://i.imgur.com/7Bc1z6K.jpg) |
+Description |
 
 ## Advisory Board
 * Jean-Francois Chamberland, [chmbrlnd](https://github.com/chmbrlnd)
