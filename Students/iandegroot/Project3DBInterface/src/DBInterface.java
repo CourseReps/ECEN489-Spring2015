@@ -47,9 +47,6 @@ public class DBInterface {
         for (String f : friends) {
             ArrayList<CheckIn> checkIns =  new ArrayList<CheckIn>(dbHelper.getCheckInByUser(dbHelper.getUserIDByUserName(f)));
 
-            //Take only top 3
-            checkIns = (ArrayList<CheckIn>)checkIns.subList(0, 3);
-
             friendsWithCheckIns.add(new UserWithCheckIns(f, checkIns));
         }
 
@@ -64,9 +61,6 @@ public class DBInterface {
         dbHelper.openDB();
         for (String l : locs) {
             ArrayList<CheckIn> checkIns =  new ArrayList<CheckIn>(dbHelper.getCheckInByLocation(dbHelper.getLocationIDByName(l)));
-
-            //Take only top 3
-            checkIns = (ArrayList<CheckIn>)checkIns.subList(0, 3);
 
             locsWithCheckIns.add(new LocWithCheckIns(l, checkIns));
         }

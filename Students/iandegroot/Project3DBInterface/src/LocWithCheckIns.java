@@ -19,6 +19,6 @@ public class LocWithCheckIns {
         for (CheckIn s : checkIns)
             arrayS += s.toString() + " ";
 
-        return "Location name: " + name + ", CheckIns: " + arrayS;
+        return "Location name: " + name + ", CheckIns: (" + arrayS + ")";
     }
 }

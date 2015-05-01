@@ -19,6 +19,6 @@ public class UserWithCheckIns {
         for (CheckIn s : checkIns)
             arrayS += s.toString() + " ";
 
-        return "Username: " + username + ", CheckIns: " + arrayS;
+        return "Username: " + username + ", CheckIns: (" + arrayS + ")";
     }
 }
