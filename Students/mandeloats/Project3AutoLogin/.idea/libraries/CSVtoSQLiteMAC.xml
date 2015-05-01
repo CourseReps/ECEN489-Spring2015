@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="CSVtoSQLiteMAC">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/CSVtoSQLiteMAC_jar/CSVtoSQLiteMAC.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

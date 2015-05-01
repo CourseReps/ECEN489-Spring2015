@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Project3AutoLogin:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Project3AutoLogin_jar</output-path>
+    <root id="archive" name="Project3AutoLogin.jar">
+      <element id="module-output" name="Project3AutoLogin" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/commons-csv-1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/json-simple-1.1.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
