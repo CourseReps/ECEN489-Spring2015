@@ -4,7 +4,6 @@
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/apache/clerezza/ext/org.json.simple/0.4/org.json.simple-0.4.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/com/googlecode/json-simple/json-simple/1.1/json-simple-1.1.jar!/" />
-      <root url="file://$PROJECT_DIR$/.idea/libraries" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -30,4 +30,9 @@ public class CheckIn {
     public String getMethod() {
         return method;
     }
+
+    @Override
+    public String toString() {
+        return "Method: " + method + ", Location: " + locationName + ", Time: " + timestamp + ", Username: " + userName;
+    }
 }

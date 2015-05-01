@@ -16,7 +16,8 @@ public class DBInterface {
         return friends;
     }
 
-    public static ArrayList<UserWithLocations> getRecentLocs(String username, ArrayList<String> friends) {
+
+    /*public static ArrayList<UserWithLocations> getRecentLocs(String username, ArrayList<String> friends) {
         DBHelper dbHelper = new DBHelper();
         ArrayList<UserWithLocations> friendsWithLocs = new ArrayList<UserWithLocations>();
         ArrayList<CheckIn> checkIns;
@@ -35,14 +36,44 @@ public class DBInterface {
         }
 
         return friendsWithLocs;
+    }*/
+
+    //Returns 3 most recent checkins of given friends
+    public static ArrayList<UserWithCheckIns> getRecentLocs(String username, ArrayList<String> friends) {
+        DBHelper dbHelper = new DBHelper();
+        ArrayList<UserWithCheckIns> friendsWithCheckIns = new ArrayList<UserWithCheckIns>();
+
+        dbHelper.openDB();
+        for (String f : friends) {
+            ArrayList<CheckIn> checkIns =  new ArrayList<CheckIn>(dbHelper.getCheckInByUser(dbHelper.getUserIDByUserName(f)));
+
+            friendsWithCheckIns.add(new UserWithCheckIns(f, checkIns));
+        }
+
+        return friendsWithCheckIns;
+    }
+
+    //Returns 3 most recent checkins of given locations
+    public static ArrayList<LocWithCheckIns> getRecentFriends(String locName, ArrayList<String> locs) {
+        DBHelper dbHelper = new DBHelper();
+        ArrayList<LocWithCheckIns> locsWithCheckIns = new ArrayList<LocWithCheckIns>();
+
+        dbHelper.openDB();
+        for (String l : locs) {
+            ArrayList<CheckIn> checkIns =  new ArrayList<CheckIn>(dbHelper.getCheckInByLocation(dbHelper.getLocationIDByName(l)));
+
+            locsWithCheckIns.add(new LocWithCheckIns(l, checkIns));
+        }
+
+        return locsWithCheckIns;
     }
 
     //Added by Ian 4/28/15
-    public static void addCheckIn(CheckInData ci) {
+    public static void addCheckIn(CheckIn ci) {
         DBHelper dbHelper = new DBHelper();
 
         dbHelper.openDB();
-        dbHelper.checkIn(dbHelper.getUserIDByUserName(ci.username), dbHelper.getLocationIDByName(ci.location), ci.time, ci.method);
+        dbHelper.checkIn(dbHelper.getUserIDByUserName(ci.getUserName()), dbHelper.getLocationIDByName(ci.getLocationName()), ci.getTimestamp(), ci.getMethod());
         dbHelper.closeDB();
     }
 
@@ -108,7 +139,6 @@ public class DBInterface {
         for (String friendName : userWithFriends.friends){
             Integer friendUserID = dbHelper.getUserIDByName(friendName);
             dbHelper.addFriend(userID,friendUserID);
-            dbHelper.addFriend(friendUserID,userID);
         }
         outcome =true;
 

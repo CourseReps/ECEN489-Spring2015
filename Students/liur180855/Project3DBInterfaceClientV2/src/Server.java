@@ -16,7 +16,7 @@ public class Server {
         ServerSocket server = null;
 
         int port = 9898;
-        System.out.println("Client is up.");
+        System.out.println("The Server is running.");
         System.out.println("Server IP address:" + InetAddress.getLocalHost().getHostAddress() + "\nServer PORT number:9898");
         server = new ServerSocket(port);
 
