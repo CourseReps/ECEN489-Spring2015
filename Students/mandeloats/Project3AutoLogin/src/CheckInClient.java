@@ -20,6 +20,7 @@ public class CheckInClient {
             String sessionID=null;
             String ip = "165.91.210.26";
             int portNumber = 9898;
+           // String ip = "10.202.124.160";
             Socket clientSocket = new Socket(ip, portNumber);
             System.out.println("connected to Server.");
 
@@ -27,7 +28,7 @@ public class CheckInClient {
             PrintWriter wr_to_server = new PrintWriter(clientSocket.getOutputStream(), true);
             String password=HashMachine.generateUnsaltedUserHash(userPassword);
 
-            System.out.println("sent Users's login info");
+            System.out.println("sent "+username+" login info");
           String json_string = JSONWrapping.getLoginJSON(username, password).toJSONString();
             wr_to_server.println(json_string);
             wr_to_server.flush();
@@ -61,6 +62,18 @@ public class CheckInClient {
 
             System.out.println("unwrapping User's Check-in response");
             JSONWrapping.clientUnwrapping(resp_checkin);
+
+            ArrayList<String> locs = new ArrayList<String>();
+            locs.add(location);
+            JSONObject jsonRequest = JSONWrapping.getRecentFriendsJSON(username, locs, sessionID);
+            wr_to_server.print(jsonRequest + "\r\n"); // send the response to client
+            wr_to_server.flush();
+            line = input.readLine();
+            //JSONObject resp_recent = (JSONObject) JSONValue.parse(line);
+            System.out.println(""+username+"'s recent Friends at this location: ");
+            //JSONWrapping.clientUnwrapping(resp_recent);
+            System.out.println(line);
+
 
             wr_to_server.println("disconnect");
             wr_to_server.flush();

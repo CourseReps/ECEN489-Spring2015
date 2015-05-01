@@ -1,4 +1,4 @@
 #Whitelist of MAC addresses to login
 
-84:38:38:3c:96:24
-30:f7:c5:51:85:76
+84:38:38:3c:96:24, DrChamberland
+30:f7:c5:51:85:76, Mandel

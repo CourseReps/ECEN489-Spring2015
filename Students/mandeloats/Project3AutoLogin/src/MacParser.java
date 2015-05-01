@@ -32,10 +32,10 @@ public class MacParser {
 
            if (sourceMac.equals("null")) continue;//ignores nulls
            if (destMac.equals("ff:ff:ff:ff:ff:ff")) continue;//igonores broadcasts
-           if(whiteList.containsValue(sourceMac)){
+           if(whiteList.containsKey(sourceMac)){
                recordMap.put(sourceMac,timeStamp);
            }
-           else if(whiteList.containsValue(destMac)){
+           else if(whiteList.containsKey(destMac)){
                recordMap.put(destMac,timeStamp);
            }
 

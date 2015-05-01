@@ -174,11 +174,12 @@ public class DBHelper {
     public void addFriend(int userID, int friendID){
         try{
             String sql;
+            /*
             sql = "INSERT INTO FRIENDS (USERS_ID, FRIEND_USERS_ID) VALUES ("+
                     userID+","+friendID+")";
             
             stmt.executeUpdate(sql);
-            
+            */
             sql = "INSERT INTO FRIENDS (USERS_ID, FRIEND_USERS_ID) VALUES ("+
                     friendID+","+userID+")";
 
@@ -303,6 +304,57 @@ public class DBHelper {
         return userID;
 
     }
+
+    //Added by Trevor on 4/27/15
+    public String getPassByUserName (String userName) {
+        String pass = null;
+        try {
+            ResultSet rs = stmt.executeQuery("SELECT PASSWORD FROM USERS WHERE USERNAME ='" + userName + "'");
+            pass = rs.getString("PASSWORD");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pass;
+    }
+    public void addSessionID (String userName, String ID) {
+        try {
+            String sql;
+            sql = "UPDATE USERS SET SESSION_ID = '" + ID + "' WHERE USERNAME = '" + userName + "'";
+            stmt.executeUpdate(sql);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void resetSessionID (String userName) {
+        //used for logging out
+        try {
+            String sql;
+            //may need to update syntax if it doesn't work
+            sql = "UPDATE USERS SET SESSION_ID = '' WHERE USERNAME = '" + userName + "'";
+            stmt.executeUpdate(sql);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //End added by Trevor
+
+    //Added by Nagaraj
+    public String getSessionIDByUserName(String userName) {
+        String sessionID = null;
+        try {
+            ResultSet rs = stmt.executeQuery("SELECT SESSION_ID FROM USERS WHERE USERNAME ='" + userName + "'");
+            sessionID = rs.getString("SESSION_ID");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sessionID;
+    }
+    //End added by Nagaraj
+
     public ArrayList<String> getFriends(int userID){
         ArrayList<String> arrayList = new ArrayList<String>();
         try {
@@ -324,7 +376,7 @@ public class DBHelper {
         ArrayList<CheckIn> checkIns = new ArrayList<CheckIn>();
         try {
             Statement s = c.createStatement();
-            ResultSet rs = s.executeQuery("SELECT USERS_ID,TIMESTAMP, METHOD FROM CHECKINS WHERE LOCATIONS_ID ="+locationID);
+            ResultSet rs = s.executeQuery("SELECT USERS_ID,TIMESTAMP, METHOD FROM CHECKINS WHERE LOCATIONS_ID = " + locationID + " ORDER BY TIMESTAMP DESC LIMIT 3");
             while(rs.next()){
                 int userID = rs.getInt("USERS_ID");
                 String username = getUserName(userID);
@@ -348,7 +400,7 @@ public class DBHelper {
         ArrayList<CheckIn> checkIns = new ArrayList<CheckIn>();
         try {
             Statement s = c.createStatement();
-            ResultSet rs = s.executeQuery("SELECT USERS_ID, LOCATIONS_ID, TIMESTAMP, METHOD FROM CHECKINS WHERE USERS_ID ="+userID);
+            ResultSet rs = s.executeQuery("SELECT USERS_ID, LOCATIONS_ID, TIMESTAMP, METHOD FROM CHECKINS WHERE USERS_ID ="+userID+" ORDER BY TIMESTAMP DESC LIMIT 3");
             while(rs.next()){
                 int locID = rs.getInt("LOCATIONS_ID");
                 String username = getUserName(userID);

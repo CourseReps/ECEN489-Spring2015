@@ -31,7 +31,7 @@ public class Main {
         
         try {
             File csvData = new File("macWhitelist.txt"); //use your own filename
-            CSVParser parser = CSVParser.parse(csvData, StandardCharsets.UTF_8, CSVFormat.TDF.withCommentMarker('#').withIgnoreEmptyLines(true).withIgnoreSurroundingSpaces(true).withQuoteMode(QuoteMode.MINIMAL));
+            CSVParser parser = CSVParser.parse(csvData, StandardCharsets.UTF_8, CSVFormat.DEFAULT.withCommentMarker('#').withIgnoreEmptyLines(true).withIgnoreSurroundingSpaces(true).withQuoteMode(QuoteMode.MINIMAL));
             for (CSVRecord csvRecord : parser) {
                 if (csvRecord.get(0).equals("")) continue;
                 if (csvRecord.get(1).equals("")) continue;
@@ -66,7 +66,8 @@ public class Main {
                     e.printStackTrace();
                 }
             }
-            
+
+           // newLoginMap.put("30:f7:c5:51:85:76", "123456789");
             if(!newLoginMap.isEmpty()){
                 for(String mac : newLoginMap.keySet()){
                     String newTimestamp = newLoginMap.get(mac);
