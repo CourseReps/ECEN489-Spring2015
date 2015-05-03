@@ -14,7 +14,7 @@ import java.util.List;
 
 public class DigRec_CameraView extends JavaCameraView implements PictureCallback {
 
-    private static final String TAG = "Sample::Tutorial3View";
+    private static final String TAG = "In DigRec_CameraView.class ::";
     private String mPictureFileName;
 
     public DigRec_CameraView(Context context, AttributeSet attrs) {

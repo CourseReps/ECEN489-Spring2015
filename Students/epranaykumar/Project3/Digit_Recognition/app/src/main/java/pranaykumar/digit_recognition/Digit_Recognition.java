@@ -10,6 +10,7 @@ import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Utils;
 import org.opencv.core.Core;
 //import org.opencv.core.Size;
 import org.opencv.core.CvType;
@@ -25,6 +26,12 @@ import org.opencv.imgproc.Imgproc;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.hardware.Camera.Size;
 import android.os.Bundle;
 import android.os.Environment;
@@ -37,10 +44,12 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.Toast;
+import android.app.AlertDialog;
 
 public class Digit_Recognition extends Activity implements CvCameraViewListener2, OnTouchListener {
-    private static final String TAG = "OCVSample::Activity";
+    private static final String TAG = "In Digit_Recognition Activity ::";
 
     private DigRec_CameraView mOpenCvCameraView;
     private List<Size> mResolutionList;
@@ -49,13 +58,13 @@ public class Digit_Recognition extends Activity implements CvCameraViewListener2
     private MenuItem[] mResolutionMenuItems;
     private SubMenu mResolutionMenu;
 
-    private int count,digitnum;
+    private int count;
     private int dgimgnum ;
     private Mat Gray_in_im;
     private Mat adpthr_image;
     int inimgwidth;
     int inimgheight;
-    int numofdigits;
+
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -200,84 +209,51 @@ public class Digit_Recognition extends Activity implements CvCameraViewListener2
         Log.i(TAG,"onTouch event");
 
         // inserted code
-        digitnum=digitnum+1;
+
 
         if (count == 0) {
             Log.i(TAG,"entered if loop");
 
             // Image Preprocessing
 
-            // Step-1 : Get Binary Image
+                // Step-1 : Get Binary Image
 
-            //adaptiveThreshold
+                        adpthr_image = getBinaryImage(Gray_in_im);
 
-            int maxValue = 255;
-            int blockSize = 11;
-            int meanOffset = 3;
-            Imgproc.adaptiveThreshold(Gray_in_im, adpthr_image, maxValue, Imgproc.ADAPTIVE_THRESH_MEAN_C,
-                    Imgproc.THRESH_BINARY_INV, blockSize, meanOffset);
+                // Step-2 : Remove small objects
 
+                        Mat processed_image = new Mat();
+                        processed_image = applyMorphologyOperation(adpthr_image);
 
+                // Step-3 : Find Contours of digits
 
-            //simple Threshold
-            //   Imgproc.threshold(Gray_in_im, adpthr_image, 85, 255, Imgproc.THRESH_BINARY_INV);  //76 red Green 150 blue 29
+                        List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
+                        Mat hierarchy = new Mat();
+                        contours = getContours(processed_image);
 
-            // Inrange
-            //Core.inRange(Gray_in_im, new Scalar(50), new Scalar(86), adpthr_image);//76 red
+                // Step-4 : get bounding Rectangle and crop each digit
 
-            // Step-2 : Remove small objects
+                        // Approximate contours to polygons + get bounding rects
+                         MatOfPoint2f approxCurve = new MatOfPoint2f();
 
-            // Perform Morphology close
-            org.opencv.core.Size kernelsize =new org.opencv.core.Size(7,7); // 7,7 is optimum (if less thin digits) (if more than 7 more dots)
-            // these values doesn't depend on color
-            Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, kernelsize);
+                            for( int i = 0; i < contours.size(); i++ )
+                            {
+                                // if its area is greater than 150
+                                double area = Imgproc.contourArea(contours.get(i));
+                                if ((area > 200) ) {
 
-            Mat Mor_Close_im = new Mat();
-            Imgproc.morphologyEx(adpthr_image, Mor_Close_im, Imgproc.MORPH_CLOSE, kernel);
+                                    //Convert contours(i) from MatOfPoint to MatOfPoint2f
+                                    MatOfPoint2f contour2f = new MatOfPoint2f( contours.get(i).toArray() );
 
-            // Perform Morphology open
-            org.opencv.core.Size dil_kernelsize =new org.opencv.core.Size(3,3);  //5,5 removes complete digit so 3,3 is optimum for opening
-            Mat dil_kernel = Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, dil_kernelsize);
-            Mat dilate_im = new Mat();  //Mat dilate_im = Mor_Close_im;
+                                    //Processing on mMOP2f1 which is in type MatOfPoint2f
+                                    double approxDistance = Imgproc.arcLength(contour2f, true)*0.02;
+                                    Imgproc.approxPolyDP(contour2f, approxCurve, approxDistance, true);
 
-            Imgproc.morphologyEx( Mor_Close_im, dilate_im, Imgproc.MORPH_OPEN, dil_kernel);
+                                    //Convert back to MatOfPoint
+                                    MatOfPoint points = new MatOfPoint( approxCurve.toArray() );
 
-            // Perform Dilate
-            // Imgproc.dilate( Mor_Close_im,dilate_im, dil_kernel);
-
-            // Step-2 : Find Contours of digits
-
-            // find contours
-            List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
-            Mat hierarchy = new Mat();
-            Imgproc.findContours(dilate_im, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
-
-            // Approximate contours to polygons + get bounding rects
-
-            numofdigits=0;
-
-            MatOfPoint2f approxCurve = new MatOfPoint2f();
-            for( int i = 0; i < contours.size(); i++ )
-            {
-                // if its area is greater than 150
-                double area = Imgproc.contourArea(contours.get(i));
-                if ((area > 700) ) {
-
-
-                    numofdigits=+1;
-
-                    //Convert contours(i) from MatOfPoint to MatOfPoint2f
-                    MatOfPoint2f contour2f = new MatOfPoint2f( contours.get(i).toArray() );
-
-                    //Processing on mMOP2f1 which is in type MatOfPoint2f
-                    double approxDistance = Imgproc.arcLength(contour2f, true)*0.02;
-                    Imgproc.approxPolyDP(contour2f, approxCurve, approxDistance, true);
-
-                    //Convert back to MatOfPoint
-                    MatOfPoint points = new MatOfPoint( approxCurve.toArray() );
-
-                    // Get bounding rect of contour
-                    Rect rect = Imgproc.boundingRect(points);
+                                    // Get bounding rect of contour
+                                    Rect rect = Imgproc.boundingRect(points);
 
                                         /*
                                            Log.i(TAG,"assigning submat ");
@@ -293,57 +269,189 @@ public class Digit_Recognition extends Activity implements CvCameraViewListener2
                                             Log.i(TAG,"assigned zero");
                                         */
 
-                    //Crop the image
-                    Mat ROI = new Mat(Mor_Close_im,rect);
+                                    //Crop the image
+                                    Mat ROI = new Mat(processed_image,rect);
 
-                    // resize the image to 50,50
-                    org.opencv.core.Size dsize = new org.opencv.core.Size(50,50);
-                    Imgproc.resize(ROI, ROI, dsize);
+                                    // resize the image to 50,50
+                                    org.opencv.core.Size dsize = new org.opencv.core.Size(50,50);
+                                    Imgproc.resize(ROI, ROI, dsize);
 
-                    // convert to float
-                    ROI.convertTo(ROI, CvType.CV_32FC1);
+                                    // convert to float
+                                    ROI.convertTo(ROI, CvType.CV_32FC1);
 
-                    // write cropped image
-                    SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
-                    String currentDateandTime2 = sdf2.format(new Date());
+                                    // save cropped image
+                                    SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+                                    String currentDateandTime2 = sdf2.format(new Date());
 
-                    String cropimgName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) +
-                            "/trainingnumber_" + currentDateandTime2 +"_"+ dgimgnum + ".jpg";
+                                    String cropimgName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) +
+                                                         "/trainingnumber_" + currentDateandTime2 +"_"+ dgimgnum + ".jpg";
 
-                    dgimgnum = dgimgnum+1;
-                    Highgui.imwrite(cropimgName, ROI);
+                                    dgimgnum = dgimgnum+1;
+                                     // Highgui.imwrite(cropimgName, ROI);
 
-                    // draw enclosing rectangle (all same color, but you could use variable i to make them unique)
-                    Core.rectangle(Mor_Close_im, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(255, 0, 0, 255), 3);
-                    // Core.rectangle(Mor_Close_im, new Point(rect.x,rect.y), new Point(rect.x+rect.width,rect.y+rect.height), new Scalar( 0, 0, 255),2);
-                }
-
-
-            }
+                                    // draw enclosing rectangle (all same color, but you could use variable i to make them unique)
+                                    Core.rectangle(processed_image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(255, 0, 0, 255), 3);
+                                    // Core.rectangle(Mor_Close_im, new Point(rect.x,rect.y), new Point(rect.x+rect.width,rect.y+rect.height), new Scalar( 0, 0, 255),2);
+                                }
 
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
-            String currentDateandTime = sdf.format(new Date());
+                             }
 
 
-            // String fileName = Environment.getExternalStorageDirectory().getPath() +
-            String fileName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) +
-                    "/digit_training_" + currentDateandTime + ".jpg";
+                // Step 5 : Save the processed image
 
-            Log.i(TAG,"calling take picture");
-            mOpenCvCameraView.takePicture(fileName);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+                        String currentDateandTime = sdf.format(new Date());
 
-            Highgui.imwrite(fileName,Mor_Close_im);
+                        // String fileName = Environment.getExternalStorageDirectory().getPath() +
+                        String fileName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) +
+                                "/digit_training_" + currentDateandTime + ".jpg";
+
+                        Log.i(TAG,"calling take picture");
+                        mOpenCvCameraView.takePicture(fileName);
+
+                        Highgui.imwrite(fileName,processed_image);
 
 
-            Toast.makeText(this, fileName + " saved", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, fileName + " saved", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Checked In at location :: "+ dgimgnum , Toast.LENGTH_SHORT).show();
 
-            // inserted code
-            count = 1;
-            mOpenCvCameraView.disableView();
+                        // disable cameraview
+                        count = 1;
+                        mOpenCvCameraView.disableView();
+
+                // Step 6: display the processed image
+
+                        displayimageonscreen(processed_image);
+
+                // step 7: display alert message to take another picture;
+
+                        displayalertdialog();
+
+
         }
         //
         return false;
+    }
+
+    // functions that used for each step
+
+    public Mat getBinaryImage(Mat input_img) {
+
+        // Step-1 : Get Binary Image
+
+                //adaptiveThreshold
+
+                int maxValue = 255;
+                int blockSize = 11;
+                int meanOffset = 3;
+                Mat bin_image = new Mat();
+
+                Imgproc.adaptiveThreshold(input_img, bin_image, maxValue, Imgproc.ADAPTIVE_THRESH_MEAN_C,
+                        Imgproc.THRESH_BINARY_INV, blockSize, meanOffset);
+
+                //simple Threshold
+                //   Imgproc.threshold(input_img, bin_image, 85, 255, Imgproc.THRESH_BINARY_INV);  //76 red Green 150 blue 29
+
+                // Inrange
+                //Core.inRange(input_img, new Scalar(50), new Scalar(86), bin_image);//76 red
+
+        return bin_image;
+
+    }
+
+    public Mat applyMorphologyOperation(Mat bin_image) {
+
+        // Step-2 : Remove small objects
+
+            // Perform Morphology close
+
+                    //get kernel
+                    org.opencv.core.Size kernelsize =new org.opencv.core.Size(7,7); // 7,7 is optimum (if less thin digits) (if more than 7 more dots)
+                    Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, kernelsize);// these values doesn't depend on color
+
+                    // apply Morphology close
+                    Mat Mor_Close_im = new Mat();
+                    Imgproc.morphologyEx(bin_image, Mor_Close_im, Imgproc.MORPH_CLOSE, kernel);
+
+            // Perform Morphology open
+
+                    //get kernel
+                    org.opencv.core.Size dil_kernelsize =new org.opencv.core.Size(3,3);  //5,5 removes complete digit so 3,3 is optimum for opening
+                    Mat dil_kernel = Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, dil_kernelsize);
+
+                    Mat dilate_im = new Mat();
+                    //dilate_im = Mor_Close_im;
+                    Imgproc.morphologyEx( Mor_Close_im, dilate_im, Imgproc.MORPH_OPEN, dil_kernel);
+
+            // Perform Dilate
+                    // Imgproc.dilate( Mor_Close_im,dilate_im, dil_kernel);
+
+        return dilate_im;
+    }
+    public List<MatOfPoint> getContours(Mat proc_image) {
+
+        // Step-3 : Find Contours of digits
+
+            // find contours
+                List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
+                Mat hierarchy = new Mat();
+                // Imgproc.findContours(dilate_im, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+                Imgproc.findContours(proc_image, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+
+        return contours;
+
+    }
+
+    public void displayimageonscreen (Mat im) {
+
+        // Step 6: display the processed image
+
+
+        Bitmap bm = Bitmap.createBitmap(im.cols(), im.rows(), Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(im, bm);
+
+        setContentView(R.layout.activity_imageview);
+        // find the imageview and draw it!
+        ImageView iv = (ImageView) findViewById(R.id.imageView);
+        iv.setImageBitmap(bm);
+    }
+
+    public void displayalertdialog() {
+
+        // Step-6
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+       // alertDialog.setTitle("Do you want to retake the picture");
+        alertDialog.setMessage("Do you want to retake the picture");
+
+            alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                            setContentView(R.layout.activity_dig_rec);
+                            mOpenCvCameraView = (DigRec_CameraView) findViewById(R.id.digRecActivity_java_surface_view);
+                            mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
+                            mOpenCvCameraView.setCvCameraViewListener(Digit_Recognition.this);
+
+                            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_3, Digit_Recognition.this, mLoaderCallback);
+
+                            count = 0;
+                            }
+              });
+            alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+
+                    count = 0;
+                    /*
+                    String loc = String.valueOf(dgimgnum);
+                    Intent i = new Intent(this, SignIn.class);
+                    i.putExtra("loc", loc);
+                    startActivity(i);
+                    */
+                }
+            });
+
+        alertDialog.show();
+
     }
 }
 

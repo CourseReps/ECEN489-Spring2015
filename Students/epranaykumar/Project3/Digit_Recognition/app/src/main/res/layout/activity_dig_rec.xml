@@ -15,12 +15,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
-android:layout_height="match_parent" >
+android:layout_height="match_parent"
+    android:orientation="horizontal">
 
-<org.opencv.samples.tutorial3.Tutorial3View
+
+    <pranaykumar.digit_recognition.DigRec_CameraView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="gone"
     android:id="@+id/digRecActivity_java_surface_view" />
 
 </LinearLayout>
+
+    <!-- change the following line according to your code
+   pranaykumar.digit_recognition.DigRec_CameraView "  -->
