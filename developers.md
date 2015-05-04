@@ -44,7 +44,7 @@ With thousands of check-ins happening daily, the Database Engine and Storage div
 ## Security and Authentication 
 
 [Trevor Dennis](https://github.com/td08) | [Nagaraj Thenkarai Janakiraman](https://github.com/tjnagaraj) |
---- | --- |
+--- |:---:|
 ![image](http://i.imgur.com/HFLbGSG.jpg) | ![image](http://i.imgur.com/jLsvx6w.jpg) |
 
 Continuing to keep your location secure and only available for your friends to see, the security and authentication division is hard at work monitoring for the latest potential security breaches and upgrading the servers with the latest authentication procedures. 
@@ -84,5 +84,5 @@ Branding is everything, and our public relations and web presence division takes
 ## Advisory Board
 
 [Jean-Francois Chamberland](https://github.com/chmbrlnd) | [Gregory H. Huff](https://github.com/ghuff) |
---- | --- |
+|:---:| --- |
 ![image](http://i.imgur.com/mT1cDNd.jpg) | ![image](http://i.imgur.com/ZWf1tUT.jpg) |
