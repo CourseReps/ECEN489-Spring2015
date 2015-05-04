@@ -1,5 +1,25 @@
 package com.ecen489.slidermenu;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.PendingIntent;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentSender.SendIntentException;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.ecen489.googlesignin.CheckInClient;
 import com.ecen489.googlesignin.R;
 import com.google.android.gms.common.ConnectionResult;
@@ -16,34 +36,13 @@ import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 import com.google.android.gms.plus.model.people.PersonBuffer;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.PendingIntent;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentSender.SendIntentException;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class SignInActivity extends FragmentActivity implements
-        ConnectionCallbacks, OnConnectionFailedListener,
-        ResultCallback<LoadPeopleResult>, View.OnClickListener {
+        ConnectionCallbacks, OnConnectionFailedListener, ResultCallback<LoadPeopleResult>,
+         View.OnClickListener {
     // Check In Client
     private CheckInClient client = new CheckInClient();
 
@@ -54,6 +53,7 @@ public class SignInActivity extends FragmentActivity implements
     private static final int STATE_IN_PROGRESS = 2;
 
     private static final int RC_SIGN_IN = 0;
+
 
     private static final String SAVED_PROGRESS = "sign_in_progress";
 
@@ -69,63 +69,45 @@ public class SignInActivity extends FragmentActivity implements
     private static final int PROFILE_PIC_SIZE = 400;
 
     private SignInButton mSignInButton;
-    private Button mSignOutButton;
-    private Button mRevokeButton;
-    private Button mAddFriends;
-    private Button mFriendsLocations;
-    private Button mCheckInLocation;
-    private TextView mStatus;
-    private ListView mCirclesListView;
+
     private ArrayAdapter<String> mCirclesAdapter;
     private ArrayList<String> mCirclesList;
 
-    private ImageView imgProfilePic;
-    private TextView txtName, txtEmail;
-    private LinearLayout llProfileLayout;
-    private TextView mCirclesTitle;
+    private boolean signout = false;
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sign_in_activity);
+        setContentView(R.layout.google_sign_in);
 
-        mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);
-        mSignOutButton = (Button) findViewById(R.id.sign_out_button);
-        mRevokeButton = (Button) findViewById(R.id.revoke_access_button);
-        mAddFriends = (Button) findViewById(R.id.addFriend);
-        mCheckInLocation = (Button) findViewById(R.id.checkInLocation);
-        mFriendsLocations = (Button) findViewById(R.id.recentLocations);
 
-        mStatus = (TextView) findViewById(R.id.sign_in_status);
-        mCirclesTitle = (TextView) findViewById(R.id.circles_title);
-        mCirclesListView = (ListView) findViewById(R.id.circles_list);
+        mSignInButton = (SignInButton) findViewById(R.id.myGoogleSignIn);
 
-        imgProfilePic = (ImageView) findViewById(R.id.imgProfilePic);
-        txtName = (TextView) findViewById(R.id.txtName);
-        txtEmail = (TextView) findViewById(R.id.txtEmail);
-        llProfileLayout = (LinearLayout) findViewById(R.id.llProfile);
 
         // Button listeners
-        mAddFriends.setOnClickListener(this);
-        mCheckInLocation.setOnClickListener(this);
-        mFriendsLocations.setOnClickListener(this);
         mSignInButton.setOnClickListener(this);
         mSignInButton.setSize(SignInButton.SIZE_WIDE);
         mSignInButton.setColorScheme(SignInButton.COLOR_LIGHT);
-        mSignOutButton.setOnClickListener(this);
-        mRevokeButton.setOnClickListener(this);
-
 
         mCirclesList = new ArrayList<String>();
         mCirclesAdapter = new ArrayAdapter<String>(
                 this, R.layout.circle_member, mCirclesList);
-        mCirclesListView.setAdapter(mCirclesAdapter);
-
 
         if (savedInstanceState != null) {
             mSignInProgress = savedInstanceState
                     .getInt(SAVED_PROGRESS, STATE_DEFAULT);
         }
+
+
+
         mGoogleApiClient = buildGoogleApiClient();
+
+        Intent intent = getIntent();
+
+        signout = intent.getBooleanExtra("signout", false);
+
+
+
     }
 
     private GoogleApiClient buildGoogleApiClient() {
@@ -141,7 +123,6 @@ public class SignInActivity extends FragmentActivity implements
     @Override
     protected void onStart() {
         super.onStart();
-        mStatus.setText("Status: Signed out");
         mGoogleApiClient.connect();
     }
 
@@ -164,54 +145,45 @@ public class SignInActivity extends FragmentActivity implements
     public void onClick(View v) {
         if (!mGoogleApiClient.isConnecting()) {
             switch (v.getId()) {
-                case R.id.sign_in_button:
+                case R.id.myGoogleSignIn:
                     //mStatus.setText("Status: Signing In to Google+...");
                     mSignInProgress = STATE_SIGN_IN;
                     mGoogleApiClient.connect();
                     //new LoginTask().execute();
                     break;
-                case R.id.sign_out_button:
-                    if (mGoogleApiClient.isConnected()) {
-                        Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-                        mGoogleApiClient.disconnect();
-                        //client.clientLogoutHandler(user);
-                        mStatus.setText("Status: Signed out");
-                    }
-                    updateUI(false);
-                    break;
-                case R.id.revoke_access_button:
-                    Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-                    Plus.AccountApi.revokeAccessAndDisconnect(mGoogleApiClient);
-                    mGoogleApiClient = buildGoogleApiClient();
-                    mGoogleApiClient.connect();
-                    mStatus.setText("Status: Signed out");
-                    updateUI(false);
-                    break;
-                case R.id.addFriend:
-                    break;
-                case R.id.checkInLocation:
-                    // New Activity for OpenCV
-                    break;
-                case R.id.recentLocations:
-                    break;
-            }
+                }
         }
     }
 
 
     @Override
     public void onConnected(Bundle connectionHint) {
-        mStatus.setText("Status: Signed In");
-        // Reaching onConnected means we consider the user signed in.
-        Log.i(TAG, "onConnected");
 
-        Intent myIntent = new Intent(SignInActivity.this, MainActivity.class);
-        startActivity(myIntent);
+
+        if(signout == true){
+            Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+            mGoogleApiClient.disconnect();
+            signout = false;
+        }
+        else {
+            // Reaching onConnected means we consider the user signed in.
+            Log.i(TAG, "onConnected");
+            Plus.PeopleApi.loadConnected(mGoogleApiClient).setResultCallback(this);
+
+
+            Intent myIntent = new Intent(SignInActivity.this, MainActivity.class);
+            ProfileInformation profileInformation= getProfileInformation();
+            myIntent.putExtra("profileInformation", (Serializable) profileInformation);
+            myIntent.putStringArrayListExtra("mCirclesList", mCirclesList);
+            startActivity(myIntent);
+            signout = false;
+
+        }
+
 
         // Get user's information
-        //getProfileInformation();
 
-        //Plus.PeopleApi.loadConnected(mGoogleApiClient).setResultCallback(this);
+
 
         //updateUI(true);
 
@@ -222,23 +194,10 @@ public class SignInActivity extends FragmentActivity implements
     private void updateUI(boolean isSignedIn) {
         if (isSignedIn) {
             mSignInButton.setVisibility(View.GONE);
-            llProfileLayout.setVisibility(View.VISIBLE);
-            mCheckInLocation.setVisibility(View.VISIBLE);
-            mAddFriends.setVisibility(View.VISIBLE);
-            mFriendsLocations.setVisibility(View.VISIBLE);
-            mCirclesTitle.setVisibility(View.VISIBLE);
-            mCirclesListView.setVisibility(View.VISIBLE);
-            mAddFriends.setVisibility(View.VISIBLE);
+
         } else {
             mSignInButton.setVisibility(View.VISIBLE);
-            llProfileLayout.setVisibility(View.GONE);
-            mCheckInLocation.setVisibility(View.GONE);
-            mAddFriends.setVisibility(View.GONE);
-            mFriendsLocations.setVisibility(View.GONE);
-            mCirclesTitle.setVisibility(View.GONE);
-            mCirclesListView.setVisibility(View.GONE);
-            mCirclesList.clear();
-            mCirclesAdapter.notifyDataSetChanged();
+
         }
     }
 
@@ -308,6 +267,41 @@ public class SignInActivity extends FragmentActivity implements
         }
     }
 
+
+
+    @Override
+    public void onConnectionSuspended(int cause) {
+        mGoogleApiClient.connect();
+    }
+
+    private Dialog createErrorDialog() {
+        if (GooglePlayServicesUtil.isUserRecoverableError(mSignInError)) {
+            return GooglePlayServicesUtil.getErrorDialog(
+                    mSignInError,
+                    this,
+                    RC_SIGN_IN,
+                    new DialogInterface.OnCancelListener() {
+                        @Override
+                        public void onCancel(DialogInterface dialog) {
+                            Log.e(TAG, "Google Play services resolution cancelled");
+                            mSignInProgress = STATE_DEFAULT;
+                        }
+                    });
+        } else {
+            return new AlertDialog.Builder(this)
+                    .setMessage(R.string.play_services_error)
+                    .setPositiveButton(R.string.close,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Log.e(TAG, "Google Play services error could not be "
+                                            + "resolved: " + mSignInError);
+                                    mSignInProgress = STATE_DEFAULT;
+                                }
+                            }).create();
+        }
+    }
+
     @Override
     public void onResult(People.LoadPeopleResult peopleData) {
         switch (peopleData.getStatus().getStatusCode()) {
@@ -322,6 +316,7 @@ public class SignInActivity extends FragmentActivity implements
                     else {
                         for (int i = 0; i < count; i++) {
                             mCirclesList.add(personBuffer.get(i).getDisplayName());
+                            //mCirclesList.add(personBuffer.get(i).getImage().getUrl());
                         }
                     }
                 } finally {
@@ -343,63 +338,27 @@ public class SignInActivity extends FragmentActivity implements
 
     }
 
-    @Override
-    public void onConnectionSuspended(int cause) {
-        mGoogleApiClient.connect();
-    }
+    private ProfileInformation getProfileInformation() {
+        ProfileInformation profile = new ProfileInformation();
 
-    private Dialog createErrorDialog() {
-        if (GooglePlayServicesUtil.isUserRecoverableError(mSignInError)) {
-            return GooglePlayServicesUtil.getErrorDialog(
-                    mSignInError,
-                    this,
-                    RC_SIGN_IN,
-                    new DialogInterface.OnCancelListener() {
-                        @Override
-                        public void onCancel(DialogInterface dialog) {
-                            Log.e(TAG, "Google Play services resolution cancelled");
-                            mSignInProgress = STATE_DEFAULT;
-                            mStatus.setText("Status: " + R.string.status_signed_out);
-                        }
-                    });
-        } else {
-            return new AlertDialog.Builder(this)
-                    .setMessage(R.string.play_services_error)
-                    .setPositiveButton(R.string.close,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Log.e(TAG, "Google Play services error could not be "
-                                            + "resolved: " + mSignInError);
-                                    mSignInProgress = STATE_DEFAULT;
-                                    mStatus.setText("Status: " +R.string.status_signed_out);
-                                }
-                            }).create();
-        }
-    }
-
-    private void getProfileInformation() {
         try {
             if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
                 Person currentPerson = Plus.PeopleApi
                         .getCurrentPerson(mGoogleApiClient);
                 String personName = currentPerson.getDisplayName();
+                profile.setName(personName);
                 String personPhotoUrl = currentPerson.getImage().getUrl();
-                String personGooglePlusProfile = currentPerson.getUrl();
-                String email = Plus.AccountApi.getAccountName(mGoogleApiClient);
-
-                Log.e(TAG, "Name: " + personName + ", plusProfile: "
-                        + personGooglePlusProfile + ", email: " + email
-                        + ", Image: " + personPhotoUrl);
-
-                txtName.setText(personName);
-                txtEmail.setText(email);
-
                 personPhotoUrl = personPhotoUrl.substring(0,
                         personPhotoUrl.length() - 2)
                         + PROFILE_PIC_SIZE;
+                profile.setImageUrl(personPhotoUrl);
 
-                new LoadProfileImage(imgProfilePic).execute(personPhotoUrl);
+                String personGooglePlusProfile = currentPerson.getUrl();
+                String email = Plus.AccountApi.getAccountName(mGoogleApiClient);
+                profile.setEmail(email);
+
+
+
 
             } else {
                 Toast.makeText(getApplicationContext(),
@@ -408,8 +367,8 @@ public class SignInActivity extends FragmentActivity implements
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return profile;
     }
-
     private class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 

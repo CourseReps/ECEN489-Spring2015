@@ -3,6 +3,7 @@ package com.ecen489.slidermenu;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.widget.ListView;
 import com.ecen489.googlesignin.R;
 import com.ecen489.slidermenu.adapter.NavDrawerListAdapter;
 import com.ecen489.slidermenu.model.NavDrawerItem;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.plus.Plus;
 
 import java.util.ArrayList;
 
@@ -39,10 +42,20 @@ public class MainActivity extends Activity {
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
 
+	public ArrayList<String> mCirclesList;
+	public static ProfileInformation profileInformation;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		String TAG = "myApp";
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		Intent intent = getIntent();
+		mCirclesList = intent.getStringArrayListExtra("mCirclesList");
+		profileInformation = (ProfileInformation) intent.getSerializableExtra("profileInformation");
+		String email = profileInformation.getEmail();
+		Log.i("myApp", email);
 
 		mTitle = mDrawerTitle = getTitle();
 
@@ -68,7 +81,7 @@ public class MainActivity extends Activity {
 		// Recent Check Ins
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1)));
 		// Pages
-		//navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
 		// What's hot, We  will add a counter here
 		//navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1)));
 		
@@ -166,6 +179,10 @@ public class MainActivity extends Activity {
 		switch (position) {
 		case 0:
 			fragment = new HomeFragment();
+			Bundle bundle = new Bundle(1);
+			bundle.putSerializable("profileInformation", profileInformation);
+			fragment.setArguments(bundle);
+
 			break;
 		case 1:
 			fragment = new FindPeopleFragment();

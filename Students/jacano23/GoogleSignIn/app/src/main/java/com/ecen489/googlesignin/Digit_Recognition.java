@@ -58,7 +58,7 @@ public class Digit_Recognition extends Activity implements CvCameraViewListener2
     int inimgwidth;
     int inimgheight;
     int numofdigits;
-    String loc;
+    static String loc;
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -264,7 +264,7 @@ public class Digit_Recognition extends Activity implements CvCameraViewListener2
             {
                 // if its area is greater than 150
                 double area = Imgproc.contourArea(contours.get(i));
-                if ((area > 700) ) {
+                if ((area > 200) ) {
 
 
                     numofdigits=+1;
@@ -321,7 +321,7 @@ public class Digit_Recognition extends Activity implements CvCameraViewListener2
 
             }
 
-            Toast.makeText(this, "Checked In at location :: "+numofdigits, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Checked In at location :: "+dgimgnum, Toast.LENGTH_SHORT).show();
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
             String currentDateandTime = sdf.format(new Date());
@@ -342,7 +342,7 @@ public class Digit_Recognition extends Activity implements CvCameraViewListener2
             // inserted code
             count = 1;
             mOpenCvCameraView.disableView();
-            loc=String.valueOf(numofdigits);
+            loc=String.valueOf(dgimgnum);
             Intent i  = new Intent(this, SignIn.class);
             i.putExtra(location, loc);
             Log.i(TAG, location);

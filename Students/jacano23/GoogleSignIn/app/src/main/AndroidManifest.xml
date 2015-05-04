@@ -35,7 +35,7 @@
             android:name="com.google.android.gms.6.5.87"
             android:value="@integer/google_play_services_version" />
         <activity
-            android:name=".SignIn"
+            android:name="com.ecen489.slidermenu.SignInActivity"
             android:label="GoogleSignIn"
             android:screenOrientation="portrait">
             <intent-filter>
