@@ -16,12 +16,16 @@ The project features national and international experts with industrial, militar
 ![image](http://i.imgur.com/7Bc1z6K.jpg) |
 Description |
 
+The Physical Devices and Virtualization division provides full back-end support of our entire infrastructure. Keeping all software up to date with the latest updates and constantly improving the hardware with the latest breakthroughs in technology.
+
 ## Networking and Server-Client Architecture
 
 [Joshua Cano](https://github.com/jacano23) | [Rong Liu](https://github.com/liur180855) | [Pranay Eedara](https://github.com/epranaykumar) | [Anudeep Tungala](https://github.com/nranudeep1990)  
 --- | --- | --- | ---
 ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) |
 Description | Description | Description | Description |
+
+Building the bridges between our servers and clients, the Networking and Server-Client Architecture division designs and monitors all socket connections with the HTTP server.
 
 ## Data Integrity and Information Management
 
@@ -30,12 +34,16 @@ Description | Description | Description | Description |
 ![image](http://i.imgur.com/7Bc1z6K.jpg) |
 Description |
 
+The Data Integrity and Information Management division is responsible for managing all JSON message formatting. 
+
 ## Database Engine and Storage
 
 [Evelyn Susanah Cifuentes](https://github.com/cifuentesevelyn) | [Mandel Oats](https://github.com/mandeloats) |
 --- | --- |
 ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) |
 Description | Description |
+
+With thousands of check-ins happening daily, the Database Engine and Storage division makes sure all information continue to be stored and managed efficiently.
 
 ## Security and Authentication 
 
@@ -44,12 +52,16 @@ Description | Description |
 ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) |
 Description | Description |
 
+Continuing to keep your location secure and only available for your friends to see, the security and authentication division is hard at work monitoring for the latest potential security breaches and upgrading the servers with the latest authentication procedures. 
+
 ## Account Managment and Administration
 
 [Randy Allen Neal](https://github.com/gmnealusn) |
 --- |
 ![image](http://i.imgur.com/7Bc1z6K.jpg) |
 Description |
+
+The account management and administration division is responsible for maintaining the user accounts. All procedures designed to make your useage safe and enjoyable  such as creating your account and adding and deleting friends is handled by this team. Having account issues? They are more than willing to help as they continue to monitor the databases and ensuring their integrity.
 
 ## Special Projects
 
@@ -58,6 +70,8 @@ Description |
 ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) |
 Description | Description | Description |
 
+Our own personal skunkworks. Our special projects division continues to push the edge of emerging technologies to find out what lies in the future to best enhance our customer experience.
+
 ## Business and Finance
 
 [Blade Octaviano Roybal](https://github.com/Bladeroybal) | [Yajie Zeng](https://github.com/yjzeng8833) |
@@ -65,12 +79,16 @@ Description | Description | Description |
 ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) |
 Description | Description |
 
+The business and finance division maintains all records and serves as a base for strategic development of all business and finance plans. All investment offers are dealt through them as they work to produce the best financial and business results for the team of talented engineers they serve.
+
 ## Public Relations and Web Presence
 
 [Benito Ramirez Jr.](https://github.com/BenitoRamirezJr) |
 --- |
 ![image](http://i.imgur.com/7Bc1z6K.jpg) |
 Description |
+
+Branding is everything, and our public relations and web presence division takes that into account. Responsible for creating and maintaining our website, the division monitors all the most popular trends to continue improving the site into a clean and professional platform for our customers and investors alike. A detailed backend structure exists for all communication for employees.
 
 ## Advisory Board
 
