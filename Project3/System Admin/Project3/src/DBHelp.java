@@ -21,13 +21,13 @@ public class DBHelp {
     //this handles the server connection and communicates to the System_Admin
     public boolean serverConnect() {
         try {
+
             svrConnected = true;
             credentials.serverConnected();
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
             svrConnected = false;
-            e.printStackTrace();
         }
         return svrConnected;
     }
@@ -58,7 +58,7 @@ public class DBHelp {
             }
             catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e);
             }
         }
         else if (System_Admin.selectedTable.equals("Locations")) {
@@ -68,12 +68,13 @@ public class DBHelp {
             }
             catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e);
             }
         }
         return rSet;
     }
 ////////////////////////////////////////////////////////////////////
+    //the next few methods between the comment break lines are adapted from Mandel code.
     //handles the add user, takes the strings and places them into the database
     public void addUser(String userName, String name,
                         String sessionID, String password, String salt ) { //set userID to -1 if adding
@@ -84,7 +85,7 @@ public class DBHelp {
             stmt.executeUpdate(sql);
         }
         catch(Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
         }
     }
     //handles the delete user, takes an int and deletes the corresponding user
@@ -95,7 +96,7 @@ public class DBHelp {
             stmt.executeUpdate(sql);
         }
         catch(Exception e){
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
         }
     }
     //handles the add location, takes the strings and places them into the database
@@ -107,7 +108,7 @@ public class DBHelp {
             stmt.executeUpdate(sql);
         }
         catch(Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
         }
     }
     //handles the delete location, takes an int and deletes the corresponding user
@@ -118,7 +119,27 @@ public class DBHelp {
             stmt.executeUpdate(sql);
         }
         catch(Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    public void deleteUserFriend(int userID) {
+        try {
+            String sql;
+            sql = "DELETE FROM FRIENDS WHERE USERS_ID =" + userID;
+            stmt.executeUpdate(sql);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    public void deleteFriend(int friendID) {
+        try {
+            String sql;
+            sql = "DELETE FROM FRIENDS WHERE FRIEND_USERS_ID ="+ friendID;
+            stmt.executeUpdate(sql);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }
     }
 ////////////////////////////////////////////////////////////////////

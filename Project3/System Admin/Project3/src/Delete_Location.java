@@ -90,9 +90,14 @@ public class Delete_Location extends JFrame {
     }
 ////////////////////////////////////////////////////////////////////
     //creates an int with the text and returns the int
-    public int info(){
-        locData = Integer.parseInt(locID.getText());
-        setVisible(false);
+    public int info() throws NumberFormatException{
+        try {
+            locData = Integer.parseInt(locID.getText());
+            setVisible(false);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
         return locData;
     }
 ////////////////////////////////////////////////////////////////////

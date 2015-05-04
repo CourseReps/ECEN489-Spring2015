@@ -184,7 +184,7 @@ public class System_Admin extends JFrame
             dataTable.setModel(DbUtils.resultSetToTableModel(rSet));
         }
         catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
         }
      }
 ///////////////////////////////////////////////////////////////////
@@ -194,7 +194,8 @@ public class System_Admin extends JFrame
         DBHelp dbconnect = new DBHelp();
         dbconnect.DBConnect();
         dbconnect.deleteUser(du.info());
-        dbconnect.
+        dbconnect.deleteFriend(du.info());
+        dbconnect.deleteUserFriend(du.info());
         rSet = dbconnect.getData();
         dataTable.setModel(DbUtils.resultSetToTableModel(rSet));
     }

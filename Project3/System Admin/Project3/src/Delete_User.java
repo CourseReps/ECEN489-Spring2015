@@ -90,14 +90,18 @@ public class Delete_User extends JFrame{
         }
     }
 ////////////////////////////////////////////////////////////////////
-    //creates an int with the text and returns the int
-    public int info(){
-        userData = Integer.parseInt(userID.getText());
-        setVisible(false);
+    //creates an int with userId text a
+    public int info() throws NumberFormatException{
+        try {
+            userData = Integer.parseInt(userID.getText());
+            setVisible(false);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
         return userData;
     }
 ////////////////////////////////////////////////////////////////////
-    //this handles communication between classes
     public void addSysAdmin(System_Admin sa) {
         this.systemAdmin = sa;
     }
