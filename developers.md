@@ -67,7 +67,7 @@ The account management and administration division is responsible for maintainin
 
 [George Sullivan](https://github.com/I-Love-Github) | [Jeffrey Jensen](https://github.com/happycamper) | [Hong Pan](https://github.com/hongpan0507) |
 --- | --- | --- |
-![image](http://i.imgur.com/08ZCp5T.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/qQzqkhA.jpg) |
+![image](http://i.imgur.com/08ZCp5T.jpg) | ![image](http://i.imgur.com/UpIqJps.png) | ![image](http://i.imgur.com/qQzqkhA.jpg) |
 Description | Description | Description |
 
 Our own personal skunkworks. Our special projects division continues to push the edge of emerging technologies to find out what lies in the future to best enhance our customer experience.
