@@ -20,10 +20,10 @@ ScoutOut is an Android exclusive app for checking in at all of your favorite loc
 
 | Latest Updates |
 |:---:|
-| Now see latest locations you’ve visited on the home page |
-| Adding and removing friends are now easier |
-| New cleaner interface |
-| Sign in now using Google Plus! |
+| *Now see latest locations you’ve visited on the home page* |
+| *Adding and removing friends are now easier* |
+| *New cleaner interface* |
+| *Sign in now using Google Plus!* |
 
 | Download Here | ![image](http://i.imgur.com/MwwnsgJ.png) |
 | :---: | --- |
