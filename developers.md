@@ -85,7 +85,7 @@ The business and finance division maintains all records and serves as a base for
 
 [Benito Ramirez Jr.](https://github.com/BenitoRamirezJr) |
 --- |
-![image](http://i.imgur.com/7Bc1z6K.jpg) |
+![image](http://i.imgur.com/Ek4A1uK.jpg) |
 Description |
 
 Branding is everything, and our public relations and web presence division takes that into account. Responsible for creating and maintaining our website, the division monitors all the most popular trends to continue improving the site into a clean and professional platform for our customers and investors alike. A detailed backend structure exists for all communication for employees.
@@ -94,5 +94,5 @@ Branding is everything, and our public relations and web presence division takes
 
 [Jean-Francois Chamberland](https://github.com/chmbrlnd) | [Gregory H. Huff](https://github.com/ghuff) |
 --- | --- |
-![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) |
+![image](http://i.imgur.com/mT1cDNd.jpg) | ![image](http://i.imgur.com/ZWf1tUT.jpg) |
 Description | Description |
