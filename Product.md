@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Product
+title: ***ScoutOut*** The App!
 permalink: /Product.html
 ---
 
