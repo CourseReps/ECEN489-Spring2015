@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="System_Admin">
+  <grid id="27dc6" binding="SystemAdmin" layout-manager="GridLayoutManager" row-count="3" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="648" height="357"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="153c1" class="javax.swing.JLabel" binding="TableList">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="97" height="18"/>
+            <maximum-size width="97" height="18"/>
+          </grid>
+        </constraints>
+        <properties>
+          <labelFor value="c2e18"/>
+          <text value="Select A Table"/>
+        </properties>
+      </component>
+      <component id="928e0" class="javax.swing.JLabel" binding="Table">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <maximum-size width="-1" height="18"/>
+          </grid>
+        </constraints>
+        <properties>
+          <labelFor value="10d00"/>
+          <text value="Table Data"/>
+        </properties>
+      </component>
+      <component id="b63f4" class="javax.swing.JButton" binding="Connect">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="97" height="32"/>
+            <maximum-size width="97" height="32"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-16746496"/>
+          <foreground color="-1"/>
+          <text value="&amp;Connect"/>
+        </properties>
+      </component>
+      <scrollpane id="10d00">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="5" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="453" height="257"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="7ee2b" class="javax.swing.JTable" binding="dataTable">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
+      <scrollpane id="c2e18">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="97" height="257"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="9aa2f" class="javax.swing.JList" binding="Tables">
+            <constraints/>
+            <properties>
+              <alignmentX value="0.5"/>
+              <fixedCellWidth value="97"/>
+              <maximumSize width="97" height="-1"/>
+              <model>
+                <item value="Users"/>
+                <item value="Locations"/>
+              </model>
+              <visible value="true"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
+      <component id="f01ab" class="javax.swing.JButton" binding="ExitButton">
+        <constraints>
+          <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-4980736"/>
+          <foreground color="-1"/>
+          <text value="Exit &amp;Program"/>
+        </properties>
+      </component>
+      <component id="4a1f8" class="javax.swing.JButton" binding="deleteLocation">
+        <constraints>
+          <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="&amp;Delete Location"/>
+        </properties>
+      </component>
+      <component id="cc8d1" class="javax.swing.JButton" binding="addLocation">
+        <constraints>
+          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="&amp;Add Location"/>
+        </properties>
+      </component>
+      <component id="d7063" class="javax.swing.JButton" binding="deleteUser">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="&amp;Delete User"/>
+        </properties>
+      </component>
+      <component id="67f1e" class="javax.swing.JButton" binding="addUser">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="&amp;Add User"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
