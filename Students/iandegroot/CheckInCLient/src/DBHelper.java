@@ -408,7 +408,6 @@ public class DBHelper {
 
         try {
             Statement s = c.createStatement();
-
             ResultSet rs = s.executeQuery("SELECT CHECKINS.USERS_ID, CHECKINS.TIMESTAMP, CHECKINS.METHOD FROM CHECKINS INNER JOIN FRIENDS ON FRIENDS.FRIEND_USERS_ID = CHECKINS.USERS_ID WHERE CHECKINS.LOCATIONS_ID = " + locationID + " AND FRIENDS.USERS_ID = " + userWithFriends + " ORDER BY TIMESTAMP DESC");
             while(rs.next() && (ctr < 3)){
                 int userID = rs.getInt("USERS_ID");
@@ -416,12 +415,12 @@ public class DBHelper {
                 String location = getLocationName(locationID);
                 int timestamp = rs.getInt("TIMESTAMP");
                 String method = rs.getString("METHOD");
-                CheckIn ci = new CheckIn(username, location, timestamp, method);
+                CheckIn ci = new CheckIn(username,location,timestamp,method);
                 checkIns.add(ci);
                 ctr++;
             }
-
             return checkIns;
+
         }
         catch (Exception e){
             e.printStackTrace();

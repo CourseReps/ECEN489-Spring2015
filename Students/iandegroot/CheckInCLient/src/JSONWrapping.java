@@ -534,7 +534,7 @@ public class JSONWrapping {
             uwl = unwrapRecentFriends(recentFriends);
 
             if (DBInterface.checkForValidSessionID((String)recentFriends.get("username"), (String)recentFriends.get("sessionID"))) {
-                response = getLocsRecentFriendsJSON(DBInterface.getRecentFriends((String)recentFriends.get("username"), uwl.locations));
+                response = getLocsRecentFriendsJSON(DBInterface.getRecentFriends(uwl.username, uwl.locations));
             }
             else
                 response = getOutcomeJSON(false);

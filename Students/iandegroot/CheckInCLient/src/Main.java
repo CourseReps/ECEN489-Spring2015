@@ -1,36 +1,20 @@
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 /**
  * Created by mandel on 4/15/15.
  */
 public class Main {
-
-    static void addMutualFriends(DBHelper dbHelper, int userID, int friendID) {
-        dbHelper.addFriend(userID, friendID);
-        dbHelper.addFriend(friendID, userID);
-    }
-
     public static void main(String args[]){
         DBHelper dbHelper = new DBHelper();
         ArrayList<CheckIn> checkIns1 = new ArrayList<CheckIn>();
         ArrayList<CheckIn> checkIns2 = new ArrayList<CheckIn>();
         dbHelper.openDB();
         dbHelper.createDB();
-
-        String Password=null;
-        try {
-            Password = HashMachine.generateUnsaltedUserHash("password");
-            dbHelper.addUser("Mandel", "Mandel", "asdf", Password, "SALT");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-
-        dbHelper.addUser("Mandel", "Mandel", "asdf", Password, "SALT");
-        dbHelper.addUser("Trevor", "Trevor", "sdfg", Password, "SALT");
-        dbHelper.addUser("Benito", "Benito", "qewr", Password, "SALT");
-        dbHelper.addUser("Josh", "Josh", "zxcv", Password, "SALT");
-        dbHelper.addUser("Blade", "Blade", "wert", Password, "SALT");
+        dbHelper.addUser("Mandel", "Mandel", "asdf", "Password", "SALT");
+        dbHelper.addUser("Trevor", "Trevor", "sdfg", "Password", "SALT");
+        dbHelper.addUser("Benito", "Benito", "qewr", "Password", "SALT");
+        dbHelper.addUser("Josh", "Josh", "zxcv", "Password", "SALT");
+        dbHelper.addUser("Blade", "Blade", "wert", "Password", "SALT");
         dbHelper.addLocation("Home", 12.567888, 12.567, "Image");
         dbHelper.addLocation("School", 12.567888, 12.567, "Image");
         dbHelper.addLocation("EIC", 12.567888, 12.567, "Image");
@@ -42,19 +26,19 @@ public class Main {
         int joshId = dbHelper.getUserIDByUserName("Josh");
         int bladeId = dbHelper.getUserIDByUserName("Blade");
 
-        //dbHelper.addFriend(mandelId,trevorId);
-        //dbHelper.addFriend(mandelId,benitoId);
-        addMutualFriends(dbHelper, mandelId, joshId);
-        addMutualFriends(dbHelper, mandelId, bladeId);
+        dbHelper.addFriend(mandelId,trevorId);
+        dbHelper.addFriend(mandelId,benitoId);
+        dbHelper.addFriend(mandelId,joshId);
+        dbHelper.addFriend(mandelId,bladeId);
 
-        addMutualFriends(dbHelper, trevorId, benitoId);
-        addMutualFriends(dbHelper, trevorId, joshId);
-        addMutualFriends(dbHelper, trevorId, bladeId);
+        dbHelper.addFriend(trevorId,benitoId);
+        dbHelper.addFriend(trevorId,joshId);
+        dbHelper.addFriend(trevorId,bladeId);
 
-        addMutualFriends(dbHelper, benitoId, joshId);
-        addMutualFriends(dbHelper, benitoId, bladeId);
+        dbHelper.addFriend(benitoId,joshId);
+        dbHelper.addFriend(benitoId,bladeId);
 
-        addMutualFriends(dbHelper, joshId,bladeId);
+        dbHelper.addFriend(joshId,bladeId);
 
 
         ArrayList<String> mandelfriends = dbHelper.getFriends(mandelId);
