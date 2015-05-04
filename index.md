@@ -24,5 +24,5 @@ ScoutOut is an Android exclusive app for checking in at all of your favorite loc
 | New cleaner interface |
 | Sign in now using Google Plus! |
 
-| Download Here | []() |
+| Download Here | ![image](http://i.imgur.com/MwwnsgJ.png) |
 |:---:| --- |
