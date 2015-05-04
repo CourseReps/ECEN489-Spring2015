@@ -374,10 +374,13 @@ public class DBHelper {
     }
     public ArrayList<CheckIn> getCheckInByLocation(int locationID){
         ArrayList<CheckIn> checkIns = new ArrayList<CheckIn>();
+
+        int ctr = 0;
+
         try {
             Statement s = c.createStatement();
-            ResultSet rs = s.executeQuery("SELECT USERS_ID,TIMESTAMP, METHOD FROM CHECKINS WHERE LOCATIONS_ID = " + locationID + " ORDER BY TIMESTAMP DESC LIMIT 3");
-            while(rs.next()){
+            ResultSet rs = s.executeQuery("SELECT USERS_ID,TIMESTAMP, METHOD FROM CHECKINS WHERE LOCATIONS_ID = " + locationID + " ORDER BY TIMESTAMP DESC");
+            while(rs.next() && (ctr < 3)){
                 int userID = rs.getInt("USERS_ID");
                 String username = getUserName(userID);
                 String location = getLocationName(locationID);
@@ -385,6 +388,7 @@ public class DBHelper {
                 String method = rs.getString("METHOD");
                 CheckIn ci = new CheckIn(username,location,timestamp,method);
                 checkIns.add(ci);
+                ctr++;
             }
             return checkIns;
 
@@ -396,12 +400,46 @@ public class DBHelper {
         
         
     }
-    public ArrayList<CheckIn> getCheckInByUser(int userID){
+
+    public ArrayList<CheckIn> getFriendsCheckInByLocation(int locationID, int userWithFriends){
         ArrayList<CheckIn> checkIns = new ArrayList<CheckIn>();
+
+        int ctr = 0;
+
         try {
             Statement s = c.createStatement();
-            ResultSet rs = s.executeQuery("SELECT USERS_ID, LOCATIONS_ID, TIMESTAMP, METHOD FROM CHECKINS WHERE USERS_ID ="+userID+" ORDER BY TIMESTAMP DESC LIMIT 3");
-            while(rs.next()){
+
+            ResultSet rs = s.executeQuery("SELECT CHECKINS.USERS_ID, CHECKINS.TIMESTAMP, CHECKINS.METHOD FROM CHECKINS INNER JOIN FRIENDS ON FRIENDS.FRIEND_USERS_ID = CHECKINS.USERS_ID WHERE CHECKINS.LOCATIONS_ID = " + locationID + " AND FRIENDS.USERS_ID = " + userWithFriends + " ORDER BY TIMESTAMP DESC");
+            while(rs.next() && (ctr < 3)){
+                int userID = rs.getInt("USERS_ID");
+                String username = getUserName(userID);
+                String location = getLocationName(locationID);
+                int timestamp = rs.getInt("TIMESTAMP");
+                String method = rs.getString("METHOD");
+                CheckIn ci = new CheckIn(username, location, timestamp, method);
+                checkIns.add(ci);
+                ctr++;
+            }
+
+            return checkIns;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+
+
+    }
+
+    public ArrayList<CheckIn> getCheckInByUser(int userID){
+        ArrayList<CheckIn> checkIns = new ArrayList<CheckIn>();
+
+        int ctr = 0;
+
+        try {
+            Statement s = c.createStatement();
+            ResultSet rs = s.executeQuery("SELECT USERS_ID, LOCATIONS_ID, TIMESTAMP, METHOD FROM CHECKINS WHERE USERS_ID ="+userID+" ORDER BY TIMESTAMP DESC");
+            while(rs.next() && (ctr < 3)){
                 int locID = rs.getInt("LOCATIONS_ID");
                 String username = getUserName(userID);
                 String location = getLocationName(locID);
@@ -409,6 +447,7 @@ public class DBHelper {
                 String method = rs.getString("METHOD");
                 CheckIn ci = new CheckIn(username,location,timestamp,method);
                 checkIns.add(ci);
+                ctr++;
             }
             return checkIns;
 

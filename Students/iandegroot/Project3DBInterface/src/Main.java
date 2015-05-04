@@ -5,6 +5,12 @@ import java.util.ArrayList;
  * Created by mandel on 4/15/15.
  */
 public class Main {
+
+    static void addMutualFriends(DBHelper dbHelper, int userID, int friendID) {
+        dbHelper.addFriend(userID, friendID);
+        dbHelper.addFriend(friendID, userID);
+    }
+
     public static void main(String args[]){
         DBHelper dbHelper = new DBHelper();
         ArrayList<CheckIn> checkIns1 = new ArrayList<CheckIn>();
@@ -38,17 +44,17 @@ public class Main {
 
         //dbHelper.addFriend(mandelId,trevorId);
         //dbHelper.addFriend(mandelId,benitoId);
-        dbHelper.addFriend(mandelId,joshId);
-        dbHelper.addFriend(mandelId,bladeId);
+        addMutualFriends(dbHelper, mandelId, joshId);
+        addMutualFriends(dbHelper, mandelId, bladeId);
 
-        dbHelper.addFriend(trevorId,benitoId);
-        dbHelper.addFriend(trevorId,joshId);
-        dbHelper.addFriend(trevorId,bladeId);
+        addMutualFriends(dbHelper, trevorId, benitoId);
+        addMutualFriends(dbHelper, trevorId, joshId);
+        addMutualFriends(dbHelper, trevorId, bladeId);
 
-        dbHelper.addFriend(benitoId,joshId);
-        dbHelper.addFriend(benitoId,bladeId);
+        addMutualFriends(dbHelper, benitoId, joshId);
+        addMutualFriends(dbHelper, benitoId, bladeId);
 
-        dbHelper.addFriend(joshId,bladeId);
+        addMutualFriends(dbHelper, joshId,bladeId);
 
 
         ArrayList<String> mandelfriends = dbHelper.getFriends(mandelId);

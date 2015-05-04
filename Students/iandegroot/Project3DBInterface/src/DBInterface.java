@@ -49,21 +49,23 @@ public class DBInterface {
 
             friendsWithCheckIns.add(new UserWithCheckIns(f, checkIns));
         }
+        dbHelper.closeDB();
 
         return friendsWithCheckIns;
     }
 
     //Returns 3 most recent checkins of given locations
-    public static ArrayList<LocWithCheckIns> getRecentFriends(String locName, ArrayList<String> locs) {
+    public static ArrayList<LocWithCheckIns> getRecentFriends(String username, ArrayList<String> locs) {
         DBHelper dbHelper = new DBHelper();
         ArrayList<LocWithCheckIns> locsWithCheckIns = new ArrayList<LocWithCheckIns>();
 
         dbHelper.openDB();
         for (String l : locs) {
-            ArrayList<CheckIn> checkIns =  new ArrayList<CheckIn>(dbHelper.getCheckInByLocation(dbHelper.getLocationIDByName(l)));
+            ArrayList<CheckIn> checkIns =  new ArrayList<CheckIn>(dbHelper.getFriendsCheckInByLocation(dbHelper.getLocationIDByName(l), dbHelper.getUserIDByUserName(username)));
 
             locsWithCheckIns.add(new LocWithCheckIns(l, checkIns));
         }
+        dbHelper.closeDB();
 
         return locsWithCheckIns;
     }
@@ -140,7 +142,8 @@ public class DBInterface {
             Integer friendUserID = dbHelper.getUserIDByName(friendName);
             dbHelper.addFriend(userID,friendUserID);
         }
-        outcome =true;
+        outcome = true;
+        dbHelper.closeDB();
 
         return outcome;
     }

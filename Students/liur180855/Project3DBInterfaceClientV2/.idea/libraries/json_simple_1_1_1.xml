@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="json-simple-1.1.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/json-simple-1.1.1.jar!/" />
+      <root url="jar://$USER_HOME$/sqlite/sqlite-jdbc-3.8.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/.idea/libraries/java-json.jar!/" />
+      <root url="jar://$PROJECT_DIR$/.idea/libraries/json-20131018.jar!/" />
+      <root url="jar://$PROJECT_DIR$/.idea/libraries/sqlite-jdbc-3.8.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/sqlite/sqlite-jdbc-3.8.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/.idea/libraries/java-json.jar!/" />
+      <root url="jar://$PROJECT_DIR$/.idea/libraries/sqlite-jdbc-3.8.7.jar!/" />
+    </SOURCES>
+  </library>
+</component>
