@@ -1,6 +1,6 @@
 ---
 layout: page
-title: ScoutOut
+title: ScoutOut The App!
 permalink: /Product.html
 ---
 
