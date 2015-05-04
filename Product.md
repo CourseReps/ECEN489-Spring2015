@@ -1,3 +1,8 @@
+---
+layout: page
+title: Product
+permalink: /Producthtml
+---
 
 ![image](http://i.imgur.com/2G0X5Gp.jpg)
 
