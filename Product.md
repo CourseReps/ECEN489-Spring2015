@@ -4,7 +4,7 @@ title: ScoutOut The App!
 permalink: /Product.html
 ---
 
-|  |  | ***ScoutOut*** The App! |
+|  |  |  |
 | --- | --- |:---:|
 |  | ![image](http://i.imgur.com/GHvJFSo.jpg) | ScoutOut is an Android exclusive app for checking in at all of your favorite locations and keeping track of where your friends have been. Long gone are the days of mindlessly checking Facebook laying in bed. It’s time to get out and explore! Starting scouting out new locations today. |
 |  |  |
