@@ -10,7 +10,11 @@ Every member on the team possesses valuable hands-on experience and a list of pe
 The project features national and international experts with industrial, military, and academic backgrounds.
 
 ## Physical Devices and Virtualization
-* Kevin Wilkens, [kevinwilkens22](https://github.com/kevinwilkens22)
+
+[Kevin Wilkens](https://github.com/kevinwilkens22) |
+--- |
+![image](http://i.imgur.com/7Bc1z6K.jpg) |
+Description |
 
 ## Networking and Server-Client Architecture
 
@@ -20,15 +24,25 @@ The project features national and international experts with industrial, militar
 Description | Description | Description | Description |
 
 ## Data Integrity and Information Management
-* Ian Paul DeGroot, [iandegroot](https://github.com/iandegroot)
+
+[Ian Paul DeGroot](https://github.com/iandegroot) |
+--- |
+![image](http://i.imgur.com/7Bc1z6K.jpg) |
+Description |
 
 ## Database Engine and Storage
-* Evelyn Susanah Cifuentes, [cifuentesevelyn](https://github.com/cifuentesevelyn)
-* Mandel Oats, [mandeloats](https://github.com/mandeloats)
+
+[Evelyn Susanah Cifuentes](https://github.com/cifuentesevelyn) | [Mandel Oats](https://github.com/mandeloats) |
+--- | --- |
+![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) |
+Description | Description |
 
 ## Security and Authentication 
-* Trevor Glen Dennis, [td08](https://github.com/td08)
-* Nagaraj Thenkarai Janakiraman, [tjnagaraj](https://github.com/tjnagaraj)
+
+[Trevor Dennis](https://github.com/td08) | [Nagaraj Thenkarai Janakiraman](https://github.com/tjnagaraj) |
+--- | --- |
+![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) |
+Description | Description |
 
 ## Account Managment and Administration
 
@@ -38,13 +52,18 @@ Description | Description | Description | Description |
 Description |
 
 ## Special Projects
-* George Sullivan, [I-Love-Github](https://github.com/I-Love-Github)
-* Jeffrey Jensen, [happycamper](https://github.com/happycamper)
-* Hong Pan, [hongpan0507](https://github.com/hongpan0507)
+
+[George Sullivan](https://github.com/I-Love-Github) | [Jeffrey Jensen](https://github.com/happycamper) | [Hong Pan](https://github.com/hongpan0507) |
+--- | --- | --- |
+![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) |
+Description | Description | Description |
 
 ## Business and Finance
-* Blade Octaviano Roybal, [Bladeroybal](https://github.com/Bladeroybal)
-* Yajie Zeng, [yjzeng8833](https://github.com/yjzeng8833)
+
+[Blade Octaviano Roybal](https://github.com/Bladeroybal) | [Yajie Zeng](https://github.com/yjzeng8833) |
+--- | --- |
+![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) |
+Description | Description |
 
 ## Public Relations and Web Presence
 
@@ -54,6 +73,8 @@ Description |
 Description |
 
 ## Advisory Board
-* Jean-Francois Chamberland, [chmbrlnd](https://github.com/chmbrlnd)
-* Gregory H. Huff, [ghuff](https://github.com/ghuff)
 
+[Jean-Francois Chamberland](https://github.com/chmbrlnd) | [Gregory H. Huff](https://github.com/ghuff) |
+--- | --- |
+![image](http://i.imgur.com/2G0X5Gp.jpg) | ![image](http://i.imgur.com/2G0X5Gp.jpg) |
+Description | Description |
