@@ -6,7 +6,7 @@ permalink: /index.html
 
 |  |  |
 |---|---|
-|![image](http://i.imgur.com/S1QWKPh.jpg)|[![IMAGE ALT TEXT HERE](http://i.imgur.com/2G0X5Gp.jpg)](https://www.youtube.com/watch?v=JAUoeqvedMo)|
+|![image](http://i.imgur.com/S1QWKPh.jpg)|[![IMAGE ALT TEXT HERE](http://i.imgur.com/8FgPXOx.png)](https://www.youtube.com/watch?v=JAUoeqvedMo)|
 
 | | | |
 |---|:---:|---|
