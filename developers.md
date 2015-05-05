@@ -37,7 +37,7 @@ The Data Integrity and Information Management division is responsible for managi
 
 [Evelyn Susanah Cifuentes](https://github.com/cifuentesevelyn) | [Mandel Oats](https://github.com/mandeloats) |
 --- | --- |
-![image](http://i.imgur.com/Evg5ZOL.jpg) | ![image](http://i.imgur.com/nIaLQwY.jpg) |
+![image](http://i.imgur.com/Evg5ZOL.jpg) | ![image](http://i.imgur.com/IVBV1xo.jpg) |
 
 With thousands of check-ins happening daily, the Database Engine and Storage division makes sure all information continue to be stored and managed efficiently.
 
