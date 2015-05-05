@@ -85,4 +85,4 @@ Branding is everything, and our public relations and web presence division takes
 
 [Jean-Francois Chamberland](https://github.com/chmbrlnd) | [Gregory H. Huff](https://github.com/ghuff) |
 |:---:| --- |
-![image](http://i.imgur.com/mT1cDNd.jpg) | ![image](http://i.imgur.com/ZWf1tUT.jpg) |
+![image](http://i.imgur.com/mT1cDNd.jpg) | ![image](http://i.imgur.com/eu0c0pw.jpg) |
