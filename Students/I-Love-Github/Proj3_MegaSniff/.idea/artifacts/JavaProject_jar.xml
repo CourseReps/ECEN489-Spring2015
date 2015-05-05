@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="JavaProject.jar">
+    <output-path>$PROJECT_DIR$/../../cproj</output-path>
+    <root id="archive" name="MegaSniff.jar">
+      <element id="module-output" name="MegaSniff" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../includes/jssc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../includes/sqlite-jdbc-3.8.7.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
