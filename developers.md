@@ -55,7 +55,7 @@ Continuing to keep your location secure and only available for your friends to s
 --- |
 ![image](http://i.imgur.com/7Bc1z6K.jpg) |
 
-The account management and administration division is responsible for maintaining the user accounts. All procedures designed to make your useage safe and enjoyable  such as creating your account and adding and deleting friends is handled by this team. Having account issues? They are more than willing to help as they continue to monitor the databases and ensuring their integrity.
+The account management and administration division is responsible for maintaining the user accounts. All procedures are designed to make your usage safe and enjoyable,  such as creating your account and adding and deleting friends is handled by this team. Having account issues? They are more than willing to help as they continue to monitor the databases and ensuring their integrity.
 
 ## Special Projects
 
