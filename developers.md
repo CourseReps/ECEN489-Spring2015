@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Development Team
+title: About Us
 permalink: /Developers.html
 ---
 
