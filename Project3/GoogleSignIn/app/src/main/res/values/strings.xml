@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GoogleSignIn</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Button text -->
+
+    <string name="circles_title">Google+ Friends using this App</string>
+    <string name="sign_out_button_name">Sign out</string>
+    <string name="revoke_access_button_name">Revoke</string>
+
+    <string name="status_sign_in_required">Sign-in required</string>
+    <string name="status_sign_in_error">Error signing in: %s</string>
+    <string name="status_loading">Loading…</string>
+    <string name="status_signing_in">Signing in with Google+…</string>
+    <string name="status_signed_out">Signed out</string>
+    <string name="status_revoke_access">Revoked access</string>
+    <string name="status_revoke_access_error">Error revoking access: %s</string>
+    <string name="signed_in_as">Signed in as %s</string>
+
+    <!-- Used if there was an error loading the signed in user's name. -->
+    <string name="unknown_person">Unknown</string>
+    <string name="play_services_error">Google Play services is not available.  This application will close.</string>
+    <string name="close">Close</string>
+    <string name="profile_picture">User\'s profile picture.</string>
+
+<string name="hello_world">Hello world!</string>
+<string name="drawer_open">Slider Menu Opened</string>
+<string name="drawer_close">Slider Menu Closed</string>
+
+<!-- Nav Drawer Menu Items -->
+<string-array name="nav_drawer_items">
+    <item >Home/Profile</item>
+    <item >Add Friends</item>
+    <item >Check In Location</item>
+    <item >Friend\'s Recent Locations</item>
+    <item >Sign Out</item>
+    <item >What\'s Hot</item>
+</string-array>
+
+<!-- Nav Drawer List Item Icons -->
+<!-- Keep them in order as the titles are in -->
+<array name="nav_drawer_icons">
+    <item>@drawable/ic_home</item>
+    <item>@drawable/ic_people</item>
+    <item>@drawable/ic_photos</item>
+    <item>@drawable/ic_communities</item>
+    <item>@drawable/ic_pages</item>
+    <item>@drawable/ic_whats_hot</item>
+</array>
+
+<!-- Content Description -->
+<string name="desc_list_item_icon">Item Icon</string>
+
+</resources>
