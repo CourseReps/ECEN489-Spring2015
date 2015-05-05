@@ -45,7 +45,7 @@ With thousands of check-ins happening daily, the Database Engine and Storage div
 
 [Trevor Dennis](https://github.com/td08) | [Nagaraj Thenkarai Janakiraman](https://github.com/tjnagaraj) |
 --- |:---:|
-![image](http://i.imgur.com/HFLbGSG.jpg) | ![image](http://i.imgur.com/jLsvx6w.jpg) |
+![image](http://i.imgur.com/M98oJKW.jpg) | ![image](http://i.imgur.com/gJ0Ltnk.jpg) |
 
 Continuing to keep your location secure and only available for your friends to see, the security and authentication division is hard at work monitoring for the latest potential security breaches and upgrading the servers with the latest authentication procedures. 
 
