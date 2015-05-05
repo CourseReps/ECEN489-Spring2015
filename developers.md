@@ -21,7 +21,7 @@ The Physical Devices and Virtualization division provides full back-end support 
 
 [Joshua Cano](https://github.com/jacano23) | [Rong Liu](https://github.com/liur180855) | [Pranay Eedara](https://github.com/epranaykumar) | [Anudeep Tungala](https://github.com/nranudeep1990)  
 --- | --- | --- | ---
-![image](http://i.imgur.com/1safFTg.jpg) | ![image](http://i.imgur.com/JPeIAOx.jpg) | ![image](http://i.imgur.com/HUdLpn3.jpg) | ![image](http://i.imgur.com/kRRKrSK.jpg) |
+![image](http://i.imgur.com/xghCcCi.jpg) | ![image](http://i.imgur.com/JPeIAOx.jpg) | ![image](http://i.imgur.com/HUdLpn3.jpg) | ![image](http://i.imgur.com/kRRKrSK.jpg) |
 
 Building the bridges between our servers and clients, the Networking and Server-Client Architecture division designs and monitors all socket connections with the HTTP server.
 
