@@ -10,5 +10,5 @@ permalink: /index.html
 
 | | | |
 |---|:---:|---|
-|| **Every journey of a thousand miles begins with a single step. Now is the time to explore. Now is the time to set down our laptops and challenge our friends to see the world. Download our app today! Take your first step to finding hidden gems in communities, meeting new friends who share your passion to travel, and fulfilling your dreams to see the world.** ||
+|| **ScoutOut is an Android app for checking in at all of your favorite locations and keeping track of where your friends have been. Through ScoutOut users can find new interesting locations and small business owners can advertise their growing establishments. Long gone are the days of mindlessly checking Facebook while laying in bed. It’s time to get out and explore! Start scouting out new locations today.** ||
 | ![image](http://i.imgur.com/S1QWKPh.jpg) | ![image](http://i.imgur.com/HkfmxLa.png) |
