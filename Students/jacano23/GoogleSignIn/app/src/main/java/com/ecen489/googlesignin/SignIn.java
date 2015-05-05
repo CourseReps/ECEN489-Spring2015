@@ -196,9 +196,9 @@ public class SignIn extends FragmentActivity implements
 
                     break;
                 case R.id.checkInLocation:
-                    Intent cVIntent = new Intent(SignIn.this, Digit_Recognition.class);
+                    //Intent cVIntent = new Intent(SignIn.this, Digit_Recognition.class);
                     setCheckInButton = true;
-                    startActivity(cVIntent);
+                    //startActivity(cVIntent);
                     // New Activity for OpenCV
                     break;
                 case R.id.recentLocations:
@@ -263,7 +263,7 @@ public class SignIn extends FragmentActivity implements
         //ArrayList<String> addFriendsToDatabase = mCirclesList;
         if (setCheckInButton) {
             Intent intent = getIntent();
-            location = (intent.getStringExtra(Digit_Recognition.location));
+            //location = (intent.getStringExtra(Digit_Recognition.location));
 
             Log.i(TAG, "Inside OnConnect");
             mStatus.setText(location);

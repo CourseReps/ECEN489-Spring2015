@@ -6,8 +6,6 @@ import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -20,7 +18,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ecen489.googlesignin.CheckInClient;
 import com.ecen489.googlesignin.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -43,16 +40,20 @@ import java.util.ArrayList;
 public class SignInActivity extends FragmentActivity implements
         ConnectionCallbacks, OnConnectionFailedListener, ResultCallback<LoadPeopleResult>,
          View.OnClickListener {
+
+    public static UserInfo myUser = new UserInfo();
+
     // Check In Client
     private CheckInClient client = new CheckInClient();
 
     private static final String TAG = "Google-Sign-In";
+    private static final int RC_SIGN_IN = 0;
+
 
     private static final int STATE_DEFAULT = 0;
     private static final int STATE_SIGN_IN = 1;
     private static final int STATE_IN_PROGRESS = 2;
 
-    private static final int RC_SIGN_IN = 0;
 
 
     private static final String SAVED_PROGRESS = "sign_in_progress";
@@ -74,6 +75,7 @@ public class SignInActivity extends FragmentActivity implements
     private ArrayList<String> mCirclesList;
 
     private boolean signout = false;
+   boolean friends_flag =false;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -87,7 +89,7 @@ public class SignInActivity extends FragmentActivity implements
         // Button listeners
         mSignInButton.setOnClickListener(this);
         mSignInButton.setSize(SignInButton.SIZE_WIDE);
-        mSignInButton.setColorScheme(SignInButton.COLOR_LIGHT);
+
 
         mCirclesList = new ArrayList<String>();
         mCirclesAdapter = new ArrayAdapter<String>(
@@ -146,46 +148,79 @@ public class SignInActivity extends FragmentActivity implements
         if (!mGoogleApiClient.isConnecting()) {
             switch (v.getId()) {
                 case R.id.myGoogleSignIn:
-                    //mStatus.setText("Status: Signing In to Google+...");
                     mSignInProgress = STATE_SIGN_IN;
                     mGoogleApiClient.connect();
-                    //new LoginTask().execute();
                     break;
                 }
+        }
+    }
+
+    public class LoginTask extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... params) {
+            String sessionID =null;
+            Boolean flag = true;
+            while(flag){
+                if (mGoogleApiClient.isConnected()) {
+                    String email = Plus.AccountApi.getAccountName(mGoogleApiClient);
+                    myUser.setUserName(getProfileInformation().getEmail());
+                    sessionID = client.clientLoginHandler(myUser);
+                    if(sessionID.equals(null)){
+                        System.out.println(" Login Failure! ");
+
+                    }
+                    else {
+                        myUser.setSessionId(sessionID);
+                    }
+
+                    flag = false;
+                }
+                else {
+                    flag = true;
+                }
+            }
+            return sessionID;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (signout == false) {
+
+                Intent myIntent = new Intent(SignInActivity.this, MainActivity.class);
+                ProfileInformation profileInformation = getProfileInformation();
+                myUser.setName(profileInformation.getName());
+                myUser.setImageUrl(profileInformation.getImageUrl());
+
+                myIntent.putExtra("UserInfo", (Serializable) myUser);
+                startActivity(myIntent);
+
+
+            }
+
+
+
         }
     }
 
 
     @Override
     public void onConnected(Bundle connectionHint) {
-
-
         if(signout == true){
             Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
             mGoogleApiClient.disconnect();
             signout = false;
         }
+
         else {
             // Reaching onConnected means we consider the user signed in.
             Log.i(TAG, "onConnected");
             Plus.PeopleApi.loadConnected(mGoogleApiClient).setResultCallback(this);
+            new LoginTask().execute();
 
 
-            Intent myIntent = new Intent(SignInActivity.this, MainActivity.class);
-            ProfileInformation profileInformation= getProfileInformation();
-            myIntent.putExtra("profileInformation", (Serializable) profileInformation);
-            myIntent.putStringArrayListExtra("mCirclesList", mCirclesList);
-            startActivity(myIntent);
-            signout = false;
 
         }
-
-
-        // Get user's information
-
-
-
-        //updateUI(true);
 
         // Indicate that the sign in process is complete.
         mSignInProgress = STATE_DEFAULT;
@@ -316,14 +351,18 @@ public class SignInActivity extends FragmentActivity implements
                     else {
                         for (int i = 0; i < count; i++) {
                             mCirclesList.add(personBuffer.get(i).getDisplayName());
+
                             //mCirclesList.add(personBuffer.get(i).getImage().getUrl());
                         }
+                        myUser.setFriendsList(mCirclesList);
+                        friends_flag =true;
                     }
                 } finally {
                     personBuffer.close();
                 }
 
                 mCirclesAdapter.notifyDataSetChanged();
+
                 break;
 
             case CommonStatusCodes.SIGN_IN_REQUIRED:
@@ -369,30 +408,7 @@ public class SignInActivity extends FragmentActivity implements
         }
         return profile;
     }
-    private class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
 
-        public LoadProfileImage(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
-    }
 
 }
 

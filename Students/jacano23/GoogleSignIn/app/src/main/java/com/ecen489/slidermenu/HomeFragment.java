@@ -15,13 +15,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ecen489.googlesignin.R;
+import com.google.android.gms.plus.Plus;
 
 import org.w3c.dom.Text;
 
 import java.io.InputStream;
 
 public class HomeFragment extends Fragment {
-    ProfileInformation profileInformation;
+    UserInfo myUser;
     ImageView profileImage;
     TextView email;
     TextView name;
@@ -35,22 +36,23 @@ public class HomeFragment extends Fragment {
 
  
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        profileInformation = (ProfileInformation) getArguments().getSerializable("profileInformation");
+        myUser = (UserInfo) getArguments().getSerializable("UserInfo");
 
         profileImage = (ImageView) rootView.findViewById(R.id.imgProfilePicture);
-        new LoadProfileImage(profileImage).execute(profileInformation.getImageUrl());
+        new LoadProfileImage(profileImage).execute(myUser.getImageUrl());
 
         email = (TextView) rootView.findViewById(R.id.txtEmail);
         name = (TextView) rootView.findViewById(R.id.txtName);
 
-        email.setText(profileInformation.getEmail());
-        name.setText(profileInformation.getName());
+        email.setText(myUser.getUserName());
+        name.setText(myUser.getName());
 
 
 
         return rootView;
 
     }
+
     private class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 

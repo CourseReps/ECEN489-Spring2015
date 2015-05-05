@@ -1,4 +1,4 @@
-package com.ecen489.googlesignin; /**
+package com.ecen489.slidermenu; /**
  * Created by Ian on 4/17/2015.
  */
 

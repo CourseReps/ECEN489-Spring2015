@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/backgroundlogin">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:background="@drawable/logo2"
+        android:layout_width="450dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.15"
+        android:layout_above="@+id/myGoogleSignIn"
+        android:layout_centerHorizontal="true" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/myGoogleSignIn"
-        android:layout_marginBottom="280dp"
-        android:layout_marginTop="280dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        />
-
-</LinearLayout>
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

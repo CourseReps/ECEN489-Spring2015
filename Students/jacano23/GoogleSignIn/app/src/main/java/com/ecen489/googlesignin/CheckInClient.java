@@ -1,10 +1,13 @@
 package com.ecen489.googlesignin;
 
-import org.json.JSONException;
+import com.ecen489.googlesignin.HashMachine;
+import com.ecen489.googlesignin.JSONWrapping;
+import com.ecen489.googlesignin.User;
+import com.ecen489.googlesignin.WebServiceHttps;
+
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
 public class CheckInClient {
@@ -52,6 +55,12 @@ public class CheckInClient {
         // Output stream and Response
         WebServiceHttps.invokeHelloWorldWS(jsonLogout, "getServerResponse");
     }
+/*
+    public static  void clientFriendHandler(User user) {
+        JSONObject friend_json = JSONWrapping.getAddFriendsJSON(user.getUserName(), user.getFriendsList(), user.getSessionId());
+        WebServiceHttps.invokeHelloWorldWS(friend_json.toJSONString(),"getServerResponse");
+    }
+    */
 
 
 }

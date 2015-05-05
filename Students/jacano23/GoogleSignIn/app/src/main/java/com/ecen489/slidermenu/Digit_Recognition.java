@@ -1,11 +1,42 @@
-package com.ecen489.googlesignin;
+package com.ecen489.slidermenu;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.ListIterator;
+
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
+import org.opencv.android.LoaderCallbackInterface;
+import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Utils;
+import org.opencv.core.Core;
+//import org.opencv.core.Size;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.MatOfPoint2f;
+import org.opencv.core.Point;
+import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
+import org.opencv.highgui.Highgui;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.imgproc.Moments;
+import org.opencv.ml.CvKNearest;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.Camera.Size;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,38 +51,9 @@ import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.app.AlertDialog;
 
-import com.ecen489.slidermenu.DigRec_CameraView;
-import com.ecen489.slidermenu.MainActivity;
-
-import org.opencv.android.BaseLoaderCallback;
-import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
-import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
-import org.opencv.android.LoaderCallbackInterface;
-import org.opencv.android.OpenCVLoader;
-import org.opencv.android.Utils;
-import org.opencv.core.Core;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfPoint;
-import org.opencv.core.MatOfPoint2f;
-import org.opencv.core.Point;
-import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
-import org.opencv.highgui.Highgui;
-import org.opencv.imgproc.Imgproc;
-import org.opencv.imgproc.Moments;
-import org.opencv.ml.CvKNearest;
-
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.ListIterator;
-
-//import org.opencv.core.Size;
+import com.ecen489.googlesignin.R;
 
 public class Digit_Recognition extends Activity implements CvCameraViewListener2, OnTouchListener {
     private static final String TAG = "Dig_Rec";
@@ -251,52 +253,14 @@ public class Digit_Recognition extends Activity implements CvCameraViewListener2
                         //Core.inRange(input_img, new Scalar(50), new Scalar(86), bin_image);//76 red
 
                 // Step-2: train knn
-/*
-                        //knntraining();
-                        if (train_count==0) {
+
+                        
+                       if (train_count==0) {
                             train_count+=1;
-
-                            Mat trainData = new Mat();
-                            Mat response_array = new Mat();
-                            Mat img;
-                            Mat imgResized;
-
-                            for (int i = 0; i < 10; i++) {
-                                for (int j = 1; j < 3; j++) {
-                                    String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) +
-                                            "/num_" + i + j + ".jpg";
-
-
-                                    img = Highgui.imread(path);
-                                    img.convertTo(img, CvType.CV_32FC1);
-
-                                    if (img.empty()) //check whether the image is loaded or not
-                                    {
-                                        Log.i(TAG, "img is empty ");
-                                    } else {
-                                        Log.i(TAG, "img is not empty ");
-                                        org.opencv.core.Size dsize = new org.opencv.core.Size(50, 50);
-                                        Imgproc.resize(img, img, dsize);
-
-                                        img.convertTo(img, CvType.CV_32FC1);
-
-                                        imgResized = img.reshape(1, 1);
-                                        trainData.push_back(imgResized);
-
-                                        response_array.push_back(new Mat(1, 1, CvType.CV_32FC1, new Scalar(i))); // Store label to a mat
-                                    }
-                                }
-                            }
-
-                            Mat response = new Mat();
-                            Mat tmp;
-                            tmp = response_array.reshape(1, 1); //make continuous
-                            tmp.convertTo(response, CvType.CV_32FC1); // Convert  to float
-
-                            knn = new CvKNearest();
-                            knn.train(trainData, response);
+                            knntraining();
                         }
-*/
+
+
                 // Step-2 : Remove small objects
 
                         //Mat processed_image = new Mat();
@@ -426,7 +390,7 @@ public class Digit_Recognition extends Activity implements CvCameraViewListener2
                                     // save cropped image
                                     SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
                                     String currentDateandTime2 = sdf2.format(new Date());
-/*
+
                                     String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) +
                                             "/digit_recognition";
                                     File file = new File(path);
@@ -452,7 +416,7 @@ public class Digit_Recognition extends Activity implements CvCameraViewListener2
                                     float numdetected = knn.find_nearest(test.reshape(1,1), 1,results,responses,dists);
                                     s.append((int)numdetected);
 
-*/
+
 
                                      dgimgnum = dgimgnum+1;
 
@@ -485,12 +449,12 @@ public class Digit_Recognition extends Activity implements CvCameraViewListener2
                         Log.i(TAG,"calling take picture");
                         mOpenCvCameraView.takePicture(fileName);
 
-                        Highgui.imwrite(fileName,Mor_Close_im);
+                       // Highgui.imwrite(fileName,Mor_Close_im);
 
 
                         //Toast.makeText(this, fileName + " saved", Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(this, "Checked In at location :: "+ s , Toast.LENGTH_SHORT).show();
-                        Toast.makeText(this, "Checked In at location :: "+ dgimgnum , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Checked In at location :: "+ s , Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, "Checked In at location :: "+ dgimgnum , Toast.LENGTH_SHORT).show();
 
                         // disable cameraview
                         count = 1;
@@ -538,45 +502,61 @@ public class Digit_Recognition extends Activity implements CvCameraViewListener2
 
     public void knntraining () {
 
+        // Step1: get trainData from .jpg file
+
+        // for reading image from BitmapFactory, first set inscaled option to false :: otherwise it will scale the image
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inScaled = false;
+
+        // readbitmap image using .decoderesource
+            Bitmap blankBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.train,o);
+            int trainWidth = blankBitmap.getWidth();
+            int trainHeight = blankBitmap.getHeight();
+            //              ((or))
+                //Resources res = getResources();
+                // Drawable drawable = res.getDrawable(R.drawable.train);
+                //Bitmap blankBitmap=((BitmapDrawable)drawable).getBitmap();
+
+        // for rescaling the image to target size :: Not needed as inscaled option was set to false
+                //Target dimensions
+                // int iW = 300;
+                //int iH = 200;
+                // mOriginalBitmap = Bitmap.createScaledBitmap(mOriginalBitmap, iW, iH, true);
+
+        Log.i(TAG,"bitmap width "+trainWidth +" bitmap Height"+trainHeight);
+
+        // convert bitmap to Mat
         Mat trainData = new Mat();
-        Mat response_array = new Mat();
-        Mat img ;
-        Mat imgResized;
+        Utils.bitmapToMat(blankBitmap,trainData);
 
-        for (int i = 1; i < 10; i++) {
-            for (int j = 1; j < 2; j++) {
-                String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) +
-                        "/num_" + i + j+".jpg";
+        // default is 4 channel. So convert it into 1 channel (to check type of matrix use:: trainData3.type(); )
+        Imgproc.cvtColor(trainData,trainData,Imgproc.COLOR_BGRA2GRAY);
 
-                img = Highgui.imread(path);
-                img.convertTo(img, CvType.CV_32FC1);
+        // convert to 32F default is 8UC
+        trainData.convertTo(trainData,CvType.CV_32FC1);
 
-                if (img.empty()) //check whether the image is loaded or not
-                {
-                    Log.i(TAG,"img is empty ");
-                }
-                else {
-                    Log.i(TAG,"img is not empty ");
-                    org.opencv.core.Size dsize = new org.opencv.core.Size(50, 50);
-                    Imgproc.resize(img, img, dsize);
+        // Dont reshape to 1,1 as it is already saved in reshaped format
+            // trainData2 = trainData2.reshape(1, 1);
 
-                    img.convertTo(img, CvType.CV_32FC1);
 
-                    imgResized = img.reshape(1, 1);
-                    trainData.push_back(imgResized);
+    // Step1: get Response from .jpg file
 
-                    response_array.push_back(new Mat (1,1,CvType.CV_32FC1,new Scalar(i))); // Store label to a mat
-                }
-            }
-        }
+        Bitmap blankBitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.response,o);
+        int resWidth = blankBitmap2.getWidth();
+        int resHeight = blankBitmap2.getHeight();
+        Log.i(TAG,"resBitmap width "+ resWidth +" resBitmap Height"+ resHeight);
 
-        Mat response=new Mat();
-        Mat tmp;
-        tmp=response_array.reshape(1,1); //make continuous
-        tmp.convertTo(response,CvType.CV_32FC1); // Convert  to float
+        Mat response = new Mat();
+        Utils.bitmapToMat(blankBitmap2,response);
+        Log.i(TAG,"response width "+ response.cols() +" response Height"+ response.rows());
 
-        knn =  new CvKNearest();
-        knn.train(trainData, response);
+        // 1. change the number of channels
+        Imgproc.cvtColor(response,response,Imgproc.COLOR_BGRA2GRAY);
+        response.convertTo(response,CvType.CV_32FC1);
+        // response2 = response2.reshape(1, 1);
+
+         knn = new CvKNearest();
+         knn.train(trainData, response);
     }
 
     public float knntesting (Mat im) {
@@ -646,8 +626,6 @@ public class Digit_Recognition extends Activity implements CvCameraViewListener2
     public void displayimageonscreen (Mat im) {
 
         // Step 6: display the processed image
-
-
         Bitmap bm = Bitmap.createBitmap(im.cols(), im.rows(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(im, bm);
 
@@ -656,13 +634,41 @@ public class Digit_Recognition extends Activity implements CvCameraViewListener2
         ImageView iv = (ImageView) findViewById(R.id.imageView);
         iv.setImageBitmap(bm);
     }
+public void displayalertdialog(){
 
-    public void displayalertdialog() {
+					//s.append(dgimgnum);
+					
+                   if (s.toString().equals("0")){loc = "EIC";displayalertdialog1();}
+                    else if (s.toString().equals("1")){loc = "Home";displayalertdialog1();}
+                    else if (s.toString().equals("2")){loc = "School";displayalertdialog1();}
+                    else if (s.toString().equals("3")){loc = "EIC";displayalertdialog1();}
+                    else if (s.toString().equals("4")){loc = "Rudder";displayalertdialog1();}
+                    else if (s.toString().equals("5")){loc = "Zachary";displayalertdialog1();}
+                    else if (s.toString().equals("6")){loc = "EIC";displayalertdialog1();}
+                    else if (s.toString().equals("7")){loc = "EIC";displayalertdialog1();}
+                    else if (s.toString().equals("8")){loc = "EIC";displayalertdialog1();}
+                    else if (s.toString().equals("9")){loc = "EIC";displayalertdialog1();}
+                    else {displayalertdialog2();}
+
+       /*             if (dgimgnum==0){loc = "EIC";displayalertdialog1();}
+                    else if (dgimgnum==1){loc = "Home";displayalertdialog1();}
+                    else if (dgimgnum==2){loc = "School";displayalertdialog1();}
+                    else if (dgimgnum==3){loc = "EIC";displayalertdialog1();}
+                    else if (dgimgnum==4){loc = "Rudder";displayalertdialog1();}
+                    else if (dgimgnum==5){loc = "Zachary";displayalertdialog1();}
+					else {displayalertdialog2();}
+					*/
+
+}
+
+
+    public void displayalertdialog1() {
 
         // Step-6
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("Do you want to retake the picture");
-        alertDialog.setMessage("detected number :: "+ dgimgnum);
+       // alertDialog.setMessage("detected number :: "+ dgimgnum);
+        alertDialog.setMessage("detected number :: "+ s);
 
             alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -678,43 +684,44 @@ public class Digit_Recognition extends Activity implements CvCameraViewListener2
                             s.setLength(0);
                             }
               });
-            alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
 
-                    count = 0;
-                    s.append(dgimgnum);
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                count = 0;
+                s.setLength(0);
+                dgimgnum=0;
+                Intent i = new Intent(Digit_Recognition.this, MainActivity.class);
+                i.putExtra("setCheckInButton", true);
+                i.putExtra("loc", loc);
+                startActivity(i);
+            }
+        });
 
-                   /* if (s.equals("0")){loc = "EIC";}
-                    else if (s.equals("1")){loc = "EIC";}
-                    else if (s.equals("2")){loc = "EIC";}
-                    else if (s.equals("3")){loc = "EIC";}
-                    else if (s.equals("4")){loc = "EIC";}
-                    else if (s.equals("5")){loc = "EIC";}
-                    else if (s.equals("6")){loc = "EIC";}
-                    else if (s.equals("7")){loc = "EIC";}
-                    else if (s.equals("8")){loc = "EIC";}
-                    else if (s.equals("9")){loc = "EIC";}
-                    else {loc = "home";}
-*/
-                    if (dgimgnum==0){loc = "EIC0";}
-                    else if (dgimgnum==1){loc = "EIC1";}
-                    else if (dgimgnum==2){loc = "EIC2";}
-                    else if (dgimgnum==3){loc = "EIC3";}
-                    else if (dgimgnum==4){loc = "EIC4";}
-                    else if (dgimgnum==5){loc = "EIC5";}
+        alertDialog.show();
 
-                    else {loc = "home";}
+    }
+	public void displayalertdialog2() {
 
+        // Step-6
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        //alertDialog.setTitle("Please retake the picture");
+        alertDialog.setMessage("Please retake the picture");
 
-                    s.setLength(0);
-                    dgimgnum=0;
-                    Intent i = new Intent(Digit_Recognition.this, MainActivity.class);
-                    i.putExtra("setCheckInButton", true);
-                    i.putExtra("loc", loc);
-                    startActivity(i);
+            alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
 
-                }
-            });
+                            setContentView(R.layout.activity_dig_rec);
+                            mOpenCvCameraView = (DigRec_CameraView) findViewById(R.id.digRecActivity_java_surface_view);
+                            mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
+                            mOpenCvCameraView.setCvCameraViewListener(Digit_Recognition.this);
+
+                            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_3, Digit_Recognition.this, mLoaderCallback);
+
+                            count = 0;
+                            s.setLength(0);
+                            }
+              });
+
 
         alertDialog.show();
 

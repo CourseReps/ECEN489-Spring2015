@@ -6,6 +6,7 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -17,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.ecen489.googlesignin.R;
+import com.ecen489.slidermenu.UserInfo;
 import com.ecen489.slidermenu.adapter.NavDrawerListAdapter;
 import com.ecen489.slidermenu.model.NavDrawerItem;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -25,9 +27,14 @@ import com.google.android.gms.plus.Plus;
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
+	private static UserInfo myUser;
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
+	private CheckInClient client = new CheckInClient();
+	private static ArrayList<String> locationList = new ArrayList<String>();
+
+
 
 	// nav drawer title
 	private CharSequence mDrawerTitle;
@@ -43,19 +50,42 @@ public class MainActivity extends Activity {
 	private NavDrawerListAdapter adapter;
 
 	public ArrayList<String> mCirclesList;
-	public static ProfileInformation profileInformation;
+	private static boolean setCheckInButton = false;
+	private static String location = null;
+	private static boolean loginFlag = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
 		String TAG = "myApp";
+		locationList.add("Home");
+		locationList.add("School");
+		locationList.add("EIC");
+		locationList.add("Rudder");
+		locationList.add("Zachary");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		Intent camera = getIntent();
+		setCheckInButton = camera.getBooleanExtra("setCheckInButton", false);
+		if(setCheckInButton) {
 
-		Intent intent = getIntent();
-		mCirclesList = intent.getStringArrayListExtra("mCirclesList");
-		profileInformation = (ProfileInformation) intent.getSerializableExtra("profileInformation");
-		String email = profileInformation.getEmail();
-		Log.i("myApp", email);
+			location = (camera.getStringExtra("loc"));
+			System.out.println(location);
+			setCheckInButton = false;
+			new setLocationTask().execute();
+		//	System.out.println(myUser.getSessionId()+"Inside setCheckInButton");
+
+		}
+
+		if(loginFlag) {
+			Intent intent = getIntent();
+			myUser = (UserInfo) intent.getSerializableExtra("UserInfo");
+			loginFlag = false;
+			System.out.println(myUser.getSessionId() +",,," +myUser.getUserName() + ";;;" +myUser.getFriendsList());
+
+		}
+
+
 
 		mTitle = mDrawerTitle = getTitle();
 
@@ -179,22 +209,38 @@ public class MainActivity extends Activity {
 		switch (position) {
 		case 0:
 			fragment = new HomeFragment();
-			Bundle bundle = new Bundle(1);
-			bundle.putSerializable("profileInformation", profileInformation);
-			fragment.setArguments(bundle);
+			Bundle bundle1 = new Bundle(1);
+			bundle1.putSerializable("UserInfo", myUser);
+			fragment.setArguments(bundle1);
 
 			break;
 		case 1:
 			fragment = new FindPeopleFragment();
+			Bundle bundle2 = new Bundle(1);
+			bundle2.putSerializable("UserInfo", myUser);
+			fragment.setArguments(bundle2);
+
 			break;
 		case 2:
 			fragment = new PhotosFragment();
+			Intent intent = new Intent(MainActivity.this, Digit_Recognition.class);
+			startActivity(intent);
 			break;
 		case 3:
 			fragment = new CommunityFragment();
+			Bundle bundle3 = new Bundle(2);
+			bundle3.putSerializable("UserInfo", myUser);
+			bundle3.putSerializable("locationList", locationList);
+
+			fragment.setArguments(bundle3);
+
 			break;
 		case 4:
 			fragment = new PagesFragment();
+			Bundle bundle4 = new Bundle(1);
+			bundle4.putSerializable("UserInfo", myUser);
+			fragment.setArguments(bundle4);
+
 			break;
 		case 5:
 			fragment = new WhatsHotFragment();
@@ -243,6 +289,16 @@ public class MainActivity extends Activity {
 		super.onConfigurationChanged(newConfig);
 		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
+
+	public class setLocationTask extends AsyncTask<String, Void, String> {
+
+		@Override
+		protected String doInBackground(String... params) {
+			String response = null;
+			client.clientLocationHandler(myUser, location);
+			return response;
+		}
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.ecen489.googlesignin;
+package com.ecen489.slidermenu;
 
 
 import org.ksoap2.SoapEnvelope;
@@ -14,10 +14,10 @@ public class WebServiceHttps {
     //SOAP Action URI again Namespace + Web method name
     private static String SOAP_ACTION = "http://ws.slscomm.com/CommHandler/";
 
-    private static final String HOST = "10.202.126.130";
-//    private static final String HOST = "elcloudo.tamu.edu";
-//    private static final int PORT = 8443;
-    private static final int PORT = 8080;
+    //private static final String HOST = "10.202.126.130";
+    private static final String HOST = "elcloudo.tamu.edu";
+    private static final int PORT = 8443;
+    //private static final int PORT = 8080;
     private static final String FILE = "/SLSComm/commhandler?wsdl";
     private static final int TIMEOUT = 1000;
 

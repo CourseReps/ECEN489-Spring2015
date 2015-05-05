@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundlogin">
+
+
+    <Button
+        android:id="@+id/sendFriendsToServer"
+        android:text="Add Friends to App"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
     <TextView
-        android:id="@+id/txtLabel"
-         android:layout_width="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="16dp"
-        android:text="Add Friends View"/>
-    
-    <ImageView android:layout_width="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Friends on Google+"
+        android:id="@+id/friendList"
+
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtLabel"
-        android:src="@drawable/ic_people"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
-    
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Friends on Google+"
+        android:id="@+id/textView3"
+        android:layout_marginTop="45dp"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>
