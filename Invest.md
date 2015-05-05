@@ -14,4 +14,4 @@ permalink: /Invest.html
 |![image](http://i.imgur.com/cx8x5Rh.jpg)|![image](http://i.imgur.com/g9BMOrc.png)|
 
 
-![Download Our Business Plan Here](https://drive.google.com/file/d/0Byb-5_tQIgFWb2RHZ3VwY0ZtZkx6ZjczYkFCX3kzdE5SN013/view?usp=sharing)
+[Download Our Business Plan Here](https://drive.google.com/file/d/0Byb-5_tQIgFWb2RHZ3VwY0ZtZkx6ZjczYkFCX3kzdE5SN013/view?usp=sharing)
