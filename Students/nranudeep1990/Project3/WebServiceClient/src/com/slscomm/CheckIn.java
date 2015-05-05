@@ -1,0 +1,39 @@
+package com.slscomm;
+/**
+ * Created by mandel on 4/15/15.
+ */
+public class CheckIn {
+    private String userName;
+    private String locationName;
+    private int timestamp;
+    private String method;
+    
+    
+    public CheckIn(String userName, String locationName, int timestamp, String method){
+        this.userName = userName;
+        this.locationName = locationName;
+        this.timestamp = timestamp;
+        this.method = method;
+    }
+
+    @Override
+    public String toString() {
+        return "Method: " + method + ", Location: " + locationName + ", Time: " + timestamp + ", Username: " + userName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public int getTimestamp() {
+        return timestamp;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+}
