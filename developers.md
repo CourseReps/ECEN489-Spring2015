@@ -4,6 +4,10 @@ title: About Us
 permalink: /Developers.html
 ---
 
+##The ScoutOut Company
+ScoutOut is a young startup located in the small town of College Station, Texas. Comprised primarily of talented engineers from the top tier public university of Texas A&M, this startup continues to make traction in the neighboring cities of Austin, Dallas, and Houston. The company was formed in January 2015 when many students met and fell in love with the concept while working in a special topics course with their advisors, Dr. Chamberland and Dr. Huff. A few short months later, ScoutOut has completed their Minimum Viable Project and are moving towards a full nationwide launch.
+
+##Divisions
 This initiative is supported by a team of highly talented engineers with complementary skill sets.
 Management is performed through a flat structure, yet members have well defined tasks attuned to individual strengths.
 Every member on the team possesses valuable hands-on experience and a list of pertinent accomplishments.
